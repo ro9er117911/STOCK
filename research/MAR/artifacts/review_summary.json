@@ -1,7 +1,17 @@
 {
   "ticker": "MAR",
-  "reviewed_at": "2026-03-25",
-  "summary": "Baseline migration from legacy notes.",
+  "reviewed_at": "2026-03-27",
+  "review_summary": "No new events were provided in the refresh bundle, so the MAR thesis remains unchanged. Confidence and action stay stable; only the review timestamps are advanced to today with the next check pushed out on the existing cadence.",
   "changed_assumptions": [],
-  "action_rule_delta": []
+  "action_rule_delta": [],
+  "trigger": "manual",
+  "context": {
+    "ticker": "MAR",
+    "trigger": "manual",
+    "scheduled_refresh_due": true,
+    "new_events": [],
+    "material_events": [],
+    "state_path": "research/MAR/state.json",
+    "current_path": "research/MAR/current.md"
+  }
 }
