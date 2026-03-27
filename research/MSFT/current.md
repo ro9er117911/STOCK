@@ -13,9 +13,9 @@
 
 ## Delta From Previous Version
 
-- Microsoft earnings press release available on Investor Relations website
-- Microsoft Cloud and AI strength drives third quarter results
-- Microsoft announces quarterly earnings release date
+- No new evidence beyond the existing state; no thesis or assumption re-rating required.
+- Maintained hold/observe stance pending the next earnings verification point.
+- Updated review timing to reflect a fresh check today and a near-term follow-up cadence.
 
 ## Core Thesis
 
@@ -93,6 +93,7 @@
 | --- | --- | --- | --- |
 | v0 | 2026-03-25 | Baseline migration from legacy MSFT notes and March update. | Established living thesis and machine-readable state. |
 | v1 | 2026-03-27 | Automated refresh triggered by event. | Automatic fallback refresh used. Review the generated diff before merging. |
+| v2 | 2026-03-27 | Automated refresh triggered by manual. | No new material events were provided in the refresh bundle, so the MSFT thesis state remains unchanged aside from the routine review timestamp update. Confidence, assumptions, and action rules are preserved. |
 
 ## Recent Event Log
 

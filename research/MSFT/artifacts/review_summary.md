@@ -6,14 +6,12 @@
 
 ## Summary
 
-Automatic fallback refresh used. Review the generated diff before merging.
+No new material events were provided in the refresh bundle, so the MSFT thesis state remains unchanged aside from the routine review timestamp update. Confidence, assumptions, and action rules are preserved.
 
 ## Assumption Changes
 
-- `msft-a2`: pressured -> reinforced because of Microsoft Dragon Copilot provides the healthcare industry’s first unified voice AI assistant that enables clinicians to streamline clinical documentation, surface information and automate tasks
-- `msft-a1`: watch -> reinforced because of We’re taking our latest AI research breakthroughs and putting them in the hands of devs everywhere, with Azure AI Foundry Labs.
+- None
 
 ## Action Rule Delta
 
-- `msft-ar-add`: No rule text changed; review whether the trigger still matches the thesis.
-- `msft-ar-trim`: No rule text changed; review whether the trigger still matches the thesis.
+- None

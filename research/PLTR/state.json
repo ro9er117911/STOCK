@@ -1,42 +1,67 @@
 {
-  "ticker": "PLTR",
-  "company_name": "Palantir Technologies",
-  "research_topic": "AI commercial monetization with durable government moat",
-  "research_type": "事件驅動 / 中線",
+  "scenarios": [
+    {
+      "scenario_id": "pltr-s-base",
+      "action": "Hold core and add on controlled pullbacks.",
+      "logic": "Original thesis holds with both engines contributing.",
+      "trigger": "US Commercial stays above 80% and government renewals remain intact."
+    },
+    {
+      "scenario_id": "pltr-s-bull",
+      "action": "Add if valuation expansion is backed by margin improvement.",
+      "logic": "Narrative shifts from government-heavy to enterprise platform winner.",
+      "trigger": "Commercial growth remains above 100% with margin expansion."
+    },
+    {
+      "scenario_id": "pltr-s-bear",
+      "action": "Trim tactical size, keep only high-conviction core.",
+      "logic": "Multiple compresses before earnings catch up.",
+      "trigger": "Commercial growth slows but government stays intact."
+    },
+    {
+      "scenario_id": "pltr-s-break",
+      "action": "Exit.",
+      "logic": "The moat claim fails and valuation has little support.",
+      "trigger": "Defense budget or flagship programs deteriorate materially."
+    }
+  ],
   "holding_period": "數季至一年",
-  "last_reviewed_at": "2026-03-25",
-  "next_review_at": "2026-05-05",
-  "current_action": "持有 / 逢回加碼",
-  "confidence": 0.72,
-  "latest_delta": [
-    "Q4 2025 美國商業營收維持三位數成長，商業化假設被強化。",
-    "Maven AI 升級為 Program of Record，政府訂單黏著度提升。",
-    "短線估值仍高，必須持續監控商業增速是否掉到 50% 以下。"
-  ],
-  "primary_observation_variables": [
-    "US Commercial revenue growth",
-    "Government contract durability",
-    "Operating margin expansion"
-  ],
   "secondary_observation_variables": [
     "International commercial conversion",
     "Federal budget cadence",
     "Stock-based compensation discipline"
   ],
-  "noise_filters": [
-    "Insider selling headlines without demand change",
-    "Single-session tech selloff",
-    "Unverified channel checks"
+  "version_log": [
+    {
+      "version": "v0",
+      "date": "2026-03-25",
+      "reason": "Baseline migration from legacy March update.",
+      "impact": "Established living thesis and machine-readable state."
+    },
+    {
+      "version": "v1",
+      "date": "2026-03-27",
+      "reason": "Automated refresh triggered by manual.",
+      "impact": "No new evidence bundle was provided in this refresh, so the PLTR thesis state is unchanged. Confidence, thesis framing, and action posture remain intact; only the review timestamp is advanced."
+    }
   ],
+  "valuation_regime": {
+    "current_yardstick": "High-growth AI software EV/Sales",
+    "re_rating_logic": "The market starts paying for compounding rather than story optionality.",
+    "associated_risk": "Any deceleration in commercial growth brings multiple compression first.",
+    "switch_trigger": "Commercial growth remains above 80% while margins expand.",
+    "better_yardstick": "Growth plus FCF durability premium"
+  },
+  "thesis": {
+    "verification_date": "2026-05-05",
+    "core_catalyst": "美國商業營收續強與大型政府專案正式預算化。",
+    "market_blind_spot": "市場把 PLTR 視為敘事股，但近兩季已證明商業化與政府續約可同時成立。",
+    "statement": "市場仍低估 Palantir 在美國商業 AI 與國防軟體的雙引擎飛輪，只要商業營收維持高成長且政府專案升級為常態預算，估值雖高仍可被更高品質的成長證明支持。",
+    "thesis_id": "pltr-thesis-core",
+    "expiry_condition": "US Commercial growth 掉到 50% 以下或核心政府專案預算被削弱。"
+  },
   "thresholds": {
     "price_gap_pct": 10.0,
-    "volume_ratio": 2.2,
-    "deep_refresh_days": 7,
-    "material_sec_forms": [
-      "8-K",
-      "10-Q",
-      "10-K"
-    ],
     "earnings_keywords": [
       "earnings",
       "results",
@@ -44,6 +69,7 @@
       "quarter",
       "contract"
     ],
+    "deep_refresh_days": 7,
     "positive_keywords": [
       "record",
       "expands",
@@ -59,188 +85,14 @@
       "probe",
       "lawsuit",
       "budget"
-    ]
+    ],
+    "material_sec_forms": [
+      "8-K",
+      "10-Q",
+      "10-K"
+    ],
+    "volume_ratio": 2.2
   },
-  "thesis": {
-    "thesis_id": "pltr-thesis-core",
-    "statement": "市場仍低估 Palantir 在美國商業 AI 與國防軟體的雙引擎飛輪，只要商業營收維持高成長且政府專案升級為常態預算，估值雖高仍可被更高品質的成長證明支持。",
-    "core_catalyst": "美國商業營收續強與大型政府專案正式預算化。",
-    "market_blind_spot": "市場把 PLTR 視為敘事股，但近兩季已證明商業化與政府續約可同時成立。",
-    "verification_date": "2026-05-05",
-    "expiry_condition": "US Commercial growth 掉到 50% 以下或核心政府專案預算被削弱。"
-  },
-  "assumptions": [
-    {
-      "assumption_id": "pltr-a1",
-      "statement": "US Commercial AI demand can sustain hyper-growth above 80%.",
-      "type": "demand",
-      "verification_method": "Quarterly US Commercial revenue growth and customer count.",
-      "update_frequency": "quarterly",
-      "invalidation_condition": "US Commercial revenue growth falls below 50% for one full quarter.",
-      "status": "reinforced",
-      "confidence": 0.78,
-      "keywords": [
-        "commercial",
-        "customer",
-        "growth",
-        "ai",
-        "earnings"
-      ]
-    },
-    {
-      "assumption_id": "pltr-a2",
-      "statement": "Government contracts remain sticky and budget-backed.",
-      "type": "government",
-      "verification_method": "Maven/DoD contract status and budget mentions in filings.",
-      "update_frequency": "monthly",
-      "invalidation_condition": "Program of Record gets delayed or defense funding is cut.",
-      "status": "reinforced",
-      "confidence": 0.74,
-      "keywords": [
-        "government",
-        "defense",
-        "contract",
-        "maven",
-        "budget"
-      ]
-    },
-    {
-      "assumption_id": "pltr-a3",
-      "statement": "Margin expansion can accompany revenue acceleration.",
-      "type": "profitability",
-      "verification_method": "Operating margin and SBC ratio.",
-      "update_frequency": "quarterly",
-      "invalidation_condition": "Revenue beats but operating leverage stops improving for two quarters.",
-      "status": "watch",
-      "confidence": 0.63,
-      "keywords": [
-        "margin",
-        "profit",
-        "operating",
-        "sbc"
-      ]
-    }
-  ],
-  "risks": [
-    {
-      "risk_id": "pltr-r1",
-      "statement": "Commercial growth normalizes faster than narrative assumes.",
-      "tier": "thesis weakener",
-      "leading_indicator": "US Commercial growth slope",
-      "response": "Pause adds and re-rate to lower EV/Sales."
-    },
-    {
-      "risk_id": "pltr-r2",
-      "statement": "Government procurement slows with defense budget reprioritization.",
-      "tier": "thesis breaker",
-      "leading_indicator": "DoD program funding language",
-      "response": "Exit if budget-backed programs lose priority."
-    },
-    {
-      "risk_id": "pltr-r3",
-      "statement": "Valuation compresses even while fundamentals stay good.",
-      "tier": "noise",
-      "leading_indicator": "Peer multiple compression",
-      "response": "Only act if accompanied by demand deterioration."
-    }
-  ],
-  "valuation_regime": {
-    "current_yardstick": "High-growth AI software EV/Sales",
-    "better_yardstick": "Growth plus FCF durability premium",
-    "switch_trigger": "Commercial growth remains above 80% while margins expand.",
-    "re_rating_logic": "The market starts paying for compounding rather than story optionality.",
-    "associated_risk": "Any deceleration in commercial growth brings multiple compression first."
-  },
-  "scenarios": [
-    {
-      "scenario_id": "pltr-s-base",
-      "trigger": "US Commercial stays above 80% and government renewals remain intact.",
-      "logic": "Original thesis holds with both engines contributing.",
-      "action": "Hold core and add on controlled pullbacks."
-    },
-    {
-      "scenario_id": "pltr-s-bull",
-      "trigger": "Commercial growth remains above 100% with margin expansion.",
-      "logic": "Narrative shifts from government-heavy to enterprise platform winner.",
-      "action": "Add if valuation expansion is backed by margin improvement."
-    },
-    {
-      "scenario_id": "pltr-s-bear",
-      "trigger": "Commercial growth slows but government stays intact.",
-      "logic": "Multiple compresses before earnings catch up.",
-      "action": "Trim tactical size, keep only high-conviction core."
-    },
-    {
-      "scenario_id": "pltr-s-break",
-      "trigger": "Defense budget or flagship programs deteriorate materially.",
-      "logic": "The moat claim fails and valuation has little support.",
-      "action": "Exit."
-    }
-  ],
-  "action_rules": [
-    {
-      "action_rule_id": "pltr-ar-add",
-      "kind": "add",
-      "condition": "US Commercial revenue grows above 100% for two straight quarters and margin expands.",
-      "action": "Add up to max position size."
-    },
-    {
-      "action_rule_id": "pltr-ar-trim",
-      "kind": "trim",
-      "condition": "Commercial growth falls below 70% without offsetting government upside.",
-      "action": "Trim tactical adds and revisit valuation regime."
-    },
-    {
-      "action_rule_id": "pltr-ar-exit",
-      "kind": "exit",
-      "condition": "Program of Record is downgraded or core defense budget support weakens.",
-      "action": "Exit regardless of price action."
-    }
-  ],
-  "next_must_check_data": "Q1 2026 earnings: US Commercial growth, margins, major government renewal cadence.",
-  "research_debt": [
-    "Need cleaner read on UK/FCA contribution size.",
-    "Need scenario work on commercial deal concentration."
-  ],
-  "source_manifest": [
-    {
-      "source_id": "legacy-market-update",
-      "type": "local_markdown",
-      "label": "Legacy March 2026 market update",
-      "url": "/Users/ro9air/STOCK/research/market_update_mar2026.md"
-    },
-    {
-      "source_id": "sec",
-      "type": "sec",
-      "label": "SEC company submissions",
-      "url": "https://data.sec.gov/submissions/CIK0001321655.json"
-    },
-    {
-      "source_id": "investor_news",
-      "type": "html",
-      "label": "Palantir investor news releases",
-      "url": "https://investors.palantir.com/news-events/news-releases/"
-    },
-    {
-      "source_id": "price",
-      "type": "market_data",
-      "label": "Yahoo Finance chart",
-      "url": "https://query1.finance.yahoo.com/v8/finance/chart/PLTR?range=1mo&interval=1d"
-    }
-  ],
-  "last_seen_event_cursors": {
-    "sec": "",
-    "investor_news": "",
-    "price": "2026-03-26"
-  },
-  "version_log": [
-    {
-      "version": "v0",
-      "date": "2026-03-25",
-      "reason": "Baseline migration from legacy March update.",
-      "impact": "Established living thesis and machine-readable state."
-    }
-  ],
   "seed_events": [
     {
       "event_id": "pltr-seed-2026-q4-results",
@@ -279,5 +131,160 @@
         "seed": true
       }
     }
+  ],
+  "latest_delta": [
+    "No material new events or filings were supplied beyond the existing state.",
+    "Core thesis remains supported by prior evidence: strong US commercial growth and Program of Record status for Maven AI.",
+    "No assumption status changes; valuation and growth-monitoring thresholds remain the same.",
+    "Review metadata updated to today with a later next review date."
+  ],
+  "confidence": 0.72,
+  "research_debt": [
+    "Need cleaner read on UK/FCA contribution size.",
+    "Need scenario work on commercial deal concentration."
+  ],
+  "ticker": "PLTR",
+  "next_review_at": "2026-05-08",
+  "current_action": "持有 / 逢回加碼",
+  "risks": [
+    {
+      "response": "Pause adds and re-rate to lower EV/Sales.",
+      "leading_indicator": "US Commercial growth slope",
+      "statement": "Commercial growth normalizes faster than narrative assumes.",
+      "tier": "thesis weakener",
+      "risk_id": "pltr-r1"
+    },
+    {
+      "response": "Exit if budget-backed programs lose priority.",
+      "leading_indicator": "DoD program funding language",
+      "statement": "Government procurement slows with defense budget reprioritization.",
+      "tier": "thesis breaker",
+      "risk_id": "pltr-r2"
+    },
+    {
+      "response": "Only act if accompanied by demand deterioration.",
+      "leading_indicator": "Peer multiple compression",
+      "statement": "Valuation compresses even while fundamentals stay good.",
+      "tier": "noise",
+      "risk_id": "pltr-r3"
+    }
+  ],
+  "assumptions": [
+    {
+      "update_frequency": "quarterly",
+      "invalidation_condition": "US Commercial revenue growth falls below 50% for one full quarter.",
+      "assumption_id": "pltr-a1",
+      "status": "reinforced",
+      "statement": "US Commercial AI demand can sustain hyper-growth above 80%.",
+      "keywords": [
+        "commercial",
+        "customer",
+        "growth",
+        "ai",
+        "earnings"
+      ],
+      "type": "demand",
+      "confidence": 0.78,
+      "verification_method": "Quarterly US Commercial revenue growth and customer count."
+    },
+    {
+      "update_frequency": "monthly",
+      "invalidation_condition": "Program of Record gets delayed or defense funding is cut.",
+      "assumption_id": "pltr-a2",
+      "status": "reinforced",
+      "statement": "Government contracts remain sticky and budget-backed.",
+      "keywords": [
+        "government",
+        "defense",
+        "contract",
+        "maven",
+        "budget"
+      ],
+      "type": "government",
+      "confidence": 0.74,
+      "verification_method": "Maven/DoD contract status and budget mentions in filings."
+    },
+    {
+      "update_frequency": "quarterly",
+      "invalidation_condition": "Revenue beats but operating leverage stops improving for two quarters.",
+      "assumption_id": "pltr-a3",
+      "status": "watch",
+      "statement": "Margin expansion can accompany revenue acceleration.",
+      "keywords": [
+        "margin",
+        "profit",
+        "operating",
+        "sbc"
+      ],
+      "type": "profitability",
+      "confidence": 0.63,
+      "verification_method": "Operating margin and SBC ratio."
+    }
+  ],
+  "research_type": "事件驅動 / 中線",
+  "last_reviewed_at": "2026-03-27",
+  "source_manifest": [
+    {
+      "source_id": "legacy-market-update",
+      "type": "local_markdown",
+      "url": "/Users/ro9air/STOCK/research/market_update_mar2026.md",
+      "label": "Legacy March 2026 market update"
+    },
+    {
+      "source_id": "sec",
+      "type": "sec",
+      "url": "https://data.sec.gov/submissions/CIK0001321655.json",
+      "label": "SEC company submissions"
+    },
+    {
+      "source_id": "investor_news",
+      "type": "html",
+      "url": "https://investors.palantir.com/news-events/news-releases/",
+      "label": "Palantir investor news releases"
+    },
+    {
+      "source_id": "price",
+      "type": "market_data",
+      "url": "https://query1.finance.yahoo.com/v8/finance/chart/PLTR?range=1mo&interval=1d",
+      "label": "Yahoo Finance chart"
+    }
+  ],
+  "company_name": "Palantir Technologies",
+  "research_topic": "AI commercial monetization with durable government moat",
+  "next_must_check_data": "Q1 2026 earnings: US Commercial growth, margins, major government renewal cadence.",
+  "primary_observation_variables": [
+    "US Commercial revenue growth",
+    "Government contract durability",
+    "Operating margin expansion"
+  ],
+  "action_rules": [
+    {
+      "condition": "US Commercial revenue grows above 100% for two straight quarters and margin expands.",
+      "action_rule_id": "pltr-ar-add",
+      "action": "Add up to max position size.",
+      "kind": "add"
+    },
+    {
+      "condition": "Commercial growth falls below 70% without offsetting government upside.",
+      "action_rule_id": "pltr-ar-trim",
+      "action": "Trim tactical adds and revisit valuation regime.",
+      "kind": "trim"
+    },
+    {
+      "condition": "Program of Record is downgraded or core defense budget support weakens.",
+      "action_rule_id": "pltr-ar-exit",
+      "action": "Exit regardless of price action.",
+      "kind": "exit"
+    }
+  ],
+  "last_seen_event_cursors": {
+    "investor_news": "",
+    "price": "2026-03-26",
+    "sec": ""
+  },
+  "noise_filters": [
+    "Insider selling headlines without demand change",
+    "Single-session tech selloff",
+    "Unverified channel checks"
   ]
 }

@@ -6,16 +6,17 @@
 | Research Topic | AI commercial monetization with durable government moat |
 | Holding Period | 數季至一年 |
 | Research Type | 事件驅動 / 中線 |
-| Last Reviewed | 2026-03-25 |
-| Next Review | 2026-05-05 |
+| Last Reviewed | 2026-03-27 |
+| Next Review | 2026-05-08 |
 | Current Action | 持有 / 逢回加碼 |
 | Thesis Confidence | 0.72 |
 
 ## Delta From Previous Version
 
-- Q4 2025 美國商業營收維持三位數成長，商業化假設被強化。
-- Maven AI 升級為 Program of Record，政府訂單黏著度提升。
-- 短線估值仍高，必須持續監控商業增速是否掉到 50% 以下。
+- No material new events or filings were supplied beyond the existing state.
+- Core thesis remains supported by prior evidence: strong US commercial growth and Program of Record status for Maven AI.
+- No assumption status changes; valuation and growth-monitoring thresholds remain the same.
+- Review metadata updated to today with a later next review date.
 
 ## Core Thesis
 
@@ -91,10 +92,11 @@
 | Version | Date | Reason | Impact |
 | --- | --- | --- | --- |
 | v0 | 2026-03-25 | Baseline migration from legacy March update. | Established living thesis and machine-readable state. |
+| v1 | 2026-03-27 | Automated refresh triggered by manual. | No new evidence bundle was provided in this refresh, so the PLTR thesis state is unchanged. Confidence, thesis framing, and action posture remain intact; only the review timestamp is advanced. |
 
 ## Recent Event Log
 
 | Date | Source | Event | Impact | Decision |
 | --- | --- | --- | --- | --- |
-| 2026-03-25 | legacy_seed | Q4 2025 results showed 137% US commercial growth. | + | refresh |
 | 2026-03-25 | legacy_seed | Maven AI became a Program of Record. | + | refresh |
+| 2026-03-25 | legacy_seed | Q4 2025 results showed 137% US commercial growth. | + | refresh |

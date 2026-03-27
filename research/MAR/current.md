@@ -6,16 +6,16 @@
 | Research Topic | Light-asset travel compounder with business travel recovery optionality |
 | Holding Period | 數季至一年 |
 | Research Type | 中線 / 防禦配置 |
-| Last Reviewed | 2026-03-25 |
-| Next Review | 2026-05-05 |
+| Last Reviewed | 2026-03-27 |
+| Next Review | 2026-05-07 |
 | Current Action | 穩健持有 |
 | Thesis Confidence | 0.67 |
 
 ## Delta From Previous Version
 
-- Q4 2025 EPS 小幅 miss，但全年指引與高端/國際需求仍穩健。
-- MAR 的 thesis 從疫情後修復轉成高品質現金流與商旅回溫的防禦型持有。
-- 若總經衰退擴散到高端與商務需求，才會進入 thesis breaker。
+- No material evidence delta versus the prior state; thesis, assumptions, and action remain intact.
+- Maintained the defensive quality / business-travel-recovery framing without changing confidence.
+- Advanced last_reviewed_at to today and set a sensible next_review_at on the prior review cadence.
 
 ## Core Thesis
 
@@ -91,10 +91,11 @@
 | Version | Date | Reason | Impact |
 | --- | --- | --- | --- |
 | v0 | 2026-03-25 | Baseline migration from legacy March update. | Established living thesis and machine-readable state. |
+| v1 | 2026-03-27 | Automated refresh triggered by manual. | No new events were provided in the refresh bundle, so the MAR thesis remains unchanged. Confidence and action stay stable; only the review timestamps are advanced to today with the next check pushed out on the existing cadence. |
 
 ## Recent Event Log
 
 | Date | Source | Event | Impact | Decision |
 | --- | --- | --- | --- | --- |
-| 2026-03-25 | legacy_seed | 2026 guidance stayed intact despite a small EPS miss. | + | watch |
 | 2026-03-25 | legacy_seed | High-end and international travel stayed firm while lower-end US demand softened. | 0 | watch |
+| 2026-03-25 | legacy_seed | 2026 guidance stayed intact despite a small EPS miss. | + | watch |
