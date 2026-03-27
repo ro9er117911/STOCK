@@ -727,6 +727,10 @@ def bootstrap_baselines(research_root: Path = RESEARCH_ROOT, force: bool = False
         recent_events = deepcopy(profile["seed_events"])
         write_json(state_path, state)
         current_path.write_text(render_current_report(state, recent_events), encoding="utf-8")
+        (ticker_dir / "current.zh-tw.md").write_text(
+            render_current_report(state, recent_events),
+            encoding="utf-8",
+        )
         write_jsonl(events_path, recent_events)
         write_json(
             artifacts_dir / "review_summary.json",
@@ -738,13 +742,18 @@ def bootstrap_baselines(research_root: Path = RESEARCH_ROOT, force: bool = False
                 "action_rule_delta": [],
             },
         )
+        review_summary_markdown = render_review_summary(
+            state,
+            "Baseline migration from legacy notes.",
+            [],
+            [],
+        )
         (artifacts_dir / "review_summary.md").write_text(
-            render_review_summary(
-                state,
-                "Baseline migration from legacy notes.",
-                [],
-                [],
-            ),
+            review_summary_markdown,
+            encoding="utf-8",
+        )
+        (artifacts_dir / "review_summary.zh-tw.md").write_text(
+            review_summary_markdown,
             encoding="utf-8",
         )
         created.append(ticker)

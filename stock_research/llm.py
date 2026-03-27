@@ -8,7 +8,7 @@ import urllib.request
 from datetime import date, timedelta
 from typing import Any
 
-from .config import DEFAULT_OPENAI_MODEL
+from .config import DEFAULT_OPENAI_MODEL, DEFAULT_TRANSLATION_MODEL
 from .storage import deep_merge
 
 
@@ -68,23 +68,21 @@ def fallback_refresh(state: dict[str, Any], context: dict[str, Any]) -> dict[str
     }
 
 
-def _request_openai(api_key: str, model: str, prompt: str) -> dict[str, Any]:
+def _request_openai_content(
+    api_key: str,
+    model: str,
+    messages: list[dict[str, str]],
+    *,
+    response_format: dict[str, str] | None = None,
+    temperature: float = 0.2,
+) -> str:
     payload = {
         "model": model,
-        "response_format": {"type": "json_object"},
-        "messages": [
-            {
-                "role": "system",
-                "content": (
-                    "You are an equity-research state updater. "
-                    "Preserve stable ids, update only what the new evidence changes, "
-                    "and respond with JSON only."
-                ),
-            },
-            {"role": "user", "content": prompt},
-        ],
-        "temperature": 0.2,
+        "messages": messages,
+        "temperature": temperature,
     }
+    if response_format is not None:
+        payload["response_format"] = response_format
     request = urllib.request.Request(
         "https://api.openai.com/v1/chat/completions",
         headers={
@@ -99,7 +97,27 @@ def _request_openai(api_key: str, model: str, prompt: str) -> dict[str, Any]:
             body = json.loads(response.read().decode("utf-8"))
     except urllib.error.URLError as exc:
         raise RuntimeError(f"OpenAI request failed: {exc}") from exc
-    content = body["choices"][0]["message"]["content"]
+    return body["choices"][0]["message"]["content"]
+
+
+def _request_openai_json(api_key: str, model: str, prompt: str) -> dict[str, Any]:
+    content = _request_openai_content(
+        api_key,
+        model,
+        [
+            {
+                "role": "system",
+                "content": (
+                    "You are an equity-research state updater. "
+                    "Preserve stable ids, update only what the new evidence changes, "
+                    "and respond with JSON only."
+                ),
+            },
+            {"role": "user", "content": prompt},
+        ],
+        response_format={"type": "json_object"},
+        temperature=0.2,
+    )
     return _extract_json_blob(content)
 
 
@@ -134,7 +152,7 @@ def generate_refresh(state: dict[str, Any], current_markdown: str, context: dict
         },
         ensure_ascii=False,
     )
-    raw = _request_openai(api_key, model, prompt)
+    raw = _request_openai_json(api_key, model, prompt)
     updated_state = deep_merge(state, raw.get("updated_state", {}))
     if "summary_points" in raw:
         updated_state["latest_delta"] = raw["summary_points"]
@@ -144,3 +162,36 @@ def generate_refresh(state: dict[str, Any], current_markdown: str, context: dict
         "action_rule_delta": raw.get("action_rule_delta", []),
         "review_summary": raw.get("review_summary", "Manual review required."),
     }
+
+
+def translate_markdown(markdown_text: str, *, context_label: str) -> str:
+    api_key = os.getenv("OPENAI_API_KEY")
+    if not api_key:
+        return markdown_text
+
+    model = os.getenv("TRANSLATION_MODEL") or DEFAULT_TRANSLATION_MODEL
+    content = _request_openai_content(
+        api_key,
+        model,
+        [
+            {
+                "role": "system",
+                "content": (
+                    "You translate investment research markdown into colloquial Traditional Chinese for Taiwan. "
+                    "Preserve markdown structure, tables, IDs, tickers, numbers, dates, links, code spans, and file paths exactly. "
+                    "Do not summarize or omit content. Only localize the prose into readable zh-TW."
+                ),
+            },
+            {
+                "role": "user",
+                "content": (
+                    f"Translate the following {context_label} into colloquial Traditional Chinese (zh-TW). "
+                    "Keep all markdown structure unchanged.\n\n"
+                    f"{markdown_text}"
+                ),
+            },
+        ],
+        temperature=0.1,
+    )
+    translated = content.strip()
+    return translated if translated else markdown_text

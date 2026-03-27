@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import json
 import tempfile
 import unittest
 from pathlib import Path
@@ -20,7 +21,9 @@ class PipelineTests(unittest.TestCase):
             msft_state = read_json(research_root / "MSFT" / "state.json")
             self.assertEqual(msft_state["thesis"]["thesis_id"], "msft-thesis-core")
             self.assertTrue((research_root / "MAR" / "current.md").exists())
+            self.assertTrue((research_root / "MAR" / "current.zh-tw.md").exists())
             self.assertTrue((research_root / "PLTR" / "events.jsonl").exists())
+            self.assertTrue((research_root / "PLTR" / "artifacts" / "review_summary.zh-tw.md").exists())
 
     def test_poll_dedupes_repeated_event_ids(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
@@ -125,6 +128,110 @@ class PipelineTests(unittest.TestCase):
                 mock.patch("stock_research.pipeline.fetch_feed_events", return_value=empty):
                 summary = poll_events(research_root=research_root, trigger="scheduled")
             self.assertIn("MSFT", summary["material_tickers"])
+
+    def test_fixture_manual_refresh_targets_only_fixture_ticker(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            research_root = Path(tmp) / "research"
+            fixture_root = Path(tmp) / "fixtures"
+            fixture_root.mkdir(parents=True, exist_ok=True)
+            (fixture_root / "msft_only.json").write_text(
+                json.dumps(
+                    {
+                        "events": [
+                            {
+                                "ticker": "MSFT",
+                                "source_type": "fixture",
+                                "occurred_at": "2026-03-27",
+                                "title": "Microsoft says Copilot enterprise penetration moved above 12%.",
+                                "metadata": {
+                                    "force_assumption_ids": ["msft-a2"],
+                                    "force_marginal_impact": "+",
+                                    "force_requires_refresh": True,
+                                },
+                            }
+                        ]
+                    },
+                    ensure_ascii=False,
+                    indent=2,
+                ),
+                encoding="utf-8",
+            )
+            bootstrap_baselines(research_root=research_root, force=True)
+            summary = poll_events(
+                research_root=research_root,
+                trigger="manual",
+                fixture_name="msft_only",
+                fixture_root=fixture_root,
+            )
+            self.assertEqual(summary["fixture_name"], "msft_only")
+            self.assertEqual(summary["material_tickers"], ["MSFT"])
+            self.assertEqual(summary["tickers"]["PLTR"]["new_events"], 0)
+            self.assertFalse(summary["tickers"]["PLTR"]["scheduled_refresh_due"])
+            ledger = read_jsonl(research_root / "MSFT" / "events.jsonl")
+            self.assertTrue(any(row["source_type"] == "fixture" for row in ledger))
+
+    def test_draft_refresh_generates_localized_outputs(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            research_root = Path(tmp) / "research"
+            fixture_root = Path(tmp) / "fixtures"
+            fixture_root.mkdir(parents=True, exist_ok=True)
+            (fixture_root / "msft_only.json").write_text(
+                json.dumps(
+                    {
+                        "events": [
+                            {
+                                "ticker": "MSFT",
+                                "source_type": "fixture",
+                                "occurred_at": "2026-03-27",
+                                "title": "Microsoft guides to slower CapEx growth while Azure AI demand stays above 30%.",
+                                "metadata": {
+                                    "force_assumption_ids": ["msft-a1", "msft-a3"],
+                                    "force_marginal_impact": "+",
+                                    "force_requires_refresh": True,
+                                },
+                            }
+                        ]
+                    },
+                    ensure_ascii=False,
+                    indent=2,
+                ),
+                encoding="utf-8",
+            )
+            automation_root = Path(tmp) / "automation"
+            bootstrap_baselines(research_root=research_root, force=True)
+            with mock.patch("stock_research.pipeline.AUTOMATION_ROOT", automation_root), \
+                mock.patch("stock_research.pipeline.CONTEXT_ROOT", automation_root / "context"), \
+                mock.patch("stock_research.pipeline.RUN_SUMMARY_PATH", automation_root / "poll-summary.json"), \
+                mock.patch("stock_research.pipeline.DRAFT_SUMMARY_PATH", automation_root / "draft-summary.json"), \
+                mock.patch("stock_research.pipeline.PR_BODY_PATH", automation_root / "pr-body.md"), \
+                mock.patch("stock_research.pipeline.PR_BODY_ZH_TW_PATH", automation_root / "pr-body.zh-tw.md"), \
+                mock.patch("stock_research.pipeline.TRANSLATION_SUMMARY_PATH", automation_root / "translation-summary.json"), \
+                mock.patch(
+                    "stock_research.pipeline.translate_markdown",
+                    side_effect=lambda markdown_text, *, context_label: f"[zh-tw:{context_label}]\n{markdown_text}",
+                ):
+                poll_events(
+                    research_root=research_root,
+                    trigger="manual",
+                    fixture_name="msft_only",
+                    fixture_root=fixture_root,
+                )
+                draft_summary = draft_refreshes(
+                    research_root=research_root,
+                    trigger="manual",
+                    fixture_name="msft_only",
+                )
+            self.assertEqual(draft_summary["refreshed_tickers"][0]["ticker"], "MSFT")
+            current_zh_tw = (research_root / "MSFT" / "current.zh-tw.md").read_text(encoding="utf-8")
+            review_zh_tw = (research_root / "MSFT" / "artifacts" / "review_summary.zh-tw.md").read_text(encoding="utf-8")
+            pr_body_zh_tw = (automation_root / "pr-body.zh-tw.md").read_text(encoding="utf-8")
+            self.assertTrue(current_zh_tw.startswith("[zh-tw:MSFT current research note]"))
+            self.assertTrue(review_zh_tw.startswith("[zh-tw:MSFT refresh review summary]"))
+            self.assertTrue(pr_body_zh_tw.startswith("[zh-tw:pull request body]"))
+            self.assertIn(
+                str(research_root / "MSFT" / "current.zh-tw.md"),
+                draft_summary["localization"]["translated_files"],
+            )
 
     def test_rss_feed_respects_title_keywords(self) -> None:
         state = {

@@ -15,6 +15,11 @@ on:
           - manual
           - event
           - scheduled
+      fixture:
+        description: Optional test event fixture name
+        type: string
+        required: false
+        default: ""
 
 permissions:
   contents: write
@@ -40,6 +45,10 @@ jobs:
       - name: Resolve trigger
         id: trigger
         run: |
+          fixture="${{ github.event.inputs.fixture }}"
+          fixture_slug="$(printf '%s' "$fixture" | tr '[:upper:]' '[:lower:]' | tr -cs 'a-z0-9' '-')"
+          fixture_slug="${fixture_slug#-}"
+          fixture_slug="${fixture_slug%-}"
           if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
             echo "value=${{ github.event.inputs.trigger }}" >> "$GITHUB_OUTPUT"
           elif [ "${{ github.event.schedule }}" = "0 14 * * 6" ]; then
@@ -47,12 +56,27 @@ jobs:
           else
             echo "value=event" >> "$GITHUB_OUTPUT"
           fi
+          if [ -n "$fixture_slug" ]; then
+            echo "fixture=${{ github.event.inputs.fixture }}" >> "$GITHUB_OUTPUT"
+            echo "pr_branch=automation/research-refresh-fixture-$fixture_slug" >> "$GITHUB_OUTPUT"
+            echo "pr_title=test: automated research refresh ($fixture_slug)" >> "$GITHUB_OUTPUT"
+          else
+            echo "fixture=" >> "$GITHUB_OUTPUT"
+            echo "pr_branch=automation/research-refresh" >> "$GITHUB_OUTPUT"
+            echo "pr_title=chore: automated research refresh" >> "$GITHUB_OUTPUT"
+          fi
 
       - name: Poll high-signal events
-        run: python3 scripts/research_ops.py poll --trigger "${{ steps.trigger.outputs.value }}"
+        run: |
+          if [ -n "${{ steps.trigger.outputs.fixture }}" ]; then
+            python3 scripts/research_ops.py poll --trigger "${{ steps.trigger.outputs.value }}" --fixture "${{ steps.trigger.outputs.fixture }}"
+          else
+            python3 scripts/research_ops.py poll --trigger "${{ steps.trigger.outputs.value }}"
+          fi
 
       - name: Commit ledger and cursor updates to main
         id: runtime_commit
+        if: steps.trigger.outputs.fixture == ''
         run: |
           if git diff --quiet -- research; then
             echo "changed=false" >> "$GITHUB_OUTPUT"
@@ -72,10 +96,16 @@ jobs:
           git reset --hard origin/main
 
       - name: Generate reviewable draft refreshes
-        run: python3 scripts/research_ops.py draft-refresh --trigger "${{ steps.trigger.outputs.value }}"
+        run: |
+          if [ -n "${{ steps.trigger.outputs.fixture }}" ]; then
+            python3 scripts/research_ops.py draft-refresh --trigger "${{ steps.trigger.outputs.value }}" --fixture "${{ steps.trigger.outputs.fixture }}"
+          else
+            python3 scripts/research_ops.py draft-refresh --trigger "${{ steps.trigger.outputs.value }}"
+          fi
         env:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
           OPENAI_MODEL: ${{ vars.OPENAI_MODEL }}
+          TRANSLATION_MODEL: gpt-4.1-mini
 
       - name: Check draft diff
         id: draft_diff
@@ -90,10 +120,10 @@ jobs:
         if: steps.draft_diff.outputs.changed == 'true'
         uses: peter-evans/create-pull-request@v8
         with:
-          branch: automation/research-refresh
+          branch: ${{ steps.trigger.outputs.pr_branch }}
           delete-branch: false
-          title: "chore: automated research refresh"
-          body-path: automation/run/pr-body.md
+          title: ${{ steps.trigger.outputs.pr_title }}
+          body-path: automation/run/pr-body.zh-tw.md
           commit-message: "chore: refresh living research drafts"
           add-paths: |
             research/**

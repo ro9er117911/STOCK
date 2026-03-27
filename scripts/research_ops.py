@@ -27,6 +27,7 @@ def main() -> int:
         default="event",
         help="Reason for the refresh pipeline.",
     )
+    poll_parser.add_argument("--fixture", default="", help="Optional test event fixture name.")
 
     draft_parser = subparsers.add_parser("draft-refresh", help="Create draft thesis refreshes for material updates.")
     draft_parser.add_argument(
@@ -35,14 +36,15 @@ def main() -> int:
         default="event",
         help="Reason for the refresh pipeline.",
     )
+    draft_parser.add_argument("--fixture", default="", help="Optional test event fixture name.")
 
     args = parser.parse_args()
     if args.command == "bootstrap-baselines":
         payload = {"created": bootstrap_baselines(force=args.force)}
     elif args.command == "poll":
-        payload = poll_events(trigger=args.trigger)
+        payload = poll_events(trigger=args.trigger, fixture_name=args.fixture or None)
     else:
-        payload = draft_refreshes(trigger=args.trigger)
+        payload = draft_refreshes(trigger=args.trigger, fixture_name=args.fixture or None)
 
     print(json.dumps(payload, ensure_ascii=False, indent=2))
     return 0

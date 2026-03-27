@@ -5,7 +5,8 @@ from pathlib import Path
 
 
 DEFAULT_USER_AGENT = "ro9air-stock-research/1.0 ro9er117911@users.noreply.github.com"
-DEFAULT_OPENAI_MODEL = "gpt-5.4-mini-2026-03-17"
+DEFAULT_OPENAI_MODEL = "gpt-5.4-mini"
+DEFAULT_TRANSLATION_MODEL = "gpt-4.1-mini"
 BOT_NAME = "stock-research-bot"
 BOT_EMAIL = "actions@users.noreply.github.com"
 
@@ -17,6 +18,9 @@ CONTEXT_ROOT = AUTOMATION_ROOT / "context"
 RUN_SUMMARY_PATH = AUTOMATION_ROOT / "poll-summary.json"
 DRAFT_SUMMARY_PATH = AUTOMATION_ROOT / "draft-summary.json"
 PR_BODY_PATH = AUTOMATION_ROOT / "pr-body.md"
+PR_BODY_ZH_TW_PATH = AUTOMATION_ROOT / "pr-body.zh-tw.md"
+TRANSLATION_SUMMARY_PATH = AUTOMATION_ROOT / "translation-summary.json"
+TEST_EVENTS_ROOT = REPO_ROOT / "automation" / "test_events"
 
 
 @dataclass(frozen=True)

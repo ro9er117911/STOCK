@@ -11,15 +11,18 @@ from .config import (
     CONTEXT_ROOT,
     DRAFT_SUMMARY_PATH,
     PR_BODY_PATH,
+    PR_BODY_ZH_TW_PATH,
     RESEARCH_ROOT,
     RUN_SUMMARY_PATH,
+    TEST_EVENTS_ROOT,
+    TRANSLATION_SUMMARY_PATH,
     WATCHLIST,
 )
-from .llm import generate_refresh
+from .llm import generate_refresh, translate_markdown
 from .markdown import render_current_report, render_review_summary
 from .models import Event
 from .sources import SourceFailure, fetch_feed_events, fetch_price_events, fetch_sec_events
-from .storage import append_jsonl, read_json, read_jsonl, write_json
+from .storage import append_jsonl, read_json, read_jsonl, sha1_digest, write_json
 
 
 def bootstrap_baselines(research_root: Path = RESEARCH_ROOT, force: bool = False) -> list[str]:
@@ -69,6 +72,8 @@ def _should_refresh(
     metadata: dict[str, Any],
     thresholds: dict[str, Any],
 ) -> bool:
+    if "force_requires_refresh" in metadata:
+        return bool(metadata["force_requires_refresh"])
     if source_type == "sec" and metadata.get("form") in thresholds["material_sec_forms"]:
         return True
     if source_type == "price":
@@ -81,16 +86,18 @@ def _should_refresh(
 
 
 def _normalize_event(raw_event: dict[str, Any], state: dict[str, Any]) -> Event:
-    affected = _map_assumptions(raw_event["title"], state["assumptions"])
-    impact = _classify_impact(raw_event["title"], state["thresholds"])
+    metadata = raw_event.get("metadata", {})
+    affected = metadata.get("force_assumption_ids") or _map_assumptions(raw_event["title"], state["assumptions"])
+    impact = metadata.get("force_marginal_impact") or _classify_impact(raw_event["title"], state["thresholds"])
     requires_refresh = _should_refresh(
-        raw_event["source_type"], raw_event["title"], raw_event.get("metadata", {}), state["thresholds"]
+        raw_event["source_type"], raw_event["title"], metadata, state["thresholds"]
     )
-    decision = "ignore"
-    if requires_refresh:
-        decision = "refresh"
-    elif affected:
-        decision = "watch"
+    decision = metadata.get("force_decision", "ignore")
+    if "force_decision" not in metadata:
+        if requires_refresh:
+            decision = "refresh"
+        elif affected:
+            decision = "watch"
     return Event(
         event_id=raw_event["event_id"],
         ticker=raw_event["ticker"],
@@ -103,11 +110,18 @@ def _normalize_event(raw_event: dict[str, Any], state: dict[str, Any]) -> Event:
         threshold_breach=requires_refresh,
         requires_refresh=requires_refresh,
         decision=decision,
-        metadata=raw_event.get("metadata", {}),
+        metadata=metadata,
     )
 
 
-def _scheduled_refresh_due(state: dict[str, Any], trigger: str, today: date) -> bool:
+def _scheduled_refresh_due(
+    state: dict[str, Any],
+    trigger: str,
+    today: date,
+    fixture_name: str | None = None,
+) -> bool:
+    if fixture_name:
+        return False
     if trigger == "manual":
         return True
     if trigger != "scheduled":
@@ -118,7 +132,39 @@ def _scheduled_refresh_due(state: dict[str, Any], trigger: str, today: date) -> 
     return today >= next_review or (today - last_review).days >= deep_refresh_days
 
 
-def poll_events(research_root: Path = RESEARCH_ROOT, trigger: str = "event") -> dict[str, Any]:
+def _load_fixture_events(fixture_name: str, fixture_root: Path = TEST_EVENTS_ROOT) -> list[dict[str, Any]]:
+    fixture_path = fixture_root / f"{fixture_name}.json"
+    payload = read_json(fixture_path)
+    if payload is None:
+        raise FileNotFoundError(f"Missing fixture file: {fixture_path}")
+    events = payload.get("events", payload)
+    normalized_events: list[dict[str, Any]] = []
+    for event in events:
+        event_copy = dict(event)
+        metadata = dict(event_copy.get("metadata", {}))
+        metadata["fixture_name"] = fixture_name
+        event_copy["metadata"] = metadata
+        event_copy.setdefault(
+            "event_id",
+            sha1_digest(
+                event_copy["ticker"],
+                "fixture",
+                fixture_name,
+                event_copy["occurred_at"],
+                event_copy["title"],
+            ),
+        )
+        event_copy.setdefault("source_url", f"fixture://{fixture_name}")
+        normalized_events.append(event_copy)
+    return normalized_events
+
+
+def poll_events(
+    research_root: Path = RESEARCH_ROOT,
+    trigger: str = "event",
+    fixture_name: str | None = None,
+    fixture_root: Path = TEST_EVENTS_ROOT,
+) -> dict[str, Any]:
     AUTOMATION_ROOT.mkdir(parents=True, exist_ok=True)
     if CONTEXT_ROOT.exists():
         shutil.rmtree(CONTEXT_ROOT)
@@ -131,7 +177,10 @@ def poll_events(research_root: Path = RESEARCH_ROOT, trigger: str = "event") -> 
         "tickers": {},
         "material_tickers": [],
         "changed_files": [],
+        "fixture_name": fixture_name,
     }
+
+    fixture_events = _load_fixture_events(fixture_name, fixture_root) if fixture_name else []
 
     for ticker, config in WATCHLIST.items():
         state = _load_state(research_root, ticker)
@@ -141,30 +190,33 @@ def poll_events(research_root: Path = RESEARCH_ROOT, trigger: str = "event") -> 
         errors: list[str] = []
         cursor_updates: dict[str, str] = {}
 
-        try:
-            sec_events, sec_cursor = fetch_sec_events(config, state)
-            raw_events.extend(sec_events)
-            if sec_cursor:
-                cursor_updates["sec"] = sec_cursor
-        except SourceFailure as exc:
-            errors.append(str(exc))
-
-        try:
-            price_events, price_cursor = fetch_price_events(config, state)
-            raw_events.extend(price_events)
-            if price_cursor:
-                cursor_updates["price"] = price_cursor
-        except SourceFailure as exc:
-            errors.append(str(exc))
-
-        for feed in config.feeds:
+        if fixture_name:
+            raw_events.extend(event for event in fixture_events if event["ticker"] == ticker)
+        else:
             try:
-                feed_events, feed_cursor = fetch_feed_events(feed, config, state)
-                raw_events.extend(feed_events)
-                if feed_cursor:
-                    cursor_updates[feed.source_id] = feed_cursor
+                sec_events, sec_cursor = fetch_sec_events(config, state)
+                raw_events.extend(sec_events)
+                if sec_cursor:
+                    cursor_updates["sec"] = sec_cursor
             except SourceFailure as exc:
                 errors.append(str(exc))
+
+            try:
+                price_events, price_cursor = fetch_price_events(config, state)
+                raw_events.extend(price_events)
+                if price_cursor:
+                    cursor_updates["price"] = price_cursor
+            except SourceFailure as exc:
+                errors.append(str(exc))
+
+            for feed in config.feeds:
+                try:
+                    feed_events, feed_cursor = fetch_feed_events(feed, config, state)
+                    raw_events.extend(feed_events)
+                    if feed_cursor:
+                        cursor_updates[feed.source_id] = feed_cursor
+                except SourceFailure as exc:
+                    errors.append(str(exc))
 
         normalized: list[Event] = []
         run_seen: set[str] = set()
@@ -183,12 +235,13 @@ def poll_events(research_root: Path = RESEARCH_ROOT, trigger: str = "event") -> 
             _save_state(research_root, ticker, state)
             summary["changed_files"].append(str(research_root / ticker / "state.json"))
 
-        needs_scheduled_refresh = _scheduled_refresh_due(state, trigger, today)
+        needs_scheduled_refresh = _scheduled_refresh_due(state, trigger, today, fixture_name=fixture_name)
         refresh_events = [event.to_dict() for event in normalized if event.requires_refresh]
         if refresh_events or needs_scheduled_refresh:
             context = {
                 "ticker": ticker,
                 "trigger": trigger,
+                "fixture_name": fixture_name,
                 "scheduled_refresh_due": needs_scheduled_refresh,
                 "new_events": [event.to_dict() for event in normalized],
                 "material_events": refresh_events,
@@ -209,12 +262,57 @@ def poll_events(research_root: Path = RESEARCH_ROOT, trigger: str = "event") -> 
     return summary
 
 
-def draft_refreshes(research_root: Path = RESEARCH_ROOT, trigger: str = "event") -> dict[str, Any]:
+def localize_refresh_outputs(
+    research_root: Path,
+    refreshed_tickers: list[str],
+) -> dict[str, Any]:
+    translated_files: list[str] = []
+    for ticker in refreshed_tickers:
+        ticker_dir = research_root / ticker
+        current_path = ticker_dir / "current.md"
+        review_summary_path = ticker_dir / "artifacts" / "review_summary.md"
+        current_zh_tw_path = ticker_dir / "current.zh-tw.md"
+        review_summary_zh_tw_path = ticker_dir / "artifacts" / "review_summary.zh-tw.md"
+
+        current_zh_tw_path.write_text(
+            translate_markdown(current_path.read_text(encoding="utf-8"), context_label=f"{ticker} current research note"),
+            encoding="utf-8",
+        )
+        review_summary_zh_tw_path.write_text(
+            translate_markdown(
+                review_summary_path.read_text(encoding="utf-8"),
+                context_label=f"{ticker} refresh review summary",
+            ),
+            encoding="utf-8",
+        )
+        translated_files.extend([str(current_zh_tw_path), str(review_summary_zh_tw_path)])
+
+    if PR_BODY_PATH.exists():
+        PR_BODY_ZH_TW_PATH.write_text(
+            translate_markdown(PR_BODY_PATH.read_text(encoding="utf-8"), context_label="pull request body"),
+            encoding="utf-8",
+        )
+        translated_files.append(str(PR_BODY_ZH_TW_PATH))
+
+    summary = {
+        "generated_at": datetime.now(UTC).isoformat(timespec="seconds"),
+        "translated_files": translated_files,
+    }
+    write_json(TRANSLATION_SUMMARY_PATH, summary)
+    return summary
+
+
+def draft_refreshes(
+    research_root: Path = RESEARCH_ROOT,
+    trigger: str = "event",
+    fixture_name: str | None = None,
+) -> dict[str, Any]:
     summary = read_json(RUN_SUMMARY_PATH, default={"material_tickers": []})
     draft_summary: dict[str, Any] = {
         "trigger": trigger,
         "generated_at": datetime.now(UTC).isoformat(timespec="seconds"),
         "refreshed_tickers": [],
+        "fixture_name": fixture_name,
     }
     pr_body_lines = [
         "## Automated Research Refresh",
@@ -302,4 +400,10 @@ def draft_refreshes(research_root: Path = RESEARCH_ROOT, trigger: str = "event")
 
     write_json(DRAFT_SUMMARY_PATH, draft_summary)
     PR_BODY_PATH.write_text("\n".join(pr_body_lines).strip() + "\n", encoding="utf-8")
+    localization_summary = localize_refresh_outputs(
+        research_root,
+        [item["ticker"] for item in draft_summary["refreshed_tickers"]],
+    )
+    draft_summary["localization"] = localization_summary
+    write_json(DRAFT_SUMMARY_PATH, draft_summary)
     return draft_summary

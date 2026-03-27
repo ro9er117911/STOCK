@@ -1,0 +1,26 @@
+{
+  "events": [
+    {
+      "ticker": "MSFT",
+      "source_type": "fixture",
+      "occurred_at": "2026-03-27",
+      "title": "Microsoft says paid Copilot enterprise penetration moved above 12% in FY2026 Q3 guidance.",
+      "metadata": {
+        "force_assumption_ids": ["msft-a2"],
+        "force_marginal_impact": "+",
+        "force_requires_refresh": true
+      }
+    },
+    {
+      "ticker": "MSFT",
+      "source_type": "fixture",
+      "occurred_at": "2026-03-27",
+      "title": "Microsoft guides to slower AI infrastructure CapEx growth while Azure AI demand remains above 30%.",
+      "metadata": {
+        "force_assumption_ids": ["msft-a1", "msft-a3"],
+        "force_marginal_impact": "+",
+        "force_requires_refresh": true
+      }
+    }
+  ]
+}
