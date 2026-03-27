@@ -331,15 +331,16 @@ def draft_refreshes(
         state_path = ticker_dir / "state.json"
         state = read_json(state_path)
         current_markdown = current_path.read_text(encoding="utf-8")
+        base_version_log = list(state.get("version_log", []))
         refresh = generate_refresh(state, current_markdown, context)
         updated_state = refresh["updated_state"]
         updated_state["last_reviewed_at"] = date.today().isoformat()
-        if not updated_state.get("next_review_at"):
-            updated_state["next_review_at"] = (
-                date.today() + timedelta(days=updated_state["thresholds"]["deep_refresh_days"])
-            ).isoformat()
+        updated_state["next_review_at"] = (
+            date.today() + timedelta(days=updated_state["thresholds"]["deep_refresh_days"])
+        ).isoformat()
         if "summary_points" in refresh:
             updated_state["latest_delta"] = refresh["summary_points"]
+        updated_state["version_log"] = base_version_log
         next_version = f"v{len(updated_state['version_log'])}"
         updated_state["version_log"].append(
             {

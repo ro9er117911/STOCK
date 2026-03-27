@@ -3,6 +3,7 @@ from __future__ import annotations
 import json
 import tempfile
 import unittest
+from datetime import date, timedelta
 from pathlib import Path
 from unittest import mock
 
@@ -232,6 +233,82 @@ class PipelineTests(unittest.TestCase):
                 str(research_root / "MSFT" / "current.zh-tw.md"),
                 draft_summary["localization"]["translated_files"],
             )
+
+    def test_draft_refresh_normalizes_review_schedule_and_version_log(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            research_root = Path(tmp) / "research"
+            fixture_root = Path(tmp) / "fixtures"
+            fixture_root.mkdir(parents=True, exist_ok=True)
+            (fixture_root / "msft_only.json").write_text(
+                json.dumps(
+                    {
+                        "events": [
+                            {
+                                "ticker": "MSFT",
+                                "source_type": "fixture",
+                                "occurred_at": "2026-03-27",
+                                "title": "Microsoft says Copilot enterprise penetration moved above 12%.",
+                                "metadata": {
+                                    "force_assumption_ids": ["msft-a2"],
+                                    "force_marginal_impact": "+",
+                                    "force_requires_refresh": True,
+                                },
+                            }
+                        ]
+                    },
+                    ensure_ascii=False,
+                    indent=2,
+                ),
+                encoding="utf-8",
+            )
+            automation_root = Path(tmp) / "automation"
+            bootstrap_baselines(research_root=research_root, force=True)
+            msft_state_path = research_root / "MSFT" / "state.json"
+            original_state = read_json(msft_state_path)
+            mutated_state = json.loads(json.dumps(original_state))
+            mutated_state["next_review_at"] = "2026-06-10"
+            mutated_state["version_log"].append(
+                {
+                    "version": "v999",
+                    "date": "2026-03-27",
+                    "reason": "Model inserted duplicate version",
+                    "impact": "Should not survive normalization.",
+                }
+            )
+            with mock.patch("stock_research.pipeline.AUTOMATION_ROOT", automation_root), \
+                mock.patch("stock_research.pipeline.CONTEXT_ROOT", automation_root / "context"), \
+                mock.patch("stock_research.pipeline.RUN_SUMMARY_PATH", automation_root / "poll-summary.json"), \
+                mock.patch("stock_research.pipeline.DRAFT_SUMMARY_PATH", automation_root / "draft-summary.json"), \
+                mock.patch("stock_research.pipeline.PR_BODY_PATH", automation_root / "pr-body.md"), \
+                mock.patch("stock_research.pipeline.PR_BODY_ZH_TW_PATH", automation_root / "pr-body.zh-tw.md"), \
+                mock.patch("stock_research.pipeline.TRANSLATION_SUMMARY_PATH", automation_root / "translation-summary.json"), \
+                mock.patch(
+                    "stock_research.pipeline.generate_refresh",
+                    return_value={
+                        "updated_state": mutated_state,
+                        "changed_assumptions": [],
+                        "action_rule_delta": [],
+                        "review_summary": "Model summary",
+                    },
+                ), \
+                mock.patch("stock_research.pipeline.translate_markdown", side_effect=lambda markdown_text, *, context_label: markdown_text):
+                poll_events(
+                    research_root=research_root,
+                    trigger="manual",
+                    fixture_name="msft_only",
+                    fixture_root=fixture_root,
+                )
+                draft_refreshes(
+                    research_root=research_root,
+                    trigger="manual",
+                    fixture_name="msft_only",
+                )
+            saved_state = read_json(msft_state_path)
+            self.assertEqual(
+                saved_state["next_review_at"],
+                (date.today() + timedelta(days=saved_state["thresholds"]["deep_refresh_days"])).isoformat(),
+            )
+            self.assertEqual([item["version"] for item in saved_state["version_log"]], ["v0", "v1"])
 
     def test_rss_feed_respects_title_keywords(self) -> None:
         state = {

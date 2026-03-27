@@ -178,8 +178,12 @@ def translate_markdown(markdown_text: str, *, context_label: str) -> str:
                 "role": "system",
                 "content": (
                     "You translate investment research markdown into colloquial Traditional Chinese for Taiwan. "
+                    "Translate section headings, bullet labels, and table headers too, unless they are IDs, tickers, code spans, file paths, or URLs. "
                     "Preserve markdown structure, tables, IDs, tickers, numbers, dates, links, code spans, and file paths exactly. "
-                    "Do not summarize or omit content. Only localize the prose into readable zh-TW."
+                    "Do not summarize or omit content. Use natural, conversational zh-TW wording for investors. "
+                    "Preferred glossary: Living Thesis=持續更新研究, Refresh Review Summary=更新檢視摘要, "
+                    "Reviewed at=檢視日期, Next review=下次檢查, Current action=目前操作, "
+                    "Delta From Previous Version=與前版差異, Assumption Changes=假設變更, Action Rule Delta=操作規則變更."
                 ),
             },
             {
