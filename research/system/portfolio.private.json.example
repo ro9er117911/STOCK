@@ -1,0 +1,32 @@
+{
+  "updated_at": "2026-03-27",
+  "positions": [
+    {
+      "ticker": "PLTR",
+      "shares": 0,
+      "avg_cost": 0,
+      "target_weight_pct": 0,
+      "max_weight_pct": 0,
+      "risk_level": "core",
+      "notes": "填入你的實際部位後，本機 dashboard 會顯示成本、目標倉位與風險等級。"
+    },
+    {
+      "ticker": "MSFT",
+      "shares": 0,
+      "avg_cost": 0,
+      "target_weight_pct": 0,
+      "max_weight_pct": 0,
+      "risk_level": "core",
+      "notes": "若還沒持有，可維持 0，dashboard 會顯示為尚未填入部位。"
+    },
+    {
+      "ticker": "MAR",
+      "shares": 0,
+      "avg_cost": 0,
+      "target_weight_pct": 0,
+      "max_weight_pct": 0,
+      "risk_level": "satellite",
+      "notes": "風險等級建議使用 core / satellite / high-conviction 這類簡單標籤。"
+    }
+  ]
+}

@@ -6,5 +6,6 @@ __pycache__/
 automation/run/*
 !automation/run/.gitkeep
 research/inbox/
+research/system/portfolio.private.json
 logs/*
 !logs/.gitkeep

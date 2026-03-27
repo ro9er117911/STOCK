@@ -1,0 +1,128 @@
+[
+  {
+    "citation_id": "msft-research-page",
+    "kind": "internal",
+    "label": "研究內頁",
+    "href": "research/MSFT.html",
+    "source_type": "研究頁面",
+    "is_clickable": true,
+    "occurred_at": "2026-03-27"
+  },
+  {
+    "citation_id": "msft-review-summary",
+    "kind": "internal",
+    "label": "本輪更新摘要",
+    "href": "research/MSFT.html#review-summary",
+    "source_type": "更新摘要",
+    "is_clickable": true,
+    "occurred_at": "2026-03-27"
+  },
+  {
+    "citation_id": "msft-manifest-sec",
+    "kind": "external",
+    "label": "SEC 公司揭露檔案",
+    "href": "https://data.sec.gov/submissions/CIK0000789019.json",
+    "source_type": "SEC",
+    "is_clickable": true,
+    "occurred_at": "2026-03-27"
+  },
+  {
+    "citation_id": "msft-manifest-investor_news",
+    "kind": "external",
+    "label": "Microsoft 官方新聞來源",
+    "href": "https://news.microsoft.com/feed/",
+    "source_type": "RSS",
+    "is_clickable": true,
+    "occurred_at": "2026-03-27"
+  },
+  {
+    "citation_id": "msft-manifest-price",
+    "kind": "external",
+    "label": "Yahoo Finance 圖表資料",
+    "href": "https://query1.finance.yahoo.com/v8/finance/chart/MSFT?range=1mo&interval=1d",
+    "source_type": "市場資料",
+    "is_clickable": true,
+    "occurred_at": "2026-03-27"
+  },
+  {
+    "citation_id": "5abff3a1f4e94c142904466eab1a8fe4fb5d57c1",
+    "kind": "external",
+    "label": "We’re taking our latest AI research breakthroughs and putting them in the hands of devs everywhere, with Azure AI Foundry Labs.",
+    "href": "https://www.linkedin.com/posts/satyanadella_introducing-azure-ai-foundry-labs-a-hub-activity-7298071158258614273-TIiL",
+    "source_type": "官方新聞",
+    "is_clickable": true,
+    "occurred_at": "2025-02-20"
+  },
+  {
+    "citation_id": "ed6756e435fcf1551e21491030e21b9972fb73c7",
+    "kind": "external",
+    "label": "Microsoft Dragon Copilot provides the healthcare industry’s first unified voice AI assistant that enables clinicians to streamline clinical documentation, surface information and automate tasks",
+    "href": "https://news.microsoft.com/2025/03/03/microsoft-dragon-copilot-provides-the-healthcare-industrys-first-unified-voice-ai-assistant-that-enables-clinicians-to-streamline-clinical-documentation-surface-information-and-automate-task/",
+    "source_type": "官方新聞",
+    "is_clickable": true,
+    "occurred_at": "2025-03-03"
+  },
+  {
+    "citation_id": "e943236490c770ed14bd5814d1c9eb6204e736e3",
+    "kind": "external",
+    "label": "Microsoft announces quarterly earnings release date",
+    "href": "https://news.microsoft.com/2025/04/09/microsoft-announces-quarterly-earnings-release-date-63/",
+    "source_type": "官方新聞",
+    "is_clickable": true,
+    "occurred_at": "2025-04-09"
+  },
+  {
+    "citation_id": "7e260af1308e86512e2fb0b318aaf7affbff0a1d",
+    "kind": "external",
+    "label": "Microsoft Cloud and AI strength drives third quarter results",
+    "href": "https://news.microsoft.com/2025/04/30/microsoft-cloud-and-ai-strength-drives-third-quarter-results/",
+    "source_type": "官方新聞",
+    "is_clickable": true,
+    "occurred_at": "2025-04-30"
+  },
+  {
+    "citation_id": "19872b27eec6a2a9ed43f77196dc4872db5212a1",
+    "kind": "external",
+    "label": "Microsoft earnings press release available on Investor Relations website",
+    "href": "https://news.microsoft.com/2025/04/30/microsoft-earnings-press-release-available-on-investor-relations-website-26/",
+    "source_type": "官方新聞",
+    "is_clickable": true,
+    "occurred_at": "2025-04-30"
+  },
+  {
+    "citation_id": "msft-seed-2026-copilot-adoption-internal",
+    "kind": "internal",
+    "label": "內部研究節點：market_update_mar2026.md",
+    "href": "research/MSFT.html#event-timeline",
+    "source_type": "內部研究筆記",
+    "is_clickable": true,
+    "occurred_at": "2026-03-25"
+  },
+  {
+    "citation_id": "msft-source-sec",
+    "kind": "external",
+    "label": "官方 SEC 揭露來源；是否算重大事件，依各 ticker 的門檻設定判斷。",
+    "href": "https://data.sec.gov/submissions/CIK0000789019.json",
+    "source_type": "SEC",
+    "is_clickable": true,
+    "occurred_at": "2026-03-27"
+  },
+  {
+    "citation_id": "msft-source-price",
+    "kind": "external",
+    "label": "Yahoo Finance 日線資料，用來抓跳空與異常成交量。",
+    "href": "https://query1.finance.yahoo.com/v8/finance/chart/MSFT?range=1mo&interval=1d",
+    "source_type": "price",
+    "is_clickable": true,
+    "occurred_at": "2026-03-27"
+  },
+  {
+    "citation_id": "msft-source-investor_news",
+    "kind": "external",
+    "label": "Microsoft 官方新聞室 RSS。",
+    "href": "https://news.microsoft.com/feed/",
+    "source_type": "官方新聞",
+    "is_clickable": true,
+    "occurred_at": "2026-03-27"
+  }
+]

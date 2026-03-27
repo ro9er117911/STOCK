@@ -4,46 +4,164 @@
   "status_label": "持有觀察",
   "current_action": "穩健持有",
   "thesis_confidence": 0.67,
-  "summary_blurb": "No new events were provided in the refresh bundle, so the MAR thesis remains unchanged. Confidence and action stay stable; only the review timestamps are advanced to today with the next check pushed out on the existing cadence.",
+  "confidence_delta": 0.0,
+  "summary_blurb": "MAR 本輪沒有新增足以改寫 thesis 的重大事件，研究主軸先延續前一版。 目前先維持「穩健持有」，下一個驗證點先盯 RevPAR 結構。",
   "next_review_at": "2026-05-07",
-  "next_must_check_data": "Next earnings: RevPAR mix, corporate travel commentary, forward bookings, and cash return guidance.",
+  "next_must_check_data": "下一次財報：RevPAR 結構、商務旅遊評論、前瞻訂房，以及資本回饋指引。",
+  "next_checklist": [
+    "RevPAR 結構",
+    "管理層對商務旅遊的評論",
+    "前瞻訂房",
+    "資本回饋指引"
+  ],
   "last_reviewed_at": "2026-03-27",
+  "risk_level": "",
+  "risk_level_label": "尚未設定",
+  "priority_score": 56,
+  "priority_label": "低優先",
+  "last_event_status": "持續追蹤",
+  "detail_path": "tickers/MAR.html",
+  "internal_research_path": "research/MAR.html",
+  "position": {
+    "ticker": "MAR",
+    "has_position": false,
+    "shares": 0.0,
+    "avg_cost": 0.0,
+    "target_weight_pct": 0.0,
+    "max_weight_pct": 0.0,
+    "risk_level": "",
+    "risk_level_label": "尚未設定",
+    "notes": "",
+    "summary": "尚未填入部位",
+    "shares_label": "尚未填入",
+    "avg_cost_label": "未填成本",
+    "target_weight_label": "未填目標倉位",
+    "max_weight_label": "未填上限倉位"
+  },
+  "portfolio_position": {
+    "ticker": "MAR",
+    "has_position": false,
+    "shares": 0.0,
+    "avg_cost": 0.0,
+    "target_weight_pct": 0.0,
+    "max_weight_pct": 0.0,
+    "risk_level": "",
+    "risk_level_label": "尚未設定",
+    "notes": "",
+    "summary": "尚未填入部位",
+    "shares_label": "尚未填入",
+    "avg_cost_label": "未填成本",
+    "target_weight_label": "未填目標倉位",
+    "max_weight_label": "未填上限倉位"
+  },
   "key_events": [
     {
+      "event_id": "mar-seed-2026-travel-mix",
       "occurred_at": "2026-03-25",
       "source_type": "legacy_seed",
+      "source_label": "既有研究節點",
       "title": "High-end and international travel stayed firm while lower-end US demand softened.",
       "impact": "0",
+      "impact_label": "中性",
       "decision": "watch",
-      "source_url": "/Users/ro9air/STOCK/research/market_update_mar2026.md"
+      "decision_label": "持續追蹤",
+      "link_kind": "internal",
+      "link_label": "內部研究節點",
+      "href": "research/MAR.html#event-timeline",
+      "is_clickable": true
     },
     {
+      "event_id": "mar-seed-2026-guidance",
       "occurred_at": "2026-03-25",
       "source_type": "legacy_seed",
+      "source_label": "既有研究節點",
       "title": "2026 guidance stayed intact despite a small EPS miss.",
       "impact": "+",
+      "impact_label": "偏正向",
       "decision": "watch",
-      "source_url": "/Users/ro9air/STOCK/research/market_update_mar2026.md"
+      "decision_label": "持續追蹤",
+      "link_kind": "internal",
+      "link_label": "內部研究節點",
+      "href": "research/MAR.html#event-timeline",
+      "is_clickable": true
+    }
+  ],
+  "event_timeline": [
+    {
+      "event_id": "mar-seed-2026-travel-mix",
+      "occurred_at": "2026-03-25",
+      "source_type": "legacy_seed",
+      "source_label": "既有研究節點",
+      "title": "High-end and international travel stayed firm while lower-end US demand softened.",
+      "impact": "0",
+      "impact_label": "中性",
+      "decision": "watch",
+      "decision_label": "持續追蹤",
+      "link_kind": "internal",
+      "link_label": "內部研究節點",
+      "href": "research/MAR.html#event-timeline",
+      "is_clickable": true
+    },
+    {
+      "event_id": "mar-seed-2026-guidance",
+      "occurred_at": "2026-03-25",
+      "source_type": "legacy_seed",
+      "source_label": "既有研究節點",
+      "title": "2026 guidance stayed intact despite a small EPS miss.",
+      "impact": "+",
+      "impact_label": "偏正向",
+      "decision": "watch",
+      "decision_label": "持續追蹤",
+      "link_kind": "internal",
+      "link_label": "內部研究節點",
+      "href": "research/MAR.html#event-timeline",
+      "is_clickable": true
     }
   ],
   "key_action_rules": [
     {
       "action_rule_id": "mar-ar-add",
       "kind": "add",
-      "condition": "Corporate travel and forward bookings improve while international RevPAR remains strong.",
-      "action": "Add selectively after management confirms trend persistence."
+      "kind_label": "加碼條件",
+      "condition": "如果商務旅遊與前瞻訂房改善，且國際 RevPAR 依舊強勁，就可考慮加碼。",
+      "action": "等管理層確認趨勢延續後，再選擇性加碼。"
     },
     {
       "action_rule_id": "mar-ar-trim",
       "kind": "trim",
-      "condition": "Premium segment demand softens without offsetting business-travel recovery.",
-      "action": "Trim and keep only defensive core size."
+      "kind_label": "減碼條件",
+      "condition": "如果高端客群需求轉弱，且沒有商務旅遊回溫來抵消，就要減碼。",
+      "action": "先減碼，只保留防守型核心倉位。"
     },
     {
       "action_rule_id": "mar-ar-exit",
       "kind": "exit",
-      "condition": "High-end and business travel weaken together in a deeper recession.",
-      "action": "Exit the active thesis."
+      "kind_label": "退出條件",
+      "condition": "若景氣更深度下行，高端與商務旅遊同步轉弱，就要退出。",
+      "action": "退出目前 thesis。"
+    }
+  ],
+  "action_rules": [
+    {
+      "action_rule_id": "mar-ar-add",
+      "kind": "add",
+      "kind_label": "加碼條件",
+      "condition": "如果商務旅遊與前瞻訂房改善，且國際 RevPAR 依舊強勁，就可考慮加碼。",
+      "action": "等管理層確認趨勢延續後，再選擇性加碼。"
+    },
+    {
+      "action_rule_id": "mar-ar-trim",
+      "kind": "trim",
+      "kind_label": "減碼條件",
+      "condition": "如果高端客群需求轉弱，且沒有商務旅遊回溫來抵消，就要減碼。",
+      "action": "先減碼，只保留防守型核心倉位。"
+    },
+    {
+      "action_rule_id": "mar-ar-exit",
+      "kind": "exit",
+      "kind_label": "退出條件",
+      "condition": "若景氣更深度下行，高端與商務旅遊同步轉弱，就要退出。",
+      "action": "退出目前 thesis。"
     }
   ],
   "changed_assumptions": [],
@@ -59,7 +177,9 @@
       "new_events": 0,
       "cursor": "",
       "error": "",
-      "notes": "Official SEC filings. Material forms are filtered by each ticker state threshold."
+      "notes": "官方 SEC 揭露來源；是否算重大事件，依各 ticker 的門檻設定判斷。",
+      "status_label": "啟用",
+      "is_clickable": true
     },
     {
       "source_id": "price",
@@ -71,7 +191,9 @@
       "new_events": 0,
       "cursor": "",
       "error": "",
-      "notes": "Daily Yahoo Finance chart data for gap and abnormal volume detection."
+      "notes": "Yahoo Finance 日線資料，用來抓跳空與異常成交量。",
+      "status_label": "啟用",
+      "is_clickable": true
     },
     {
       "source_id": "investor_news",
@@ -83,9 +205,507 @@
       "new_events": 0,
       "cursor": "",
       "error": "",
-      "notes": "Official Marriott newsroom archive."
+      "notes": "Marriott 官方新聞室頁面。",
+      "status_label": "啟用",
+      "is_clickable": true
     }
   ],
+  "citations": [
+    {
+      "citation_id": "mar-research-page",
+      "kind": "internal",
+      "label": "研究內頁",
+      "href": "research/MAR.html",
+      "source_type": "研究頁面",
+      "is_clickable": true,
+      "occurred_at": "2026-03-27"
+    },
+    {
+      "citation_id": "mar-review-summary",
+      "kind": "internal",
+      "label": "本輪更新摘要",
+      "href": "research/MAR.html#review-summary",
+      "source_type": "更新摘要",
+      "is_clickable": true,
+      "occurred_at": "2026-03-27"
+    },
+    {
+      "citation_id": "mar-manifest-sec",
+      "kind": "external",
+      "label": "SEC 公司揭露檔案",
+      "href": "https://data.sec.gov/submissions/CIK0001048286.json",
+      "source_type": "SEC",
+      "is_clickable": true,
+      "occurred_at": "2026-03-27"
+    },
+    {
+      "citation_id": "mar-manifest-investor_news",
+      "kind": "external",
+      "label": "Marriott 投資人新聞稿",
+      "href": "https://news.marriott.com/news/",
+      "source_type": "官網頁面",
+      "is_clickable": true,
+      "occurred_at": "2026-03-27"
+    },
+    {
+      "citation_id": "mar-manifest-price",
+      "kind": "external",
+      "label": "Yahoo Finance 圖表資料",
+      "href": "https://query1.finance.yahoo.com/v8/finance/chart/MAR?range=1mo&interval=1d",
+      "source_type": "市場資料",
+      "is_clickable": true,
+      "occurred_at": "2026-03-27"
+    },
+    {
+      "citation_id": "mar-seed-2026-travel-mix-internal",
+      "kind": "internal",
+      "label": "內部研究節點：market_update_mar2026.md",
+      "href": "research/MAR.html#event-timeline",
+      "source_type": "內部研究筆記",
+      "is_clickable": true,
+      "occurred_at": "2026-03-25"
+    },
+    {
+      "citation_id": "mar-source-sec",
+      "kind": "external",
+      "label": "官方 SEC 揭露來源；是否算重大事件，依各 ticker 的門檻設定判斷。",
+      "href": "https://data.sec.gov/submissions/CIK0001048286.json",
+      "source_type": "SEC",
+      "is_clickable": true,
+      "occurred_at": "2026-03-27"
+    },
+    {
+      "citation_id": "mar-source-price",
+      "kind": "external",
+      "label": "Yahoo Finance 日線資料，用來抓跳空與異常成交量。",
+      "href": "https://query1.finance.yahoo.com/v8/finance/chart/MAR?range=1mo&interval=1d",
+      "source_type": "price",
+      "is_clickable": true,
+      "occurred_at": "2026-03-27"
+    },
+    {
+      "citation_id": "mar-source-investor_news",
+      "kind": "external",
+      "label": "Marriott 官方新聞室頁面。",
+      "href": "https://news.marriott.com/news/",
+      "source_type": "官方新聞",
+      "is_clickable": true,
+      "occurred_at": "2026-03-27"
+    }
+  ],
+  "citation_links": {
+    "external": [
+      {
+        "citation_id": "mar-manifest-sec",
+        "kind": "external",
+        "label": "SEC 公司揭露檔案",
+        "href": "https://data.sec.gov/submissions/CIK0001048286.json",
+        "source_type": "SEC",
+        "is_clickable": true,
+        "occurred_at": "2026-03-27"
+      },
+      {
+        "citation_id": "mar-manifest-investor_news",
+        "kind": "external",
+        "label": "Marriott 投資人新聞稿",
+        "href": "https://news.marriott.com/news/",
+        "source_type": "官網頁面",
+        "is_clickable": true,
+        "occurred_at": "2026-03-27"
+      },
+      {
+        "citation_id": "mar-manifest-price",
+        "kind": "external",
+        "label": "Yahoo Finance 圖表資料",
+        "href": "https://query1.finance.yahoo.com/v8/finance/chart/MAR?range=1mo&interval=1d",
+        "source_type": "市場資料",
+        "is_clickable": true,
+        "occurred_at": "2026-03-27"
+      },
+      {
+        "citation_id": "mar-source-sec",
+        "kind": "external",
+        "label": "官方 SEC 揭露來源；是否算重大事件，依各 ticker 的門檻設定判斷。",
+        "href": "https://data.sec.gov/submissions/CIK0001048286.json",
+        "source_type": "SEC",
+        "is_clickable": true,
+        "occurred_at": "2026-03-27"
+      },
+      {
+        "citation_id": "mar-source-price",
+        "kind": "external",
+        "label": "Yahoo Finance 日線資料，用來抓跳空與異常成交量。",
+        "href": "https://query1.finance.yahoo.com/v8/finance/chart/MAR?range=1mo&interval=1d",
+        "source_type": "price",
+        "is_clickable": true,
+        "occurred_at": "2026-03-27"
+      },
+      {
+        "citation_id": "mar-source-investor_news",
+        "kind": "external",
+        "label": "Marriott 官方新聞室頁面。",
+        "href": "https://news.marriott.com/news/",
+        "source_type": "官方新聞",
+        "is_clickable": true,
+        "occurred_at": "2026-03-27"
+      }
+    ],
+    "internal": [
+      {
+        "citation_id": "mar-research-page",
+        "kind": "internal",
+        "label": "研究內頁",
+        "href": "research/MAR.html",
+        "source_type": "研究頁面",
+        "is_clickable": true,
+        "occurred_at": "2026-03-27"
+      },
+      {
+        "citation_id": "mar-review-summary",
+        "kind": "internal",
+        "label": "本輪更新摘要",
+        "href": "research/MAR.html#review-summary",
+        "source_type": "更新摘要",
+        "is_clickable": true,
+        "occurred_at": "2026-03-27"
+      },
+      {
+        "citation_id": "mar-seed-2026-travel-mix-internal",
+        "kind": "internal",
+        "label": "內部研究節點：market_update_mar2026.md",
+        "href": "research/MAR.html#event-timeline",
+        "source_type": "內部研究筆記",
+        "is_clickable": true,
+        "occurred_at": "2026-03-25"
+      }
+    ],
+    "all": [
+      {
+        "citation_id": "mar-research-page",
+        "kind": "internal",
+        "label": "研究內頁",
+        "href": "research/MAR.html",
+        "source_type": "研究頁面",
+        "is_clickable": true,
+        "occurred_at": "2026-03-27"
+      },
+      {
+        "citation_id": "mar-review-summary",
+        "kind": "internal",
+        "label": "本輪更新摘要",
+        "href": "research/MAR.html#review-summary",
+        "source_type": "更新摘要",
+        "is_clickable": true,
+        "occurred_at": "2026-03-27"
+      },
+      {
+        "citation_id": "mar-manifest-sec",
+        "kind": "external",
+        "label": "SEC 公司揭露檔案",
+        "href": "https://data.sec.gov/submissions/CIK0001048286.json",
+        "source_type": "SEC",
+        "is_clickable": true,
+        "occurred_at": "2026-03-27"
+      },
+      {
+        "citation_id": "mar-manifest-investor_news",
+        "kind": "external",
+        "label": "Marriott 投資人新聞稿",
+        "href": "https://news.marriott.com/news/",
+        "source_type": "官網頁面",
+        "is_clickable": true,
+        "occurred_at": "2026-03-27"
+      },
+      {
+        "citation_id": "mar-manifest-price",
+        "kind": "external",
+        "label": "Yahoo Finance 圖表資料",
+        "href": "https://query1.finance.yahoo.com/v8/finance/chart/MAR?range=1mo&interval=1d",
+        "source_type": "市場資料",
+        "is_clickable": true,
+        "occurred_at": "2026-03-27"
+      },
+      {
+        "citation_id": "mar-seed-2026-travel-mix-internal",
+        "kind": "internal",
+        "label": "內部研究節點：market_update_mar2026.md",
+        "href": "research/MAR.html#event-timeline",
+        "source_type": "內部研究筆記",
+        "is_clickable": true,
+        "occurred_at": "2026-03-25"
+      },
+      {
+        "citation_id": "mar-source-sec",
+        "kind": "external",
+        "label": "官方 SEC 揭露來源；是否算重大事件，依各 ticker 的門檻設定判斷。",
+        "href": "https://data.sec.gov/submissions/CIK0001048286.json",
+        "source_type": "SEC",
+        "is_clickable": true,
+        "occurred_at": "2026-03-27"
+      },
+      {
+        "citation_id": "mar-source-price",
+        "kind": "external",
+        "label": "Yahoo Finance 日線資料，用來抓跳空與異常成交量。",
+        "href": "https://query1.finance.yahoo.com/v8/finance/chart/MAR?range=1mo&interval=1d",
+        "source_type": "price",
+        "is_clickable": true,
+        "occurred_at": "2026-03-27"
+      },
+      {
+        "citation_id": "mar-source-investor_news",
+        "kind": "external",
+        "label": "Marriott 官方新聞室頁面。",
+        "href": "https://news.marriott.com/news/",
+        "source_type": "官方新聞",
+        "is_clickable": true,
+        "occurred_at": "2026-03-27"
+      }
+    ]
+  },
+  "assumptions": [
+    {
+      "assumption_id": "mar-a1",
+      "type": "需求",
+      "statement": "高端與國際旅遊仍夠有韌性，足以抵消低端美國內需偏弱。",
+      "status": "reinforced",
+      "status_label": "已強化",
+      "confidence": 0.7,
+      "verification_method": "各分部的 RevPAR 結構與管理層評論。",
+      "invalidation_condition": "如果高端與國際 RevPAR 都明顯轉弱，這個假設就失效。",
+      "update_frequency": "每季"
+    },
+    {
+      "assumption_id": "mar-a2",
+      "type": "需求",
+      "statement": "商務旅遊在 2026 年持續改善，支撐入住率與定價。",
+      "status": "watch",
+      "status_label": "持續觀察",
+      "confidence": 0.61,
+      "verification_method": "企業訂房與入住率評論。",
+      "invalidation_condition": "若商務旅遊再停滯一整個循環，就要下修期待。",
+      "update_frequency": "每季"
+    },
+    {
+      "assumption_id": "mar-a3",
+      "type": "資本配置",
+      "statement": "資本輕模式能保住下檔保護，也讓資本回饋更有彈性。",
+      "status": "reinforced",
+      "status_label": "已強化",
+      "confidence": 0.69,
+      "verification_method": "資本回饋指引、槓桿水位，以及 fee-based earnings 結構。",
+      "invalidation_condition": "若 fee earnings 明顯轉弱，且在需求沒有撐住時槓桿又上升，就要轉保守。",
+      "update_frequency": "每季"
+    }
+  ],
+  "risks": [
+    {
+      "risk_id": "mar-r1",
+      "statement": "Macro recession broadens from budget travel to high-end and 商務旅遊.",
+      "tier": "thesis breaker",
+      "tier_label": "可能打斷 thesis 的風險",
+      "response": "若高端客群也開始同步轉弱，就應退出。"
+    },
+    {
+      "risk_id": "mar-r2",
+      "statement": "若匯率或地緣政治惡化，國際旅遊動能可能會轉弱。",
+      "tier": "thesis weakener",
+      "tier_label": "削弱 thesis 的風險",
+      "response": "先減碼，並下修估值區間。"
+    },
+    {
+      "risk_id": "mar-r3",
+      "statement": "就算基本面沒壞，市場也可能先從防守型品質股撤出。",
+      "tier": "noise",
+      "tier_label": "雜訊",
+      "response": "除非基本面惡化，否則先忽略。"
+    }
+  ],
+  "thesis_health": {
+    "score": 0.74,
+    "label": "穩定監控",
+    "reinforced_count": 2,
+    "watch_count": 1,
+    "pressured_count": 0
+  },
+  "review_summary": "本輪沒有新增需要重估的事件，因此 MAR 的 thesis 維持不變。信心與操作都先延續，只是把檢查時間更新到今天，並依原本節奏往後安排下一次檢查。",
+  "research_state": {
+    "research_topic": "資本輕、可複利的旅遊平台，外加商務旅遊回溫的選擇權。",
+    "holding_period": "數季至一年",
+    "thesis_statement": "Marriott 受惠於輕資產模式、高端與國際旅遊韌性，以及企業差旅回溫，因此在景氣不確定環境下仍能維持穩定現金流與較佳下行保護。",
+    "core_catalyst": "商務旅遊回溫，加上國際與高端 RevPAR 維持穩定。",
+    "market_blind_spot": "市場容易把 MAR 當純週期股，但其資本輕、品牌強與回購能力提供了更好的防禦質地。",
+    "latest_delta": [
+      "和前一版相比，沒有新的重大證據差異；thesis、假設與操作都先維持。",
+      "防守型品質股加商務旅遊回溫的敘事先維持，信心不變。",
+      "這次把 last_reviewed_at 更新到今天，並依既有節奏安排下一次檢查。"
+    ],
+    "review_summary": "本輪沒有新增需要重估的事件，因此 MAR 的 thesis 維持不變。信心與操作都先延續，只是把檢查時間更新到今天，並依原本節奏往後安排下一次檢查。",
+    "thesis_health": {
+      "score": 0.74,
+      "label": "穩定監控",
+      "reinforced_count": 2,
+      "watch_count": 1,
+      "pressured_count": 0
+    },
+    "assumptions": [
+      {
+        "assumption_id": "mar-a1",
+        "type": "需求",
+        "statement": "高端與國際旅遊仍夠有韌性，足以抵消低端美國內需偏弱。",
+        "status": "reinforced",
+        "status_label": "已強化",
+        "confidence": 0.7,
+        "verification_method": "各分部的 RevPAR 結構與管理層評論。",
+        "invalidation_condition": "如果高端與國際 RevPAR 都明顯轉弱，這個假設就失效。",
+        "update_frequency": "每季"
+      },
+      {
+        "assumption_id": "mar-a2",
+        "type": "需求",
+        "statement": "商務旅遊在 2026 年持續改善，支撐入住率與定價。",
+        "status": "watch",
+        "status_label": "持續觀察",
+        "confidence": 0.61,
+        "verification_method": "企業訂房與入住率評論。",
+        "invalidation_condition": "若商務旅遊再停滯一整個循環，就要下修期待。",
+        "update_frequency": "每季"
+      },
+      {
+        "assumption_id": "mar-a3",
+        "type": "資本配置",
+        "statement": "資本輕模式能保住下檔保護，也讓資本回饋更有彈性。",
+        "status": "reinforced",
+        "status_label": "已強化",
+        "confidence": 0.69,
+        "verification_method": "資本回饋指引、槓桿水位，以及 fee-based earnings 結構。",
+        "invalidation_condition": "若 fee earnings 明顯轉弱，且在需求沒有撐住時槓桿又上升，就要轉保守。",
+        "update_frequency": "每季"
+      }
+    ],
+    "risks": [
+      {
+        "risk_id": "mar-r1",
+        "statement": "Macro recession broadens from budget travel to high-end and 商務旅遊.",
+        "tier": "thesis breaker",
+        "tier_label": "可能打斷 thesis 的風險",
+        "response": "若高端客群也開始同步轉弱，就應退出。"
+      },
+      {
+        "risk_id": "mar-r2",
+        "statement": "若匯率或地緣政治惡化，國際旅遊動能可能會轉弱。",
+        "tier": "thesis weakener",
+        "tier_label": "削弱 thesis 的風險",
+        "response": "先減碼，並下修估值區間。"
+      },
+      {
+        "risk_id": "mar-r3",
+        "statement": "就算基本面沒壞，市場也可能先從防守型品質股撤出。",
+        "tier": "noise",
+        "tier_label": "雜訊",
+        "response": "除非基本面惡化，否則先忽略。"
+      }
+    ],
+    "event_timeline": [
+      {
+        "event_id": "mar-seed-2026-travel-mix",
+        "occurred_at": "2026-03-25",
+        "source_type": "legacy_seed",
+        "source_label": "既有研究節點",
+        "title": "High-end and international travel stayed firm while lower-end US demand softened.",
+        "impact": "0",
+        "impact_label": "中性",
+        "decision": "watch",
+        "decision_label": "持續追蹤",
+        "link_kind": "internal",
+        "link_label": "內部研究節點",
+        "href": "research/MAR.html#event-timeline",
+        "is_clickable": true
+      },
+      {
+        "event_id": "mar-seed-2026-guidance",
+        "occurred_at": "2026-03-25",
+        "source_type": "legacy_seed",
+        "source_label": "既有研究節點",
+        "title": "2026 guidance stayed intact despite a small EPS miss.",
+        "impact": "+",
+        "impact_label": "偏正向",
+        "decision": "watch",
+        "decision_label": "持續追蹤",
+        "link_kind": "internal",
+        "link_label": "內部研究節點",
+        "href": "research/MAR.html#event-timeline",
+        "is_clickable": true
+      }
+    ],
+    "source_manifest": [
+      {
+        "source_id": "legacy-market-update",
+        "label": "2026 年 3 月市場更新舊筆記",
+        "type": "本機研究筆記",
+        "url": "/Users/ro9air/STOCK/research/market_update_mar2026.md",
+        "is_clickable": false
+      },
+      {
+        "source_id": "sec",
+        "label": "SEC 公司揭露檔案",
+        "type": "SEC",
+        "url": "https://data.sec.gov/submissions/CIK0001048286.json",
+        "is_clickable": true
+      },
+      {
+        "source_id": "investor_news",
+        "label": "Marriott 投資人新聞稿",
+        "type": "官網頁面",
+        "url": "https://news.marriott.com/news/",
+        "is_clickable": true
+      },
+      {
+        "source_id": "price",
+        "label": "Yahoo Finance 圖表資料",
+        "type": "市場資料",
+        "url": "https://query1.finance.yahoo.com/v8/finance/chart/MAR?range=1mo&interval=1d",
+        "is_clickable": true
+      }
+    ]
+  },
+  "decision_state": {
+    "current_action": "穩健持有",
+    "status_label": "持有觀察",
+    "priority_score": 56,
+    "priority_label": "低優先",
+    "next_review_at": "2026-05-07",
+    "next_checklist": [
+      "RevPAR 結構",
+      "管理層對商務旅遊的評論",
+      "前瞻訂房",
+      "資本回饋指引"
+    ],
+    "action_rules": [
+      {
+        "action_rule_id": "mar-ar-add",
+        "kind": "add",
+        "kind_label": "加碼條件",
+        "condition": "如果商務旅遊與前瞻訂房改善，且國際 RevPAR 依舊強勁，就可考慮加碼。",
+        "action": "等管理層確認趨勢延續後，再選擇性加碼。"
+      },
+      {
+        "action_rule_id": "mar-ar-trim",
+        "kind": "trim",
+        "kind_label": "減碼條件",
+        "condition": "如果高端客群需求轉弱，且沒有商務旅遊回溫來抵消，就要減碼。",
+        "action": "先減碼，只保留防守型核心倉位。"
+      },
+      {
+        "action_rule_id": "mar-ar-exit",
+        "kind": "exit",
+        "kind_label": "退出條件",
+        "condition": "若景氣更深度下行，高端與商務旅遊同步轉弱，就要退出。",
+        "action": "退出目前 thesis。"
+      }
+    ],
+    "changed_assumptions": []
+  },
   "artifacts": {
     "state_path": "research/MAR/state.json",
     "current_path": "research/MAR/current.md",

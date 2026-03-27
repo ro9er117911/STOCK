@@ -7,6 +7,7 @@ This repo upgrades the original `stock-research-operator` prompt into a durable 
 - `research/<ticker>/events.jsonl` is the event ledger.
 - `research/<ticker>/artifacts/review_summary.json` is the machine-readable refresh artifact.
 - `research/system/source_registry.json` is the source-of-truth whitelist for event inputs.
+- `research/system/portfolio.private.json.example` is the template for local-only position data.
 - GitHub Actions polls high-signal sources even when the Mac is off.
 - Material updates become a reviewable PR instead of silently rewriting `main`.
 - PR, email, and dashboard are rendered from the same canonical digest instead of ad hoc string assembly.
@@ -19,6 +20,7 @@ research/
   MSFT/
   MAR/
   system/source_registry.json
+  system/portfolio.private.json.example
 stock_research/
   pipeline.py
   sources.py
@@ -90,6 +92,23 @@ Build the private-first dashboard artifact:
 python3 scripts/research_ops.py build-dashboard
 ```
 
+Local usage:
+
+- tracked public site: `site/`
+- local private cockpit, only when `research/system/portfolio.private.json` exists: `automation/run/dashboard-local/`
+
+Preview either static site with a temporary server:
+
+```bash
+python3 -m http.server 8765 -d site
+```
+
+If you have private positions configured, preview the private cockpit instead:
+
+```bash
+python3 -m http.server 8765 -d automation/run/dashboard-local
+```
+
 Send a material-update email preview or live email:
 
 ```bash
@@ -156,8 +175,10 @@ Formal outputs:
 - `research/<ticker>/state.json`
 - `research/<ticker>/artifacts/review_summary.json`
 - `research/<ticker>/artifacts/digest.json`
+- `research/<ticker>/artifacts/citations.json`
 - `site/data/portfolio.json`
 - `site/data/tickers/<ticker>.json`
+- `site/research/<ticker>.html`
 
 Delivery surfaces:
 
@@ -170,6 +191,7 @@ Runtime-only artifacts:
 - `automation/run/*.json`
 - `automation/run/pr-body*.md`
 - `automation/run/email-preview.*`
+- `automation/run/dashboard-local/`
 
 ## macOS Catch-Up Job
 
@@ -194,5 +216,6 @@ launchctl load ~/Library/LaunchAgents/com.ro9air.stock-research.catchup.plist
 - Default research model is `gpt-5.4-mini`. Set repository variable `OPENAI_MODEL` to override it without changing code.
 - SEC polling is implemented as a best-effort official source. If SEC blocks your runner IP, the workflow will continue with investor-news and price signals while logging the SEC error in the poll summary.
 - Feed endpoints are configurable through [`source_registry.json`](/Users/ro9air/STOCK/research/system/source_registry.json).
+- Local-only position data belongs in [`portfolio.private.json.example`](/Users/ro9air/STOCK/research/system/portfolio.private.json.example) copied to `research/system/portfolio.private.json`.
 - Operator-facing workflow and output docs live in [`operator-guide.md`](/Users/ro9air/STOCK/docs/operator-guide.md).
 - The living thesis files are meant to be reviewed in PRs, not edited blindly by automation.

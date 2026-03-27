@@ -3,28 +3,92 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Stock Research Dashboard</title>
+    <title>投資駕駛艙</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@500;600&family=IBM+Plex+Sans:wght@400;500;600&family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@500;600&family=IBM+Plex+Sans:wght@400;500;600;700&family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./assets/dashboard.css">
   </head>
   <body data-dashboard-page="portfolio">
-    <div class="background-blobs">
-      <div class="blob blob-1"></div>
-      <div class="blob blob-2"></div>
-      <div class="blob blob-3"></div>
-    </div>
-    <main class="shell">
-      <section class="hero">
-        <p class="eyebrow">Stock Research Operator</p>
-        <h1>持股狀態儀表板</h1>
-        <p class="hero-copy">這裡只保留現在要做的事、最需要盯的事件，以及下一次要驗證的資料。</p>
-        <div class="hero-meta" id="portfolio-meta"></div>
+    <div class="ambient ambient-left"></div>
+    <div class="ambient ambient-right"></div>
+    <main class="app-shell">
+      <section class="masthead">
+        <div class="masthead-copy">
+          <p class="eyebrow">Private Investment Cockpit</p>
+          <h1>投資駕駛艙</h1>
+          <p class="lede">先看部位與操作，再看 thesis、事件、風險與待辦。這裡不是展示頁，而是你每天真正會打開的決策面板。</p>
+        </div>
+        <div class="masthead-strip" id="portfolio-summary-strip"></div>
       </section>
-      <section class="grid-container">
-        <div class="grid" id="portfolio-grid"></div>
+
+      <section class="board two-column">
+        <article class="panel panel-emphasis">
+          <div class="panel-head">
+            <div>
+              <p class="panel-kicker">Command Queue</p>
+              <h2>今天優先處理</h2>
+            </div>
+          </div>
+          <div id="priority-queue" class="priority-list"></div>
+        </article>
+        <article class="panel">
+          <div class="panel-head">
+            <div>
+              <p class="panel-kicker">Portfolio Signal</p>
+              <h2>投資組合摘要</h2>
+            </div>
+          </div>
+          <div id="summary-cards" class="summary-grid"></div>
+        </article>
       </section>
+
+      <section class="panel panel-controls">
+        <div class="panel-head">
+          <div>
+            <p class="panel-kicker">Control Surface</p>
+            <h2>篩選與排序</h2>
+          </div>
+        </div>
+        <div class="controls">
+          <label class="field">
+            <span>排序方式</span>
+            <select id="sort-select">
+              <option value="priority">依處理優先度</option>
+              <option value="review">依下次檢查日期</option>
+              <option value="risk">依風險等級</option>
+              <option value="confidence">依 thesis 健康度</option>
+            </select>
+          </label>
+          <label class="field">
+            <span>部位狀態</span>
+            <select id="position-filter">
+              <option value="all">全部</option>
+              <option value="has-position">只看已填部位</option>
+              <option value="missing-position">只看未填部位</option>
+            </select>
+          </label>
+          <label class="field">
+            <span>風險等級</span>
+            <select id="risk-filter">
+              <option value="all">全部</option>
+              <option value="high-conviction">高信念</option>
+              <option value="core">核心</option>
+              <option value="satellite">衛星</option>
+              <option value="unset">未設定</option>
+            </select>
+          </label>
+        </div>
+      </section>
+
+      <section class="section-head">
+        <div>
+          <p class="panel-kicker">Coverage</p>
+          <h2>個股駕駛艙</h2>
+        </div>
+        <p class="section-note" id="portfolio-grid-meta"></p>
+      </section>
+      <section class="portfolio-grid" id="portfolio-grid"></section>
     </main>
     <script src="./assets/dashboard.js"></script>
   </body>

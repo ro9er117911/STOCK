@@ -11,7 +11,7 @@ if str(REPO_ROOT) not in sys.path:
     sys.path.insert(0, str(REPO_ROOT))
 
 from stock_research.config import DRAFT_SUMMARY_PATH
-from stock_research.dashboard import build_dashboard_site
+from stock_research.dashboard import build_dashboard_bundle
 from stock_research.digest import build_notification_payload, build_portfolio_digest
 from stock_research.notify import send_resend_email
 from stock_research.pipeline import bootstrap_baselines, draft_refreshes, poll_events
@@ -64,7 +64,7 @@ def main() -> int:
     elif args.command == "draft-refresh":
         payload = draft_refreshes(trigger=args.trigger, fixture_name=args.fixture or None)
     elif args.command == "build-dashboard":
-        payload = build_dashboard_site()
+        payload = build_dashboard_bundle()
     else:
         draft_summary = read_json(DRAFT_SUMMARY_PATH, default={"refreshed_tickers": []})
         tickers = args.tickers or [item["ticker"] for item in draft_summary.get("refreshed_tickers", [])]

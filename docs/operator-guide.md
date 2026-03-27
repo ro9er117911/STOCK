@@ -28,12 +28,14 @@
 - `research/<ticker>/events.jsonl`
 - `research/<ticker>/artifacts/review_summary.json`
 - `research/<ticker>/artifacts/digest.json`
+- `research/<ticker>/artifacts/citations.json`
 
 Delivery surfaces：
 
 - GitHub PR：顯示本輪 material refresh 的 reviewable diff
 - Email：只在 material refresh PR create/update 時寄出摘要
 - Dashboard：從 merged `main` 生成的 summary-first 靜態站
+- Local cockpit：如果有 `research/system/portfolio.private.json`，會額外生成本機私有 dashboard
 
 執行期中間產物：
 
@@ -43,12 +45,14 @@ Delivery surfaces：
 - `automation/run/notification-payload.json`
 - `automation/run/pr-body*.md`
 - `automation/run/email-preview.*`
+- `automation/run/dashboard-local/`
 
 ## 各 surface 代表什麼狀態
 
 - PR：最新 automation draft，可能尚未合併
 - Email：material refresh 的精簡摘要，附 PR 與 dashboard 連結
 - Dashboard：只顯示 merged `main` 的正式狀態，不顯示未審稿 preview
+- Local cockpit：包含你的私有部位資料，不應 commit
 
 ## 你通常要看哪裡
 
@@ -56,3 +60,4 @@ Delivery surfaces：
 - 想知道這次到底改了什麼：看 PR 與 `review_summary.json`
 - 想快速掌握目前持股狀態：看 dashboard
 - 想確認 email 會寄什麼：看 `automation/run/email-preview.html` 與 `automation/run/email-preview.txt`
+- 想把成本、持股數、目標倉位放進 cockpit：從 `research/system/portfolio.private.json.example` 複製成 `research/system/portfolio.private.json`

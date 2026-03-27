@@ -12,16 +12,16 @@ from .storage import write_json
 
 def render_email_subject(payload: dict[str, Any]) -> str:
     tickers = ", ".join(payload["material_tickers"])
-    return f"Stock Research Update | {tickers}"
+    return f"研究更新 | {tickers}"
 
 
 def render_email_text(payload: dict[str, Any]) -> str:
     lines = [
         render_email_subject(payload),
         "",
-        f"Run type: {payload['run_type']}",
-        f"Dashboard: {payload['dashboard_url']}",
-        f"PR: {payload['pr_url']}",
+        f"執行類型：{payload['run_type']}",
+        f"Dashboard：{payload['dashboard_url']}",
+        f"PR：{payload['pr_url']}",
         "",
     ]
     for card in payload["digest_cards"]:

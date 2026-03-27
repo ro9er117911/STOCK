@@ -4,46 +4,163 @@
   "status_label": "偏多",
   "current_action": "持有 / 逢回加碼",
   "thesis_confidence": 0.72,
-  "summary_blurb": "No new evidence bundle was provided in this refresh, so the PLTR thesis state is unchanged. Confidence, thesis framing, and action posture remain intact; only the review timestamp is advanced.",
+  "confidence_delta": 0.0,
+  "summary_blurb": "PLTR 這輪有足以觸發重新檢查的事件，但目前主判斷沒有被推翻。 目前先維持「持有 / 逢回加碼」，下一個驗證點先盯 美國商業業務成長。",
   "next_review_at": "2026-05-08",
-  "next_must_check_data": "Q1 2026 earnings: US Commercial growth, margins, major government renewal cadence.",
+  "next_must_check_data": "2026 Q1 財報：美國商業業務成長、利潤率，以及主要政府合約續約節奏。",
+  "next_checklist": [
+    "美國商業業務成長",
+    "利潤率",
+    "major 政府 renewal cadence"
+  ],
   "last_reviewed_at": "2026-03-27",
+  "risk_level": "",
+  "risk_level_label": "尚未設定",
+  "priority_score": 96,
+  "priority_label": "優先追蹤",
+  "last_event_status": "需要重估",
+  "detail_path": "tickers/PLTR.html",
+  "internal_research_path": "research/PLTR.html",
+  "position": {
+    "ticker": "PLTR",
+    "has_position": false,
+    "shares": 0.0,
+    "avg_cost": 0.0,
+    "target_weight_pct": 0.0,
+    "max_weight_pct": 0.0,
+    "risk_level": "",
+    "risk_level_label": "尚未設定",
+    "notes": "",
+    "summary": "尚未填入部位",
+    "shares_label": "尚未填入",
+    "avg_cost_label": "未填成本",
+    "target_weight_label": "未填目標倉位",
+    "max_weight_label": "未填上限倉位"
+  },
+  "portfolio_position": {
+    "ticker": "PLTR",
+    "has_position": false,
+    "shares": 0.0,
+    "avg_cost": 0.0,
+    "target_weight_pct": 0.0,
+    "max_weight_pct": 0.0,
+    "risk_level": "",
+    "risk_level_label": "尚未設定",
+    "notes": "",
+    "summary": "尚未填入部位",
+    "shares_label": "尚未填入",
+    "avg_cost_label": "未填成本",
+    "target_weight_label": "未填目標倉位",
+    "max_weight_label": "未填上限倉位"
+  },
   "key_events": [
     {
+      "event_id": "pltr-seed-2026-maven",
       "occurred_at": "2026-03-25",
       "source_type": "legacy_seed",
+      "source_label": "既有研究節點",
       "title": "Maven AI became a Program of Record.",
       "impact": "+",
+      "impact_label": "偏正向",
       "decision": "refresh",
-      "source_url": "/Users/ro9air/STOCK/research/market_update_mar2026.md"
+      "decision_label": "需要重估",
+      "link_kind": "internal",
+      "link_label": "內部研究節點",
+      "href": "research/PLTR.html#event-timeline",
+      "is_clickable": true
     },
     {
+      "event_id": "pltr-seed-2026-q4-results",
       "occurred_at": "2026-03-25",
       "source_type": "legacy_seed",
+      "source_label": "既有研究節點",
       "title": "Q4 2025 results showed 137% US commercial growth.",
       "impact": "+",
+      "impact_label": "偏正向",
       "decision": "refresh",
-      "source_url": "/Users/ro9air/STOCK/research/market_update_mar2026.md"
+      "decision_label": "需要重估",
+      "link_kind": "internal",
+      "link_label": "內部研究節點",
+      "href": "research/PLTR.html#event-timeline",
+      "is_clickable": true
+    }
+  ],
+  "event_timeline": [
+    {
+      "event_id": "pltr-seed-2026-maven",
+      "occurred_at": "2026-03-25",
+      "source_type": "legacy_seed",
+      "source_label": "既有研究節點",
+      "title": "Maven AI became a Program of Record.",
+      "impact": "+",
+      "impact_label": "偏正向",
+      "decision": "refresh",
+      "decision_label": "需要重估",
+      "link_kind": "internal",
+      "link_label": "內部研究節點",
+      "href": "research/PLTR.html#event-timeline",
+      "is_clickable": true
+    },
+    {
+      "event_id": "pltr-seed-2026-q4-results",
+      "occurred_at": "2026-03-25",
+      "source_type": "legacy_seed",
+      "source_label": "既有研究節點",
+      "title": "Q4 2025 results showed 137% US commercial growth.",
+      "impact": "+",
+      "impact_label": "偏正向",
+      "decision": "refresh",
+      "decision_label": "需要重估",
+      "link_kind": "internal",
+      "link_label": "內部研究節點",
+      "href": "research/PLTR.html#event-timeline",
+      "is_clickable": true
     }
   ],
   "key_action_rules": [
     {
       "action_rule_id": "pltr-ar-add",
       "kind": "add",
-      "condition": "US Commercial revenue grows above 100% for two straight quarters and margin expands.",
-      "action": "Add up to max position size."
+      "kind_label": "加碼條件",
+      "condition": "如果美國商業營收連兩季都高於 100%，且利潤率同步擴張，就可以加碼。",
+      "action": "可加碼至目標上限倉位。"
     },
     {
       "action_rule_id": "pltr-ar-trim",
       "kind": "trim",
-      "condition": "Commercial growth falls below 70% without offsetting government upside.",
-      "action": "Trim tactical adds and revisit valuation regime."
+      "kind_label": "減碼條件",
+      "condition": "若商業業務成長掉到 70% 以下，且沒有政府業務補上，就要減碼。",
+      "action": "先減掉戰術性加碼部位，並重新檢查估值框架。"
     },
     {
       "action_rule_id": "pltr-ar-exit",
       "kind": "exit",
-      "condition": "Program of Record is downgraded or core defense budget support weakens.",
-      "action": "Exit regardless of price action."
+      "kind_label": "退出條件",
+      "condition": "若 Program of Record 被降級，或核心國防預算支持轉弱，就應退出。",
+      "action": "不管股價走勢，直接退出。"
+    }
+  ],
+  "action_rules": [
+    {
+      "action_rule_id": "pltr-ar-add",
+      "kind": "add",
+      "kind_label": "加碼條件",
+      "condition": "如果美國商業營收連兩季都高於 100%，且利潤率同步擴張，就可以加碼。",
+      "action": "可加碼至目標上限倉位。"
+    },
+    {
+      "action_rule_id": "pltr-ar-trim",
+      "kind": "trim",
+      "kind_label": "減碼條件",
+      "condition": "若商業業務成長掉到 70% 以下，且沒有政府業務補上，就要減碼。",
+      "action": "先減掉戰術性加碼部位，並重新檢查估值框架。"
+    },
+    {
+      "action_rule_id": "pltr-ar-exit",
+      "kind": "exit",
+      "kind_label": "退出條件",
+      "condition": "若 Program of Record 被降級，或核心國防預算支持轉弱，就應退出。",
+      "action": "不管股價走勢，直接退出。"
     }
   ],
   "changed_assumptions": [],
@@ -59,7 +176,9 @@
       "new_events": 0,
       "cursor": "",
       "error": "",
-      "notes": "Official SEC filings. Material forms are filtered by each ticker state threshold."
+      "notes": "官方 SEC 揭露來源；是否算重大事件，依各 ticker 的門檻設定判斷。",
+      "status_label": "啟用",
+      "is_clickable": true
     },
     {
       "source_id": "price",
@@ -71,7 +190,9 @@
       "new_events": 0,
       "cursor": "",
       "error": "",
-      "notes": "Daily Yahoo Finance chart data for gap and abnormal volume detection."
+      "notes": "Yahoo Finance 日線資料，用來抓跳空與異常成交量。",
+      "status_label": "啟用",
+      "is_clickable": true
     },
     {
       "source_id": "investor_news",
@@ -83,9 +204,507 @@
       "new_events": 0,
       "cursor": "",
       "error": "",
-      "notes": "Official Palantir investor news release archive."
+      "notes": "Palantir 投資人新聞稿頁面。",
+      "status_label": "啟用",
+      "is_clickable": true
     }
   ],
+  "citations": [
+    {
+      "citation_id": "pltr-research-page",
+      "kind": "internal",
+      "label": "研究內頁",
+      "href": "research/PLTR.html",
+      "source_type": "研究頁面",
+      "is_clickable": true,
+      "occurred_at": "2026-03-27"
+    },
+    {
+      "citation_id": "pltr-review-summary",
+      "kind": "internal",
+      "label": "本輪更新摘要",
+      "href": "research/PLTR.html#review-summary",
+      "source_type": "更新摘要",
+      "is_clickable": true,
+      "occurred_at": "2026-03-27"
+    },
+    {
+      "citation_id": "pltr-manifest-sec",
+      "kind": "external",
+      "label": "SEC 公司揭露檔案",
+      "href": "https://data.sec.gov/submissions/CIK0001321655.json",
+      "source_type": "SEC",
+      "is_clickable": true,
+      "occurred_at": "2026-03-27"
+    },
+    {
+      "citation_id": "pltr-manifest-investor_news",
+      "kind": "external",
+      "label": "Palantir 投資人新聞稿",
+      "href": "https://investors.palantir.com/news-events/news-releases/",
+      "source_type": "官網頁面",
+      "is_clickable": true,
+      "occurred_at": "2026-03-27"
+    },
+    {
+      "citation_id": "pltr-manifest-price",
+      "kind": "external",
+      "label": "Yahoo Finance 圖表資料",
+      "href": "https://query1.finance.yahoo.com/v8/finance/chart/PLTR?range=1mo&interval=1d",
+      "source_type": "市場資料",
+      "is_clickable": true,
+      "occurred_at": "2026-03-27"
+    },
+    {
+      "citation_id": "pltr-seed-2026-maven-internal",
+      "kind": "internal",
+      "label": "內部研究節點：market_update_mar2026.md",
+      "href": "research/PLTR.html#event-timeline",
+      "source_type": "內部研究筆記",
+      "is_clickable": true,
+      "occurred_at": "2026-03-25"
+    },
+    {
+      "citation_id": "pltr-source-sec",
+      "kind": "external",
+      "label": "官方 SEC 揭露來源；是否算重大事件，依各 ticker 的門檻設定判斷。",
+      "href": "https://data.sec.gov/submissions/CIK0001321655.json",
+      "source_type": "SEC",
+      "is_clickable": true,
+      "occurred_at": "2026-03-27"
+    },
+    {
+      "citation_id": "pltr-source-price",
+      "kind": "external",
+      "label": "Yahoo Finance 日線資料，用來抓跳空與異常成交量。",
+      "href": "https://query1.finance.yahoo.com/v8/finance/chart/PLTR?range=1mo&interval=1d",
+      "source_type": "price",
+      "is_clickable": true,
+      "occurred_at": "2026-03-27"
+    },
+    {
+      "citation_id": "pltr-source-investor_news",
+      "kind": "external",
+      "label": "Palantir 投資人新聞稿頁面。",
+      "href": "https://investors.palantir.com/news-events/news-releases/",
+      "source_type": "官方新聞",
+      "is_clickable": true,
+      "occurred_at": "2026-03-27"
+    }
+  ],
+  "citation_links": {
+    "external": [
+      {
+        "citation_id": "pltr-manifest-sec",
+        "kind": "external",
+        "label": "SEC 公司揭露檔案",
+        "href": "https://data.sec.gov/submissions/CIK0001321655.json",
+        "source_type": "SEC",
+        "is_clickable": true,
+        "occurred_at": "2026-03-27"
+      },
+      {
+        "citation_id": "pltr-manifest-investor_news",
+        "kind": "external",
+        "label": "Palantir 投資人新聞稿",
+        "href": "https://investors.palantir.com/news-events/news-releases/",
+        "source_type": "官網頁面",
+        "is_clickable": true,
+        "occurred_at": "2026-03-27"
+      },
+      {
+        "citation_id": "pltr-manifest-price",
+        "kind": "external",
+        "label": "Yahoo Finance 圖表資料",
+        "href": "https://query1.finance.yahoo.com/v8/finance/chart/PLTR?range=1mo&interval=1d",
+        "source_type": "市場資料",
+        "is_clickable": true,
+        "occurred_at": "2026-03-27"
+      },
+      {
+        "citation_id": "pltr-source-sec",
+        "kind": "external",
+        "label": "官方 SEC 揭露來源；是否算重大事件，依各 ticker 的門檻設定判斷。",
+        "href": "https://data.sec.gov/submissions/CIK0001321655.json",
+        "source_type": "SEC",
+        "is_clickable": true,
+        "occurred_at": "2026-03-27"
+      },
+      {
+        "citation_id": "pltr-source-price",
+        "kind": "external",
+        "label": "Yahoo Finance 日線資料，用來抓跳空與異常成交量。",
+        "href": "https://query1.finance.yahoo.com/v8/finance/chart/PLTR?range=1mo&interval=1d",
+        "source_type": "price",
+        "is_clickable": true,
+        "occurred_at": "2026-03-27"
+      },
+      {
+        "citation_id": "pltr-source-investor_news",
+        "kind": "external",
+        "label": "Palantir 投資人新聞稿頁面。",
+        "href": "https://investors.palantir.com/news-events/news-releases/",
+        "source_type": "官方新聞",
+        "is_clickable": true,
+        "occurred_at": "2026-03-27"
+      }
+    ],
+    "internal": [
+      {
+        "citation_id": "pltr-research-page",
+        "kind": "internal",
+        "label": "研究內頁",
+        "href": "research/PLTR.html",
+        "source_type": "研究頁面",
+        "is_clickable": true,
+        "occurred_at": "2026-03-27"
+      },
+      {
+        "citation_id": "pltr-review-summary",
+        "kind": "internal",
+        "label": "本輪更新摘要",
+        "href": "research/PLTR.html#review-summary",
+        "source_type": "更新摘要",
+        "is_clickable": true,
+        "occurred_at": "2026-03-27"
+      },
+      {
+        "citation_id": "pltr-seed-2026-maven-internal",
+        "kind": "internal",
+        "label": "內部研究節點：market_update_mar2026.md",
+        "href": "research/PLTR.html#event-timeline",
+        "source_type": "內部研究筆記",
+        "is_clickable": true,
+        "occurred_at": "2026-03-25"
+      }
+    ],
+    "all": [
+      {
+        "citation_id": "pltr-research-page",
+        "kind": "internal",
+        "label": "研究內頁",
+        "href": "research/PLTR.html",
+        "source_type": "研究頁面",
+        "is_clickable": true,
+        "occurred_at": "2026-03-27"
+      },
+      {
+        "citation_id": "pltr-review-summary",
+        "kind": "internal",
+        "label": "本輪更新摘要",
+        "href": "research/PLTR.html#review-summary",
+        "source_type": "更新摘要",
+        "is_clickable": true,
+        "occurred_at": "2026-03-27"
+      },
+      {
+        "citation_id": "pltr-manifest-sec",
+        "kind": "external",
+        "label": "SEC 公司揭露檔案",
+        "href": "https://data.sec.gov/submissions/CIK0001321655.json",
+        "source_type": "SEC",
+        "is_clickable": true,
+        "occurred_at": "2026-03-27"
+      },
+      {
+        "citation_id": "pltr-manifest-investor_news",
+        "kind": "external",
+        "label": "Palantir 投資人新聞稿",
+        "href": "https://investors.palantir.com/news-events/news-releases/",
+        "source_type": "官網頁面",
+        "is_clickable": true,
+        "occurred_at": "2026-03-27"
+      },
+      {
+        "citation_id": "pltr-manifest-price",
+        "kind": "external",
+        "label": "Yahoo Finance 圖表資料",
+        "href": "https://query1.finance.yahoo.com/v8/finance/chart/PLTR?range=1mo&interval=1d",
+        "source_type": "市場資料",
+        "is_clickable": true,
+        "occurred_at": "2026-03-27"
+      },
+      {
+        "citation_id": "pltr-seed-2026-maven-internal",
+        "kind": "internal",
+        "label": "內部研究節點：market_update_mar2026.md",
+        "href": "research/PLTR.html#event-timeline",
+        "source_type": "內部研究筆記",
+        "is_clickable": true,
+        "occurred_at": "2026-03-25"
+      },
+      {
+        "citation_id": "pltr-source-sec",
+        "kind": "external",
+        "label": "官方 SEC 揭露來源；是否算重大事件，依各 ticker 的門檻設定判斷。",
+        "href": "https://data.sec.gov/submissions/CIK0001321655.json",
+        "source_type": "SEC",
+        "is_clickable": true,
+        "occurred_at": "2026-03-27"
+      },
+      {
+        "citation_id": "pltr-source-price",
+        "kind": "external",
+        "label": "Yahoo Finance 日線資料，用來抓跳空與異常成交量。",
+        "href": "https://query1.finance.yahoo.com/v8/finance/chart/PLTR?range=1mo&interval=1d",
+        "source_type": "price",
+        "is_clickable": true,
+        "occurred_at": "2026-03-27"
+      },
+      {
+        "citation_id": "pltr-source-investor_news",
+        "kind": "external",
+        "label": "Palantir 投資人新聞稿頁面。",
+        "href": "https://investors.palantir.com/news-events/news-releases/",
+        "source_type": "官方新聞",
+        "is_clickable": true,
+        "occurred_at": "2026-03-27"
+      }
+    ]
+  },
+  "assumptions": [
+    {
+      "assumption_id": "pltr-a1",
+      "type": "需求",
+      "statement": "美國商業 AI 需求有機會把超高速成長維持在 80% 以上。",
+      "status": "reinforced",
+      "status_label": "已強化",
+      "confidence": 0.78,
+      "verification_method": "每季美國商業營收成長與客戶數變化。",
+      "invalidation_condition": "若美國商業營收成長有一整季跌破 50%，這個假設就要失效。",
+      "update_frequency": "每季"
+    },
+    {
+      "assumption_id": "pltr-a2",
+      "type": "政府",
+      "statement": "政府合約仍具黏性，且有正式預算支持。",
+      "status": "reinforced",
+      "status_label": "已強化",
+      "confidence": 0.74,
+      "verification_method": "Maven / DoD 合約狀態，以及揭露文件中的預算訊號。",
+      "invalidation_condition": "若 Program of Record 延後，或國防資金被砍，這個 thesis 就要重估。",
+      "update_frequency": "每月"
+    },
+    {
+      "assumption_id": "pltr-a3",
+      "type": "獲利",
+      "statement": "營收加速時，利潤率也有機會同步擴張。",
+      "status": "watch",
+      "status_label": "持續觀察",
+      "confidence": 0.63,
+      "verification_method": "營業利潤率與 SBC 比例。",
+      "invalidation_condition": "若營收雖然超預期，但營運槓桿連兩季都不再改善，就要重新評估。",
+      "update_frequency": "每季"
+    }
+  ],
+  "risks": [
+    {
+      "risk_id": "pltr-r1",
+      "statement": "商業成長若比市場敘事更快正常化，估值就要下修。",
+      "tier": "thesis weakener",
+      "tier_label": "削弱 thesis 的風險",
+      "response": "先停止加碼，並把估值重心下修到更低的 EV/Sales 區間。"
+    },
+    {
+      "risk_id": "pltr-r2",
+      "statement": "如果國防預算重排導致政府採購放慢，就要調整判斷。",
+      "tier": "thesis breaker",
+      "tier_label": "可能打斷 thesis 的風險",
+      "response": "若有預算支持的專案失去優先順序，就應退出。"
+    },
+    {
+      "risk_id": "pltr-r3",
+      "statement": "就算基本面還好，估值也可能先被壓縮。",
+      "tier": "noise",
+      "tier_label": "雜訊",
+      "response": "只有在需求惡化同時出現時才採取動作。"
+    }
+  ],
+  "thesis_health": {
+    "score": 0.77,
+    "label": "健康穩定",
+    "reinforced_count": 2,
+    "watch_count": 1,
+    "pressured_count": 0
+  },
+  "review_summary": "這次更新沒有新增足以重寫 thesis 的證據，所以 PLTR 的 thesis 狀態不變。信心、論述框架與操作姿態都先延續，只更新檢查時間。",
+  "research_state": {
+    "research_topic": "AI 商業化變現，外加持久的政府護城河。",
+    "holding_period": "數季至一年",
+    "thesis_statement": "市場仍低估 Palantir 在美國商業 AI 與國防軟體的雙引擎飛輪，只要商業營收維持高成長且政府專案升級為常態預算，估值雖高仍可被更高品質的成長證明支持。",
+    "core_catalyst": "美國商業營收續強與大型政府專案正式預算化。",
+    "market_blind_spot": "市場把 PLTR 視為敘事股，但近兩季已證明商業化與政府續約可同時成立。",
+    "latest_delta": [
+      "除了既有研究內容之外，沒有新增需要重估的重大事件或揭露。",
+      "核心 thesis 仍由前一版證據支撐：包括強勁的美國商業成長，以及 Maven AI 升格為正式預算項目。",
+      "假設狀態沒有變動，估值與成長監控門檻先維持不變。",
+      "這次主要是把 review metadata 更新到今天，並順延下次檢查日期。"
+    ],
+    "review_summary": "這次更新沒有新增足以重寫 thesis 的證據，所以 PLTR 的 thesis 狀態不變。信心、論述框架與操作姿態都先延續，只更新檢查時間。",
+    "thesis_health": {
+      "score": 0.77,
+      "label": "健康穩定",
+      "reinforced_count": 2,
+      "watch_count": 1,
+      "pressured_count": 0
+    },
+    "assumptions": [
+      {
+        "assumption_id": "pltr-a1",
+        "type": "需求",
+        "statement": "美國商業 AI 需求有機會把超高速成長維持在 80% 以上。",
+        "status": "reinforced",
+        "status_label": "已強化",
+        "confidence": 0.78,
+        "verification_method": "每季美國商業營收成長與客戶數變化。",
+        "invalidation_condition": "若美國商業營收成長有一整季跌破 50%，這個假設就要失效。",
+        "update_frequency": "每季"
+      },
+      {
+        "assumption_id": "pltr-a2",
+        "type": "政府",
+        "statement": "政府合約仍具黏性，且有正式預算支持。",
+        "status": "reinforced",
+        "status_label": "已強化",
+        "confidence": 0.74,
+        "verification_method": "Maven / DoD 合約狀態，以及揭露文件中的預算訊號。",
+        "invalidation_condition": "若 Program of Record 延後，或國防資金被砍，這個 thesis 就要重估。",
+        "update_frequency": "每月"
+      },
+      {
+        "assumption_id": "pltr-a3",
+        "type": "獲利",
+        "statement": "營收加速時，利潤率也有機會同步擴張。",
+        "status": "watch",
+        "status_label": "持續觀察",
+        "confidence": 0.63,
+        "verification_method": "營業利潤率與 SBC 比例。",
+        "invalidation_condition": "若營收雖然超預期，但營運槓桿連兩季都不再改善，就要重新評估。",
+        "update_frequency": "每季"
+      }
+    ],
+    "risks": [
+      {
+        "risk_id": "pltr-r1",
+        "statement": "商業成長若比市場敘事更快正常化，估值就要下修。",
+        "tier": "thesis weakener",
+        "tier_label": "削弱 thesis 的風險",
+        "response": "先停止加碼，並把估值重心下修到更低的 EV/Sales 區間。"
+      },
+      {
+        "risk_id": "pltr-r2",
+        "statement": "如果國防預算重排導致政府採購放慢，就要調整判斷。",
+        "tier": "thesis breaker",
+        "tier_label": "可能打斷 thesis 的風險",
+        "response": "若有預算支持的專案失去優先順序，就應退出。"
+      },
+      {
+        "risk_id": "pltr-r3",
+        "statement": "就算基本面還好，估值也可能先被壓縮。",
+        "tier": "noise",
+        "tier_label": "雜訊",
+        "response": "只有在需求惡化同時出現時才採取動作。"
+      }
+    ],
+    "event_timeline": [
+      {
+        "event_id": "pltr-seed-2026-maven",
+        "occurred_at": "2026-03-25",
+        "source_type": "legacy_seed",
+        "source_label": "既有研究節點",
+        "title": "Maven AI became a Program of Record.",
+        "impact": "+",
+        "impact_label": "偏正向",
+        "decision": "refresh",
+        "decision_label": "需要重估",
+        "link_kind": "internal",
+        "link_label": "內部研究節點",
+        "href": "research/PLTR.html#event-timeline",
+        "is_clickable": true
+      },
+      {
+        "event_id": "pltr-seed-2026-q4-results",
+        "occurred_at": "2026-03-25",
+        "source_type": "legacy_seed",
+        "source_label": "既有研究節點",
+        "title": "Q4 2025 results showed 137% US commercial growth.",
+        "impact": "+",
+        "impact_label": "偏正向",
+        "decision": "refresh",
+        "decision_label": "需要重估",
+        "link_kind": "internal",
+        "link_label": "內部研究節點",
+        "href": "research/PLTR.html#event-timeline",
+        "is_clickable": true
+      }
+    ],
+    "source_manifest": [
+      {
+        "source_id": "legacy-market-update",
+        "label": "2026 年 3 月市場更新舊筆記",
+        "type": "本機研究筆記",
+        "url": "/Users/ro9air/STOCK/research/market_update_mar2026.md",
+        "is_clickable": false
+      },
+      {
+        "source_id": "sec",
+        "label": "SEC 公司揭露檔案",
+        "type": "SEC",
+        "url": "https://data.sec.gov/submissions/CIK0001321655.json",
+        "is_clickable": true
+      },
+      {
+        "source_id": "investor_news",
+        "label": "Palantir 投資人新聞稿",
+        "type": "官網頁面",
+        "url": "https://investors.palantir.com/news-events/news-releases/",
+        "is_clickable": true
+      },
+      {
+        "source_id": "price",
+        "label": "Yahoo Finance 圖表資料",
+        "type": "市場資料",
+        "url": "https://query1.finance.yahoo.com/v8/finance/chart/PLTR?range=1mo&interval=1d",
+        "is_clickable": true
+      }
+    ]
+  },
+  "decision_state": {
+    "current_action": "持有 / 逢回加碼",
+    "status_label": "偏多",
+    "priority_score": 96,
+    "priority_label": "優先追蹤",
+    "next_review_at": "2026-05-08",
+    "next_checklist": [
+      "美國商業業務成長",
+      "利潤率",
+      "major 政府 renewal cadence"
+    ],
+    "action_rules": [
+      {
+        "action_rule_id": "pltr-ar-add",
+        "kind": "add",
+        "kind_label": "加碼條件",
+        "condition": "如果美國商業營收連兩季都高於 100%，且利潤率同步擴張，就可以加碼。",
+        "action": "可加碼至目標上限倉位。"
+      },
+      {
+        "action_rule_id": "pltr-ar-trim",
+        "kind": "trim",
+        "kind_label": "減碼條件",
+        "condition": "若商業業務成長掉到 70% 以下，且沒有政府業務補上，就要減碼。",
+        "action": "先減掉戰術性加碼部位，並重新檢查估值框架。"
+      },
+      {
+        "action_rule_id": "pltr-ar-exit",
+        "kind": "exit",
+        "kind_label": "退出條件",
+        "condition": "若 Program of Record 被降級，或核心國防預算支持轉弱，就應退出。",
+        "action": "不管股價走勢，直接退出。"
+      }
+    ],
+    "changed_assumptions": []
+  },
   "artifacts": {
     "state_path": "research/PLTR/state.json",
     "current_path": "research/PLTR/current.md",

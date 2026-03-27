@@ -22,7 +22,7 @@ from .config import (
     WATCHLIST,
 )
 from .digest import build_portfolio_digest, render_pr_body_from_digest
-from .dashboard import build_dashboard_site
+from .dashboard import build_dashboard_bundle
 from .llm import generate_refresh, translate_markdown
 from .markdown import render_current_report, render_review_summary
 from .models import Event
@@ -485,4 +485,4 @@ def draft_refreshes(
 
 
 def build_dashboard(research_root: Path = RESEARCH_ROOT) -> dict[str, Any]:
-    return build_dashboard_site(research_root)
+    return build_dashboard_bundle(research_root=research_root)

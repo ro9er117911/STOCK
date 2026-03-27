@@ -1,0 +1,83 @@
+[
+  {
+    "citation_id": "pltr-research-page",
+    "kind": "internal",
+    "label": "研究內頁",
+    "href": "research/PLTR.html",
+    "source_type": "研究頁面",
+    "is_clickable": true,
+    "occurred_at": "2026-03-27"
+  },
+  {
+    "citation_id": "pltr-review-summary",
+    "kind": "internal",
+    "label": "本輪更新摘要",
+    "href": "research/PLTR.html#review-summary",
+    "source_type": "更新摘要",
+    "is_clickable": true,
+    "occurred_at": "2026-03-27"
+  },
+  {
+    "citation_id": "pltr-manifest-sec",
+    "kind": "external",
+    "label": "SEC 公司揭露檔案",
+    "href": "https://data.sec.gov/submissions/CIK0001321655.json",
+    "source_type": "SEC",
+    "is_clickable": true,
+    "occurred_at": "2026-03-27"
+  },
+  {
+    "citation_id": "pltr-manifest-investor_news",
+    "kind": "external",
+    "label": "Palantir 投資人新聞稿",
+    "href": "https://investors.palantir.com/news-events/news-releases/",
+    "source_type": "官網頁面",
+    "is_clickable": true,
+    "occurred_at": "2026-03-27"
+  },
+  {
+    "citation_id": "pltr-manifest-price",
+    "kind": "external",
+    "label": "Yahoo Finance 圖表資料",
+    "href": "https://query1.finance.yahoo.com/v8/finance/chart/PLTR?range=1mo&interval=1d",
+    "source_type": "市場資料",
+    "is_clickable": true,
+    "occurred_at": "2026-03-27"
+  },
+  {
+    "citation_id": "pltr-seed-2026-maven-internal",
+    "kind": "internal",
+    "label": "內部研究節點：market_update_mar2026.md",
+    "href": "research/PLTR.html#event-timeline",
+    "source_type": "內部研究筆記",
+    "is_clickable": true,
+    "occurred_at": "2026-03-25"
+  },
+  {
+    "citation_id": "pltr-source-sec",
+    "kind": "external",
+    "label": "官方 SEC 揭露來源；是否算重大事件，依各 ticker 的門檻設定判斷。",
+    "href": "https://data.sec.gov/submissions/CIK0001321655.json",
+    "source_type": "SEC",
+    "is_clickable": true,
+    "occurred_at": "2026-03-27"
+  },
+  {
+    "citation_id": "pltr-source-price",
+    "kind": "external",
+    "label": "Yahoo Finance 日線資料，用來抓跳空與異常成交量。",
+    "href": "https://query1.finance.yahoo.com/v8/finance/chart/PLTR?range=1mo&interval=1d",
+    "source_type": "price",
+    "is_clickable": true,
+    "occurred_at": "2026-03-27"
+  },
+  {
+    "citation_id": "pltr-source-investor_news",
+    "kind": "external",
+    "label": "Palantir 投資人新聞稿頁面。",
+    "href": "https://investors.palantir.com/news-events/news-releases/",
+    "source_type": "官方新聞",
+    "is_clickable": true,
+    "occurred_at": "2026-03-27"
+  }
+]

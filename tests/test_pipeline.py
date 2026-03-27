@@ -8,7 +8,8 @@ from datetime import date, timedelta
 from pathlib import Path
 from unittest import mock
 
-from stock_research.dashboard import build_dashboard_site
+from stock_research.dashboard import build_dashboard_bundle, build_dashboard_site
+from stock_research.digest import build_ticker_digest
 from stock_research.notify import send_resend_email
 from stock_research.pipeline import bootstrap_baselines, draft_refreshes, poll_events
 from stock_research.postprocess import post_process_refresh_output
@@ -382,20 +383,68 @@ class PipelineTests(unittest.TestCase):
             research_root = Path(tmp) / "research"
             site_root = Path(tmp) / "site"
             bootstrap_baselines(research_root=research_root, force=True)
-            with mock.patch("stock_research.dashboard.SITE_DATA_ROOT", site_root / "data"), \
-                mock.patch("stock_research.dashboard.SITE_TICKER_DATA_ROOT", site_root / "data" / "tickers"), \
-                mock.patch("stock_research.dashboard.SITE_TICKER_PAGE_ROOT", site_root / "tickers"), \
-                mock.patch(
-                    "stock_research.dashboard.localize_digest_payload",
-                    side_effect=lambda payload, *, context_label: payload,
-                ):
-                summary = build_dashboard_site(research_root=research_root, site_root=site_root)
+            summary = build_dashboard_site(research_root=research_root, site_root=site_root)
             self.assertTrue((site_root / "index.html").exists())
             self.assertTrue((site_root / "data" / "portfolio.json").exists())
             self.assertTrue((site_root / "tickers" / "MSFT.html").exists())
+            self.assertTrue((site_root / "research" / "MSFT.html").exists())
             portfolio = read_json(site_root / "data" / "portfolio.json")
+            self.assertIn("portfolio_summary", portfolio)
             self.assertEqual(len(portfolio["tickers"]), 3)
             self.assertIn("MSFT", summary["tickers"])
+
+    def test_build_dashboard_bundle_keeps_private_positions_out_of_public_site(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            research_root = Path(tmp) / "research"
+            public_site_root = Path(tmp) / "site"
+            local_site_root = Path(tmp) / "dashboard-local"
+            portfolio_path = Path(tmp) / "portfolio.private.json"
+            bootstrap_baselines(research_root=research_root, force=True)
+            portfolio_path.write_text(
+                json.dumps(
+                    {
+                        "positions": [
+                            {
+                                "ticker": "MSFT",
+                                "shares": 12,
+                                "avg_cost": 401.25,
+                                "target_weight_pct": 18,
+                                "max_weight_pct": 22,
+                                "risk_level": "core",
+                                "notes": "private",
+                            }
+                        ]
+                    },
+                    ensure_ascii=False,
+                    indent=2,
+                ),
+                encoding="utf-8",
+            )
+            summary = build_dashboard_bundle(
+                research_root=research_root,
+                public_site_root=public_site_root,
+                local_site_root=local_site_root,
+                portfolio_path=portfolio_path,
+            )
+            public_portfolio = read_json(public_site_root / "data" / "portfolio.json")
+            local_portfolio = read_json(local_site_root / "data" / "portfolio.json")
+            msft_public = next(item for item in public_portfolio["tickers"] if item["ticker"] == "MSFT")
+            msft_local = next(item for item in local_portfolio["tickers"] if item["ticker"] == "MSFT")
+            self.assertFalse(msft_public["position"]["has_position"])
+            self.assertTrue(msft_local["position"]["has_position"])
+            self.assertEqual(msft_local["position"]["shares"], 12)
+            self.assertTrue(summary["has_private_overlay"])
+
+    def test_public_citations_replace_local_seed_path_with_internal_research_link(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            research_root = Path(tmp) / "research"
+            bootstrap_baselines(research_root=research_root, force=True)
+            digest = build_ticker_digest(research_root, "MAR")
+            citations = read_json(research_root / "MAR" / "artifacts" / "citations.json")
+            self.assertTrue(any(item["kind"] == "internal" for item in citations))
+            self.assertFalse(any("/Users/" in item["href"] for item in citations))
+            self.assertTrue(any(item["href"] == "research/MAR.html#event-timeline" for item in citations))
+            self.assertFalse(any("/Users/" in item["href"] for item in digest["citations"]))
 
     def test_send_email_writes_preview_without_resend_secrets(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
