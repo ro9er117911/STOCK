@@ -1,0 +1,281 @@
+{
+  "ticker": "MAR",
+  "company_name": "Marriott International",
+  "research_topic": "Light-asset travel compounder with business travel recovery optionality",
+  "research_type": "中線 / 防禦配置",
+  "holding_period": "數季至一年",
+  "last_reviewed_at": "2026-03-25",
+  "next_review_at": "2026-05-05",
+  "current_action": "穩健持有",
+  "confidence": 0.67,
+  "latest_delta": [
+    "Q4 2025 EPS 小幅 miss，但全年指引與高端/國際需求仍穩健。",
+    "MAR 的 thesis 從疫情後修復轉成高品質現金流與商旅回溫的防禦型持有。",
+    "若總經衰退擴散到高端與商務需求，才會進入 thesis breaker。"
+  ],
+  "primary_observation_variables": [
+    "RevPAR by segment and geography",
+    "Business travel recovery",
+    "Capital-light cash return profile"
+  ],
+  "secondary_observation_variables": [
+    "Forward bookings",
+    "High-end leisure mix",
+    "Macro slowdown risk"
+  ],
+  "noise_filters": [
+    "Single-quarter EPS miss without RevPAR weakness",
+    "Short-lived consumer sentiment noise",
+    "Headline volatility in lower-end domestic travel"
+  ],
+  "thresholds": {
+    "price_gap_pct": 8.0,
+    "volume_ratio": 2.0,
+    "deep_refresh_days": 10,
+    "material_sec_forms": [
+      "8-K",
+      "10-Q",
+      "10-K"
+    ],
+    "earnings_keywords": [
+      "earnings",
+      "results",
+      "guidance",
+      "revpar",
+      "dividend"
+    ],
+    "positive_keywords": [
+      "raises",
+      "growth",
+      "recovery",
+      "booking",
+      "revpar"
+    ],
+    "negative_keywords": [
+      "miss",
+      "decline",
+      "slowdown",
+      "recession",
+      "cut"
+    ]
+  },
+  "thesis": {
+    "thesis_id": "mar-thesis-core",
+    "statement": "Marriott 受惠於輕資產模式、高端與國際旅遊韌性，以及企業差旅回溫，因此在景氣不確定環境下仍能維持穩定現金流與較佳下行保護。",
+    "core_catalyst": "Business travel recovery and stable international/high-end RevPAR.",
+    "market_blind_spot": "市場容易把 MAR 當純週期股，但其資本輕、品牌強與回購能力提供了更好的防禦質地。",
+    "verification_date": "2026-05-05",
+    "expiry_condition": "High-end and business travel demand crack together in a deeper macro slowdown."
+  },
+  "assumptions": [
+    {
+      "assumption_id": "mar-a1",
+      "statement": "High-end and international travel remain resilient enough to offset weaker low-end domestic demand.",
+      "type": "demand",
+      "verification_method": "RevPAR mix and management commentary by segment.",
+      "update_frequency": "quarterly",
+      "invalidation_condition": "High-end and international RevPAR both roll over materially.",
+      "status": "reinforced",
+      "confidence": 0.7,
+      "keywords": [
+        "revpar",
+        "luxury",
+        "international",
+        "travel"
+      ]
+    },
+    {
+      "assumption_id": "mar-a2",
+      "statement": "Business travel improves through 2026 and supports occupancy and pricing.",
+      "type": "demand",
+      "verification_method": "Corporate booking and occupancy commentary.",
+      "update_frequency": "quarterly",
+      "invalidation_condition": "Corporate travel recovery stalls for another full cycle.",
+      "status": "watch",
+      "confidence": 0.61,
+      "keywords": [
+        "business",
+        "corporate",
+        "booking",
+        "conference"
+      ]
+    },
+    {
+      "assumption_id": "mar-a3",
+      "statement": "The asset-light model preserves downside protection and cash return flexibility.",
+      "type": "capital_allocation",
+      "verification_method": "Cash return guidance, leverage, and fee-based earnings mix.",
+      "update_frequency": "quarterly",
+      "invalidation_condition": "Fee earnings weaken materially and leverage rises without demand support.",
+      "status": "reinforced",
+      "confidence": 0.69,
+      "keywords": [
+        "cash",
+        "buyback",
+        "dividend",
+        "asset-light",
+        "fee"
+      ]
+    }
+  ],
+  "risks": [
+    {
+      "risk_id": "mar-r1",
+      "statement": "Macro recession broadens from budget travel to high-end and business travel.",
+      "tier": "thesis breaker",
+      "leading_indicator": "Forward bookings and corporate travel commentary",
+      "response": "Exit if premium segments crack together."
+    },
+    {
+      "risk_id": "mar-r2",
+      "statement": "International travel momentum fades as FX or geopolitics worsen.",
+      "tier": "thesis weakener",
+      "leading_indicator": "International RevPAR mix",
+      "response": "Trim and lower the valuation range."
+    },
+    {
+      "risk_id": "mar-r3",
+      "statement": "Market rotates away from quality defensives even if fundamentals hold.",
+      "tier": "noise",
+      "leading_indicator": "Factor rotation and bond-yield shocks",
+      "response": "Ignore unless fundamentals deteriorate."
+    }
+  ],
+  "valuation_regime": {
+    "current_yardstick": "Hotel-cycle P/E plus RevPAR outlook",
+    "better_yardstick": "Quality fee-based travel compounder",
+    "switch_trigger": "Business travel recovery becomes visible while premium segments stay resilient.",
+    "re_rating_logic": "The market pays for durable fee earnings and cash returns rather than pure cycle recovery.",
+    "associated_risk": "If the cycle weakens across all segments, the quality premium disappears."
+  },
+  "scenarios": [
+    {
+      "scenario_id": "mar-s-base",
+      "trigger": "Premium and international demand remain healthy and business travel improves gradually.",
+      "logic": "MAR compounds through a quality earnings profile rather than a hot cycle.",
+      "action": "Hold as defensive quality exposure."
+    },
+    {
+      "scenario_id": "mar-s-bull",
+      "trigger": "Corporate travel snaps back and forward bookings beat expectations.",
+      "logic": "The market re-rates MAR from cycle recovery to durable compounding.",
+      "action": "Add on confirmation from RevPAR and bookings."
+    },
+    {
+      "scenario_id": "mar-s-bear",
+      "trigger": "Budget weakness starts leaking into premium segments.",
+      "logic": "The thesis weakens but cash-return quality still matters.",
+      "action": "Trim, but do not exit until premium demand clearly breaks."
+    },
+    {
+      "scenario_id": "mar-s-break",
+      "trigger": "Deep recession hits business and premium travel together.",
+      "logic": "Downside protection is no longer enough to support the valuation.",
+      "action": "Exit."
+    }
+  ],
+  "action_rules": [
+    {
+      "action_rule_id": "mar-ar-add",
+      "kind": "add",
+      "condition": "Corporate travel and forward bookings improve while international RevPAR remains strong.",
+      "action": "Add selectively after management confirms trend persistence."
+    },
+    {
+      "action_rule_id": "mar-ar-trim",
+      "kind": "trim",
+      "condition": "Premium segment demand softens without offsetting business-travel recovery.",
+      "action": "Trim and keep only defensive core size."
+    },
+    {
+      "action_rule_id": "mar-ar-exit",
+      "kind": "exit",
+      "condition": "High-end and business travel weaken together in a deeper recession.",
+      "action": "Exit the active thesis."
+    }
+  ],
+  "next_must_check_data": "Next earnings: RevPAR mix, corporate travel commentary, forward bookings, and cash return guidance.",
+  "research_debt": [
+    "Need a cleaner framework for group and convention demand sensitivity.",
+    "Need cross-check on Europe and Asia RevPAR versus US softness."
+  ],
+  "source_manifest": [
+    {
+      "source_id": "legacy-market-update",
+      "type": "local_markdown",
+      "label": "Legacy March 2026 market update",
+      "url": "/Users/ro9air/STOCK/research/market_update_mar2026.md"
+    },
+    {
+      "source_id": "sec",
+      "type": "sec",
+      "label": "SEC company submissions",
+      "url": "https://data.sec.gov/submissions/CIK0001048286.json"
+    },
+    {
+      "source_id": "investor_news",
+      "type": "html",
+      "label": "Marriott investor news releases",
+      "url": "https://news.marriott.com/news/"
+    },
+    {
+      "source_id": "price",
+      "type": "market_data",
+      "label": "Yahoo Finance chart",
+      "url": "https://query1.finance.yahoo.com/v8/finance/chart/MAR?range=1mo&interval=1d"
+    }
+  ],
+  "last_seen_event_cursors": {
+    "sec": "",
+    "investor_news": "",
+    "price": "2026-03-26"
+  },
+  "version_log": [
+    {
+      "version": "v0",
+      "date": "2026-03-25",
+      "reason": "Baseline migration from legacy March update.",
+      "impact": "Established living thesis and machine-readable state."
+    }
+  ],
+  "seed_events": [
+    {
+      "event_id": "mar-seed-2026-guidance",
+      "ticker": "MAR",
+      "source_type": "legacy_seed",
+      "occurred_at": "2026-03-25",
+      "title": "2026 guidance stayed intact despite a small EPS miss.",
+      "source_url": "/Users/ro9air/STOCK/research/market_update_mar2026.md",
+      "affected_assumption_ids": [
+        "mar-a1",
+        "mar-a3"
+      ],
+      "marginal_impact": "+",
+      "threshold_breach": false,
+      "requires_refresh": false,
+      "decision": "watch",
+      "metadata": {
+        "seed": true
+      }
+    },
+    {
+      "event_id": "mar-seed-2026-travel-mix",
+      "ticker": "MAR",
+      "source_type": "legacy_seed",
+      "occurred_at": "2026-03-25",
+      "title": "High-end and international travel stayed firm while lower-end US demand softened.",
+      "source_url": "/Users/ro9air/STOCK/research/market_update_mar2026.md",
+      "affected_assumption_ids": [
+        "mar-a1",
+        "mar-a2"
+      ],
+      "marginal_impact": "0",
+      "threshold_breach": false,
+      "requires_refresh": false,
+      "decision": "watch",
+      "metadata": {
+        "seed": true
+      }
+    }
+  ]
+}

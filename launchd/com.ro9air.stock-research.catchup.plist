@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+  <dict>
+    <key>Label</key>
+    <string>com.ro9air.stock-research.catchup</string>
+    <key>ProgramArguments</key>
+    <array>
+      <string>/bin/zsh</string>
+      <string>/Users/ro9air/STOCK/scripts/local_catchup.sh</string>
+    </array>
+    <key>RunAtLoad</key>
+    <true/>
+    <key>StartInterval</key>
+    <integer>1800</integer>
+    <key>StandardOutPath</key>
+    <string>/Users/ro9air/STOCK/logs/local-catchup.out.log</string>
+    <key>StandardErrorPath</key>
+    <string>/Users/ro9air/STOCK/logs/local-catchup.err.log</string>
+    <key>WorkingDirectory</key>
+    <string>/Users/ro9air/STOCK</string>
+  </dict>
+</plist>

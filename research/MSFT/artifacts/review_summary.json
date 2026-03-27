@@ -1,0 +1,181 @@
+{
+  "ticker": "MSFT",
+  "reviewed_at": "2026-03-27",
+  "review_summary": "Automatic fallback refresh used. Review the generated diff before merging.",
+  "changed_assumptions": [
+    {
+      "assumption_id": "msft-a2",
+      "summary": "pressured -> reinforced because of Microsoft Dragon Copilot provides the healthcare industry’s first unified voice AI assistant that enables clinicians to streamline clinical documentation, surface information and automate tasks"
+    },
+    {
+      "assumption_id": "msft-a1",
+      "summary": "watch -> reinforced because of We’re taking our latest AI research breakthroughs and putting them in the hands of devs everywhere, with Azure AI Foundry Labs."
+    }
+  ],
+  "action_rule_delta": [
+    {
+      "action_rule_id": "msft-ar-add",
+      "summary": "No rule text changed; review whether the trigger still matches the thesis."
+    },
+    {
+      "action_rule_id": "msft-ar-trim",
+      "summary": "No rule text changed; review whether the trigger still matches the thesis."
+    }
+  ],
+  "trigger": "event",
+  "context": {
+    "ticker": "MSFT",
+    "trigger": "event",
+    "scheduled_refresh_due": false,
+    "new_events": [
+      {
+        "event_id": "19872b27eec6a2a9ed43f77196dc4872db5212a1",
+        "ticker": "MSFT",
+        "source_type": "investor_news",
+        "occurred_at": "2025-04-30",
+        "title": "Microsoft earnings press release available on Investor Relations website",
+        "source_url": "https://news.microsoft.com/2025/04/30/microsoft-earnings-press-release-available-on-investor-relations-website-26/",
+        "affected_assumption_ids": [
+          "msft-a1"
+        ],
+        "marginal_impact": "0",
+        "threshold_breach": true,
+        "requires_refresh": true,
+        "decision": "refresh",
+        "metadata": {
+          "feed_url": "https://news.microsoft.com/feed/"
+        }
+      },
+      {
+        "event_id": "7e260af1308e86512e2fb0b318aaf7affbff0a1d",
+        "ticker": "MSFT",
+        "source_type": "investor_news",
+        "occurred_at": "2025-04-30",
+        "title": "Microsoft Cloud and AI strength drives third quarter results",
+        "source_url": "https://news.microsoft.com/2025/04/30/microsoft-cloud-and-ai-strength-drives-third-quarter-results/",
+        "affected_assumption_ids": [
+          "msft-a1"
+        ],
+        "marginal_impact": "0",
+        "threshold_breach": true,
+        "requires_refresh": true,
+        "decision": "refresh",
+        "metadata": {
+          "feed_url": "https://news.microsoft.com/feed/"
+        }
+      },
+      {
+        "event_id": "e943236490c770ed14bd5814d1c9eb6204e736e3",
+        "ticker": "MSFT",
+        "source_type": "investor_news",
+        "occurred_at": "2025-04-09",
+        "title": "Microsoft announces quarterly earnings release date",
+        "source_url": "https://news.microsoft.com/2025/04/09/microsoft-announces-quarterly-earnings-release-date-63/",
+        "affected_assumption_ids": [
+          "msft-a1"
+        ],
+        "marginal_impact": "0",
+        "threshold_breach": true,
+        "requires_refresh": true,
+        "decision": "refresh",
+        "metadata": {
+          "feed_url": "https://news.microsoft.com/feed/"
+        }
+      },
+      {
+        "event_id": "ed6756e435fcf1551e21491030e21b9972fb73c7",
+        "ticker": "MSFT",
+        "source_type": "investor_news",
+        "occurred_at": "2025-03-03",
+        "title": "Microsoft Dragon Copilot provides the healthcare industry’s first unified voice AI assistant that enables clinicians to streamline clinical documentation, surface information and automate tasks",
+        "source_url": "https://news.microsoft.com/2025/03/03/microsoft-dragon-copilot-provides-the-healthcare-industrys-first-unified-voice-ai-assistant-that-enables-clinicians-to-streamline-clinical-documentation-surface-information-and-automate-task/",
+        "affected_assumption_ids": [
+          "msft-a2"
+        ],
+        "marginal_impact": "+",
+        "threshold_breach": false,
+        "requires_refresh": false,
+        "decision": "watch",
+        "metadata": {
+          "feed_url": "https://news.microsoft.com/feed/"
+        }
+      },
+      {
+        "event_id": "5abff3a1f4e94c142904466eab1a8fe4fb5d57c1",
+        "ticker": "MSFT",
+        "source_type": "investor_news",
+        "occurred_at": "2025-02-20",
+        "title": "We’re taking our latest AI research breakthroughs and putting them in the hands of devs everywhere, with Azure AI Foundry Labs.",
+        "source_url": "https://www.linkedin.com/posts/satyanadella_introducing-azure-ai-foundry-labs-a-hub-activity-7298071158258614273-TIiL",
+        "affected_assumption_ids": [
+          "msft-a1"
+        ],
+        "marginal_impact": "+",
+        "threshold_breach": false,
+        "requires_refresh": false,
+        "decision": "watch",
+        "metadata": {
+          "feed_url": "https://news.microsoft.com/feed/"
+        }
+      }
+    ],
+    "material_events": [
+      {
+        "event_id": "19872b27eec6a2a9ed43f77196dc4872db5212a1",
+        "ticker": "MSFT",
+        "source_type": "investor_news",
+        "occurred_at": "2025-04-30",
+        "title": "Microsoft earnings press release available on Investor Relations website",
+        "source_url": "https://news.microsoft.com/2025/04/30/microsoft-earnings-press-release-available-on-investor-relations-website-26/",
+        "affected_assumption_ids": [
+          "msft-a1"
+        ],
+        "marginal_impact": "0",
+        "threshold_breach": true,
+        "requires_refresh": true,
+        "decision": "refresh",
+        "metadata": {
+          "feed_url": "https://news.microsoft.com/feed/"
+        }
+      },
+      {
+        "event_id": "7e260af1308e86512e2fb0b318aaf7affbff0a1d",
+        "ticker": "MSFT",
+        "source_type": "investor_news",
+        "occurred_at": "2025-04-30",
+        "title": "Microsoft Cloud and AI strength drives third quarter results",
+        "source_url": "https://news.microsoft.com/2025/04/30/microsoft-cloud-and-ai-strength-drives-third-quarter-results/",
+        "affected_assumption_ids": [
+          "msft-a1"
+        ],
+        "marginal_impact": "0",
+        "threshold_breach": true,
+        "requires_refresh": true,
+        "decision": "refresh",
+        "metadata": {
+          "feed_url": "https://news.microsoft.com/feed/"
+        }
+      },
+      {
+        "event_id": "e943236490c770ed14bd5814d1c9eb6204e736e3",
+        "ticker": "MSFT",
+        "source_type": "investor_news",
+        "occurred_at": "2025-04-09",
+        "title": "Microsoft announces quarterly earnings release date",
+        "source_url": "https://news.microsoft.com/2025/04/09/microsoft-announces-quarterly-earnings-release-date-63/",
+        "affected_assumption_ids": [
+          "msft-a1"
+        ],
+        "marginal_impact": "0",
+        "threshold_breach": true,
+        "requires_refresh": true,
+        "decision": "refresh",
+        "metadata": {
+          "feed_url": "https://news.microsoft.com/feed/"
+        }
+      }
+    ],
+    "state_path": "research/MSFT/state.json",
+    "current_path": "research/MSFT/current.md"
+  }
+}
