@@ -1,0 +1,105 @@
+{
+  "ticker": "MSFT",
+  "company_name": "Microsoft",
+  "status_label": "持有觀察",
+  "current_action": "持有 / 觀望，等待下一次驗證點",
+  "thesis_confidence": 0.63,
+  "summary_blurb": "No new material events were provided in the refresh bundle, so the MSFT thesis state remains unchanged aside from the routine review timestamp update. Confidence, assumptions, and action rules are preserved.",
+  "next_review_at": "2026-04-03",
+  "next_must_check_data": "FY2026 Q3 earnings: Azure growth, AI contribution, Copilot monetization, margin trend, and CapEx guidance.",
+  "last_reviewed_at": "2026-03-27",
+  "key_events": [
+    {
+      "occurred_at": "2025-02-20",
+      "source_type": "investor_news",
+      "title": "We’re taking our latest AI research breakthroughs and putting them in the hands of devs everywhere, with Azure AI Foundry Labs.",
+      "impact": "+",
+      "decision": "watch",
+      "source_url": "https://www.linkedin.com/posts/satyanadella_introducing-azure-ai-foundry-labs-a-hub-activity-7298071158258614273-TIiL"
+    },
+    {
+      "occurred_at": "2025-03-03",
+      "source_type": "investor_news",
+      "title": "Microsoft Dragon Copilot provides the healthcare industry’s first unified voice AI assistant that enables clinicians to streamline clinical documentation, surface information and automate tasks",
+      "impact": "+",
+      "decision": "watch",
+      "source_url": "https://news.microsoft.com/2025/03/03/microsoft-dragon-copilot-provides-the-healthcare-industrys-first-unified-voice-ai-assistant-that-enables-clinicians-to-streamline-clinical-documentation-surface-information-and-automate-task/"
+    },
+    {
+      "occurred_at": "2025-04-09",
+      "source_type": "investor_news",
+      "title": "Microsoft announces quarterly earnings release date",
+      "impact": "0",
+      "decision": "refresh",
+      "source_url": "https://news.microsoft.com/2025/04/09/microsoft-announces-quarterly-earnings-release-date-63/"
+    }
+  ],
+  "key_action_rules": [
+    {
+      "action_rule_id": "msft-ar-add",
+      "kind": "add",
+      "condition": "Copilot enterprise penetration breaks above 10% and CapEx growth moderates.",
+      "action": "Add after earnings confirmation."
+    },
+    {
+      "action_rule_id": "msft-ar-trim",
+      "kind": "trim",
+      "condition": "CapEx rises again while Copilot monetization does not improve.",
+      "action": "Trim into strength and lower conviction."
+    },
+    {
+      "action_rule_id": "msft-ar-exit",
+      "kind": "exit",
+      "condition": "Azure growth falls below 30% or flagship cloud access is materially impaired.",
+      "action": "Exit active thesis and rotate to better risk/reward."
+    }
+  ],
+  "changed_assumptions": [],
+  "action_rule_delta": [],
+  "source_status": [
+    {
+      "source_id": "sec",
+      "source_type": "sec",
+      "kind": "sec",
+      "url": "https://data.sec.gov/submissions/CIK0000789019.json",
+      "status": "active",
+      "priority": 10,
+      "new_events": 0,
+      "cursor": "",
+      "error": "",
+      "notes": "Official SEC filings. Material forms are filtered by each ticker state threshold.",
+      "status_label": "啟用"
+    },
+    {
+      "source_id": "price",
+      "source_type": "price",
+      "kind": "price",
+      "url": "https://query1.finance.yahoo.com/v8/finance/chart/MSFT?range=1mo&interval=1d",
+      "status": "active",
+      "priority": 20,
+      "new_events": 0,
+      "cursor": "",
+      "error": "",
+      "notes": "Daily Yahoo Finance chart data for gap and abnormal volume detection.",
+      "status_label": "啟用"
+    },
+    {
+      "source_id": "investor_news",
+      "source_type": "investor_news",
+      "kind": "rss",
+      "url": "https://news.microsoft.com/feed/",
+      "status": "active",
+      "priority": 30,
+      "new_events": 0,
+      "cursor": "",
+      "error": "",
+      "notes": "Official Microsoft newsroom RSS feed.",
+      "status_label": "啟用"
+    }
+  ],
+  "artifacts": {
+    "state_path": "research/MSFT/state.json",
+    "current_path": "research/MSFT/current.md",
+    "review_summary_path": "research/MSFT/artifacts/review_summary.md"
+  }
+}

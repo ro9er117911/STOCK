@@ -1,0 +1,47 @@
+name: Dashboard Site
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+jobs:
+  build-dashboard:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Setup Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+
+      - name: Build dashboard artifact
+        run: python3 scripts/research_ops.py build-dashboard
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          TRANSLATION_MODEL: gpt-4.1-mini
+
+      - name: Upload dashboard artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: dashboard-site
+          path: site
+
+      - name: Upload Pages artifact
+        if: vars.ENABLE_DASHBOARD_PUBLISH == 'true'
+        uses: actions/upload-pages-artifact@v4
+        with:
+          path: site
+
+      - name: Deploy to GitHub Pages
+        if: vars.ENABLE_DASHBOARD_PUBLISH == 'true'
+        id: deployment
+        uses: actions/deploy-pages@v4

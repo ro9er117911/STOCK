@@ -1,0 +1,161 @@
+{
+  "version": 1,
+  "generated_at": "2026-03-27",
+  "tickers": [
+    {
+      "ticker": "PLTR",
+      "company_name": "Palantir Technologies",
+      "cik": "0001321655",
+      "yahoo_symbol": "PLTR",
+      "price_gap_pct": 10.0,
+      "abnormal_volume_ratio": 2.2,
+      "deep_refresh_days": 7,
+      "sources": [
+        {
+          "source_id": "sec",
+          "source_type": "sec",
+          "kind": "sec",
+          "url": "https://data.sec.gov/submissions/CIK0001321655.json",
+          "status": "active",
+          "priority": 10,
+          "title_keywords": [],
+          "allow_patterns": [],
+          "notes": "Official SEC filings. Material forms are filtered by each ticker state threshold."
+        },
+        {
+          "source_id": "price",
+          "source_type": "price",
+          "kind": "price",
+          "url": "https://query1.finance.yahoo.com/v8/finance/chart/PLTR?range=1mo&interval=1d",
+          "status": "active",
+          "priority": 20,
+          "title_keywords": [],
+          "allow_patterns": [],
+          "notes": "Daily Yahoo Finance chart data for gap and abnormal volume detection."
+        },
+        {
+          "source_id": "investor_news",
+          "source_type": "investor_news",
+          "kind": "html",
+          "url": "https://investors.palantir.com/news-events/news-releases/",
+          "status": "active",
+          "priority": 30,
+          "title_keywords": [
+            "earnings",
+            "results",
+            "quarter",
+            "contract",
+            "ai"
+          ],
+          "allow_patterns": [
+            "news",
+            "releases"
+          ],
+          "notes": "Official Palantir investor news release archive."
+        }
+      ]
+    },
+    {
+      "ticker": "MSFT",
+      "company_name": "Microsoft",
+      "cik": "0000789019",
+      "yahoo_symbol": "MSFT",
+      "price_gap_pct": 8.0,
+      "abnormal_volume_ratio": 2.0,
+      "deep_refresh_days": 7,
+      "sources": [
+        {
+          "source_id": "sec",
+          "source_type": "sec",
+          "kind": "sec",
+          "url": "https://data.sec.gov/submissions/CIK0000789019.json",
+          "status": "active",
+          "priority": 10,
+          "title_keywords": [],
+          "allow_patterns": [],
+          "notes": "Official SEC filings. Material forms are filtered by each ticker state threshold."
+        },
+        {
+          "source_id": "price",
+          "source_type": "price",
+          "kind": "price",
+          "url": "https://query1.finance.yahoo.com/v8/finance/chart/MSFT?range=1mo&interval=1d",
+          "status": "active",
+          "priority": 20,
+          "title_keywords": [],
+          "allow_patterns": [],
+          "notes": "Daily Yahoo Finance chart data for gap and abnormal volume detection."
+        },
+        {
+          "source_id": "investor_news",
+          "source_type": "investor_news",
+          "kind": "rss",
+          "url": "https://news.microsoft.com/feed/",
+          "status": "active",
+          "priority": 30,
+          "title_keywords": [
+            "earnings",
+            "microsoft cloud",
+            "copilot",
+            "azure",
+            "results"
+          ],
+          "allow_patterns": [],
+          "notes": "Official Microsoft newsroom RSS feed."
+        }
+      ]
+    },
+    {
+      "ticker": "MAR",
+      "company_name": "Marriott International",
+      "cik": "0001048286",
+      "yahoo_symbol": "MAR",
+      "price_gap_pct": 8.0,
+      "abnormal_volume_ratio": 2.0,
+      "deep_refresh_days": 10,
+      "sources": [
+        {
+          "source_id": "sec",
+          "source_type": "sec",
+          "kind": "sec",
+          "url": "https://data.sec.gov/submissions/CIK0001048286.json",
+          "status": "active",
+          "priority": 10,
+          "title_keywords": [],
+          "allow_patterns": [],
+          "notes": "Official SEC filings. Material forms are filtered by each ticker state threshold."
+        },
+        {
+          "source_id": "price",
+          "source_type": "price",
+          "kind": "price",
+          "url": "https://query1.finance.yahoo.com/v8/finance/chart/MAR?range=1mo&interval=1d",
+          "status": "active",
+          "priority": 20,
+          "title_keywords": [],
+          "allow_patterns": [],
+          "notes": "Daily Yahoo Finance chart data for gap and abnormal volume detection."
+        },
+        {
+          "source_id": "investor_news",
+          "source_type": "investor_news",
+          "kind": "html",
+          "url": "https://news.marriott.com/news/",
+          "status": "active",
+          "priority": 30,
+          "title_keywords": [
+            "reports",
+            "results",
+            "announces",
+            "guidance",
+            "quarter"
+          ],
+          "allow_patterns": [
+            "news"
+          ],
+          "notes": "Official Marriott newsroom archive."
+        }
+      ]
+    }
+  ]
+}

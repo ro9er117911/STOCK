@@ -1,0 +1,97 @@
+{
+  "ticker": "MAR",
+  "company_name": "Marriott International",
+  "status_label": "持有觀察",
+  "current_action": "穩健持有",
+  "thesis_confidence": 0.67,
+  "summary_blurb": "No new events were provided in the refresh bundle, so the MAR thesis remains unchanged. Confidence and action stay stable; only the review timestamps are advanced to today with the next check pushed out on the existing cadence.",
+  "next_review_at": "2026-05-07",
+  "next_must_check_data": "Next earnings: RevPAR mix, corporate travel commentary, forward bookings, and cash return guidance.",
+  "last_reviewed_at": "2026-03-27",
+  "key_events": [
+    {
+      "occurred_at": "2026-03-25",
+      "source_type": "legacy_seed",
+      "title": "High-end and international travel stayed firm while lower-end US demand softened.",
+      "impact": "0",
+      "decision": "watch",
+      "source_url": "/Users/ro9air/STOCK/research/market_update_mar2026.md"
+    },
+    {
+      "occurred_at": "2026-03-25",
+      "source_type": "legacy_seed",
+      "title": "2026 guidance stayed intact despite a small EPS miss.",
+      "impact": "+",
+      "decision": "watch",
+      "source_url": "/Users/ro9air/STOCK/research/market_update_mar2026.md"
+    }
+  ],
+  "key_action_rules": [
+    {
+      "action_rule_id": "mar-ar-add",
+      "kind": "add",
+      "condition": "Corporate travel and forward bookings improve while international RevPAR remains strong.",
+      "action": "Add selectively after management confirms trend persistence."
+    },
+    {
+      "action_rule_id": "mar-ar-trim",
+      "kind": "trim",
+      "condition": "Premium segment demand softens without offsetting business-travel recovery.",
+      "action": "Trim and keep only defensive core size."
+    },
+    {
+      "action_rule_id": "mar-ar-exit",
+      "kind": "exit",
+      "condition": "High-end and business travel weaken together in a deeper recession.",
+      "action": "Exit the active thesis."
+    }
+  ],
+  "changed_assumptions": [],
+  "action_rule_delta": [],
+  "source_status": [
+    {
+      "source_id": "sec",
+      "source_type": "sec",
+      "kind": "sec",
+      "url": "https://data.sec.gov/submissions/CIK0001048286.json",
+      "status": "active",
+      "priority": 10,
+      "new_events": 0,
+      "cursor": "",
+      "error": "",
+      "notes": "Official SEC filings. Material forms are filtered by each ticker state threshold.",
+      "status_label": "啟用"
+    },
+    {
+      "source_id": "price",
+      "source_type": "price",
+      "kind": "price",
+      "url": "https://query1.finance.yahoo.com/v8/finance/chart/MAR?range=1mo&interval=1d",
+      "status": "active",
+      "priority": 20,
+      "new_events": 0,
+      "cursor": "",
+      "error": "",
+      "notes": "Daily Yahoo Finance chart data for gap and abnormal volume detection.",
+      "status_label": "啟用"
+    },
+    {
+      "source_id": "investor_news",
+      "source_type": "investor_news",
+      "kind": "html",
+      "url": "https://news.marriott.com/news/",
+      "status": "active",
+      "priority": 30,
+      "new_events": 0,
+      "cursor": "",
+      "error": "",
+      "notes": "Official Marriott newsroom archive.",
+      "status_label": "啟用"
+    }
+  ],
+  "artifacts": {
+    "state_path": "research/MAR/state.json",
+    "current_path": "research/MAR/current.md",
+    "review_summary_path": "research/MAR/artifacts/review_summary.md"
+  }
+}

@@ -1,13 +1,17 @@
 from __future__ import annotations
 
 import json
+import os
 import tempfile
 import unittest
 from datetime import date, timedelta
 from pathlib import Path
 from unittest import mock
 
+from stock_research.dashboard import build_dashboard_site
+from stock_research.notify import send_resend_email
 from stock_research.pipeline import bootstrap_baselines, draft_refreshes, poll_events
+from stock_research.postprocess import post_process_refresh_output
 from stock_research.sources import fetch_feed_events
 from stock_research.storage import deep_merge, read_json, read_jsonl
 from stock_research.config import WATCHLIST
@@ -83,6 +87,18 @@ class PipelineTests(unittest.TestCase):
             ledger = read_jsonl(research_root / "MAR" / "events.jsonl")
             self.assertTrue(any(row["event_id"] == "mar-news-1" for row in ledger))
 
+    def test_poll_records_source_status_summary(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            research_root = Path(tmp) / "research"
+            bootstrap_baselines(research_root=research_root, force=True)
+            empty = ([], "")
+            with mock.patch("stock_research.pipeline.fetch_sec_events", return_value=empty), \
+                mock.patch("stock_research.pipeline.fetch_price_events", return_value=empty), \
+                mock.patch("stock_research.pipeline.fetch_feed_events", return_value=empty):
+                summary = poll_events(research_root=research_root, trigger="event")
+            source_ids = {item["source_id"] for item in summary["tickers"]["MSFT"]["source_status"]}
+            self.assertTrue({"sec", "price", "investor_news"}.issubset(source_ids))
+
     def test_material_event_triggers_context_and_draft(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             research_root = Path(tmp) / "research"
@@ -102,7 +118,7 @@ class PipelineTests(unittest.TestCase):
                 "0002",
             )
             empty = ([], "")
-            def sec_stub(config, state):  # noqa: ANN001
+            def sec_stub(source, config, state):  # noqa: ANN001
                 return sec_event if config.ticker == "MSFT" else empty
 
             with mock.patch("stock_research.pipeline.fetch_sec_events", side_effect=sec_stub), \
@@ -310,6 +326,110 @@ class PipelineTests(unittest.TestCase):
             )
             self.assertEqual([item["version"] for item in saved_state["version_log"]], ["v0", "v1"])
 
+    def test_post_process_rewrites_same_status_confidence_gain(self) -> None:
+        previous_state = {
+            "ticker": "MSFT",
+            "current_action": "持有 / 觀望",
+            "assumptions": [
+                {
+                    "assumption_id": "msft-a2",
+                    "status": "reinforced",
+                    "confidence": 0.54,
+                }
+            ],
+        }
+        updated_state = {
+            "ticker": "MSFT",
+            "current_action": "持有 / 觀望",
+            "assumptions": [
+                {
+                    "assumption_id": "msft-a2",
+                    "status": "reinforced",
+                    "confidence": 0.66,
+                }
+            ],
+        }
+        processed = post_process_refresh_output(
+            previous_state,
+            {
+                "updated_state": updated_state,
+                "changed_assumptions": [
+                    {
+                        "assumption_id": "msft-a2",
+                        "summary": "reinforced -> reinforced because of stronger Copilot adoption",
+                    }
+                ],
+                "action_rule_delta": [],
+                "review_summary": "raw summary",
+                "summary_points": [],
+            },
+            {
+                "material_events": [
+                    {
+                        "title": "Microsoft says paid Copilot enterprise penetration moved above 12%.",
+                        "affected_assumption_ids": ["msft-a2"],
+                    }
+                ],
+                "new_events": [],
+            },
+        )
+        summary = processed["changed_assumptions"][0]["summary"]
+        self.assertIn("remains reinforced, but confidence rises", summary)
+        self.assertNotIn("->", summary)
+
+    def test_build_dashboard_site_writes_json_and_pages_ready_html(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            research_root = Path(tmp) / "research"
+            site_root = Path(tmp) / "site"
+            bootstrap_baselines(research_root=research_root, force=True)
+            with mock.patch("stock_research.dashboard.SITE_DATA_ROOT", site_root / "data"), \
+                mock.patch("stock_research.dashboard.SITE_TICKER_DATA_ROOT", site_root / "data" / "tickers"), \
+                mock.patch("stock_research.dashboard.SITE_TICKER_PAGE_ROOT", site_root / "tickers"), \
+                mock.patch(
+                    "stock_research.dashboard.localize_digest_payload",
+                    side_effect=lambda payload, *, context_label: payload,
+                ):
+                summary = build_dashboard_site(research_root=research_root, site_root=site_root)
+            self.assertTrue((site_root / "index.html").exists())
+            self.assertTrue((site_root / "data" / "portfolio.json").exists())
+            self.assertTrue((site_root / "tickers" / "MSFT.html").exists())
+            portfolio = read_json(site_root / "data" / "portfolio.json")
+            self.assertEqual(len(portfolio["tickers"]), 3)
+            self.assertIn("MSFT", summary["tickers"])
+
+    def test_send_email_writes_preview_without_resend_secrets(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            html_path = Path(tmp) / "email-preview.html"
+            text_path = Path(tmp) / "email-preview.txt"
+            payload_path = Path(tmp) / "notification-payload.json"
+            payload = {
+                "run_type": "event",
+                "material_tickers": ["MSFT"],
+                "dashboard_url": "https://example.com/dashboard",
+                "pr_url": "https://example.com/pr/1",
+                "digest_cards": [
+                    {
+                        "ticker": "MSFT",
+                        "status_label": "偏多",
+                        "thesis_confidence": 0.72,
+                        "summary_blurb": "Summary",
+                        "current_action": "持有 / 偏多觀望",
+                        "next_review_at": "2026-04-03",
+                        "next_must_check_data": "FY2026 Q3 earnings",
+                        "key_events": [],
+                    }
+                ],
+            }
+            with mock.patch("stock_research.notify.EMAIL_PREVIEW_HTML_PATH", html_path), \
+                mock.patch("stock_research.notify.EMAIL_PREVIEW_TEXT_PATH", text_path), \
+                mock.patch("stock_research.notify.NOTIFICATION_PAYLOAD_PATH", payload_path), \
+                mock.patch.dict(os.environ, {}, clear=True):
+                result = send_resend_email(payload)
+            self.assertFalse(result["sent"])
+            self.assertTrue(html_path.exists())
+            self.assertTrue(text_path.exists())
+            self.assertTrue(payload_path.exists())
+
     def test_rss_feed_respects_title_keywords(self) -> None:
         state = {
             "last_seen_event_cursors": {"investor_news": ""},
@@ -330,7 +450,7 @@ class PipelineTests(unittest.TestCase):
   </channel>
 </rss>"""
         with mock.patch("stock_research.sources._request", return_value=rss):
-            events, cursor = fetch_feed_events(WATCHLIST["MSFT"].feeds[0], WATCHLIST["MSFT"], state)
+            events, cursor = fetch_feed_events(WATCHLIST["MSFT"].sources[2], WATCHLIST["MSFT"], state)
         self.assertEqual(cursor, "https://example.com/1")
         self.assertEqual(len(events), 1)
         self.assertEqual(events[0]["source_url"], "https://example.com/2")

@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import json
 from dataclasses import dataclass, field
 from pathlib import Path
 
@@ -17,19 +18,35 @@ AUTOMATION_ROOT = REPO_ROOT / "automation" / "run"
 CONTEXT_ROOT = AUTOMATION_ROOT / "context"
 RUN_SUMMARY_PATH = AUTOMATION_ROOT / "poll-summary.json"
 DRAFT_SUMMARY_PATH = AUTOMATION_ROOT / "draft-summary.json"
+CANONICAL_DIGEST_PATH = AUTOMATION_ROOT / "canonical-digest.json"
+NOTIFICATION_PAYLOAD_PATH = AUTOMATION_ROOT / "notification-payload.json"
+EMAIL_PREVIEW_HTML_PATH = AUTOMATION_ROOT / "email-preview.html"
+EMAIL_PREVIEW_TEXT_PATH = AUTOMATION_ROOT / "email-preview.txt"
 PR_BODY_PATH = AUTOMATION_ROOT / "pr-body.md"
 PR_BODY_ZH_TW_PATH = AUTOMATION_ROOT / "pr-body.zh-tw.md"
 TRANSLATION_SUMMARY_PATH = AUTOMATION_ROOT / "translation-summary.json"
 TEST_EVENTS_ROOT = REPO_ROOT / "automation" / "test_events"
+SOURCE_REGISTRY_PATH = SYSTEM_ROOT / "source_registry.json"
+OPERATOR_GUIDE_PATH = REPO_ROOT / "docs" / "operator-guide.md"
+SITE_ROOT = REPO_ROOT / "site"
+SITE_DATA_ROOT = SITE_ROOT / "data"
+SITE_TICKER_DATA_ROOT = SITE_DATA_ROOT / "tickers"
+SITE_TICKER_PAGE_ROOT = SITE_ROOT / "tickers"
+SOURCE_STATUS_FILENAME = "source_status.json"
+DIGEST_FILENAME = "digest.json"
 
 
 @dataclass(frozen=True)
-class FeedConfig:
+class SourceConfig:
     source_id: str
+    source_type: str
     kind: str
     url: str
+    status: str = "active"
+    priority: int = 50
     title_keywords: tuple[str, ...] = ()
     allow_patterns: tuple[str, ...] = ()
+    notes: str = ""
 
 
 @dataclass(frozen=True)
@@ -41,58 +58,41 @@ class TickerConfig:
     price_gap_pct: float
     abnormal_volume_ratio: float
     deep_refresh_days: int = 7
-    feeds: tuple[FeedConfig, ...] = field(default_factory=tuple)
+    sources: tuple[SourceConfig, ...] = field(default_factory=tuple)
 
 
-WATCHLIST = {
-    "PLTR": TickerConfig(
-        ticker="PLTR",
-        company_name="Palantir Technologies",
-        cik="0001321655",
-        yahoo_symbol="PLTR",
-        price_gap_pct=10.0,
-        abnormal_volume_ratio=2.2,
-        feeds=(
-            FeedConfig(
-                source_id="investor_news",
-                kind="html",
-                url="https://investors.palantir.com/news-events/news-releases/",
-                title_keywords=("earnings", "results", "quarter", "contract", "ai"),
-                allow_patterns=("news", "releases"),
+def _read_source_registry(path: Path = SOURCE_REGISTRY_PATH) -> dict:
+    return json.loads(path.read_text(encoding="utf-8"))
+
+
+def load_source_registry(path: Path = SOURCE_REGISTRY_PATH) -> dict[str, TickerConfig]:
+    payload = _read_source_registry(path)
+    watchlist: dict[str, TickerConfig] = {}
+    for row in payload["tickers"]:
+        watchlist[row["ticker"]] = TickerConfig(
+            ticker=row["ticker"],
+            company_name=row["company_name"],
+            cik=row["cik"],
+            yahoo_symbol=row["yahoo_symbol"],
+            price_gap_pct=row["price_gap_pct"],
+            abnormal_volume_ratio=row["abnormal_volume_ratio"],
+            deep_refresh_days=row.get("deep_refresh_days", 7),
+            sources=tuple(
+                SourceConfig(
+                    source_id=source["source_id"],
+                    source_type=source["source_type"],
+                    kind=source["kind"],
+                    url=source["url"],
+                    status=source.get("status", "active"),
+                    priority=source.get("priority", 50),
+                    title_keywords=tuple(source.get("title_keywords", ())),
+                    allow_patterns=tuple(source.get("allow_patterns", ())),
+                    notes=source.get("notes", ""),
+                )
+                for source in row.get("sources", ())
             ),
-        ),
-    ),
-    "MSFT": TickerConfig(
-        ticker="MSFT",
-        company_name="Microsoft",
-        cik="0000789019",
-        yahoo_symbol="MSFT",
-        price_gap_pct=8.0,
-        abnormal_volume_ratio=2.0,
-        feeds=(
-            FeedConfig(
-                source_id="investor_news",
-                kind="rss",
-                url="https://news.microsoft.com/feed/",
-                title_keywords=("earnings", "microsoft cloud", "copilot", "azure", "results"),
-            ),
-        ),
-    ),
-    "MAR": TickerConfig(
-        ticker="MAR",
-        company_name="Marriott International",
-        cik="0001048286",
-        yahoo_symbol="MAR",
-        price_gap_pct=8.0,
-        abnormal_volume_ratio=2.0,
-        feeds=(
-            FeedConfig(
-                source_id="investor_news",
-                kind="html",
-                url="https://news.marriott.com/news/",
-                title_keywords=("reports", "results", "announces", "guidance", "quarter"),
-                allow_patterns=("news",),
-            ),
-        ),
-    ),
-}
+        )
+    return watchlist
+
+
+WATCHLIST = load_source_registry()

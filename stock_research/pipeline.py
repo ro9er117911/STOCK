@@ -8,19 +8,25 @@ from typing import Any
 from .baselines import bootstrap_baselines as bootstrap_profile_files
 from .config import (
     AUTOMATION_ROOT,
+    CANONICAL_DIGEST_PATH,
     CONTEXT_ROOT,
     DRAFT_SUMMARY_PATH,
+    DIGEST_FILENAME,
     PR_BODY_PATH,
     PR_BODY_ZH_TW_PATH,
     RESEARCH_ROOT,
     RUN_SUMMARY_PATH,
+    SOURCE_STATUS_FILENAME,
     TEST_EVENTS_ROOT,
     TRANSLATION_SUMMARY_PATH,
     WATCHLIST,
 )
+from .digest import build_portfolio_digest, render_pr_body_from_digest
+from .dashboard import build_dashboard_site
 from .llm import generate_refresh, translate_markdown
 from .markdown import render_current_report, render_review_summary
 from .models import Event
+from .postprocess import post_process_refresh_output
 from .sources import SourceFailure, fetch_feed_events, fetch_price_events, fetch_sec_events
 from .storage import append_jsonl, read_json, read_jsonl, sha1_digest, write_json
 
@@ -45,6 +51,13 @@ def _save_state(research_root: Path, ticker: str, state: dict[str, Any]) -> None
 def _update_recent_events(research_root: Path, ticker: str) -> list[dict[str, Any]]:
     events = read_jsonl(research_root / ticker / "events.jsonl")
     return list(reversed(events[-8:]))
+
+
+def _relative_path(path: Path) -> str:
+    try:
+        return str(path.resolve().relative_to(Path(".").resolve()))
+    except ValueError:
+        return str(path)
 
 
 def _map_assumptions(title: str, assumptions: list[dict[str, Any]]) -> list[str]:
@@ -159,6 +172,29 @@ def _load_fixture_events(fixture_name: str, fixture_root: Path = TEST_EVENTS_ROO
     return normalized_events
 
 
+def _source_status_row(
+    source,
+    *,
+    status: str,
+    new_events: int = 0,
+    cursor: str = "",
+    error: str = "",
+    notes: str | None = None,
+) -> dict[str, Any]:
+    return {
+        "source_id": source.source_id,
+        "source_type": source.source_type,
+        "kind": source.kind,
+        "url": source.url,
+        "status": status,
+        "priority": source.priority,
+        "new_events": new_events,
+        "cursor": cursor,
+        "error": error,
+        "notes": notes if notes is not None else source.notes,
+    }
+
+
 def poll_events(
     research_root: Path = RESEARCH_ROOT,
     trigger: str = "event",
@@ -185,38 +221,72 @@ def poll_events(
     for ticker, config in WATCHLIST.items():
         state = _load_state(research_root, ticker)
         ledger_path = research_root / ticker / "events.jsonl"
+        artifacts_dir = research_root / ticker / "artifacts"
         seen_ids = {row["event_id"] for row in read_jsonl(ledger_path)}
         raw_events: list[dict[str, Any]] = []
         errors: list[str] = []
         cursor_updates: dict[str, str] = {}
+        source_status_rows: list[dict[str, Any]] = []
 
         if fixture_name:
+            for source in config.sources:
+                source_status_rows.append(
+                    _source_status_row(
+                        source,
+                        status="fixture_override",
+                        notes=f"Skipped because fixture {fixture_name} overrides live polling.",
+                    )
+                )
             raw_events.extend(event for event in fixture_events if event["ticker"] == ticker)
+            if any(event["ticker"] == ticker for event in fixture_events):
+                source_status_rows.append(
+                    {
+                        "source_id": f"fixture:{fixture_name}",
+                        "source_type": "fixture",
+                        "kind": "fixture",
+                        "url": f"fixture://{fixture_name}",
+                        "status": "polled",
+                        "priority": 0,
+                        "new_events": len([event for event in fixture_events if event["ticker"] == ticker]),
+                        "cursor": fixture_name,
+                        "error": "",
+                        "notes": "Deterministic fixture input for test refresh validation.",
+                    }
+                )
         else:
-            try:
-                sec_events, sec_cursor = fetch_sec_events(config, state)
-                raw_events.extend(sec_events)
-                if sec_cursor:
-                    cursor_updates["sec"] = sec_cursor
-            except SourceFailure as exc:
-                errors.append(str(exc))
-
-            try:
-                price_events, price_cursor = fetch_price_events(config, state)
-                raw_events.extend(price_events)
-                if price_cursor:
-                    cursor_updates["price"] = price_cursor
-            except SourceFailure as exc:
-                errors.append(str(exc))
-
-            for feed in config.feeds:
+            for source in config.sources:
+                if source.status != "active":
+                    source_status_rows.append(_source_status_row(source, status="disabled"))
+                    continue
                 try:
-                    feed_events, feed_cursor = fetch_feed_events(feed, config, state)
-                    raw_events.extend(feed_events)
-                    if feed_cursor:
-                        cursor_updates[feed.source_id] = feed_cursor
+                    source_events: list[dict[str, Any]]
+                    source_cursor: str
+                    if source.kind == "sec":
+                        source_events, source_cursor = fetch_sec_events(source, config, state)
+                    elif source.kind == "price":
+                        source_events, source_cursor = fetch_price_events(source, config, state)
+                    else:
+                        source_events, source_cursor = fetch_feed_events(source, config, state)
+                    raw_events.extend(source_events)
+                    if source_cursor:
+                        cursor_updates[source.source_id] = source_cursor
+                    source_status_rows.append(
+                        _source_status_row(
+                            source,
+                            status="polled",
+                            new_events=len(source_events),
+                            cursor=source_cursor,
+                        )
+                    )
                 except SourceFailure as exc:
                     errors.append(str(exc))
+                    source_status_rows.append(
+                        _source_status_row(
+                            source,
+                            status="failed",
+                            error=str(exc),
+                        )
+                    )
 
         normalized: list[Event] = []
         run_seen: set[str] = set()
@@ -229,6 +299,16 @@ def poll_events(
         if normalized:
             append_jsonl(ledger_path, [event.to_dict() for event in normalized])
             summary["changed_files"].append(str(ledger_path))
+
+        artifacts_dir.mkdir(parents=True, exist_ok=True)
+        source_status_path = artifacts_dir / SOURCE_STATUS_FILENAME
+        source_status_payload = {
+            "ticker": ticker,
+            "sources": source_status_rows,
+        }
+        if read_json(source_status_path) != source_status_payload:
+            write_json(source_status_path, source_status_payload)
+            summary["changed_files"].append(str(source_status_path))
 
         if cursor_updates:
             state["last_seen_event_cursors"].update(cursor_updates)
@@ -256,6 +336,7 @@ def poll_events(
             "material_events": len(refresh_events),
             "scheduled_refresh_due": needs_scheduled_refresh,
             "errors": errors,
+            "source_status": source_status_rows,
         }
 
     write_json(RUN_SUMMARY_PATH, summary)
@@ -285,14 +366,14 @@ def localize_refresh_outputs(
             ),
             encoding="utf-8",
         )
-        translated_files.extend([str(current_zh_tw_path), str(review_summary_zh_tw_path)])
+        translated_files.extend([_relative_path(current_zh_tw_path), _relative_path(review_summary_zh_tw_path)])
 
     if PR_BODY_PATH.exists():
         PR_BODY_ZH_TW_PATH.write_text(
             translate_markdown(PR_BODY_PATH.read_text(encoding="utf-8"), context_label="pull request body"),
             encoding="utf-8",
         )
-        translated_files.append(str(PR_BODY_ZH_TW_PATH))
+        translated_files.append(_relative_path(PR_BODY_ZH_TW_PATH))
 
     summary = {
         "generated_at": datetime.now(UTC).isoformat(timespec="seconds"),
@@ -308,18 +389,16 @@ def draft_refreshes(
     fixture_name: str | None = None,
 ) -> dict[str, Any]:
     summary = read_json(RUN_SUMMARY_PATH, default={"material_tickers": []})
+    source_status_map = {
+        ticker: summary.get("tickers", {}).get(ticker, {}).get("source_status", [])
+        for ticker in summary.get("tickers", {})
+    }
     draft_summary: dict[str, Any] = {
         "trigger": trigger,
         "generated_at": datetime.now(UTC).isoformat(timespec="seconds"),
         "refreshed_tickers": [],
         "fixture_name": fixture_name,
     }
-    pr_body_lines = [
-        "## Automated Research Refresh",
-        "",
-        f"- Trigger: `{trigger}`",
-        "",
-    ]
 
     for ticker in summary.get("material_tickers", []):
         context_path = CONTEXT_ROOT / f"{ticker}.json"
@@ -333,6 +412,7 @@ def draft_refreshes(
         current_markdown = current_path.read_text(encoding="utf-8")
         base_version_log = list(state.get("version_log", []))
         refresh = generate_refresh(state, current_markdown, context)
+        refresh = post_process_refresh_output(state, refresh, context)
         updated_state = refresh["updated_state"]
         updated_state["last_reviewed_at"] = date.today().isoformat()
         updated_state["next_review_at"] = (
@@ -366,6 +446,7 @@ def draft_refreshes(
                 "action_rule_delta": refresh["action_rule_delta"],
                 "trigger": trigger,
                 "context": context,
+                "source_status": source_status_map.get(ticker, []),
             },
         )
         (artifacts_dir / "review_summary.md").write_text(
@@ -382,25 +463,18 @@ def draft_refreshes(
                 "ticker": ticker,
                 "review_summary": refresh["review_summary"],
                 "changed_assumptions": refresh["changed_assumptions"],
+                "digest_path": _relative_path(artifacts_dir / DIGEST_FILENAME),
             }
         )
-        pr_body_lines.extend(
-            [
-                f"### {ticker}",
-                "",
-                refresh["review_summary"],
-                "",
-                "Changed assumptions:",
-            ]
-        )
-        if refresh["changed_assumptions"]:
-            pr_body_lines.extend(f"- `{item['assumption_id']}` {item['summary']}" for item in refresh["changed_assumptions"])
-        else:
-            pr_body_lines.append("- None")
-        pr_body_lines.append("")
 
+    digest_payload = build_portfolio_digest(
+        research_root,
+        tickers=[item["ticker"] for item in draft_summary["refreshed_tickers"]],
+        source_status_map=source_status_map,
+    )
+    draft_summary["canonical_digest_path"] = _relative_path(CANONICAL_DIGEST_PATH)
     write_json(DRAFT_SUMMARY_PATH, draft_summary)
-    PR_BODY_PATH.write_text("\n".join(pr_body_lines).strip() + "\n", encoding="utf-8")
+    PR_BODY_PATH.write_text(render_pr_body_from_digest(digest_payload), encoding="utf-8")
     localization_summary = localize_refresh_outputs(
         research_root,
         [item["ticker"] for item in draft_summary["refreshed_tickers"]],
@@ -408,3 +482,7 @@ def draft_refreshes(
     draft_summary["localization"] = localization_summary
     write_json(DRAFT_SUMMARY_PATH, draft_summary)
     return draft_summary
+
+
+def build_dashboard(research_root: Path = RESEARCH_ROOT) -> dict[str, Any]:
+    return build_dashboard_site(research_root)

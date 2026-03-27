@@ -199,3 +199,33 @@ def translate_markdown(markdown_text: str, *, context_label: str) -> str:
     )
     translated = content.strip()
     return translated if translated else markdown_text
+
+
+def translate_structured_payload(payload: dict[str, Any], *, context_label: str) -> dict[str, Any]:
+    api_key = os.getenv("OPENAI_API_KEY")
+    if not api_key:
+        return payload
+
+    model = os.getenv("TRANSLATION_MODEL") or DEFAULT_TRANSLATION_MODEL
+    prompt = json.dumps(
+        {
+            "task": (
+                "Translate only the human-facing string values in this JSON payload into colloquial "
+                "Traditional Chinese for Taiwan."
+            ),
+            "rules": [
+                "Preserve every key, nesting shape, array length, boolean, number, date, URL, and ticker exactly.",
+                "Do not rename ids or path-like values.",
+                "Translate summaries, labels, and descriptive prose into natural zh-TW.",
+                "Return JSON only.",
+            ],
+            "context_label": context_label,
+            "payload": payload,
+        },
+        ensure_ascii=False,
+    )
+    try:
+        translated = _request_openai_json(api_key, model, prompt)
+    except (RuntimeError, ValueError):
+        return payload
+    return translated.get("payload", payload) if "payload" in translated else translated

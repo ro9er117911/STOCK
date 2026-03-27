@@ -737,7 +737,7 @@ def bootstrap_baselines(research_root: Path = RESEARCH_ROOT, force: bool = False
             {
                 "ticker": ticker,
                 "reviewed_at": state["last_reviewed_at"],
-                "summary": "Baseline migration from legacy notes.",
+                "review_summary": "Baseline migration from legacy notes.",
                 "changed_assumptions": [],
                 "action_rule_delta": [],
             },
@@ -760,12 +760,18 @@ def bootstrap_baselines(research_root: Path = RESEARCH_ROOT, force: bool = False
 
     system_root = research_root / "system"
     system_root.mkdir(parents=True, exist_ok=True)
-    write_json(
-        system_root / "watchlist.json",
-        {
-            "generated_at": date.today().isoformat(),
-            "tickers": list(WATCHLIST.keys()),
-            "paths": {ticker: str(_ticker_dir(research_root, ticker)) for ticker in WATCHLIST},
-        },
-    )
+    lines = [
+        "# Source Registry",
+        "",
+        "This file is generated for operators. The runtime source-of-truth stays in `source_registry.json`.",
+        "",
+    ]
+    for ticker, config in WATCHLIST.items():
+        lines.extend([f"## {ticker}", ""])
+        for source in config.sources:
+            lines.append(
+                f"- `{source.source_id}` ({source.kind}, {source.status}) priority {source.priority}: {source.url}"
+            )
+        lines.append("")
+    (system_root / "source_registry.md").write_text("\n".join(lines).strip() + "\n", encoding="utf-8")
     return created

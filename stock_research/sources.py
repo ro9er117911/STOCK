@@ -11,7 +11,7 @@ from email.utils import parsedate_to_datetime
 from html import unescape
 from typing import Any
 
-from .config import DEFAULT_USER_AGENT, FeedConfig, TickerConfig
+from .config import DEFAULT_USER_AGENT, SourceConfig, TickerConfig
 from .storage import sha1_digest
 
 
@@ -51,8 +51,12 @@ def _normalize_date(value: str | None) -> str:
     return datetime.now(UTC).date().isoformat()
 
 
-def fetch_sec_events(config: TickerConfig, state: dict[str, Any]) -> tuple[list[dict[str, Any]], str]:
-    url = f"https://data.sec.gov/submissions/CIK{config.cik}.json"
+def fetch_sec_events(
+    source: SourceConfig,
+    config: TickerConfig,
+    state: dict[str, Any],
+) -> tuple[list[dict[str, Any]], str]:
+    url = source.url or f"https://data.sec.gov/submissions/CIK{config.cik}.json"
     data = json.loads(_request(url).decode("utf-8"))
     recent = data.get("filings", {}).get("recent", {})
     forms = recent.get("form", [])
@@ -91,8 +95,12 @@ def fetch_sec_events(config: TickerConfig, state: dict[str, Any]) -> tuple[list[
     return events, new_cursor
 
 
-def fetch_price_events(config: TickerConfig, state: dict[str, Any]) -> tuple[list[dict[str, Any]], str]:
-    url = (
+def fetch_price_events(
+    source: SourceConfig,
+    config: TickerConfig,
+    state: dict[str, Any],
+) -> tuple[list[dict[str, Any]], str]:
+    url = source.url or (
         f"https://query1.finance.yahoo.com/v8/finance/chart/{config.yahoo_symbol}"
         "?range=1mo&interval=1d&includePrePost=false&events=div%2Csplits"
     )
@@ -156,7 +164,7 @@ def _parse_rss_items(feed_bytes: bytes) -> list[dict[str, str]]:
     return items
 
 
-def _extract_html_links(feed: FeedConfig, html_text: str) -> list[dict[str, str]]:
+def _extract_html_links(feed: SourceConfig, html_text: str) -> list[dict[str, str]]:
     anchor_pattern = re.compile(r"<a[^>]+href=[\"']([^\"']+)[\"'][^>]*>(.*?)</a>", re.IGNORECASE | re.DOTALL)
     results: list[dict[str, str]] = []
     seen_links: set[str] = set()
@@ -190,7 +198,7 @@ def _extract_html_links(feed: FeedConfig, html_text: str) -> list[dict[str, str]
 
 
 def fetch_feed_events(
-    feed: FeedConfig,
+    feed: SourceConfig,
     config: TickerConfig,
     state: dict[str, Any],
 ) -> tuple[list[dict[str, Any]], str]:

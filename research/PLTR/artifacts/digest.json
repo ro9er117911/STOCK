@@ -1,0 +1,94 @@
+{
+  "ticker": "PLTR",
+  "company_name": "Palantir Technologies",
+  "status_label": "偏多",
+  "current_action": "持有 / 逢回加碼",
+  "thesis_confidence": 0.72,
+  "summary_blurb": "No new evidence bundle was provided in this refresh, so the PLTR thesis state is unchanged. Confidence, thesis framing, and action posture remain intact; only the review timestamp is advanced.",
+  "next_review_at": "2026-05-08",
+  "next_must_check_data": "Q1 2026 earnings: US Commercial growth, margins, major government renewal cadence.",
+  "last_reviewed_at": "2026-03-27",
+  "key_events": [
+    {
+      "occurred_at": "2026-03-25",
+      "source_type": "legacy_seed",
+      "title": "Maven AI became a Program of Record.",
+      "impact": "+",
+      "decision": "refresh",
+      "source_url": "/Users/ro9air/STOCK/research/market_update_mar2026.md"
+    },
+    {
+      "occurred_at": "2026-03-25",
+      "source_type": "legacy_seed",
+      "title": "Q4 2025 results showed 137% US commercial growth.",
+      "impact": "+",
+      "decision": "refresh",
+      "source_url": "/Users/ro9air/STOCK/research/market_update_mar2026.md"
+    }
+  ],
+  "key_action_rules": [
+    {
+      "action_rule_id": "pltr-ar-add",
+      "kind": "add",
+      "condition": "US Commercial revenue grows above 100% for two straight quarters and margin expands.",
+      "action": "Add up to max position size."
+    },
+    {
+      "action_rule_id": "pltr-ar-trim",
+      "kind": "trim",
+      "condition": "Commercial growth falls below 70% without offsetting government upside.",
+      "action": "Trim tactical adds and revisit valuation regime."
+    },
+    {
+      "action_rule_id": "pltr-ar-exit",
+      "kind": "exit",
+      "condition": "Program of Record is downgraded or core defense budget support weakens.",
+      "action": "Exit regardless of price action."
+    }
+  ],
+  "changed_assumptions": [],
+  "action_rule_delta": [],
+  "source_status": [
+    {
+      "source_id": "sec",
+      "source_type": "sec",
+      "kind": "sec",
+      "url": "https://data.sec.gov/submissions/CIK0001321655.json",
+      "status": "active",
+      "priority": 10,
+      "new_events": 0,
+      "cursor": "",
+      "error": "",
+      "notes": "Official SEC filings. Material forms are filtered by each ticker state threshold."
+    },
+    {
+      "source_id": "price",
+      "source_type": "price",
+      "kind": "price",
+      "url": "https://query1.finance.yahoo.com/v8/finance/chart/PLTR?range=1mo&interval=1d",
+      "status": "active",
+      "priority": 20,
+      "new_events": 0,
+      "cursor": "",
+      "error": "",
+      "notes": "Daily Yahoo Finance chart data for gap and abnormal volume detection."
+    },
+    {
+      "source_id": "investor_news",
+      "source_type": "investor_news",
+      "kind": "html",
+      "url": "https://investors.palantir.com/news-events/news-releases/",
+      "status": "active",
+      "priority": 30,
+      "new_events": 0,
+      "cursor": "",
+      "error": "",
+      "notes": "Official Palantir investor news release archive."
+    }
+  ],
+  "artifacts": {
+    "state_path": "research/PLTR/state.json",
+    "current_path": "research/PLTR/current.md",
+    "review_summary_path": "research/PLTR/artifacts/review_summary.md"
+  }
+}

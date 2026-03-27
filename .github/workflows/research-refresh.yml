@@ -49,6 +49,10 @@ jobs:
           fixture_slug="$(printf '%s' "$fixture" | tr '[:upper:]' '[:lower:]' | tr -cs 'a-z0-9' '-')"
           fixture_slug="${fixture_slug#-}"
           fixture_slug="${fixture_slug%-}"
+          dashboard_url="${{ vars.DASHBOARD_BASE_URL }}"
+          if [ -z "$dashboard_url" ]; then
+            dashboard_url="https://github.com/${{ github.repository }}/actions/workflows/dashboard-site.yml"
+          fi
           if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
             echo "value=${{ github.event.inputs.trigger }}" >> "$GITHUB_OUTPUT"
           elif [ "${{ github.event.schedule }}" = "0 14 * * 6" ]; then
@@ -56,6 +60,7 @@ jobs:
           else
             echo "value=event" >> "$GITHUB_OUTPUT"
           fi
+          echo "dashboard_url=$dashboard_url" >> "$GITHUB_OUTPUT"
           if [ -n "$fixture_slug" ]; then
             echo "fixture=${{ github.event.inputs.fixture }}" >> "$GITHUB_OUTPUT"
             echo "pr_branch=automation/research-refresh-fixture-$fixture_slug" >> "$GITHUB_OUTPUT"
@@ -95,7 +100,7 @@ jobs:
           git fetch origin main
           git reset --hard origin/main
 
-      - name: Generate reviewable draft refreshes
+      - name: Refresh, post-process, and render delivery surfaces
         run: |
           if [ -n "${{ steps.trigger.outputs.fixture }}" ]; then
             python3 scripts/research_ops.py draft-refresh --trigger "${{ steps.trigger.outputs.value }}" --fixture "${{ steps.trigger.outputs.fixture }}"
@@ -117,6 +122,7 @@ jobs:
           fi
 
       - name: Create or update refresh PR
+        id: refresh_pr
         if: steps.draft_diff.outputs.changed == 'true'
         uses: peter-evans/create-pull-request@v8
         with:
@@ -130,3 +136,15 @@ jobs:
           labels: |
             automation
             research
+
+      - name: Notify material update by email
+        if: steps.draft_diff.outputs.changed == 'true' && steps.trigger.outputs.fixture == '' && steps.refresh_pr.outputs.pull-request-url != ''
+        run: |
+          python3 scripts/research_ops.py send-email \
+            --run-type "${{ steps.trigger.outputs.value }}" \
+            --pr-url "${{ steps.refresh_pr.outputs.pull-request-url }}" \
+            --dashboard-url "${{ steps.trigger.outputs.dashboard_url }}"
+        env:
+          RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
+          RESEND_FROM_EMAIL: ${{ secrets.RESEND_FROM_EMAIL }}
+          RESEND_TO_EMAIL: ${{ secrets.RESEND_TO_EMAIL }}
