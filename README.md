@@ -72,7 +72,7 @@ python3 scripts/research_ops.py draft-refresh --trigger event
 
 1. Create the GitHub repo and push this folder.
 2. Add repository secret `OPENAI_API_KEY`.
-3. Optional: add repository variable `OPENAI_MODEL` if you want something other than `gpt-4.1-mini`.
+3. Optional: add repository variable `OPENAI_MODEL` if you want something other than `gpt-5.4-mini-2026-03-17`.
 4. Enable Actions.
 
 The workflow does two things:
@@ -100,6 +100,7 @@ launchctl load ~/Library/LaunchAgents/com.ro9air.stock-research.catchup.plist
 ## Notes
 
 - If `OPENAI_API_KEY` is not set, the refresh step falls back to a deterministic rule-based draft.
+- Default model is `gpt-5.4-mini-2026-03-17`. Set repository variable `OPENAI_MODEL` to override it without changing code.
 - SEC polling is implemented as a best-effort official source. If SEC blocks your runner IP, the workflow will continue with investor-news and price signals while logging the SEC error in the poll summary.
 - Feed endpoints are configurable in [`stock_research/config.py`](/Users/ro9air/STOCK/stock_research/config.py).
 - The living thesis files are meant to be reviewed in PRs, not edited blindly by automation.

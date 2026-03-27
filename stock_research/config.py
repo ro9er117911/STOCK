@@ -5,7 +5,7 @@ from pathlib import Path
 
 
 DEFAULT_USER_AGENT = "ro9air-stock-research/1.0 ro9er117911@users.noreply.github.com"
-DEFAULT_OPENAI_MODEL = "gpt-4.1-mini"
+DEFAULT_OPENAI_MODEL = "gpt-5.4-mini-2026-03-17"
 BOT_NAME = "stock-research-bot"
 BOT_EMAIL = "actions@users.noreply.github.com"
 
