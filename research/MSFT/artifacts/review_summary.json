@@ -1,177 +1,138 @@
 {
   "ticker": "MSFT",
   "reviewed_at": "2026-03-27",
-  "review_summary": "Automatic fallback refresh used. Review the generated diff before merging.",
+  "review_summary": "FY2026 Q3 guidance materially improves the thesis: paid Copilot enterprise penetration moved above 12%, Azure AI demand remains above 30%, and Microsoft now guides to slower AI infrastructure CapEx growth. This converts the prior Copilot and CapEx concerns from watch/weakness into reinforcement, raising confidence and supporting a continued hold while awaiting the next earnings confirmation.",
   "changed_assumptions": [
     {
-      "assumption_id": "msft-a2",
-      "summary": "pressured -> reinforced because of Microsoft Dragon Copilot provides the healthcare industry’s first unified voice AI assistant that enables clinicians to streamline clinical documentation, surface information and automate tasks"
+      "assumption_id": "msft-a1",
+      "summary": "Reinforced further: Azure AI demand remains above 30%, supporting the growth threshold and lowering near-term invalidation risk."
     },
     {
-      "assumption_id": "msft-a1",
-      "summary": "watch -> reinforced because of We’re taking our latest AI research breakthroughs and putting them in the hands of devs everywhere, with Azure AI Foundry Labs."
+      "assumption_id": "msft-a2",
+      "summary": "Materially improved: paid Copilot enterprise penetration moved above 12%, clearing the prior adoption hurdle and strengthening the AI distribution premium case."
+    },
+    {
+      "assumption_id": "msft-a3",
+      "summary": "Improved: Microsoft is guiding to slower AI infrastructure CapEx growth, reducing the risk that spend remains a pure cost drag."
     }
   ],
   "action_rule_delta": [
     {
       "action_rule_id": "msft-ar-add",
-      "summary": "No rule text changed; review whether the trigger still matches the thesis."
+      "summary": "Condition is now met on Copilot penetration (>10%) and CapEx growth moderation; however, action remains contingent on earnings confirmation before adding."
     },
     {
       "action_rule_id": "msft-ar-trim",
-      "summary": "No rule text changed; review whether the trigger still matches the thesis."
+      "summary": "Less likely to trigger because CapEx is moderating rather than re-accelerating while monetization is improving."
+    },
+    {
+      "action_rule_id": "msft-ar-exit",
+      "summary": "No change; exit conditions are not approached given Azure growth remains above 30% and flagship cloud access is not impaired."
     }
   ],
-  "trigger": "event",
+  "trigger": "manual",
   "context": {
     "ticker": "MSFT",
-    "trigger": "event",
+    "trigger": "manual",
+    "fixture_name": "msft_copilot_breakout",
     "scheduled_refresh_due": false,
     "new_events": [
       {
-        "event_id": "19872b27eec6a2a9ed43f77196dc4872db5212a1",
+        "event_id": "b5a7fa37eb981761b1d0d86f24a1a5f928c2cda1",
         "ticker": "MSFT",
-        "source_type": "investor_news",
-        "occurred_at": "2025-04-30",
-        "title": "Microsoft earnings press release available on Investor Relations website",
-        "source_url": "https://news.microsoft.com/2025/04/30/microsoft-earnings-press-release-available-on-investor-relations-website-26/",
-        "affected_assumption_ids": [
-          "msft-a1"
-        ],
-        "marginal_impact": "0",
-        "threshold_breach": true,
-        "requires_refresh": true,
-        "decision": "refresh",
-        "metadata": {
-          "feed_url": "https://news.microsoft.com/feed/"
-        }
-      },
-      {
-        "event_id": "7e260af1308e86512e2fb0b318aaf7affbff0a1d",
-        "ticker": "MSFT",
-        "source_type": "investor_news",
-        "occurred_at": "2025-04-30",
-        "title": "Microsoft Cloud and AI strength drives third quarter results",
-        "source_url": "https://news.microsoft.com/2025/04/30/microsoft-cloud-and-ai-strength-drives-third-quarter-results/",
-        "affected_assumption_ids": [
-          "msft-a1"
-        ],
-        "marginal_impact": "0",
-        "threshold_breach": true,
-        "requires_refresh": true,
-        "decision": "refresh",
-        "metadata": {
-          "feed_url": "https://news.microsoft.com/feed/"
-        }
-      },
-      {
-        "event_id": "e943236490c770ed14bd5814d1c9eb6204e736e3",
-        "ticker": "MSFT",
-        "source_type": "investor_news",
-        "occurred_at": "2025-04-09",
-        "title": "Microsoft announces quarterly earnings release date",
-        "source_url": "https://news.microsoft.com/2025/04/09/microsoft-announces-quarterly-earnings-release-date-63/",
-        "affected_assumption_ids": [
-          "msft-a1"
-        ],
-        "marginal_impact": "0",
-        "threshold_breach": true,
-        "requires_refresh": true,
-        "decision": "refresh",
-        "metadata": {
-          "feed_url": "https://news.microsoft.com/feed/"
-        }
-      },
-      {
-        "event_id": "ed6756e435fcf1551e21491030e21b9972fb73c7",
-        "ticker": "MSFT",
-        "source_type": "investor_news",
-        "occurred_at": "2025-03-03",
-        "title": "Microsoft Dragon Copilot provides the healthcare industry’s first unified voice AI assistant that enables clinicians to streamline clinical documentation, surface information and automate tasks",
-        "source_url": "https://news.microsoft.com/2025/03/03/microsoft-dragon-copilot-provides-the-healthcare-industrys-first-unified-voice-ai-assistant-that-enables-clinicians-to-streamline-clinical-documentation-surface-information-and-automate-task/",
+        "source_type": "fixture",
+        "occurred_at": "2026-03-27",
+        "title": "Microsoft says paid Copilot enterprise penetration moved above 12% in FY2026 Q3 guidance.",
+        "source_url": "fixture://msft_copilot_breakout",
         "affected_assumption_ids": [
           "msft-a2"
         ],
         "marginal_impact": "+",
-        "threshold_breach": false,
-        "requires_refresh": false,
-        "decision": "watch",
+        "threshold_breach": true,
+        "requires_refresh": true,
+        "decision": "refresh",
         "metadata": {
-          "feed_url": "https://news.microsoft.com/feed/"
+          "force_assumption_ids": [
+            "msft-a2"
+          ],
+          "force_marginal_impact": "+",
+          "force_requires_refresh": true,
+          "fixture_name": "msft_copilot_breakout"
         }
       },
       {
-        "event_id": "5abff3a1f4e94c142904466eab1a8fe4fb5d57c1",
+        "event_id": "5255238f72a232534f7db940531293f6f6e034fa",
         "ticker": "MSFT",
-        "source_type": "investor_news",
-        "occurred_at": "2025-02-20",
-        "title": "We’re taking our latest AI research breakthroughs and putting them in the hands of devs everywhere, with Azure AI Foundry Labs.",
-        "source_url": "https://www.linkedin.com/posts/satyanadella_introducing-azure-ai-foundry-labs-a-hub-activity-7298071158258614273-TIiL",
+        "source_type": "fixture",
+        "occurred_at": "2026-03-27",
+        "title": "Microsoft guides to slower AI infrastructure CapEx growth while Azure AI demand remains above 30%.",
+        "source_url": "fixture://msft_copilot_breakout",
         "affected_assumption_ids": [
-          "msft-a1"
+          "msft-a1",
+          "msft-a3"
         ],
         "marginal_impact": "+",
-        "threshold_breach": false,
-        "requires_refresh": false,
-        "decision": "watch",
+        "threshold_breach": true,
+        "requires_refresh": true,
+        "decision": "refresh",
         "metadata": {
-          "feed_url": "https://news.microsoft.com/feed/"
+          "force_assumption_ids": [
+            "msft-a1",
+            "msft-a3"
+          ],
+          "force_marginal_impact": "+",
+          "force_requires_refresh": true,
+          "fixture_name": "msft_copilot_breakout"
         }
       }
     ],
     "material_events": [
       {
-        "event_id": "19872b27eec6a2a9ed43f77196dc4872db5212a1",
+        "event_id": "b5a7fa37eb981761b1d0d86f24a1a5f928c2cda1",
         "ticker": "MSFT",
-        "source_type": "investor_news",
-        "occurred_at": "2025-04-30",
-        "title": "Microsoft earnings press release available on Investor Relations website",
-        "source_url": "https://news.microsoft.com/2025/04/30/microsoft-earnings-press-release-available-on-investor-relations-website-26/",
+        "source_type": "fixture",
+        "occurred_at": "2026-03-27",
+        "title": "Microsoft says paid Copilot enterprise penetration moved above 12% in FY2026 Q3 guidance.",
+        "source_url": "fixture://msft_copilot_breakout",
         "affected_assumption_ids": [
-          "msft-a1"
+          "msft-a2"
         ],
-        "marginal_impact": "0",
+        "marginal_impact": "+",
         "threshold_breach": true,
         "requires_refresh": true,
         "decision": "refresh",
         "metadata": {
-          "feed_url": "https://news.microsoft.com/feed/"
+          "force_assumption_ids": [
+            "msft-a2"
+          ],
+          "force_marginal_impact": "+",
+          "force_requires_refresh": true,
+          "fixture_name": "msft_copilot_breakout"
         }
       },
       {
-        "event_id": "7e260af1308e86512e2fb0b318aaf7affbff0a1d",
+        "event_id": "5255238f72a232534f7db940531293f6f6e034fa",
         "ticker": "MSFT",
-        "source_type": "investor_news",
-        "occurred_at": "2025-04-30",
-        "title": "Microsoft Cloud and AI strength drives third quarter results",
-        "source_url": "https://news.microsoft.com/2025/04/30/microsoft-cloud-and-ai-strength-drives-third-quarter-results/",
+        "source_type": "fixture",
+        "occurred_at": "2026-03-27",
+        "title": "Microsoft guides to slower AI infrastructure CapEx growth while Azure AI demand remains above 30%.",
+        "source_url": "fixture://msft_copilot_breakout",
         "affected_assumption_ids": [
-          "msft-a1"
+          "msft-a1",
+          "msft-a3"
         ],
-        "marginal_impact": "0",
+        "marginal_impact": "+",
         "threshold_breach": true,
         "requires_refresh": true,
         "decision": "refresh",
         "metadata": {
-          "feed_url": "https://news.microsoft.com/feed/"
-        }
-      },
-      {
-        "event_id": "e943236490c770ed14bd5814d1c9eb6204e736e3",
-        "ticker": "MSFT",
-        "source_type": "investor_news",
-        "occurred_at": "2025-04-09",
-        "title": "Microsoft announces quarterly earnings release date",
-        "source_url": "https://news.microsoft.com/2025/04/09/microsoft-announces-quarterly-earnings-release-date-63/",
-        "affected_assumption_ids": [
-          "msft-a1"
-        ],
-        "marginal_impact": "0",
-        "threshold_breach": true,
-        "requires_refresh": true,
-        "decision": "refresh",
-        "metadata": {
-          "feed_url": "https://news.microsoft.com/feed/"
+          "force_assumption_ids": [
+            "msft-a1",
+            "msft-a3"
+          ],
+          "force_marginal_impact": "+",
+          "force_requires_refresh": true,
+          "fixture_name": "msft_copilot_breakout"
         }
       }
     ],

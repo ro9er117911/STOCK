@@ -7,15 +7,16 @@
 | Holding Period | 數季至一年 |
 | Research Type | 事件驅動 / 中線 |
 | Last Reviewed | 2026-03-27 |
-| Next Review | 2026-04-03 |
+| Next Review | 2026-04-10 |
 | Current Action | 持有 / 觀望，等待下一次驗證點 |
-| Thesis Confidence | 0.63 |
+| Thesis Confidence | 0.72 |
 
 ## Delta From Previous Version
 
-- Microsoft earnings press release available on Investor Relations website
-- Microsoft Cloud and AI strength drives third quarter results
-- Microsoft announces quarterly earnings release date
+- Copilot adoption cleared the prior 10%+ add threshold, validating the enterprise monetization path.
+- Azure AI demand staying above 30% preserves the core growth assumption.
+- Slower AI infrastructure CapEx growth reduces the main margin/payback overhang and improves the re-rating case.
+- Overall thesis confidence increases; current action remains hold/observe rather than add immediately, pending confirmation on realized monetization and margins.
 
 ## Core Thesis
 
@@ -37,9 +38,9 @@
 
 | ID | Assumption | Status | Confidence | Invalidation |
 | --- | --- | --- | --- | --- |
-| msft-a1 | Azure AI demand can keep total Azure growth above 30%. | reinforced | 0.68 | Azure growth drops below 30% or AI contribution decelerates materially. |
-| msft-a2 | Copilot adoption can improve enough to justify the AI distribution premium. | reinforced | 0.54 | Copilot stays below 10% enterprise penetration through the next earnings cycle. |
-| msft-a3 | CapEx growth will translate into durable revenue and margin support rather than pure cost drag. | watch | 0.56 | CapEx keeps accelerating while margin and monetization do not improve for two quarters. |
+| msft-a1 | Azure AI demand can keep total Azure growth above 30%. | reinforced | 0.74 | Azure growth drops below 30% or AI contribution decelerates materially. |
+| msft-a2 | Copilot adoption can improve enough to justify the AI distribution premium. | reinforced | 0.69 | Copilot stays below 10% enterprise penetration through the next earnings cycle. |
+| msft-a3 | CapEx growth will translate into durable revenue and margin support rather than pure cost drag. | reinforced | 0.64 | CapEx keeps accelerating while margin and monetization do not improve for two quarters. |
 
 ## Risk Register
 
@@ -93,15 +94,18 @@
 | --- | --- | --- | --- |
 | v0 | 2026-03-25 | Baseline migration from legacy MSFT notes and March update. | Established living thesis and machine-readable state. |
 | v1 | 2026-03-27 | Automated refresh triggered by event. | Automatic fallback refresh used. Review the generated diff before merging. |
+| v2 | 2026-03-27 | Manual refresh on Copilot breakout and CapEx moderation guidance. | Raised confidence and reinforced core assumptions; thesis remains active hold pending confirmation. |
+| v3 | 2026-03-27 | Automated refresh triggered by manual. | FY2026 Q3 guidance materially improves the thesis: paid Copilot enterprise penetration moved above 12%, Azure AI demand remains above 30%, and Microsoft now guides to slower AI infrastructure CapEx growth. This converts the prior Copilot and CapEx concerns from watch/weakness into reinforcement, raising confidence and supporting a continued hold while awaiting the next earnings confirmation. |
 
 ## Recent Event Log
 
 | Date | Source | Event | Impact | Decision |
 | --- | --- | --- | --- | --- |
+| 2026-03-27 | fixture | Microsoft guides to slower AI infrastructure CapEx growth while Azure AI demand remains above 30%. | + | refresh |
+| 2026-03-27 | fixture | Microsoft says paid Copilot enterprise penetration moved above 12% in FY2026 Q3 guidance. | + | refresh |
 | 2025-02-20 | investor_news | We’re taking our latest AI research breakthroughs and putting them in the hands of devs everywhere, with Azure AI Foundry Labs. | + | watch |
 | 2025-03-03 | investor_news | Microsoft Dragon Copilot provides the healthcare industry’s first unified voice AI assistant that enables clinicians to streamline clinical documentation, surface information and automate tasks | + | watch |
 | 2025-04-09 | investor_news | Microsoft announces quarterly earnings release date | 0 | refresh |
 | 2025-04-30 | investor_news | Microsoft Cloud and AI strength drives third quarter results | 0 | refresh |
 | 2025-04-30 | investor_news | Microsoft earnings press release available on Investor Relations website | 0 | refresh |
 | 2026-03-25 | legacy_seed | Copilot enterprise penetration remained near 3%, below expectations. | - | refresh |
-| 2026-03-25 | legacy_seed | Q2 FY2026 Azure stayed strong but CapEx nearly reached $30B. | - | refresh |
