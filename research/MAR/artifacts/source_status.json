@@ -1,0 +1,41 @@
+{
+  "ticker": "MAR",
+  "sources": [
+    {
+      "source_id": "sec",
+      "source_type": "sec",
+      "kind": "sec",
+      "url": "https://data.sec.gov/submissions/CIK0001048286.json",
+      "status": "failed",
+      "priority": 10,
+      "new_events": 0,
+      "cursor": "",
+      "error": "https://data.sec.gov/submissions/CIK0001048286.json: HTTP Error 403: Forbidden",
+      "notes": "Official SEC filings. Material forms are filtered by each ticker state threshold."
+    },
+    {
+      "source_id": "price",
+      "source_type": "price",
+      "kind": "price",
+      "url": "https://query1.finance.yahoo.com/v8/finance/chart/MAR?range=1mo&interval=1d",
+      "status": "polled",
+      "priority": 20,
+      "new_events": 0,
+      "cursor": "2026-03-27",
+      "error": "",
+      "notes": "Daily Yahoo Finance chart data for gap and abnormal volume detection."
+    },
+    {
+      "source_id": "investor_news",
+      "source_type": "investor_news",
+      "kind": "html",
+      "url": "https://news.marriott.com/news/",
+      "status": "polled",
+      "priority": 30,
+      "new_events": 0,
+      "cursor": "",
+      "error": "",
+      "notes": "Official Marriott newsroom archive."
+    }
+  ]
+}
