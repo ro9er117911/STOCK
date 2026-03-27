@@ -7,7 +7,7 @@ from unittest import mock
 
 from stock_research.pipeline import bootstrap_baselines, draft_refreshes, poll_events
 from stock_research.sources import fetch_feed_events
-from stock_research.storage import read_json, read_jsonl
+from stock_research.storage import deep_merge, read_json, read_jsonl
 from stock_research.config import WATCHLIST
 
 
@@ -150,6 +150,23 @@ class PipelineTests(unittest.TestCase):
         self.assertEqual(cursor, "https://example.com/1")
         self.assertEqual(len(events), 1)
         self.assertEqual(events[0]["source_url"], "https://example.com/2")
+
+    def test_deep_merge_merges_list_items_by_stable_id(self) -> None:
+        base = {
+            "assumptions": [
+                {"assumption_id": "a1", "statement": "Base thesis", "status": "watch"},
+                {"assumption_id": "a2", "statement": "Second thesis", "status": "watch"},
+            ]
+        }
+        overlay = {"assumptions": [{"assumption_id": "a1", "status": "reinforced"}]}
+        merged = deep_merge(base, overlay)
+        self.assertEqual(
+            merged["assumptions"],
+            [
+                {"assumption_id": "a1", "statement": "Base thesis", "status": "reinforced"},
+                {"assumption_id": "a2", "statement": "Second thesis", "status": "watch"},
+            ],
+        )
 
 
 if __name__ == "__main__":

@@ -66,6 +66,44 @@ def deep_merge(base: Any, overlay: Any) -> Any:
             else:
                 merged[key] = base[key]
         return merged
+    if isinstance(base, list) and isinstance(overlay, list):
+        identity_keys = (
+            "assumption_id",
+            "action_rule_id",
+            "scenario_id",
+            "risk_id",
+            "source_id",
+        )
+        if all(isinstance(item, dict) for item in base + overlay):
+            identity_key = next(
+                (
+                    key
+                    for key in identity_keys
+                    if any(key in item for item in base) or any(key in item for item in overlay)
+                ),
+                None,
+            )
+            if identity_key:
+                base_map = {item[identity_key]: item for item in base if identity_key in item}
+                overlay_map = {item[identity_key]: item for item in overlay if identity_key in item}
+                merged_list: list[Any] = []
+                seen: set[str] = set()
+                for item in base:
+                    item_id = item.get(identity_key)
+                    if item_id and item_id in overlay_map:
+                        merged_list.append(deep_merge(item, overlay_map[item_id]))
+                        seen.add(item_id)
+                    else:
+                        merged_list.append(item)
+                for item in overlay:
+                    item_id = item.get(identity_key)
+                    if item_id and item_id in seen:
+                        continue
+                    if item_id and item_id in base_map:
+                        continue
+                    merged_list.append(item)
+                return merged_list
+        return overlay if overlay else base
     if overlay in (None, ""):
         return base
     return overlay
