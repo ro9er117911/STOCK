@@ -6,7 +6,7 @@ from pathlib import Path
 from typing import Any
 
 from .config import RESEARCH_ROOT, WATCHLIST
-from .markdown import render_current_report
+from .markdown import render_current_report, render_review_summary
 from .storage import write_json, write_jsonl
 
 
@@ -737,6 +737,15 @@ def bootstrap_baselines(research_root: Path = RESEARCH_ROOT, force: bool = False
                 "changed_assumptions": [],
                 "action_rule_delta": [],
             },
+        )
+        (artifacts_dir / "review_summary.md").write_text(
+            render_review_summary(
+                state,
+                "Baseline migration from legacy notes.",
+                [],
+                [],
+            ),
+            encoding="utf-8",
         )
         created.append(ticker)
 

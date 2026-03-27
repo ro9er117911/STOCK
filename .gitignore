@@ -6,4 +6,5 @@ __pycache__/
 automation/run/*
 !automation/run/.gitkeep
 research/inbox/
-logs/
+logs/*
+!logs/.gitkeep
