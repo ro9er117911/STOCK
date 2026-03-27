@@ -108,7 +108,7 @@ def generate_refresh(state: dict[str, Any], current_markdown: str, context: dict
     if not api_key:
         return fallback_refresh(state, context)
 
-    model = os.getenv("OPENAI_MODEL", DEFAULT_OPENAI_MODEL)
+    model = os.getenv("OPENAI_MODEL") or DEFAULT_OPENAI_MODEL
     prompt = json.dumps(
         {
             "instructions": {
