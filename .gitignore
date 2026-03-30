@@ -1,11 +1,27 @@
+# Python
 __pycache__/
-*.pyc
-.DS_Store
+*.py[cod]
 .pytest_cache/
 .coverage
+.coverage.*
+.venv/
+
+# JavaScript and build tooling
+node_modules/
+.npm-cache/
+.vite/
+
+# Editor and local agent state
+.DS_Store
+.idea/
+.vscode/
+.understand-anything/
+.ua-repo/
+
+# Runtime outputs
 automation/run/*
 !automation/run/.gitkeep
-research/inbox/
-research/system/portfolio.private.json
 logs/*
 !logs/.gitkeep
+research/inbox/
+research/system/portfolio.private.json

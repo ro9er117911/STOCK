@@ -43,7 +43,13 @@ stock_research/
   digest.py
   notify.py
 site/
-docs/operator-guide.md
+docs/
+  README.md
+  architecture/
+  audits/
+  guides/
+  reference/
+  walkthroughs/
 scripts/
   research_ops.py
   local_catchup.sh
@@ -51,6 +57,8 @@ scripts/
 .github/workflows/dashboard-site.yml
 launchd/com.ro9air.stock-research.catchup.plist
 ```
+
+The repo root is intentionally kept lean. Long-form planning notes, audits, walkthroughs, and imported reference material now live under `docs/`.
 
 ## What Is Automated
 
