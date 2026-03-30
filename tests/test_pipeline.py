@@ -9,9 +9,10 @@ from pathlib import Path
 from unittest import mock
 
 from stock_research.dashboard import build_dashboard_bundle, build_dashboard_site
+from stock_research.candidates import upsert_candidate_dossier
 from stock_research.digest import build_ticker_digest
 from stock_research.notify import send_resend_email
-from stock_research.pipeline import bootstrap_baselines, draft_refreshes, poll_events
+from stock_research.pipeline import bootstrap_baselines, draft_refreshes, poll_events, sync_research_contracts
 from stock_research.postprocess import post_process_refresh_output
 from stock_research.sources import fetch_feed_events
 from stock_research.storage import deep_merge, read_json, read_jsonl
@@ -26,10 +27,83 @@ class PipelineTests(unittest.TestCase):
             self.assertIn("MSFT", created)
             msft_state = read_json(research_root / "MSFT" / "state.json")
             self.assertEqual(msft_state["thesis"]["thesis_id"], "msft-thesis-core")
+            self.assertEqual(msft_state["research_stage"], "active")
+            self.assertEqual(msft_state["decision_status"], "active")
+            self.assertIn("radar_summary", msft_state)
+            self.assertIn("thesis_change_log", msft_state)
             self.assertTrue((research_root / "MAR" / "current.md").exists())
             self.assertTrue((research_root / "MAR" / "current.zh-tw.md").exists())
             self.assertTrue((research_root / "PLTR" / "events.jsonl").exists())
             self.assertTrue((research_root / "PLTR" / "artifacts" / "review_summary.zh-tw.md").exists())
+            candidate_queue = read_json(research_root / "system" / "candidates.json")
+            self.assertTrue(any(item["ticker"] == "MSFT" for item in candidate_queue["items"]))
+
+    def test_upsert_candidate_tracks_stage_progression_and_rejection_reason(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            research_root = Path(tmp) / "research"
+            bootstrap_baselines(research_root=research_root, force=True)
+            created = upsert_candidate_dossier(
+                research_root,
+                ticker="NVDA",
+                company_name="NVIDIA",
+                research_topic="AI capex beneficiary with valuation discipline",
+                candidate_origin="manual_watchlist",
+                research_stage="candidate",
+                radar_flags=["52-week breakout", "Abnormal volume"],
+                radar_summary="Momentum is strong, but valuation already prices in a lot of AI upside.",
+                radar_risk_level="medium",
+                note="Initial candidate added from the manual watchlist.",
+            )
+            self.assertEqual(created["research_stage"], "candidate")
+            state_path = research_root / "NVDA" / "state.json"
+            created_state = read_json(state_path)
+            self.assertEqual(created_state["decision_status"], "pending")
+            self.assertEqual(created_state["radar_flags"], ["52-week breakout", "Abnormal volume"])
+
+            upsert_candidate_dossier(
+                research_root,
+                ticker="NVDA",
+                company_name="NVIDIA",
+                research_topic="AI capex beneficiary with valuation discipline",
+                candidate_origin="manual_watchlist",
+                research_stage="in_research",
+                note="Primary sources collected; move into active thesis work.",
+            )
+            ready = upsert_candidate_dossier(
+                research_root,
+                ticker="NVDA",
+                company_name="NVIDIA",
+                research_topic="AI capex beneficiary with valuation discipline",
+                candidate_origin="manual_watchlist",
+                research_stage="ready_to_decide",
+                note="Decision packet is ready; waiting for explicit entry rule confirmation.",
+                current_action="Defer entry until the next earnings print confirms margin durability.",
+            )
+            self.assertEqual(ready["research_stage"], "ready_to_decide")
+
+            rejected = upsert_candidate_dossier(
+                research_root,
+                ticker="NVDA",
+                company_name="NVIDIA",
+                research_topic="AI capex beneficiary with valuation discipline",
+                candidate_origin="manual_watchlist",
+                research_stage="rejected",
+                note="Reject after the reward/risk deteriorated versus alternatives.",
+                current_action="Do not buy; keep only as a comparison anchor.",
+                invalidation_reason="Expected upside no longer clears the required bar after valuation re-rate.",
+            )
+            self.assertEqual(rejected["research_stage"], "rejected")
+            final_state = read_json(state_path)
+            self.assertEqual(final_state["decision_status"], "rejected")
+            self.assertEqual(
+                final_state["invalidation_reason"],
+                "Expected upside no longer clears the required bar after valuation re-rate.",
+            )
+            self.assertGreaterEqual(len(final_state["thesis_change_log"]), 4)
+            queue = read_json(research_root / "system" / "candidates.json")
+            queue_item = next(item for item in queue["items"] if item["ticker"] == "NVDA")
+            self.assertEqual(queue_item["research_stage"], "rejected")
+            self.assertEqual(queue_item["invalidation_reason"], final_state["invalidation_reason"])
 
     def test_poll_dedupes_repeated_event_ids(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
@@ -520,6 +594,86 @@ class PipelineTests(unittest.TestCase):
                 {"assumption_id": "a2", "statement": "Second thesis", "status": "watch"},
             ],
         )
+
+    def test_sync_research_contracts_backfills_workflow_sections(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            research_root = Path(tmp) / "research"
+            ticker_dir = research_root / "ABC"
+            artifacts_dir = ticker_dir / "artifacts"
+            artifacts_dir.mkdir(parents=True, exist_ok=True)
+            legacy_state = {
+                "ticker": "ABC",
+                "company_name": "ABC Corp",
+                "research_topic": "Legacy state migration test",
+                "research_type": "事件驅動 / 中線",
+                "holding_period": "數季",
+                "last_reviewed_at": "2026-03-20",
+                "next_review_at": "2026-04-01",
+                "current_action": "持有 / 觀望",
+                "confidence": 0.55,
+                "latest_delta": ["Legacy state before vNext contract migration."],
+                "primary_observation_variables": ["Demand"],
+                "secondary_observation_variables": ["Margins"],
+                "noise_filters": ["Noise"],
+                "thresholds": {
+                    "price_gap_pct": 10.0,
+                    "volume_ratio": 2.0,
+                    "deep_refresh_days": 7,
+                    "material_sec_forms": ["8-K", "10-Q", "10-K"],
+                    "earnings_keywords": ["earnings"],
+                    "positive_keywords": ["beat"],
+                    "negative_keywords": ["miss"],
+                },
+                "thesis": {
+                    "thesis_id": "abc-thesis-core",
+                    "statement": "Legacy thesis.",
+                    "core_catalyst": "Catalyst",
+                    "market_blind_spot": "Blind spot",
+                    "verification_date": "2026-05-01",
+                    "expiry_condition": "Expiry",
+                },
+                "assumptions": [],
+                "risks": [],
+                "valuation_regime": {
+                    "current_yardstick": "P/E",
+                    "better_yardstick": "EV/EBITDA",
+                    "switch_trigger": "Trigger",
+                    "re_rating_logic": "Logic",
+                    "associated_risk": "Risk",
+                },
+                "scenarios": [],
+                "action_rules": [],
+                "next_must_check_data": "Earnings",
+                "research_debt": [],
+                "source_manifest": [],
+                "last_seen_event_cursors": {},
+                "version_log": [{"version": "v0", "date": "2026-03-20", "reason": "Legacy", "impact": "Legacy"}],
+            }
+            (ticker_dir / "state.json").write_text(json.dumps(legacy_state, ensure_ascii=False, indent=2), encoding="utf-8")
+            (ticker_dir / "current.md").write_text("# Placeholder\n", encoding="utf-8")
+            (ticker_dir / "events.jsonl").write_text("", encoding="utf-8")
+            (artifacts_dir / "review_summary.json").write_text(
+                json.dumps(
+                    {
+                        "ticker": "ABC",
+                        "reviewed_at": "2026-03-20",
+                        "review_summary": "Legacy summary.",
+                        "changed_assumptions": [],
+                        "action_rule_delta": [],
+                    },
+                    ensure_ascii=False,
+                    indent=2,
+                ),
+                encoding="utf-8",
+            )
+
+            summary = sync_research_contracts(research_root=research_root)
+            self.assertEqual(summary["rewritten_tickers"], ["ABC"])
+            migrated = read_json(ticker_dir / "state.json")
+            self.assertEqual(migrated["research_stage"], "in_research")
+            current_markdown = (ticker_dir / "current.md").read_text(encoding="utf-8")
+            self.assertIn("## Research Workflow", current_markdown)
+            self.assertIn("## Radar Summary", current_markdown)
 
 
 if __name__ == "__main__":

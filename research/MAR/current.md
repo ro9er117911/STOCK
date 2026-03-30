@@ -6,6 +6,10 @@
 | Research Topic | Light-asset travel compounder with business travel recovery optionality |
 | Holding Period | 數季至一年 |
 | Research Type | 中線 / 防禦配置 |
+| Research Stage | active |
+| Candidate Origin | manual_watchlist |
+| Decision Status | active |
+| Decision Updated | 2026-03-27 |
 | Last Reviewed | 2026-03-27 |
 | Next Review | 2026-05-07 |
 | Current Action | 穩健持有 |
@@ -32,6 +36,20 @@
 - Secondary variables: Forward bookings, High-end leisure mix, Macro slowdown risk
 - Noise filters: Single-quarter EPS miss without RevPAR weakness, Short-lived consumer sentiment noise, Headline volatility in lower-end domestic travel
 - Thresholds: price gap 8.0%, abnormal volume 2.0x, deep refresh every 10 days
+
+## Research Workflow
+
+- Stage: active
+- Candidate origin: manual_watchlist
+- Decision status: active
+- Decision updated at: 2026-03-27
+- Invalidation reason: None logged
+
+## Radar Summary
+
+- Risk level: none
+- Summary: No radar flags logged yet; use this field for pre-research prioritization only.
+- Flags: None logged
 
 ## Assumption Status
 
@@ -78,6 +96,7 @@
 
 - Next must-check data: Next earnings: RevPAR mix, corporate travel commentary, forward bookings, and cash return guidance.
 - Research debt: Need a cleaner framework for group and convention demand sensitivity., Need cross-check on Europe and Asia RevPAR versus US softness.
+- Consistency notes: None logged
 
 ## Source Manifest
 
@@ -92,6 +111,12 @@
 | --- | --- | --- | --- |
 | v0 | 2026-03-25 | Baseline migration from legacy March update. | Established living thesis and machine-readable state. |
 | v1 | 2026-03-27 | Automated refresh triggered by manual. | No new events were provided in the refresh bundle, so the MAR thesis remains unchanged. Confidence and action stay stable; only the review timestamps are advanced to today with the next check pushed out on the existing cadence. |
+
+## Thesis Change Log
+
+| Date | Type | Stage | Decision | Summary |
+| --- | --- | --- | --- | --- |
+| 2026-03-27 | baseline | active | active | Established the living research state under the vNext decision workflow contract. |
 
 ## Recent Event Log
 

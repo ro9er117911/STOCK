@@ -1,6 +1,10 @@
 {
   "ticker": "MSFT",
   "company_name": "Microsoft",
+  "research_stage": "active",
+  "candidate_origin": "manual_watchlist",
+  "decision_status": "active",
+  "decision_updated_at": "2026-03-27",
   "status_label": "持有觀察",
   "current_action": "持有 / 觀望，等待下一次驗證點",
   "thesis_confidence": 0.63,
@@ -257,6 +261,25 @@
   ],
   "changed_assumptions": [],
   "action_rule_delta": [],
+  "radar": {
+    "flags": [],
+    "summary": "No radar flags logged yet; use this field for pre-research prioritization only.",
+    "risk_level": "none"
+  },
+  "outcome_markers": [],
+  "thesis_change_log": [
+    {
+      "changed_at": "2026-03-27",
+      "change_type": "baseline",
+      "research_stage": "active",
+      "decision_status": "active",
+      "current_action": "持有 / 觀望，等待下一次驗證點",
+      "confidence": 0.63,
+      "summary": "Established the living research state under the vNext decision workflow contract."
+    }
+  ],
+  "invalidation_reason": "",
+  "consistency_notes": [],
   "source_status": [
     {
       "source_id": "sec",
@@ -758,6 +781,10 @@
   "research_state": {
     "research_topic": "AI 變現重估，加上 model-agnostic 平台對沖。",
     "holding_period": "數季至一年",
+    "research_stage": "active",
+    "candidate_origin": "manual_watchlist",
+    "decision_status": "active",
+    "decision_updated_at": "2026-03-27",
     "thesis_statement": "微軟仍是 AI 基礎設施與企業分發的核心受益者，但要讓股價脫離 CapEx 懷疑，必須用 Copilot adoption、M365 漲價與 Azure AI 需求證明其估值可以重新從成熟雲端股回到高品質 AI 平台股。",
     "core_catalyst": "Copilot adoption、M365 漲價傳導，以及 Azure AI 需求。",
     "market_blind_spot": "市場短線聚焦高 CapEx，低估 model-agnostic Copilot 與商業訂價權恢復帶來的 EPS 扭轉。",
@@ -766,6 +793,8 @@
       "目前維持持有 / 觀望，等下一個財報驗證點。",
       "這次把檢查時間更新成今天已完成複盤，並維持近期待追蹤節奏。"
     ],
+    "radar_summary": "No radar flags logged yet; use this field for pre-research prioritization only.",
+    "radar_flags": [],
     "review_summary": "本輪沒有新增足以改寫 thesis 的重大事件，所以 MSFT 除了例行更新檢查時間之外，主判斷不變。信心、關鍵假設與操作規則都先維持。",
     "thesis_health": {
       "score": 0.71,
@@ -830,6 +859,18 @@
         "tier": "thesis weakener",
         "tier_label": "削弱 thesis 的風險",
         "response": "若政府雲敘事削弱了平台對沖，就要減碼。"
+      }
+    ],
+    "outcome_markers": [],
+    "thesis_change_log": [
+      {
+        "changed_at": "2026-03-27",
+        "change_type": "baseline",
+        "research_stage": "active",
+        "decision_status": "active",
+        "current_action": "持有 / 觀望，等待下一次驗證點",
+        "confidence": 0.63,
+        "summary": "Established the living research state under the vNext decision workflow contract."
       }
     ],
     "event_timeline": [
@@ -978,6 +1019,9 @@
     ]
   },
   "decision_state": {
+    "research_stage": "active",
+    "decision_status": "active",
+    "decision_updated_at": "2026-03-27",
     "current_action": "持有 / 觀望，等待下一次驗證點",
     "status_label": "持有觀察",
     "priority_score": 102,
@@ -1013,7 +1057,8 @@
         "action": "退出目前 thesis，轉往風險報酬更佳的標的。"
       }
     ],
-    "changed_assumptions": []
+    "changed_assumptions": [],
+    "invalidation_reason": ""
   },
   "artifacts": {
     "state_path": "research/MSFT/state.json",

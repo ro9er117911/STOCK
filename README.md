@@ -1,9 +1,10 @@
 # Stock Research Operator
 
-This repo upgrades the original `stock-research-operator` prompt into a durable research system:
+This repo upgrades the original `stock-research-operator` prompt into a durable, personal-first research decision OS:
 
 - `research/<ticker>/current.md` is the human-readable living thesis.
 - `research/<ticker>/state.json` is the machine-readable state used by automation.
+- `research/system/candidates.json` is the manually editable candidate queue and workflow index.
 - `research/<ticker>/events.jsonl` is the event ledger.
 - `research/<ticker>/artifacts/review_summary.json` is the machine-readable refresh artifact.
 - `research/system/source_registry.json` is the source-of-truth whitelist for event inputs.
@@ -11,6 +12,20 @@ This repo upgrades the original `stock-research-operator` prompt into a durable 
 - GitHub Actions polls high-signal sources even when the Mac is off.
 - Material updates become a reviewable PR instead of silently rewriting `main`.
 - PR, email, and dashboard are rendered from the same canonical digest instead of ad hoc string assembly.
+
+## vNext Decision Workflow
+
+The repo now treats research as a workflow, not just a post-hoc holdings monitor:
+
+`candidate -> in_research -> ready_to_decide -> active / rejected / archived`
+
+The machine-readable contract in each `state.json` now includes:
+
+- `research_stage`, `candidate_origin`, `decision_status`, `decision_updated_at`
+- `radar_flags[]`, `radar_summary`, `radar_risk_level`
+- `outcome_markers[]`, `thesis_change_log[]`, `invalidation_reason`, `consistency_notes[]`
+
+Quant inputs are intentionally advisory only in vNext. They can prioritize and warn, but they do not act as hard vetoes or trade-execution signals.
 
 ## Repo Layout
 
@@ -72,6 +87,33 @@ Bootstrap the baseline living research files:
 
 ```bash
 python3 scripts/research_ops.py bootstrap-baselines --force
+```
+
+Normalize existing dossiers to the vNext contract and rebuild the candidate queue:
+
+```bash
+python3 scripts/research_ops.py sync-research-contracts
+```
+
+Rebuild the candidate queue only:
+
+```bash
+python3 scripts/research_ops.py sync-candidates
+```
+
+Create or advance a manual candidate dossier:
+
+```bash
+python3 scripts/research_ops.py upsert-candidate \
+  --ticker NVDA \
+  --company-name "NVIDIA" \
+  --research-topic "AI capex beneficiary with valuation discipline" \
+  --origin manual_watchlist \
+  --stage in_research \
+  --radar-flag "52-week breakout" \
+  --radar-summary "Strong price confirmation, but valuation is already rich." \
+  --radar-risk-level medium \
+  --note "Promoted from watchlist into active pre-entry research."
 ```
 
 Poll the live sources and update ledgers/cursors:

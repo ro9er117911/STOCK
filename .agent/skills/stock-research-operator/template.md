@@ -19,10 +19,14 @@
 | 初始主張一句話 | |
 | 預期 Alpha 來源 | |
 | 主要比較對象 | |
-| thesis_id | `ticker-thesis-core` |
+| research_stage | candidate / in_research / ready_to_decide / active / rejected / archived |
+| candidate_origin | manual_watchlist / ad_hoc_idea / quant_radar |
+| decision_status | pending / needs_more_research / ready_to_decide / active / rejected / archived |
+| decision_updated_at | YYYY-MM-DD |
+| 信心評分 | 0.00 - 1.00 |
 | last_reviewed_at | YYYY-MM-DD |
 | next_review_at | YYYY-MM-DD |
-| confidence | 0.00 - 1.00 |
+| thesis_id | `ticker-thesis-core` |
 
 ### Automation Mirror
 
@@ -35,6 +39,11 @@
 | thresholds | 至少含 `price_gap_pct`、`volume_ratio`、`deep_refresh_days`、`material_sec_forms` |
 | research_debt | 目前尚未補齊、但會影響判讀品質的資料缺口 |
 | source_manifest | 目前倚賴的主要來源清單 |
+| radar_flags / radar_summary / radar_risk_level | 候選雷達訊號，只做提醒，不做硬性 veto |
+| outcome_markers | 關鍵事件後留下的結果標記 |
+| thesis_change_log | thesis / decision 狀態改寫記錄 |
+| invalidation_reason | 明確不買、拒絕或撤銷 thesis 的原因 |
+| consistency_notes | 事後校準用的簡短紀錄 |
 
 ### 限制條件
 
@@ -46,6 +55,19 @@
 | 研究資料缺口 | |
 
 ---
+
+## 0. 決策紀錄 (Decision Log — Pre-entry)
+
+> 紀錄標的如何進入候選名單，以及決定啟動深研的初衷。
+
+- **進件來源：** (例如：52週新高雷達 / 13F 追蹤 / 產業鏈推導)
+- **初篩亮點：**
+- **深研啟動動機：**
+- **是否跳過深研直接觀察？** 是/否 (理由)
+- **決策者自評：** (進場前的直覺或擔憂)
+
+---
+
 
 ## 1. 一句話結論
 
@@ -67,6 +89,16 @@
   3.
 - **預設降噪項目：**
 - **警鈴閾值：**
+
+## 2A. Workflow 與 Radar
+
+- **research_stage：**
+- **candidate_origin：**
+- **decision_status：**
+- **decision_updated_at：**
+- **radar_flags：**
+- **radar_summary：**
+- **radar_risk_level：**
 
 ---
 
@@ -176,6 +208,14 @@
 | 待補資料 | |
 | 目前最大不確定性 | |
 | research_debt | |
+
+## 12. Calibration Log
+
+| 類型 | 日期 | 內容 |
+|---|---|---|
+| outcome_marker | | |
+| thesis_change_log | | |
+| consistency_note | | |
 
 ## Source Manifest
 

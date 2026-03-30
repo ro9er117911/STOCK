@@ -1,6 +1,10 @@
 {
   "ticker": "PLTR",
   "company_name": "Palantir Technologies",
+  "research_stage": "active",
+  "candidate_origin": "manual_watchlist",
+  "decision_status": "active",
+  "decision_updated_at": "2026-03-27",
   "status_label": "偏多",
   "current_action": "持有 / 逢回加碼",
   "thesis_confidence": 0.72,
@@ -165,6 +169,25 @@
   ],
   "changed_assumptions": [],
   "action_rule_delta": [],
+  "radar": {
+    "flags": [],
+    "summary": "No radar flags logged yet; use this field for pre-research prioritization only.",
+    "risk_level": "none"
+  },
+  "outcome_markers": [],
+  "thesis_change_log": [
+    {
+      "changed_at": "2026-03-27",
+      "change_type": "baseline",
+      "research_stage": "active",
+      "decision_status": "active",
+      "current_action": "持有 / 逢回加碼",
+      "confidence": 0.72,
+      "summary": "Established the living research state under the vNext decision workflow contract."
+    }
+  ],
+  "invalidation_reason": "",
+  "consistency_notes": [],
   "source_status": [
     {
       "source_id": "sec",
@@ -531,6 +554,10 @@
   "research_state": {
     "research_topic": "AI 商業化變現，外加持久的政府護城河。",
     "holding_period": "數季至一年",
+    "research_stage": "active",
+    "candidate_origin": "manual_watchlist",
+    "decision_status": "active",
+    "decision_updated_at": "2026-03-27",
     "thesis_statement": "市場仍低估 Palantir 在美國商業 AI 與國防軟體的雙引擎飛輪，只要商業營收維持高成長且政府專案升級為常態預算，估值雖高仍可被更高品質的成長證明支持。",
     "core_catalyst": "美國商業營收續強與大型政府專案正式預算化。",
     "market_blind_spot": "市場把 PLTR 視為敘事股，但近兩季已證明商業化與政府續約可同時成立。",
@@ -540,6 +567,8 @@
       "假設狀態沒有變動，估值與成長監控門檻先維持不變。",
       "這次主要是把 review metadata 更新到今天，並順延下次檢查日期。"
     ],
+    "radar_summary": "No radar flags logged yet; use this field for pre-research prioritization only.",
+    "radar_flags": [],
     "review_summary": "這次更新沒有新增足以重寫 thesis 的證據，所以 PLTR 的 thesis 狀態不變。信心、論述框架與操作姿態都先延續，只更新檢查時間。",
     "thesis_health": {
       "score": 0.77,
@@ -606,6 +635,18 @@
         "response": "只有在需求惡化同時出現時才採取動作。"
       }
     ],
+    "outcome_markers": [],
+    "thesis_change_log": [
+      {
+        "changed_at": "2026-03-27",
+        "change_type": "baseline",
+        "research_stage": "active",
+        "decision_status": "active",
+        "current_action": "持有 / 逢回加碼",
+        "confidence": 0.72,
+        "summary": "Established the living research state under the vNext decision workflow contract."
+      }
+    ],
     "event_timeline": [
       {
         "event_id": "pltr-seed-2026-maven",
@@ -670,6 +711,9 @@
     ]
   },
   "decision_state": {
+    "research_stage": "active",
+    "decision_status": "active",
+    "decision_updated_at": "2026-03-27",
     "current_action": "持有 / 逢回加碼",
     "status_label": "偏多",
     "priority_score": 96,
@@ -703,7 +747,8 @@
         "action": "不管股價走勢，直接退出。"
       }
     ],
-    "changed_assumptions": []
+    "changed_assumptions": [],
+    "invalidation_reason": ""
   },
   "artifacts": {
     "state_path": "research/PLTR/state.json",

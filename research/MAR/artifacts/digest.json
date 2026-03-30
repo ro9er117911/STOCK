@@ -1,6 +1,10 @@
 {
   "ticker": "MAR",
   "company_name": "Marriott International",
+  "research_stage": "active",
+  "candidate_origin": "manual_watchlist",
+  "decision_status": "active",
+  "decision_updated_at": "2026-03-27",
   "status_label": "持有觀察",
   "current_action": "穩健持有",
   "thesis_confidence": 0.67,
@@ -166,6 +170,25 @@
   ],
   "changed_assumptions": [],
   "action_rule_delta": [],
+  "radar": {
+    "flags": [],
+    "summary": "No radar flags logged yet; use this field for pre-research prioritization only.",
+    "risk_level": "none"
+  },
+  "outcome_markers": [],
+  "thesis_change_log": [
+    {
+      "changed_at": "2026-03-27",
+      "change_type": "baseline",
+      "research_stage": "active",
+      "decision_status": "active",
+      "current_action": "穩健持有",
+      "confidence": 0.67,
+      "summary": "Established the living research state under the vNext decision workflow contract."
+    }
+  ],
+  "invalidation_reason": "",
+  "consistency_notes": [],
   "source_status": [
     {
       "source_id": "sec",
@@ -532,6 +555,10 @@
   "research_state": {
     "research_topic": "資本輕、可複利的旅遊平台，外加商務旅遊回溫的選擇權。",
     "holding_period": "數季至一年",
+    "research_stage": "active",
+    "candidate_origin": "manual_watchlist",
+    "decision_status": "active",
+    "decision_updated_at": "2026-03-27",
     "thesis_statement": "Marriott 受惠於輕資產模式、高端與國際旅遊韌性，以及企業差旅回溫，因此在景氣不確定環境下仍能維持穩定現金流與較佳下行保護。",
     "core_catalyst": "商務旅遊回溫，加上國際與高端 RevPAR 維持穩定。",
     "market_blind_spot": "市場容易把 MAR 當純週期股，但其資本輕、品牌強與回購能力提供了更好的防禦質地。",
@@ -540,6 +567,8 @@
       "防守型品質股加商務旅遊回溫的敘事先維持，信心不變。",
       "這次把 last_reviewed_at 更新到今天，並依既有節奏安排下一次檢查。"
     ],
+    "radar_summary": "No radar flags logged yet; use this field for pre-research prioritization only.",
+    "radar_flags": [],
     "review_summary": "本輪沒有新增需要重估的事件，因此 MAR 的 thesis 維持不變。信心與操作都先延續，只是把檢查時間更新到今天，並依原本節奏往後安排下一次檢查。",
     "thesis_health": {
       "score": 0.74,
@@ -606,6 +635,18 @@
         "response": "除非基本面惡化，否則先忽略。"
       }
     ],
+    "outcome_markers": [],
+    "thesis_change_log": [
+      {
+        "changed_at": "2026-03-27",
+        "change_type": "baseline",
+        "research_stage": "active",
+        "decision_status": "active",
+        "current_action": "穩健持有",
+        "confidence": 0.67,
+        "summary": "Established the living research state under the vNext decision workflow contract."
+      }
+    ],
     "event_timeline": [
       {
         "event_id": "mar-seed-2026-travel-mix",
@@ -670,6 +711,9 @@
     ]
   },
   "decision_state": {
+    "research_stage": "active",
+    "decision_status": "active",
+    "decision_updated_at": "2026-03-27",
     "current_action": "穩健持有",
     "status_label": "持有觀察",
     "priority_score": 56,
@@ -704,7 +748,8 @@
         "action": "退出目前 thesis。"
       }
     ],
-    "changed_assumptions": []
+    "changed_assumptions": [],
+    "invalidation_reason": ""
   },
   "artifacts": {
     "state_path": "research/MAR/state.json",

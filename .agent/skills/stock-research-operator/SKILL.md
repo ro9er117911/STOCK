@@ -1,329 +1,117 @@
 ---
 name: stock-research-operator
-description: >
-  Conducts professional US equity research producing actionable investment theses,
-  verifiable assumptions, scenario-based action plans, and peer comparisons.
-  Monitors PLTR, MSFT, MAR as core watchlist.
-  Use this skill whenever the user mentions: stock research, investment thesis,
-  thesis update, earnings review, position sizing, scenario analysis, pre-mortem,
-  valuation regime, PLTR, MSFT, MAR, or asks for buy/sell/hold recommendations.
+description: 進行專業的個股研究，產出具備行動力的投資關鍵導因、可驗證假設、情境行動方案及同業比較。主要監控 PLTR, MSFT, MAR。
 metadata:
   author: ro9air
   version: "1.0"
   watchlist: "PLTR, MSFT, MAR"
 ---
 
-# Investment Research Operator
+# Investment Research Operator - 📈 專業股票投資研判
 
-## Purpose
+## 核心目標
 
-Transform investment research from "information aggregation" into an **executable, iterable, calibratable** decision process.
+將投資研究從單純的「資訊堆砌」轉化為一個**可執行、可迭代、可校準**的決策過程。
 
-The deliverable is NOT a pretty report. It is:
-1. A clear investment    thesis (one verifiable sentence)
-2. Core assumptions that can be tracked and falsified
-3. Scenario-conditioned action rules
-4. A living document that evolves with new data
-5. A machine-readable state that automation can refresh safely
-
----
-
-## Core Principles
-
-### 1. Time-Horizon First
-Before any vanálysis, define the holding period. The horizon determines:
-- Which variables matter
-- How to weight information
-- What counts as noise
-- Which events trigger action
-
-### 2. Marginal Change Over Information Volume
-Value comes not from more data, but from answering:
-- Does this new event change the thesis?
-- By how much?
-- Does it breach my alarm threshold?
-
-### 3. Scenarios Must Produce Actions
-Every conclusion must be written as:
-- If A happens → do X
-- If B happens → do Y
-- If C happens → exit or switch
-
-### 4. Valuation Regime > Point Estimate
-Don't just ask "is it cheap?" Ask:
-- What yardstick is the market using to price this?
-- Could that yardstick change?
-- What event would trigger a regime shift?
-
-### 5. Research Is Continuous Calibration
-A good study is never "done." Each update must re-check:
-- Are original assumptions still valid?
-- Which risks have materialized?
-- Which signals turned out to be noise?
-- Do action rules need adjustment?
+研究產物不應只是一份漂亮的報告，而必須包含：
+1. **清晰的投資關鍵導因 (Thesis)**：用一句話說清邏輯。
+2. **核心假設 (Assumptions)**：可追蹤、可證偽的具體指標。
+3. **情境觸發規則 (Action Rules)**：在不同情境下的行動指南。
+4. **活體文件 (Living Document)**：隨數據更新而自動演進。
+5. **機器可讀狀態**：由 API 產出狀態，供自動化系統安全刷新。
+6. **流程意識**：清楚標註「研究中」、「待決定」、「持有中」或「已拒絕」狀態。
 
 ---
 
-## Research Workflow (9 Steps)
+## 核心原則
 
-### Step 1. Define Time-Horizon
+### 1. 時間導向優先 (Time-Horizon First)
+在開始分析前，先定義持有週期。週期決定了：
+- 哪些變數是關鍵，哪些是雜訊。
+- 資訊權重如何分配。
+- 哪些事件應觸發行動。
 
-Answer before anything else:
-- Intended holding period (weeks / months / years)
-- Top 3 variables for this horizon
-- Items to de-noise
-- Events that directly impact the thesis
+### 2. 邊際變化優於資訊總量
+價值不在於數據多寡，而在於回答：
+- 這次新事件是否改變了核心導因 (Thesis)？
+- 改變了多少？是否觸發了警報閥值？
 
-**Horizon-Variable Mapping**
-| Horizon | Priority Variables |
-|---|---|
-| Short-term (weeks) | Newsflow, event catalysts, expectation gaps, crowding |
-| Medium-term (quarters) | Orders, inventory, margin trends, consensus revisions |
-| Long-term (years) | Market share, industry structure, capital allocation, moat |
+### 3. 情境必須產出行動
+每個結論都應寫成：
+- 若 A 發生 -> 執行 X
+- 若 B 發生 -> 執行 Y
+- 若 C 發生 -> 撤退或轉向
 
-**Output fields:**
-- Holding period
-- Primary observation variables (3)
-- Secondary observation variables (3)
-- Noise filters
-- Alarm thresholds
-
----
-
-### Step 2. Build the Thesis
-
-Compress the investment view into one verifiable sentence:
-
-> I am long/short [ticker] because [causal logic]. The market has not fully priced [key change], which I expect [catalyst] to surface within [timeframe].
-
-The thesis MUST contain: causal chain, key variable, timeframe, catalyst source, and invalidation condition.
-
-**Output fields:** Thesis, Core catalyst, Market blind spot, Verification date, Expiry condition
+### 4. 估值體系 (Regime) > 單點預測
+不只是問「便不便宜」，而是問：
+- 目標市場現在是用什麼尺子（指標）來定價？
+- 尺子是否會換？什麼事件會觸發體系轉換？
 
 ---
 
-### Step 3. List Core Assumptions
+## 研究工作流 (9 個步驟)
 
-Decompose the thesis into ≥3 testable assumptions.
+### Step 0. 候選項目錄入 (Candidate Intake)
+在開始研究前，填寫 `template.md` 中的**決策日誌**。
 
-| Assumption | Type | Verification Method | Update Frequency | Invalidation Condition |
-|---|---|---|---|---|
-| A | Demand / Supply / Pricing / Valuation / Mgmt | Data source | W / M / Q | When X happens |
+### Step 1. 定義階段與時間週期
+- 設置階段：`candidate`, `in_research`, `ready_to_decide`, `active`, `rejected`
+- 定義預計持有期：週、月或年。
+- 列出該預算期內的前三大關鍵變數、雜訊過濾器與警報閥值。
 
-**Good assumption traits:** observable, verifiable, falsifiable, linked to stock-price driver.
-**Bad assumptions:** "company is great," "industry has potential," "market will understand eventually."
+### Step 2. 建立投資導因 (The Thesis)
+將投資觀點壓縮成一句話：
+> 我{買入/放空} [代號] 是因為 [因果邏輯]。市場尚未完全定價 [核心變動]，我預期 [催化劑] 將在 [時間內] 顯現。
 
----
+### Step 3. 列出核心假設
+分解導因，列出至少 3 個可測試的假設。包含：驗證方法、更新頻率與失效條件。
 
-### Step 4. List Top Risks That Could Kill the Thesis
+### Step 4. 列出會殺死導因的關鍵風險
+至少 3 個具體風險。區分為：導因破壞者 (Thesis breaker)、導因削弱者、短期雜訊。
 
-≥3 risks. Generic macro or black-swan-only lists are not acceptable.
+### Step 5. 分析估值體系 (Valation Regime)
+分析市場目前的定價指標（例如 P/E 轉為 P/S），以及何種條件會觸發漲跌幅的重新定義。
 
-| Risk | Type | Leading Indicator | Thesis Impact | Response |
-|---|---|---|---|---|
-| A | Structural / Execution / Competition / Demand / Regulatory | What moves first | +/0/-/thesis-breaker | Watch / Trim / Exit |
+### Step 6. 情境分析 (Scenario Analysis)
+建立「因果開關情境」，而非簡單的數字調整。包含：基準、牛市、熊市與撤退路徑。
 
-**Risk tiers:**
-- **Thesis breaker** — logic collapses, exit immediately
-- **Thesis weakener** — lower conviction, don't necessarily exit
-- **Noise** — short-term disruption, ignore per threshold rules
+### Step 7. 投資前檢討 (Pre-Mortem)
+假設一年後這筆投資損失了 50%，回溯可能的失敗原因、被忽視的訊號以及最早的停損點。
 
----
+### Step 8. 同業比較 (Peer Comparison)
+回答「為什麼選這檔而不是其他？」比較維度包含：上漲彈性、下行保護、催化劑可見度。
 
-### Step 5. Analyze the Valuation Regime
-
-Do NOT jump into a DCF. First answer:
-1. What yardstick is the market using now?
-2. Is that yardstick appropriate?
-3. Under what conditions would the market switch yardsticks?
-4. If the regime shifts, where does the re-rating come from?
-
-**Common regime drifts:** P/B→P/E, P/E→EV/EBITDA, mature→growth, single-metric→narrative, asset-value→earnings-value, legacy→optionality/platform.
-
-**Output fields:** Current yardstick, Better yardstick, Switch trigger, Re-rating logic, Associated risk
+### Step 9. 撰寫可執行的行動建議
+最後必須以行動規則作結：包含目前行動、建議位階、加碼、減碼、退出與轉換條件。
 
 ---
 
-### Step 6. Scenario Analysis
-
-Do NOT produce optimistic / neutral / pessimistic number tweaks. Build **causal-switch scenarios**.
-
-| Scenario | Trigger | Causal Logic | Winner / Loser | Action |
-|---|---|---|---|---|
-| Base | Condition A | Original thesis holds | Target / Peers | Hold / small add |
-| Bull | Condition B | Assumptions accelerate | Higher-beta plays | Add / rotate up |
-| Bear | Condition C | Key variable deteriorates | Weak-B/S firms first | Trim / exit |
-| Break | Condition D | Thesis invalid | All hurt | Full exit |
-
-Each scenario MUST specify: trigger condition, change chain, profit redistribution, beneficiaries (first & lagged), and action.
+## 事件更新協議 (Event Update Protocol)
+當新資訊出現時，不要直接修改結論，應經過：
+1. 是否符合時間週期？
+2. 影響哪個核心假設？
+3. 邊際貢獻程度？
+4. 是否觸發閥值？
+5. 是否需要行動？
 
 ---
 
-### Step 7. Pre-Mortem
-
-Assume one year from now this investment lost 50%. Work backward:
-- Most likely failure scenario
-- Which assumption failed
-- What signal was ignored
-- Earliest point to have corrected
-- How to avoid next time
-
-Purpose: surface blind spots, find the weakest assumption, build early-exit rules.
+## 自動化輸出契約
+每個研究週期應維護兩個文件：
+- `research/<ticker>/current.md`: 人類可讀的活體導因。
+- `research/<ticker>/state.json`: 機器可讀的狀態檔。
 
 ---
 
-### Step 8. Peer Comparison
-
-Research must answer not just "should I buy this?" but "is this the **best** choice?"
-
-**Comparison dimensions:**
-- Upside elasticity
-- Downside protection
-- Catalyst visibility
-- Assumption difficulty
-- Valuation-regime improvement potential
-- Balance-sheet resilience
-- "If wrong, who survives?"
-
-**Standard table (pre-filled for watchlist):**
-
-| Ticker | Upside Source | Downside Protection | Key Catalyst | Core Risk | Best-Fit Scenario |
-|---|---|---|---|---|---|
-| PLTR | | | | | |
-| MSFT | | | | | |
-| MAR | | | | | |
-
-**Must answer:**
-- Why this and not the others?
-- If thesis holds, which has most upside?
-- If thesis partially holds, which has best risk/reward?
-- If thesis fails, which drops least?
+## 跌破原則 (Success Criteria)
+1. 讀者應能在 3 分鐘內理解買賣邏輯與驗證時間表。
+2. 每個結論都能溯源至可辨識的假設。
+3. 新資訊能被快速分流：忽略、追蹤、加碼、減碼、退出。
 
 ---
 
-### Step 9. Write Executable Actions
-
-Every study MUST end with action rules.
-
-- Current action:
-- Suggested position size:
-- Add condition:
-- Trim condition:
-- Exit condition:
-- Switch condition:
-- Next update date:
-- Next must-check data:
-
-**Action rule examples:**
-- If gross margin declines non-seasonally for 2 consecutive quarters → trim
-- If capacity expansion beats expectations AND ASP holds → add
-- If market shifts from P/B to P/E pricing → re-rate target price
-- If thesis breaker fires → unconditional exit
-
----
-
-## Event Update Protocol
-
-When new information appears, do NOT change conclusions directly. Follow this flow:
-
-1. Does this info match my time-horizon?
-2. Which core assumption does it affect?
-3. Marginal contribution: + / 0 / −?
-4. Does it breach the alarm threshold?
-5. Is an action required?
-
-**Event Log Table:**
-
-| Date | Event | Affected Assumption | Marginal Impact | Threshold Breach? | Action |
-|---|---|---|---|---|---|
-
-## Automation Output Contract
-
-Every research cycle should maintain both:
-
-- `research/<ticker>/current.md`: the human-readable living thesis
-- `research/<ticker>/state.json`: the machine-readable state for automation
-
-Minimum machine state fields:
-
-- `thesis_id`
-- `assumptions[].assumption_id`
-- `action_rules[].action_rule_id`
-- `thresholds`
-- `last_reviewed_at`
-- `next_review_at`
-- `confidence`
-- `research_debt`
-- `source_manifest`
-
----
-
-## Signal vs. Noise Rules
-
-**Treat as signal when:**
-- Multiple indicators move together
-- Change hits a core assumption directly
-- Change is persistent (not one-off)
-- Change affects the valuation regime
-- Change alters profit distribution
-
-**Treat as noise when:**
-- Single month / single week / single source / unverified
-- Affects sentiment only, not fundamentals
-- Does not touch the thesis causal chain
-- Below alarm threshold
-
----
-
-## Iteration Mechanism
-
-This skill produces living documents, not one-shot reports.
-
-**Version convention:**
-- v0: Initial thesis
-- v1: + comparison & scenarios
-- v2: + event tracking & thresholds
-- v3: + pre-mortem & counter-evidence
-- v4+: Ongoing thesis revision
-
-**Each iteration must:**
-1. Log new events
-2. Re-check all core assumptions
-3. Re-check valuation regime
-4. Re-check whether a better alternative exists
-5. Update action rules
-
-**Version Log:**
-
-| Version | Date | Reason | Changes | Impact on Conclusion |
-|---|---|---|---|---|
-
----
-
-## Common Errors to Avoid
-
-1. Starting research without defining time-horizon
-2. Mixing all sources (news, transcripts, revenue, rumors) without weighting
-3. Obsessing over valuation math while ignoring regime drift
-4. Producing info-rich reports with zero action rules
-5. Analyzing only one company without peer comparison
-6. Scenario analysis that only changes numbers, not causal logic
-7. Emotionally revising thesis on new events without checking thresholds
-
----
-
-## Success Criteria
-
-A compliant research output must satisfy all five:
-1. Reader knows the long/short thesis, rationale, and verification timeline within 3 minutes
-2. Every major conclusion traces to a verifiable assumption
-3. New information can be quickly triaged: ignore / watch / add / trim / exit
-4. Clearly answers "why this and not the alternatives?"
-5. When the thesis breaks, enables fast pivot instead of post-hoc rationalization
-
----
-
-## Bundled Resources
-
-- Read `template.md` at the start of every new research to get the blank fill-in structure.
-- Read `checklist.md` before delivering any research to run the QA gate.
+## 相關資源
+- 投資靈魂：`rules/investment-soul.md`
+- 研究方法論：`rules/research-methodology.md`
+- 模板：`.agent/skills/stock-research-operator/template.md`
+- 檢查清單：`.agent/skills/stock-research-operator/checklist.md`

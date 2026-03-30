@@ -2,6 +2,8 @@
 
 - Reviewed at: 2026-03-27
 - Next review: 2026-04-03
+- Research stage: active
+- Decision status: active
 - Current action: 持有 / 觀望，等待下一次驗證點
 
 ## Summary

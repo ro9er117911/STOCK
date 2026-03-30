@@ -1,0 +1,15 @@
+{
+  "projectName": "STOCK",
+  "projectDescription": "24歲成長駭客專研 OS: 整合 AI 研究與投資決策的系統",
+  "languages": ["python", "javascript", "markdown", "json", "css", "html"],
+  "frameworks": ["flask", "nextjs", "tailwind"],
+  "complexity": "Medium",
+  "files": [
+    {"path": "stock_research/pipeline.py", "category": "code", "lines": 577},
+    {"path": "stock_research/radar.py", "category": "code", "lines": 160},
+    {"path": "stock_research/digest.py", "category": "code", "lines": 684},
+    {"path": "stock_research/strategy.py", "category": "code", "lines": 150},
+    {"path": ".agent/skills/pm/SKILL.md", "category": "docs", "lines": 50},
+    {"path": ".agent/skills/research/SKILL.md", "category": "docs", "lines": 140}
+  ]
+}

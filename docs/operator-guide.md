@@ -25,6 +25,7 @@
 
 - `research/<ticker>/current.md`
 - `research/<ticker>/state.json`
+- `research/system/candidates.json`
 - `research/<ticker>/events.jsonl`
 - `research/<ticker>/artifacts/review_summary.json`
 - `research/<ticker>/artifacts/digest.json`
@@ -54,10 +55,21 @@ Delivery surfaces：
 - Dashboard：只顯示 merged `main` 的正式狀態，不顯示未審稿 preview
 - Local cockpit：包含你的私有部位資料，不應 commit
 
+## vNext workflow 怎麼看
+
+- `research_stage`：`candidate`、`in_research`、`ready_to_decide`、`active`、`rejected`、`archived`
+- `candidate_origin`：目前預設來源為 `manual_watchlist`、`ad_hoc_idea`、`quant_radar`
+- `decision_status`：補充你此刻對該 dossier 的決策狀態，不等同交易執行
+- `radar_*`：研究前雷達，只做排序與提醒，不是硬性 veto
+- `outcome_markers` / `thesis_change_log`：用來回看 thesis 怎麼被事件改寫，以及哪些判斷最常漂移
+
+`research/system/candidates.json` 是目前候選與正式 dossier 的工作流索引。它可以手動編修，但最穩妥的做法仍是透過 CLI 生成，避免漏掉 `state.json` / `current.md` 的同步更新。
+
 ## 你通常要看哪裡
 
 - 想知道事件來源有沒有成功輪詢：看 `poll-summary.json` 和各 ticker 的 `artifacts/source_status.json`
 - 想知道這次到底改了什麼：看 PR 與 `review_summary.json`
 - 想快速掌握目前持股狀態：看 dashboard
+- 想整理候選研究與下一步：看 `research/system/candidates.json`
 - 想確認 email 會寄什麼：看 `automation/run/email-preview.html` 與 `automation/run/email-preview.txt`
 - 想把成本、持股數、目標倉位放進 cockpit：從 `research/system/portfolio.private.json.example` 複製成 `research/system/portfolio.private.json`

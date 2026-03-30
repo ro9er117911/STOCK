@@ -7,6 +7,7 @@ from typing import Any
 
 from .config import RESEARCH_ROOT, WATCHLIST
 from .markdown import render_current_report, render_review_summary
+from .research_state import normalize_state_contract, sync_candidate_queue
 from .storage import write_json, write_jsonl
 
 
@@ -714,7 +715,7 @@ def _ticker_dir(research_root: Path, ticker: str) -> Path:
 def bootstrap_baselines(research_root: Path = RESEARCH_ROOT, force: bool = False) -> list[str]:
     created: list[str] = []
     for ticker, profile in BASELINE_PROFILES.items():
-        state = deepcopy(profile)
+        state = normalize_state_contract(deepcopy(profile), default_stage="active", default_origin="manual_watchlist")
         ticker_dir = _ticker_dir(research_root, ticker)
         state_path = ticker_dir / "state.json"
         current_path = ticker_dir / "current.md"
@@ -774,4 +775,5 @@ def bootstrap_baselines(research_root: Path = RESEARCH_ROOT, force: bool = False
             )
         lines.append("")
     (system_root / "source_registry.md").write_text("\n".join(lines).strip() + "\n", encoding="utf-8")
+    sync_candidate_queue(research_root)
     return created

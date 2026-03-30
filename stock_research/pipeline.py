@@ -21,12 +21,20 @@ from .config import (
     TRANSLATION_SUMMARY_PATH,
     WATCHLIST,
 )
-from .digest import build_portfolio_digest, render_pr_body_from_digest
 from .dashboard import build_dashboard_bundle
+from .digest import build_portfolio_digest, render_pr_body_from_digest
 from .llm import generate_refresh, translate_markdown
+from .radar import scan_market
 from .markdown import render_current_report, render_review_summary
 from .models import Event
 from .postprocess import post_process_refresh_output
+from .research_state import (
+    append_state_change_entry,
+    normalize_state_contract,
+    record_outcome_marker,
+    rewrite_research_artifacts,
+    sync_candidate_queue,
+)
 from .sources import SourceFailure, fetch_feed_events, fetch_price_events, fetch_sec_events
 from .storage import append_jsonl, read_json, read_jsonl, sha1_digest, write_json
 
@@ -40,12 +48,12 @@ def _load_state(research_root: Path, ticker: str) -> dict[str, Any]:
     state = read_json(path)
     if state is None:
         raise FileNotFoundError(f"Missing state for {ticker}: {path}")
-    return state
+    return normalize_state_contract(state)
 
 
 def _save_state(research_root: Path, ticker: str, state: dict[str, Any]) -> None:
     path = research_root / ticker / "state.json"
-    write_json(path, state)
+    write_json(path, normalize_state_contract(state))
 
 
 def _update_recent_events(research_root: Path, ticker: str) -> list[dict[str, Any]]:
@@ -408,12 +416,12 @@ def draft_refreshes(
         ticker_dir = research_root / ticker
         current_path = ticker_dir / "current.md"
         state_path = ticker_dir / "state.json"
-        state = read_json(state_path)
+        state = normalize_state_contract(read_json(state_path))
         current_markdown = current_path.read_text(encoding="utf-8")
         base_version_log = list(state.get("version_log", []))
         refresh = generate_refresh(state, current_markdown, context)
         refresh = post_process_refresh_output(state, refresh, context)
-        updated_state = refresh["updated_state"]
+        updated_state = normalize_state_contract(refresh["updated_state"])
         updated_state["last_reviewed_at"] = date.today().isoformat()
         updated_state["next_review_at"] = (
             date.today() + timedelta(days=updated_state["thresholds"]["deep_refresh_days"])
@@ -429,6 +437,24 @@ def draft_refreshes(
                 "reason": f"Automated refresh triggered by {trigger}.",
                 "impact": refresh["review_summary"],
             }
+        )
+        updated_state = append_state_change_entry(
+            state,
+            updated_state,
+            summary=refresh["review_summary"],
+            change_type="refresh_review",
+            changed_at=updated_state["last_reviewed_at"],
+        )
+        updated_state = record_outcome_marker(
+            updated_state,
+            kind="material_refresh" if context.get("material_events") else "scheduled_refresh",
+            summary=refresh["review_summary"],
+            marked_at=updated_state["last_reviewed_at"],
+            affected_assumption_ids=[
+                item["assumption_id"]
+                for item in refresh.get("changed_assumptions", [])
+                if item.get("assumption_id")
+            ],
         )
         _save_state(research_root, ticker, updated_state)
         recent_events = _update_recent_events(research_root, ticker)
@@ -481,8 +507,71 @@ def draft_refreshes(
     )
     draft_summary["localization"] = localization_summary
     write_json(DRAFT_SUMMARY_PATH, draft_summary)
+    sync_candidate_queue(research_root)
     return draft_summary
 
 
 def build_dashboard(research_root: Path = RESEARCH_ROOT) -> dict[str, Any]:
     return build_dashboard_bundle(research_root=research_root)
+
+
+def run_radar_scan(
+    research_root: Path = RESEARCH_ROOT,
+    universe: list[str] | list[Any] | None = None,
+) -> dict[str, Any]:
+    from .candidates import upsert_candidate_dossier
+    from .config import TickerConfig
+    
+    universe = universe or list(WATCHLIST.values())
+    
+    summary = {
+        "generated_at": datetime.now(UTC).isoformat(timespec="seconds"),
+        "scanned_count": 0,
+        "flagged_tickers": [],
+    }
+    
+    results = scan_market(universe)
+    summary["scanned_count"] = len(results)
+    
+    for ticker, info in results.items():
+        if not info["radar_flags"]:
+            continue
+            
+        company_name = next(
+            (t.company_name for t in universe if isinstance(t, TickerConfig) and t.ticker == ticker),
+            ticker
+        )
+
+        dossier = upsert_candidate_dossier(
+            research_root,
+            ticker=ticker,
+            company_name=company_name,
+            research_topic=f"Technically driven candidate via Radar Scanner.",
+            candidate_origin="radar_scan",
+            research_stage="candidate",
+            radar_flags=info["radar_flags"],
+            radar_summary=info["radar_summary"],
+            radar_risk_level=info["radar_risk_level"],
+            note=f"Automatic ingestion from radar scan due to technical flags.",
+        )
+        summary["flagged_tickers"].append(dossier)
+
+    sync_candidate_queue(research_root)
+    write_json(AUTOMATION_ROOT / "radar-summary.json", summary)
+    return summary
+
+
+def sync_research_contracts(research_root: Path = RESEARCH_ROOT) -> dict[str, Any]:
+    rewritten: list[str] = []
+    for state_path in sorted(research_root.glob("*/state.json")):
+        state = read_json(state_path)
+        if state is None:
+            continue
+        rewrite_research_artifacts(research_root, state_path.parent.name, state)
+        rewritten.append(state_path.parent.name)
+    queue = sync_candidate_queue(research_root)
+    return {
+        "rewritten_tickers": rewritten,
+        "candidate_queue_path": str(research_root / "system" / "candidates.json"),
+        "candidate_count": len(queue["items"]),
+    }

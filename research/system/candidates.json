@@ -1,0 +1,86 @@
+{
+  "generated_at": "2026-03-27",
+  "items": [
+    {
+      "ticker": "MAR",
+      "company_name": "Marriott International",
+      "research_stage": "active",
+      "candidate_origin": "manual_watchlist",
+      "decision_status": "active",
+      "decision_updated_at": "2026-03-27",
+      "current_action": "穩健持有",
+      "research_topic": "Light-asset travel compounder with business travel recovery optionality",
+      "radar_flags": [],
+      "radar_summary": "No radar flags logged yet; use this field for pre-research prioritization only.",
+      "radar_risk_level": "none",
+      "invalidation_reason": "",
+      "latest_change": {
+        "changed_at": "2026-03-27",
+        "change_type": "baseline",
+        "research_stage": "active",
+        "decision_status": "active",
+        "current_action": "穩健持有",
+        "confidence": 0.67,
+        "summary": "Established the living research state under the vNext decision workflow contract."
+      },
+      "artifacts": {
+        "state_path": "research/MAR/state.json",
+        "current_path": "research/MAR/current.md"
+      }
+    },
+    {
+      "ticker": "MSFT",
+      "company_name": "Microsoft",
+      "research_stage": "active",
+      "candidate_origin": "manual_watchlist",
+      "decision_status": "active",
+      "decision_updated_at": "2026-03-27",
+      "current_action": "持有 / 觀望，等待下一次驗證點",
+      "research_topic": "AI monetization reset and model-agnostic platform hedge",
+      "radar_flags": [],
+      "radar_summary": "No radar flags logged yet; use this field for pre-research prioritization only.",
+      "radar_risk_level": "none",
+      "invalidation_reason": "",
+      "latest_change": {
+        "changed_at": "2026-03-27",
+        "change_type": "baseline",
+        "research_stage": "active",
+        "decision_status": "active",
+        "current_action": "持有 / 觀望，等待下一次驗證點",
+        "confidence": 0.63,
+        "summary": "Established the living research state under the vNext decision workflow contract."
+      },
+      "artifacts": {
+        "state_path": "research/MSFT/state.json",
+        "current_path": "research/MSFT/current.md"
+      }
+    },
+    {
+      "ticker": "PLTR",
+      "company_name": "Palantir Technologies",
+      "research_stage": "active",
+      "candidate_origin": "manual_watchlist",
+      "decision_status": "active",
+      "decision_updated_at": "2026-03-27",
+      "current_action": "持有 / 逢回加碼",
+      "research_topic": "AI commercial monetization with durable government moat",
+      "radar_flags": [],
+      "radar_summary": "No radar flags logged yet; use this field for pre-research prioritization only.",
+      "radar_risk_level": "none",
+      "invalidation_reason": "",
+      "latest_change": {
+        "changed_at": "2026-03-27",
+        "change_type": "baseline",
+        "research_stage": "active",
+        "decision_status": "active",
+        "current_action": "持有 / 逢回加碼",
+        "confidence": 0.72,
+        "summary": "Established the living research state under the vNext decision workflow contract."
+      },
+      "artifacts": {
+        "state_path": "research/PLTR/state.json",
+        "current_path": "research/PLTR/current.md"
+      }
+    }
+  ]
+}

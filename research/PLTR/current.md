@@ -6,6 +6,10 @@
 | Research Topic | AI commercial monetization with durable government moat |
 | Holding Period | 數季至一年 |
 | Research Type | 事件驅動 / 中線 |
+| Research Stage | active |
+| Candidate Origin | manual_watchlist |
+| Decision Status | active |
+| Decision Updated | 2026-03-27 |
 | Last Reviewed | 2026-03-27 |
 | Next Review | 2026-05-08 |
 | Current Action | 持有 / 逢回加碼 |
@@ -33,6 +37,20 @@
 - Secondary variables: International commercial conversion, Federal budget cadence, Stock-based compensation discipline
 - Noise filters: Insider selling headlines without demand change, Single-session tech selloff, Unverified channel checks
 - Thresholds: price gap 10.0%, abnormal volume 2.2x, deep refresh every 7 days
+
+## Research Workflow
+
+- Stage: active
+- Candidate origin: manual_watchlist
+- Decision status: active
+- Decision updated at: 2026-03-27
+- Invalidation reason: None logged
+
+## Radar Summary
+
+- Risk level: none
+- Summary: No radar flags logged yet; use this field for pre-research prioritization only.
+- Flags: None logged
 
 ## Assumption Status
 
@@ -79,6 +97,7 @@
 
 - Next must-check data: Q1 2026 earnings: US Commercial growth, margins, major government renewal cadence.
 - Research debt: Need cleaner read on UK/FCA contribution size., Need scenario work on commercial deal concentration.
+- Consistency notes: None logged
 
 ## Source Manifest
 
@@ -93,6 +112,12 @@
 | --- | --- | --- | --- |
 | v0 | 2026-03-25 | Baseline migration from legacy March update. | Established living thesis and machine-readable state. |
 | v1 | 2026-03-27 | Automated refresh triggered by manual. | No new evidence bundle was provided in this refresh, so the PLTR thesis state is unchanged. Confidence, thesis framing, and action posture remain intact; only the review timestamp is advanced. |
+
+## Thesis Change Log
+
+| Date | Type | Stage | Decision | Summary |
+| --- | --- | --- | --- | --- |
+| 2026-03-27 | baseline | active | active | Established the living research state under the vNext decision workflow contract. |
 
 ## Recent Event Log
 

@@ -594,3 +594,99 @@ async function boot() {
 }
 
 document.addEventListener('DOMContentLoaded', boot);
+
+// Appended Analytics & Exception rendering
+function renderAnalytics(analytics) {
+  const container = document.getElementById("analytics-summary");
+  if (!container || !analytics) return;
+
+  container.innerHTML = `
+    <div class="summary-metric">
+      <div class="metric-value">${analytics.hit_rate_pct}%</div>
+      <div class="metric-label">Assumption Hit Rate (${analytics.assumptions_correct}/${analytics.assumptions_resolved})</div>
+    </div>
+    <div class="summary-metric">
+      <div class="metric-value">${analytics.regime_drift_events}</div>
+      <div class="metric-label">Regime Drifts Identified</div>
+    </div>
+    <div class="summary-metric">
+        <div class="metric-value">${analytics.expectation_gap_events}</div>
+        <div class="metric-label">Expectation Gaps Logged</div>
+    </div>
+  `;
+}
+
+// Override initDashboard to include analytics
+const _oldInitDashboard = initDashboard;
+initDashboard = async function() {
+    await _oldInitDashboard();
+    try {
+        const response = await fetch('./data/portfolio.json');
+        const data = await response.json();
+        if (data.post_mortem_analytics) {
+            renderAnalytics(data.post_mortem_analytics);
+        }
+    } catch (err) {
+        console.error("Failed to load analytics: ", err);
+    }
+};
+
+// Exception Dashboard logic
+function renderExceptionQueue(tickers) {
+  const container = document.getElementById("exception-queue");
+  const board = document.getElementById("exception-board");
+  if (!container || !board) return;
+
+  const exceptions = [];
+  
+  if (tickers) {
+    for (const ticker of tickers) {
+      if (ticker.key_events) {
+          for (const ev of ticker.key_events) {
+             if (ev.metadata && ev.metadata.is_exception) {
+                 exceptions.push({
+                     ticker: ticker.ticker,
+                     type: ev.metadata.exception_type,
+                     severity: ev.metadata.severity,
+                     title: ev.title,
+                     date: ev.occurred_at
+                 });
+             }
+          }
+      }
+    }
+  }
+
+  if (exceptions.length > 0) {
+    board.style.display = "block";
+    container.innerHTML = exceptions.map(ex => `
+      <a href="tickers/${ex.ticker}.html" class="priority-item" style="border-left-color: var(--accent-red);">
+        <div class="priority-meta">
+          <span class="ticker">${ex.ticker}</span>
+          <span class="score" style="background: var(--accent-red); color: white;">${ex.severity.toUpperCase()}</span>
+        </div>
+        <div class="priority-detail">
+          <strong>${ex.type}</strong>
+          <span class="reason">${ex.title} (${ex.date})</span>
+        </div>
+      </a>
+    `).join("");
+  } else {
+    board.style.display = "none";
+  }
+}
+
+// Override initDashboard to include exception rendering
+const _oldInitDashboard2 = initDashboard;
+initDashboard = async function() {
+    await _oldInitDashboard2();
+    try {
+        const response = await fetch('./data/portfolio.json');
+        const data = await response.json();
+        if (data.tickers) {
+            renderExceptionQueue(data.tickers);
+        }
+    } catch (err) {
+        console.error("Failed to load exceptions: ", err);
+    }
+};

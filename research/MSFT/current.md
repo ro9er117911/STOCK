@@ -6,6 +6,10 @@
 | Research Topic | AI monetization reset and model-agnostic platform hedge |
 | Holding Period | 數季至一年 |
 | Research Type | 事件驅動 / 中線 |
+| Research Stage | active |
+| Candidate Origin | manual_watchlist |
+| Decision Status | active |
+| Decision Updated | 2026-03-27 |
 | Last Reviewed | 2026-03-27 |
 | Next Review | 2026-04-03 |
 | Current Action | 持有 / 觀望，等待下一次驗證點 |
@@ -32,6 +36,20 @@
 - Secondary variables: Government cloud contract status, M365 pricing realization, Oil / rates driven valuation pressure
 - Noise filters: 單一功能 rollback 未連到企業端 adoption, Macro headline without Azure or Copilot impact, Short-term price weakness without revision in demand
 - Thresholds: price gap 8.0%, abnormal volume 2.0x, deep refresh every 7 days
+
+## Research Workflow
+
+- Stage: active
+- Candidate origin: manual_watchlist
+- Decision status: active
+- Decision updated at: 2026-03-27
+- Invalidation reason: None logged
+
+## Radar Summary
+
+- Risk level: none
+- Summary: No radar flags logged yet; use this field for pre-research prioritization only.
+- Flags: None logged
 
 ## Assumption Status
 
@@ -78,6 +96,7 @@
 
 - Next must-check data: FY2026 Q3 earnings: Azure growth, AI contribution, Copilot monetization, margin trend, and CapEx guidance.
 - Research debt: Need a cleaner measure of paid Copilot seats versus trial activity., Need a better read on government cloud exposure to model-sourcing disputes.
+- Consistency notes: None logged
 
 ## Source Manifest
 
@@ -94,6 +113,12 @@
 | v0 | 2026-03-25 | Baseline migration from legacy MSFT notes and March update. | Established living thesis and machine-readable state. |
 | v1 | 2026-03-27 | Automated refresh triggered by event. | Automatic fallback refresh used. Review the generated diff before merging. |
 | v2 | 2026-03-27 | Automated refresh triggered by manual. | No new material events were provided in the refresh bundle, so the MSFT thesis state remains unchanged aside from the routine review timestamp update. Confidence, assumptions, and action rules are preserved. |
+
+## Thesis Change Log
+
+| Date | Type | Stage | Decision | Summary |
+| --- | --- | --- | --- | --- |
+| 2026-03-27 | baseline | active | active | Established the living research state under the vNext decision workflow contract. |
 
 ## Recent Event Log
 

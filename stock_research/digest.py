@@ -30,8 +30,9 @@ from .copy import (
     thesis_health_snapshot,
 )
 from .portfolio import load_private_portfolio
+from .research_state import normalize_state_contract
 from .storage import read_json, read_jsonl, write_json
-
+from .analytics import generate_post_mortem_report
 
 def _relative_path(path: Path) -> str:
     try:
@@ -49,6 +50,8 @@ def _load_source_status(ticker_dir: Path, ticker: str) -> list[dict[str, Any]]:
     sources = payload.get("sources")
     if sources:
         return sources
+    if ticker not in WATCHLIST:
+        return []
     config = WATCHLIST[ticker]
     return [
         {
@@ -68,6 +71,17 @@ def _load_source_status(ticker_dir: Path, ticker: str) -> list[dict[str, Any]]:
 
 
 def _status_label(state: dict[str, Any]) -> str:
+    stage = state.get("research_stage")
+    if stage == "candidate":
+        return "候選觀察"
+    if stage == "in_research":
+        return "研究進行中"
+    if stage == "ready_to_decide":
+        return "待決策"
+    if stage == "rejected":
+        return "已拒絕"
+    if stage == "archived":
+        return "已封存"
     action = state["current_action"]
     confidence = state["confidence"]
     lowered = action.lower()
@@ -362,6 +376,7 @@ def _build_card(
     state = read_json(ticker_dir / "state.json")
     if state is None:
         raise FileNotFoundError(f"Missing state for {ticker}")
+    state = normalize_state_contract(state)
 
     review_summary = _load_review_summary(ticker_dir)
     source_status_rows = source_status if source_status is not None else _load_source_status(ticker_dir, ticker)
@@ -394,6 +409,10 @@ def _build_card(
     digest = {
         "ticker": ticker,
         "company_name": state["company_name"],
+        "research_stage": state["research_stage"],
+        "candidate_origin": state["candidate_origin"],
+        "decision_status": state["decision_status"],
+        "decision_updated_at": state["decision_updated_at"],
         "status_label": _status_label(state),
         "current_action": state["current_action"],
         "thesis_confidence": round(float(state["confidence"]), 2),
@@ -418,6 +437,15 @@ def _build_card(
         "action_rules": _build_action_rules(state),
         "changed_assumptions": changed_assumptions,
         "action_rule_delta": action_rule_delta,
+        "radar": {
+            "flags": [localize_text(item) for item in state.get("radar_flags", [])],
+            "summary": localize_text(state.get("radar_summary", "")),
+            "risk_level": state.get("radar_risk_level", "none"),
+        },
+        "outcome_markers": state.get("outcome_markers", []),
+        "thesis_change_log": state.get("thesis_change_log", []),
+        "invalidation_reason": localize_text(state.get("invalidation_reason", "")),
+        "consistency_notes": [localize_text(item) for item in state.get("consistency_notes", [])],
         "source_status": source_status_items,
         "citations": citations,
         "citation_links": {
@@ -432,14 +460,22 @@ def _build_card(
         "research_state": {
             "research_topic": localize_text(state["research_topic"]),
             "holding_period": state["holding_period"],
+            "research_stage": state["research_stage"],
+            "candidate_origin": state["candidate_origin"],
+            "decision_status": state["decision_status"],
+            "decision_updated_at": state["decision_updated_at"],
             "thesis_statement": localize_text(state["thesis"]["statement"]),
             "core_catalyst": localize_text(state["thesis"]["core_catalyst"]),
             "market_blind_spot": localize_text(state["thesis"]["market_blind_spot"]),
             "latest_delta": [localize_text(item) for item in state.get("latest_delta", [])],
+            "radar_summary": localize_text(state.get("radar_summary", "")),
+            "radar_flags": [localize_text(item) for item in state.get("radar_flags", [])],
             "review_summary": localize_text(review_summary.get("review_summary", "")),
             "thesis_health": thesis_health,
             "assumptions": _build_assumptions(state),
             "risks": _build_risks(state),
+            "outcome_markers": state.get("outcome_markers", []),
+            "thesis_change_log": state.get("thesis_change_log", []),
             "event_timeline": event_timeline,
             "source_manifest": [
                 {
@@ -453,6 +489,9 @@ def _build_card(
             ],
         },
         "decision_state": {
+            "research_stage": state["research_stage"],
+            "decision_status": state["decision_status"],
+            "decision_updated_at": state["decision_updated_at"],
             "current_action": state["current_action"],
             "status_label": _status_label(state),
             "priority_score": priority["score"],
@@ -461,6 +500,7 @@ def _build_card(
             "next_checklist": next_checklist,
             "action_rules": _build_action_rules(state),
             "changed_assumptions": changed_assumptions,
+            "invalidation_reason": localize_text(state.get("invalidation_reason", "")),
         },
         "artifacts": {
             "state_path": _relative_path(ticker_dir / "state.json"),
@@ -550,6 +590,7 @@ def build_portfolio_digest(
         "portfolio_summary": _build_portfolio_summary(cards),
         "priority_queue": _build_priority_queue(cards),
         "tickers": cards,
+        "post_mortem_analytics": generate_post_mortem_report(research_root),
     }
     write_json(CANONICAL_DIGEST_PATH, payload)
     return payload

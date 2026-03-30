@@ -19,6 +19,10 @@ def render_current_report(state: dict[str, Any], recent_events: list[dict[str, A
     valuation = state["valuation_regime"]
     version_log = state["version_log"]
     recent_events = recent_events or []
+    radar_flags = state.get("radar_flags", [])
+    outcome_markers = state.get("outcome_markers", [])
+    thesis_change_log = state.get("thesis_change_log", [])
+    consistency_notes = state.get("consistency_notes", [])
 
     assumption_rows = [
         [
@@ -87,6 +91,10 @@ def render_current_report(state: dict[str, Any], recent_events: list[dict[str, A
                 ["Research Topic", state["research_topic"]],
                 ["Holding Period", state["holding_period"]],
                 ["Research Type", state["research_type"]],
+                ["Research Stage", state.get("research_stage", "")],
+                ["Candidate Origin", state.get("candidate_origin", "")],
+                ["Decision Status", state.get("decision_status", "")],
+                ["Decision Updated", state.get("decision_updated_at", "")],
                 ["Last Reviewed", state["last_reviewed_at"]],
                 ["Next Review", state["next_review_at"]],
                 ["Current Action", state["current_action"]],
@@ -113,6 +121,20 @@ def render_current_report(state: dict[str, Any], recent_events: list[dict[str, A
         f"- Secondary variables: {', '.join(state['secondary_observation_variables'])}",
         f"- Noise filters: {', '.join(state['noise_filters'])}",
         f"- Thresholds: price gap {state['thresholds']['price_gap_pct']}%, abnormal volume {state['thresholds']['volume_ratio']}x, deep refresh every {state['thresholds']['deep_refresh_days']} days",
+        "",
+        "## Research Workflow",
+        "",
+        f"- Stage: {state.get('research_stage', '')}",
+        f"- Candidate origin: {state.get('candidate_origin', '')}",
+        f"- Decision status: {state.get('decision_status', '')}",
+        f"- Decision updated at: {state.get('decision_updated_at', '')}",
+        f"- Invalidation reason: {state.get('invalidation_reason', '') or 'None logged'}",
+        "",
+        "## Radar Summary",
+        "",
+        f"- Risk level: {state.get('radar_risk_level', 'none')}",
+        f"- Summary: {state.get('radar_summary', '')}",
+        f"- Flags: {', '.join(radar_flags) if radar_flags else 'None logged'}",
         "",
         "## Assumption Status",
         "",
@@ -142,6 +164,7 @@ def render_current_report(state: dict[str, Any], recent_events: list[dict[str, A
         "",
         f"- Next must-check data: {state['next_must_check_data']}",
         f"- Research debt: {', '.join(state['research_debt'])}",
+        f"- Consistency notes: {'; '.join(consistency_notes) if consistency_notes else 'None logged'}",
         "",
         "## Source Manifest",
         "",
@@ -154,6 +177,45 @@ def render_current_report(state: dict[str, Any], recent_events: list[dict[str, A
         "",
         _render_table(["Version", "Date", "Reason", "Impact"], version_rows),
     ]
+
+    if outcome_markers:
+        marker_rows = [
+            [
+                item.get("marked_at", ""),
+                item.get("kind", ""),
+                item.get("summary", ""),
+                ", ".join(item.get("affected_assumption_ids", [])) or "-",
+            ]
+            for item in outcome_markers[-8:]
+        ]
+        lines.extend(
+            [
+                "",
+                "## Outcome Markers",
+                "",
+                _render_table(["Date", "Kind", "Summary", "Assumptions"], marker_rows),
+            ]
+        )
+
+    if thesis_change_log:
+        change_rows = [
+            [
+                item.get("changed_at", ""),
+                item.get("change_type", ""),
+                item.get("research_stage", ""),
+                item.get("decision_status", ""),
+                item.get("summary", ""),
+            ]
+            for item in thesis_change_log[-8:]
+        ]
+        lines.extend(
+            [
+                "",
+                "## Thesis Change Log",
+                "",
+                _render_table(["Date", "Type", "Stage", "Decision", "Summary"], change_rows),
+            ]
+        )
 
     if event_rows:
         lines.extend(
@@ -184,6 +246,8 @@ def render_review_summary(
         f"# {state['ticker']} Refresh Review Summary\n\n"
         f"- Reviewed at: {state['last_reviewed_at']}\n"
         f"- Next review: {state['next_review_at']}\n"
+        f"- Research stage: {state.get('research_stage', '')}\n"
+        f"- Decision status: {state.get('decision_status', '')}\n"
         f"- Current action: {state['current_action']}\n\n"
         "## Summary\n\n"
         f"{review_summary}\n\n"

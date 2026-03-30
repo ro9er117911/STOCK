@@ -2,6 +2,8 @@
 
 - Reviewed at: 2026-03-27
 - Next review: 2026-05-08
+- Research stage: active
+- Decision status: active
 - Current action: 持有 / 逢回加碼
 
 ## Summary

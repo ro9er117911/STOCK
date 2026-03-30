@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-03-27T07:47:45+00:00",
+  "generated_at": "2026-03-27T11:51:05+00:00",
   "portfolio_summary": {
     "tracked_ticker_count": 3,
     "positioned_ticker_count": 0,
@@ -45,6 +45,10 @@
     {
       "ticker": "PLTR",
       "company_name": "Palantir Technologies",
+      "research_stage": "active",
+      "candidate_origin": "manual_watchlist",
+      "decision_status": "active",
+      "decision_updated_at": "2026-03-27",
       "status_label": "偏多",
       "current_action": "持有 / 逢回加碼",
       "thesis_confidence": 0.72,
@@ -209,6 +213,25 @@
       ],
       "changed_assumptions": [],
       "action_rule_delta": [],
+      "radar": {
+        "flags": [],
+        "summary": "No radar flags logged yet; use this field for pre-research prioritization only.",
+        "risk_level": "none"
+      },
+      "outcome_markers": [],
+      "thesis_change_log": [
+        {
+          "changed_at": "2026-03-27",
+          "change_type": "baseline",
+          "research_stage": "active",
+          "decision_status": "active",
+          "current_action": "持有 / 逢回加碼",
+          "confidence": 0.72,
+          "summary": "Established the living research state under the vNext decision workflow contract."
+        }
+      ],
+      "invalidation_reason": "",
+      "consistency_notes": [],
       "source_status": [
         {
           "source_id": "sec",
@@ -575,6 +598,10 @@
       "research_state": {
         "research_topic": "AI 商業化變現，外加持久的政府護城河。",
         "holding_period": "數季至一年",
+        "research_stage": "active",
+        "candidate_origin": "manual_watchlist",
+        "decision_status": "active",
+        "decision_updated_at": "2026-03-27",
         "thesis_statement": "市場仍低估 Palantir 在美國商業 AI 與國防軟體的雙引擎飛輪，只要商業營收維持高成長且政府專案升級為常態預算，估值雖高仍可被更高品質的成長證明支持。",
         "core_catalyst": "美國商業營收續強與大型政府專案正式預算化。",
         "market_blind_spot": "市場把 PLTR 視為敘事股，但近兩季已證明商業化與政府續約可同時成立。",
@@ -584,6 +611,8 @@
           "假設狀態沒有變動，估值與成長監控門檻先維持不變。",
           "這次主要是把 review metadata 更新到今天，並順延下次檢查日期。"
         ],
+        "radar_summary": "No radar flags logged yet; use this field for pre-research prioritization only.",
+        "radar_flags": [],
         "review_summary": "這次更新沒有新增足以重寫 thesis 的證據，所以 PLTR 的 thesis 狀態不變。信心、論述框架與操作姿態都先延續，只更新檢查時間。",
         "thesis_health": {
           "score": 0.77,
@@ -650,6 +679,18 @@
             "response": "只有在需求惡化同時出現時才採取動作。"
           }
         ],
+        "outcome_markers": [],
+        "thesis_change_log": [
+          {
+            "changed_at": "2026-03-27",
+            "change_type": "baseline",
+            "research_stage": "active",
+            "decision_status": "active",
+            "current_action": "持有 / 逢回加碼",
+            "confidence": 0.72,
+            "summary": "Established the living research state under the vNext decision workflow contract."
+          }
+        ],
         "event_timeline": [
           {
             "event_id": "pltr-seed-2026-maven",
@@ -714,6 +755,9 @@
         ]
       },
       "decision_state": {
+        "research_stage": "active",
+        "decision_status": "active",
+        "decision_updated_at": "2026-03-27",
         "current_action": "持有 / 逢回加碼",
         "status_label": "偏多",
         "priority_score": 96,
@@ -747,7 +791,8 @@
             "action": "不管股價走勢，直接退出。"
           }
         ],
-        "changed_assumptions": []
+        "changed_assumptions": [],
+        "invalidation_reason": ""
       },
       "artifacts": {
         "state_path": "research/PLTR/state.json",
@@ -758,6 +803,10 @@
     {
       "ticker": "MSFT",
       "company_name": "Microsoft",
+      "research_stage": "active",
+      "candidate_origin": "manual_watchlist",
+      "decision_status": "active",
+      "decision_updated_at": "2026-03-27",
       "status_label": "持有觀察",
       "current_action": "持有 / 觀望，等待下一次驗證點",
       "thesis_confidence": 0.63,
@@ -1014,6 +1063,25 @@
       ],
       "changed_assumptions": [],
       "action_rule_delta": [],
+      "radar": {
+        "flags": [],
+        "summary": "No radar flags logged yet; use this field for pre-research prioritization only.",
+        "risk_level": "none"
+      },
+      "outcome_markers": [],
+      "thesis_change_log": [
+        {
+          "changed_at": "2026-03-27",
+          "change_type": "baseline",
+          "research_stage": "active",
+          "decision_status": "active",
+          "current_action": "持有 / 觀望，等待下一次驗證點",
+          "confidence": 0.63,
+          "summary": "Established the living research state under the vNext decision workflow contract."
+        }
+      ],
+      "invalidation_reason": "",
+      "consistency_notes": [],
       "source_status": [
         {
           "source_id": "sec",
@@ -1515,6 +1583,10 @@
       "research_state": {
         "research_topic": "AI 變現重估，加上 model-agnostic 平台對沖。",
         "holding_period": "數季至一年",
+        "research_stage": "active",
+        "candidate_origin": "manual_watchlist",
+        "decision_status": "active",
+        "decision_updated_at": "2026-03-27",
         "thesis_statement": "微軟仍是 AI 基礎設施與企業分發的核心受益者，但要讓股價脫離 CapEx 懷疑，必須用 Copilot adoption、M365 漲價與 Azure AI 需求證明其估值可以重新從成熟雲端股回到高品質 AI 平台股。",
         "core_catalyst": "Copilot adoption、M365 漲價傳導，以及 Azure AI 需求。",
         "market_blind_spot": "市場短線聚焦高 CapEx，低估 model-agnostic Copilot 與商業訂價權恢復帶來的 EPS 扭轉。",
@@ -1523,6 +1595,8 @@
           "目前維持持有 / 觀望，等下一個財報驗證點。",
           "這次把檢查時間更新成今天已完成複盤，並維持近期待追蹤節奏。"
         ],
+        "radar_summary": "No radar flags logged yet; use this field for pre-research prioritization only.",
+        "radar_flags": [],
         "review_summary": "本輪沒有新增足以改寫 thesis 的重大事件，所以 MSFT 除了例行更新檢查時間之外，主判斷不變。信心、關鍵假設與操作規則都先維持。",
         "thesis_health": {
           "score": 0.71,
@@ -1587,6 +1661,18 @@
             "tier": "thesis weakener",
             "tier_label": "削弱 thesis 的風險",
             "response": "若政府雲敘事削弱了平台對沖，就要減碼。"
+          }
+        ],
+        "outcome_markers": [],
+        "thesis_change_log": [
+          {
+            "changed_at": "2026-03-27",
+            "change_type": "baseline",
+            "research_stage": "active",
+            "decision_status": "active",
+            "current_action": "持有 / 觀望，等待下一次驗證點",
+            "confidence": 0.63,
+            "summary": "Established the living research state under the vNext decision workflow contract."
           }
         ],
         "event_timeline": [
@@ -1735,6 +1821,9 @@
         ]
       },
       "decision_state": {
+        "research_stage": "active",
+        "decision_status": "active",
+        "decision_updated_at": "2026-03-27",
         "current_action": "持有 / 觀望，等待下一次驗證點",
         "status_label": "持有觀察",
         "priority_score": 102,
@@ -1770,7 +1859,8 @@
             "action": "退出目前 thesis，轉往風險報酬更佳的標的。"
           }
         ],
-        "changed_assumptions": []
+        "changed_assumptions": [],
+        "invalidation_reason": ""
       },
       "artifacts": {
         "state_path": "research/MSFT/state.json",
@@ -1781,6 +1871,10 @@
     {
       "ticker": "MAR",
       "company_name": "Marriott International",
+      "research_stage": "active",
+      "candidate_origin": "manual_watchlist",
+      "decision_status": "active",
+      "decision_updated_at": "2026-03-27",
       "status_label": "持有觀察",
       "current_action": "穩健持有",
       "thesis_confidence": 0.67,
@@ -1946,6 +2040,25 @@
       ],
       "changed_assumptions": [],
       "action_rule_delta": [],
+      "radar": {
+        "flags": [],
+        "summary": "No radar flags logged yet; use this field for pre-research prioritization only.",
+        "risk_level": "none"
+      },
+      "outcome_markers": [],
+      "thesis_change_log": [
+        {
+          "changed_at": "2026-03-27",
+          "change_type": "baseline",
+          "research_stage": "active",
+          "decision_status": "active",
+          "current_action": "穩健持有",
+          "confidence": 0.67,
+          "summary": "Established the living research state under the vNext decision workflow contract."
+        }
+      ],
+      "invalidation_reason": "",
+      "consistency_notes": [],
       "source_status": [
         {
           "source_id": "sec",
@@ -2312,6 +2425,10 @@
       "research_state": {
         "research_topic": "資本輕、可複利的旅遊平台，外加商務旅遊回溫的選擇權。",
         "holding_period": "數季至一年",
+        "research_stage": "active",
+        "candidate_origin": "manual_watchlist",
+        "decision_status": "active",
+        "decision_updated_at": "2026-03-27",
         "thesis_statement": "Marriott 受惠於輕資產模式、高端與國際旅遊韌性，以及企業差旅回溫，因此在景氣不確定環境下仍能維持穩定現金流與較佳下行保護。",
         "core_catalyst": "商務旅遊回溫，加上國際與高端 RevPAR 維持穩定。",
         "market_blind_spot": "市場容易把 MAR 當純週期股，但其資本輕、品牌強與回購能力提供了更好的防禦質地。",
@@ -2320,6 +2437,8 @@
           "防守型品質股加商務旅遊回溫的敘事先維持，信心不變。",
           "這次把 last_reviewed_at 更新到今天，並依既有節奏安排下一次檢查。"
         ],
+        "radar_summary": "No radar flags logged yet; use this field for pre-research prioritization only.",
+        "radar_flags": [],
         "review_summary": "本輪沒有新增需要重估的事件，因此 MAR 的 thesis 維持不變。信心與操作都先延續，只是把檢查時間更新到今天，並依原本節奏往後安排下一次檢查。",
         "thesis_health": {
           "score": 0.74,
@@ -2386,6 +2505,18 @@
             "response": "除非基本面惡化，否則先忽略。"
           }
         ],
+        "outcome_markers": [],
+        "thesis_change_log": [
+          {
+            "changed_at": "2026-03-27",
+            "change_type": "baseline",
+            "research_stage": "active",
+            "decision_status": "active",
+            "current_action": "穩健持有",
+            "confidence": 0.67,
+            "summary": "Established the living research state under the vNext decision workflow contract."
+          }
+        ],
         "event_timeline": [
           {
             "event_id": "mar-seed-2026-travel-mix",
@@ -2450,6 +2581,9 @@
         ]
       },
       "decision_state": {
+        "research_stage": "active",
+        "decision_status": "active",
+        "decision_updated_at": "2026-03-27",
         "current_action": "穩健持有",
         "status_label": "持有觀察",
         "priority_score": 56,
@@ -2484,7 +2618,8 @@
             "action": "退出目前 thesis。"
           }
         ],
-        "changed_assumptions": []
+        "changed_assumptions": [],
+        "invalidation_reason": ""
       },
       "artifacts": {
         "state_path": "research/MAR/state.json",
@@ -2492,5 +2627,37 @@
         "review_summary_path": "research/MAR/artifacts/review_summary.md"
       }
     }
-  ]
+  ],
+  "post_mortem_analytics": {
+    "total_tickers_analyzed": 3,
+    "assumptions_resolved": 0,
+    "assumptions_correct": 0,
+    "hit_rate_pct": 0.0,
+    "thesis_changes": 3,
+    "regime_drift_events": 0,
+    "expectation_gap_events": 0,
+    "ticker_breakdown": {
+      "MAR": {
+        "outcomes_resolved": 0,
+        "outcomes_correct": 0,
+        "thesis_changes": 1,
+        "regime_drifts": 0,
+        "expectation_gaps": 0
+      },
+      "MSFT": {
+        "outcomes_resolved": 0,
+        "outcomes_correct": 0,
+        "thesis_changes": 1,
+        "regime_drifts": 0,
+        "expectation_gaps": 0
+      },
+      "PLTR": {
+        "outcomes_resolved": 0,
+        "outcomes_correct": 0,
+        "thesis_changes": 1,
+        "regime_drifts": 0,
+        "expectation_gaps": 0
+      }
+    }
+  }
 }

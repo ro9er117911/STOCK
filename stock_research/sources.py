@@ -121,11 +121,30 @@ def fetch_price_events(
     change_pct = ((last_close - previous_close) / previous_close) * 100 if previous_close else 0.0
     occurred_at = datetime.fromtimestamp(last_ts, UTC).date().isoformat()
     previous_cursor = state["last_seen_event_cursors"].get("price", "")
+    
+    # Exception Logic
+    is_exception = False
+    exception_type = ""
+    severity = "normal"
+    
+    if volume_ratio >= 3.0 and change_pct >= 5.0:
+        is_exception = True
+        exception_type = "妖股爆發結構 (Volume Climax Breakout)"
+        severity = "high"
+    elif volume_ratio >= 2.0 and change_pct <= -5.0:
+        is_exception = True
+        exception_type = "籌碼崩解 (High-Volume Selloff)"
+        severity = "critical"
+    
     if previous_cursor == occurred_at:
         return [], occurred_at
-    if abs(change_pct) < state["thresholds"]["price_gap_pct"] and volume_ratio < state["thresholds"]["volume_ratio"]:
+        
+    if not is_exception and abs(change_pct) < state["thresholds"]["price_gap_pct"] and volume_ratio < state["thresholds"]["volume_ratio"]:
         return [], occurred_at
-    title = f"Price move {change_pct:+.2f}% with {volume_ratio:.2f}x volume"
+        
+    title_prefix = f"[EXCEPTION: {exception_type}] " if is_exception else ""
+    title = f"{title_prefix}Price move {change_pct:+.2f}% with {volume_ratio:.2f}x volume"
+    
     event = {
         "event_id": sha1_digest(config.ticker, "price", occurred_at, title),
         "ticker": config.ticker,
@@ -137,6 +156,9 @@ def fetch_price_events(
             "change_pct": round(change_pct, 2),
             "volume_ratio": round(volume_ratio, 2),
             "close": round(last_close, 2),
+            "is_exception": is_exception,
+            "exception_type": exception_type,
+            "severity": severity,
         },
     }
     return [event], occurred_at

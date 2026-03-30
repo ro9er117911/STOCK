@@ -283,5 +283,26 @@
     "Single-quarter EPS miss without RevPAR weakness",
     "Short-lived consumer sentiment noise",
     "Headline volatility in lower-end domestic travel"
-  ]
+  ],
+  "research_stage": "active",
+  "candidate_origin": "manual_watchlist",
+  "decision_status": "active",
+  "decision_updated_at": "2026-03-27",
+  "radar_flags": [],
+  "radar_summary": "No radar flags logged yet; use this field for pre-research prioritization only.",
+  "radar_risk_level": "none",
+  "outcome_markers": [],
+  "thesis_change_log": [
+    {
+      "changed_at": "2026-03-27",
+      "change_type": "baseline",
+      "research_stage": "active",
+      "decision_status": "active",
+      "current_action": "穩健持有",
+      "confidence": 0.67,
+      "summary": "Established the living research state under the vNext decision workflow contract."
+    }
+  ],
+  "invalidation_reason": "",
+  "consistency_notes": []
 }
