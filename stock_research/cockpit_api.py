@@ -51,6 +51,71 @@ def _rebuild_local_cockpit(
     )
 
 
+def get_observation_workspace(research_root: Path = RESEARCH_ROOT) -> dict[str, Any]:
+    ensure_observation_system_files(research_root)
+    return _workspace_payload(research_root)
+
+
+def handle_observation_command(
+    *,
+    research_root: Path = RESEARCH_ROOT,
+    local_site_root: Path = LOCAL_DASHBOARD_ROOT,
+    portfolio_path: Path = PORTFOLIO_PRIVATE_PATH,
+    route: str,
+    payload: dict[str, Any] | None = None,
+) -> dict[str, Any]:
+    data = payload or {}
+    ensure_observation_system_files(research_root)
+
+    if route == "/api/observations/open":
+        lake = open_observation(
+            research_root,
+            ticker=data["ticker"],
+            company_name=data.get("company_name", data["ticker"]),
+            intended_horizon=data.get("intended_horizon", ""),
+            opened_from=data.get("opened_from", "manual"),
+            theme_ids=data.get("theme_ids", []),
+            peer_refs=data.get("peer_refs", []),
+            chain_refs=data.get("chain_refs", []),
+            why_now=data.get("why_now", ""),
+            selected_events=data.get("selected_events", []),
+            notes=data.get("notes", ""),
+        )
+    elif route == "/api/observations/include-events":
+        lake = include_events(
+            research_root,
+            observation_id=data["observation_id"],
+            selected_events=data.get("selected_events", []),
+            notes=data.get("notes", ""),
+        )
+    elif route == "/api/observations/promote":
+        lake = promote_observation(
+            research_root,
+            observation_id=data["observation_id"],
+            stage=data.get("stage", "candidate"),
+            note=data.get("note", ""),
+        )
+    elif route == "/api/observations/dismiss":
+        lake = dismiss_observation(
+            research_root,
+            observation_id=data["observation_id"],
+            reason=data.get("reason", ""),
+        )
+    else:
+        raise ValueError(f"Unknown route: {route}")
+
+    _rebuild_local_cockpit(
+        research_root,
+        local_site_root=local_site_root,
+        portfolio_path=portfolio_path,
+    )
+    return {
+        "ok": True,
+        "lake": lake,
+        "workspace": _workspace_payload(research_root),
+    }
+
+
 class CockpitAPIHandler(BaseHTTPRequestHandler):
     server_version = "ObservationCockpitAPI/1.0"
 
