@@ -72,6 +72,21 @@ def build_dashboard_site(
     return _write_site(site_root, payload)
 
 
+def build_local_dashboard_site(
+    research_root: Path = RESEARCH_ROOT,
+    local_site_root: Path = LOCAL_DASHBOARD_ROOT,
+    portfolio_path: Path = PORTFOLIO_PRIVATE_PATH,
+) -> dict[str, Any]:
+    public_payload = build_portfolio_digest(research_root)
+    local_payload = overlay_private_positions(
+        public_payload,
+        research_root=research_root,
+        portfolio_path=portfolio_path,
+        risk_policy_path=research_root / "system" / "risk_policy.json",
+    )
+    return _write_site(local_site_root, local_payload)
+
+
 def build_dashboard_bundle(
     research_root: Path = RESEARCH_ROOT,
     public_site_root: Path = SITE_ROOT,
@@ -81,16 +96,17 @@ def build_dashboard_bundle(
     public_payload = build_portfolio_digest(research_root)
     public_summary = _write_site(public_site_root, public_payload)
 
-    local_summary: dict[str, Any] | None = None
-    local_payload = overlay_private_positions(public_payload, portfolio_path=portfolio_path)
-    if any(item["position"]["has_position"] for item in local_payload["tickers"]):
-        local_summary = _write_site(local_site_root, local_payload)
+    local_summary = build_local_dashboard_site(
+        research_root=research_root,
+        local_site_root=local_site_root,
+        portfolio_path=portfolio_path,
+    )
 
     return {
         "generated_at": public_summary["generated_at"],
         "public_site_root": public_summary["site_root"],
         "public_tickers": public_summary["tickers"],
-        "local_site_root": None if local_summary is None else local_summary["site_root"],
-        "local_tickers": [] if local_summary is None else local_summary["tickers"],
-        "has_private_overlay": local_summary is not None,
+        "local_site_root": local_summary["site_root"],
+        "local_tickers": local_summary["tickers"],
+        "has_private_overlay": local_summary["has_private_positions"],
     }

@@ -1,0 +1,196 @@
+from __future__ import annotations
+
+import json
+from functools import partial
+from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
+from pathlib import Path
+from typing import Any
+from urllib.parse import urlparse
+
+from .config import (
+    COCKPIT_API_HOST,
+    COCKPIT_API_PORT,
+    LOCAL_DASHBOARD_ROOT,
+    PORTFOLIO_PRIVATE_PATH,
+    RESEARCH_ROOT,
+)
+from .dashboard import build_local_dashboard_site
+from .digest import build_portfolio_digest
+from .observation import (
+    build_observation_workspace,
+    dismiss_observation,
+    ensure_observation_system_files,
+    include_events,
+    open_observation,
+    promote_observation,
+)
+
+
+def _workspace_payload(research_root: Path) -> dict[str, Any]:
+    portfolio_payload = build_portfolio_digest(research_root)
+    workspace = build_observation_workspace(research_root, cards=portfolio_payload["tickers"])
+    return {
+        "generated_at": portfolio_payload["generated_at"],
+        "summary": workspace["summary"],
+        "items": workspace["items"],
+        "watchlist_recommendations": workspace["watchlist_recommendations"],
+        "observation_actions_enabled": True,
+    }
+
+
+def _rebuild_local_cockpit(
+    research_root: Path,
+    *,
+    local_site_root: Path,
+    portfolio_path: Path,
+) -> None:
+    build_local_dashboard_site(
+        research_root=research_root,
+        local_site_root=local_site_root,
+        portfolio_path=portfolio_path,
+    )
+
+
+class CockpitAPIHandler(BaseHTTPRequestHandler):
+    server_version = "ObservationCockpitAPI/1.0"
+
+    def __init__(
+        self,
+        *args: Any,
+        research_root: Path,
+        local_site_root: Path,
+        portfolio_path: Path,
+        **kwargs: Any,
+    ) -> None:
+        self.research_root = research_root
+        self.local_site_root = local_site_root
+        self.portfolio_path = portfolio_path
+        super().__init__(*args, **kwargs)
+
+    def log_message(self, format: str, *args: Any) -> None:  # noqa: A003
+        _ = format, args
+
+    def _send_json(self, status: int, payload: dict[str, Any]) -> None:
+        body = json.dumps(payload, ensure_ascii=False, indent=2).encode("utf-8")
+        self.send_response(status)
+        self.send_header("Content-Type", "application/json; charset=utf-8")
+        self.send_header("Content-Length", str(len(body)))
+        self.send_header("Access-Control-Allow-Origin", "*")
+        self.send_header("Access-Control-Allow-Headers", "Content-Type")
+        self.send_header("Access-Control-Allow-Methods", "GET, POST, OPTIONS")
+        self.end_headers()
+        self.wfile.write(body)
+
+    def _read_json_body(self) -> dict[str, Any]:
+        length = int(self.headers.get("Content-Length", "0") or 0)
+        if length <= 0:
+            return {}
+        raw = self.rfile.read(length).decode("utf-8")
+        return json.loads(raw) if raw.strip() else {}
+
+    def do_OPTIONS(self) -> None:  # noqa: N802
+        self._send_json(200, {"ok": True})
+
+    def do_GET(self) -> None:  # noqa: N802
+        path = urlparse(self.path).path
+        ensure_observation_system_files(self.research_root)
+        if path == "/api/health":
+            self._send_json(
+                200,
+                {
+                    "ok": True,
+                    "host": COCKPIT_API_HOST,
+                    "port": COCKPIT_API_PORT,
+                },
+            )
+            return
+        if path == "/api/observations":
+            self._send_json(200, _workspace_payload(self.research_root))
+            return
+        self._send_json(404, {"error": f"Unknown route: {path}"})
+
+    def do_POST(self) -> None:  # noqa: N802
+        path = urlparse(self.path).path
+        try:
+            payload = self._read_json_body()
+            ensure_observation_system_files(self.research_root)
+            if path == "/api/observations/open":
+                lake = open_observation(
+                    self.research_root,
+                    ticker=payload["ticker"],
+                    company_name=payload.get("company_name", payload["ticker"]),
+                    intended_horizon=payload.get("intended_horizon", ""),
+                    opened_from=payload.get("opened_from", "manual"),
+                    theme_ids=payload.get("theme_ids", []),
+                    peer_refs=payload.get("peer_refs", []),
+                    chain_refs=payload.get("chain_refs", []),
+                    why_now=payload.get("why_now", ""),
+                    selected_events=payload.get("selected_events", []),
+                    notes=payload.get("notes", ""),
+                )
+            elif path == "/api/observations/include-events":
+                lake = include_events(
+                    self.research_root,
+                    observation_id=payload["observation_id"],
+                    selected_events=payload.get("selected_events", []),
+                    notes=payload.get("notes", ""),
+                )
+            elif path == "/api/observations/promote":
+                lake = promote_observation(
+                    self.research_root,
+                    observation_id=payload["observation_id"],
+                    stage=payload.get("stage", "candidate"),
+                    note=payload.get("note", ""),
+                )
+            elif path == "/api/observations/dismiss":
+                lake = dismiss_observation(
+                    self.research_root,
+                    observation_id=payload["observation_id"],
+                    reason=payload.get("reason", ""),
+                )
+            else:
+                self._send_json(404, {"error": f"Unknown route: {path}"})
+                return
+            _rebuild_local_cockpit(
+                self.research_root,
+                local_site_root=self.local_site_root,
+                portfolio_path=self.portfolio_path,
+            )
+            self._send_json(
+                200,
+                {
+                    "ok": True,
+                    "lake": lake,
+                    "workspace": _workspace_payload(self.research_root),
+                },
+            )
+        except KeyError as exc:
+            self._send_json(404, {"error": str(exc)})
+        except (TypeError, ValueError, json.JSONDecodeError) as exc:
+            self._send_json(400, {"error": str(exc)})
+        except Exception as exc:  # pragma: no cover - safety net
+            self._send_json(500, {"error": str(exc)})
+
+
+def serve_cockpit_api(
+    *,
+    research_root: Path = RESEARCH_ROOT,
+    host: str = COCKPIT_API_HOST,
+    port: int = COCKPIT_API_PORT,
+    local_site_root: Path = LOCAL_DASHBOARD_ROOT,
+    portfolio_path: Path = PORTFOLIO_PRIVATE_PATH,
+) -> None:
+    ensure_observation_system_files(research_root)
+    _rebuild_local_cockpit(
+        research_root,
+        local_site_root=local_site_root,
+        portfolio_path=portfolio_path,
+    )
+    handler = partial(
+        CockpitAPIHandler,
+        research_root=research_root,
+        local_site_root=local_site_root,
+        portfolio_path=portfolio_path,
+    )
+    with ThreadingHTTPServer((host, port), handler) as server:
+        server.serve_forever()

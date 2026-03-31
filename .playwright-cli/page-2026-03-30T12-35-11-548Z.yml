@@ -1,0 +1,376 @@
+- main [ref=e2]:
+  - generic [ref=e3]:
+    - generic [ref=e4]:
+      - paragraph [ref=e5]: Institutional Growth Cockpit
+      - heading "投資駕駛艙" [level=1] [ref=e6]
+      - paragraph [ref=e7]: 先看真實部位、VIX regime 與熔斷警報，再看 thesis、事件、sizing 壓力與專案成熟度。這是本機私有 cockpit，不是展示用 landing page。
+    - generic [ref=e8]:
+      - generic [ref=e9]:
+        - generic [ref=e10]: 更新時間
+        - strong [ref=e11]: 2026-03-30T12:34:35+00:00
+      - generic [ref=e12]:
+        - generic [ref=e13]: 追蹤標的
+        - strong [ref=e14]: 3 檔
+      - generic [ref=e15]:
+        - generic [ref=e16]: 真實部位
+        - strong [ref=e17]: 3 檔
+      - generic [ref=e18]:
+        - generic [ref=e19]: VIX regime
+        - strong [ref=e20]: 壓力 30.27
+      - generic [ref=e21]:
+        - generic [ref=e22]: 風險警報
+        - strong [ref=e23]: 6 則
+  - generic [ref=e24]:
+    - article [ref=e25]:
+      - generic [ref=e26]:
+        - generic [ref=e27]:
+          - paragraph [ref=e28]: Portfolio Totals
+          - heading "真實組合總覽" [level=2] [ref=e29]
+        - generic [ref=e30]: Private on
+      - generic [ref=e31]:
+        - generic [ref=e32]:
+          - paragraph [ref=e33]: Cost Basis
+          - generic [ref=e34]: $7,231.06
+          - paragraph [ref=e35]: 本機 private overlay 已啟用，以下 metrics 以你的真實成本與持股數為準。
+        - generic [ref=e36]:
+          - paragraph [ref=e37]: Market Value
+          - generic [ref=e38]: $5,817.61
+          - paragraph [ref=e39]: As of 2026-03-27
+        - generic [ref=e40]:
+          - paragraph [ref=e41]: Unrealized P/L
+          - generic [ref=e42]: $-1,413.45
+          - paragraph [ref=e43]: "-19.55%"
+        - generic [ref=e44]:
+          - paragraph [ref=e45]: Largest Position
+          - generic [ref=e46]: MAR
+          - paragraph [ref=e47]: 54.58%
+    - article [ref=e48]:
+      - generic [ref=e49]:
+        - generic [ref=e50]:
+          - paragraph [ref=e51]: Macro Regime
+          - heading "VIX 風險閥" [level=2] [ref=e52]
+        - generic [ref=e53]: 壓力
+      - generic [ref=e54]:
+        - generic [ref=e55]:
+          - generic [ref=e56]: VIX
+          - strong [ref=e57]: "30.27"
+        - generic [ref=e58]:
+          - generic [ref=e59]: Size Multiplier
+          - strong [ref=e60]: 0.75x
+        - generic [ref=e61]:
+          - generic [ref=e62]: Review Urgency
+          - strong [ref=e63]: high
+      - paragraph [ref=e64]: 風險偏高，target / max 倉位收緊 25%，暫停追價加碼。
+    - article [ref=e65]:
+      - generic [ref=e66]:
+        - generic [ref=e67]:
+          - paragraph [ref=e68]: Risk Radar
+          - heading "當前警報" [level=2] [ref=e69]
+        - generic [ref=e70]: 6 則
+      - generic [ref=e71]:
+        - article [ref=e72]:
+          - generic [ref=e73]:
+            - heading "PLTR｜VIX 壓力 regime" [level=3] [ref=e74]
+            - generic [ref=e75]: high
+          - paragraph [ref=e76]: 風險偏高，target / max 倉位收緊 25%，暫停追價加碼。
+          - paragraph [ref=e77]: 先收緊 sizing，暫停追價加碼。
+        - article [ref=e78]:
+          - generic [ref=e79]:
+            - heading "PLTR｜De-risk review" [level=3] [ref=e80]
+            - generic [ref=e81]: high
+          - paragraph [ref=e82]: 未實現損益 -17.72%，且 thesis / macro 壓力同時存在。
+          - paragraph [ref=e83]: 減碼到 regime-adjusted target 附近，並重新檢查 thesis。
+        - article [ref=e84]:
+          - generic [ref=e85]:
+            - heading "MSFT｜VIX 壓力 regime" [level=3] [ref=e86]
+            - generic [ref=e87]: high
+          - paragraph [ref=e88]: 風險偏高，target / max 倉位收緊 25%，暫停追價加碼。
+          - paragraph [ref=e89]: 先收緊 sizing，暫停追價加碼。
+        - article [ref=e90]:
+          - generic [ref=e91]:
+            - heading "MSFT｜Capital-preservation review" [level=3] [ref=e92]
+            - generic [ref=e93]: critical
+          - paragraph [ref=e94]: 未實現損益已達 -33.56%。
+          - paragraph [ref=e95]: 停止加碼並優先做 capital-preservation review，等待下一個 catalyst 重新驗證。
+  - generic [ref=e96]:
+    - article [ref=e97]:
+      - generic [ref=e99]:
+        - paragraph [ref=e100]: Recent Progress
+        - heading "最近成果" [level=2] [ref=e101]
+      - generic [ref=e102]:
+        - article [ref=e103]:
+          - generic [ref=e104]: Tracked names
+          - generic [ref=e105]: "3"
+          - paragraph [ref=e106]: Living dossiers currently covered by the research OS.
+        - article [ref=e107]:
+          - generic [ref=e108]: Pending events
+          - generic [ref=e109]: "7"
+          - paragraph [ref=e110]: Recent watch / refresh items already flowing through the digest.
+        - article [ref=e111]:
+          - generic [ref=e112]: Due this week
+          - generic [ref=e113]: "1"
+          - paragraph [ref=e114]: Names that need near-term review attention.
+        - article [ref=e115]:
+          - generic [ref=e116]: Post-mortem
+          - generic [ref=e117]: 0.0%
+          - paragraph [ref=e118]: Current assumption hit rate from the existing post-mortem layer.
+    - article [ref=e119]:
+      - generic [ref=e121]:
+        - paragraph [ref=e122]: Gap Map
+        - heading "Institutional Gap Map" [level=2] [ref=e123]
+      - generic [ref=e124]:
+        - article [ref=e125]:
+          - generic [ref=e126]:
+            - heading "Research OS" [level=3] [ref=e127]
+            - generic [ref=e128]: Complete
+          - paragraph [ref=e129]: 研究 dossiers、state contract、digest 與 dashboard 產線已成形。
+        - article [ref=e130]:
+          - generic [ref=e131]:
+            - heading "Exception monitoring" [level=3] [ref=e132]
+            - generic [ref=e133]: Prototype
+          - paragraph [ref=e134]: 已有量價例外事件與 UI 入口，但先前資料 contract 斷裂。
+        - article [ref=e135]:
+          - generic [ref=e136]:
+            - heading "Post-mortem analytics" [level=3] [ref=e137]
+            - generic [ref=e138]: Basic
+          - paragraph [ref=e139]: 已能回顧 assumption hit rate，但尚未結合 sizing / P&L。
+        - article [ref=e140]:
+          - generic [ref=e141]:
+            - heading "Risk circuit breaker" [level=3] [ref=e142]
+            - generic [ref=e143]: Basic
+          - paragraph [ref=e144]: v1 成本基礎與 thesis/macro 雙重條件熔斷邏輯已上線，下一步是更細的例外分級。
+      - paragraph [ref=e145]: 首頁先顯示最關鍵的 4 個能力節點；其餘缺口留在總覽摘要。
+    - article [ref=e146]:
+      - generic [ref=e148]:
+        - paragraph [ref=e149]: Review Performance
+        - heading "決策回測" [level=2] [ref=e150]
+      - generic [ref=e151]:
+        - article [ref=e152]:
+          - generic [ref=e153]: Assumption Hit Rate
+          - generic [ref=e154]: 0%
+          - paragraph [ref=e155]: 0/0 resolved assumptions
+        - article [ref=e156]:
+          - generic [ref=e157]: Regime Drifts
+          - generic [ref=e158]: "0"
+          - paragraph [ref=e159]: 估值體系與判斷 yardstick 發生位移的事件數。
+        - article [ref=e160]:
+          - generic [ref=e161]: Expectation Gaps
+          - generic [ref=e162]: "0"
+          - paragraph [ref=e163]: 基本面與價格反應之間已被記錄的預期差事件。
+  - generic [ref=e164]:
+    - article [ref=e165]:
+      - generic [ref=e167]:
+        - paragraph [ref=e168]: Command Queue
+        - heading "今天優先處理" [level=2] [ref=e169]
+      - generic [ref=e170]:
+        - article [ref=e171]:
+          - generic [ref=e172]:
+            - generic [ref=e173]:
+              - heading "MSFT｜Microsoft" [level=3] [ref=e174]
+              - paragraph [ref=e175]: 持有 / 觀望，等待下一次驗證點；下一步先看 Azure 成長
+            - generic [ref=e176]: 最高優先
+          - generic [ref=e177]:
+            - link "打開決策頁" [ref=e178] [cursor=pointer]:
+              - /url: ./tickers/MSFT.html
+            - link "打開研究內頁" [ref=e179] [cursor=pointer]:
+              - /url: ./research/MSFT.html
+        - article [ref=e180]:
+          - generic [ref=e181]:
+            - generic [ref=e182]:
+              - heading "PLTR｜Palantir Technologies" [level=3] [ref=e183]
+              - paragraph [ref=e184]: 持有 / 逢回加碼；下一步先看 美國商業業務成長
+            - generic [ref=e185]: 最高優先
+          - generic [ref=e186]:
+            - link "打開決策頁" [ref=e187] [cursor=pointer]:
+              - /url: ./tickers/PLTR.html
+            - link "打開研究內頁" [ref=e188] [cursor=pointer]:
+              - /url: ./research/PLTR.html
+        - article [ref=e189]:
+          - generic [ref=e190]:
+            - generic [ref=e191]:
+              - heading "MAR｜Marriott International" [level=3] [ref=e192]
+              - paragraph [ref=e193]: 穩健持有；下一步先看 RevPAR 結構
+            - generic [ref=e194]: 優先追蹤
+          - generic [ref=e195]:
+            - link "打開決策頁" [ref=e196] [cursor=pointer]:
+              - /url: ./tickers/MAR.html
+            - link "打開研究內頁" [ref=e197] [cursor=pointer]:
+              - /url: ./research/MAR.html
+    - article [ref=e198]:
+      - generic [ref=e200]:
+        - paragraph [ref=e201]: Coverage Signal
+        - heading "研究與持倉摘要" [level=2] [ref=e202]
+      - generic [ref=e203]:
+        - article [ref=e204]:
+          - paragraph [ref=e205]: 整體 thesis 狀態
+          - strong [ref=e206]: 整體穩定
+          - paragraph [ref=e207]: 平均健康度 74%，平均信心 67%。
+        - article [ref=e208]:
+          - paragraph [ref=e209]: 待追蹤事件
+          - strong [ref=e210]: "7"
+          - paragraph [ref=e211]: 近一輪需要 watch / refresh 的事件總數。
+        - article [ref=e212]:
+          - paragraph [ref=e213]: 一週內需檢查
+          - strong [ref=e214]: "1"
+          - paragraph [ref=e215]: MSFT
+        - article [ref=e216]:
+          - paragraph [ref=e217]: 持倉覆蓋
+          - strong [ref=e218]: 3 / 3
+          - paragraph [ref=e219]: 真實部位已接上 private overlay。
+  - article [ref=e221]:
+    - generic [ref=e223]:
+      - paragraph [ref=e224]: Institutional Gaps
+      - heading "目前缺口總覽" [level=2] [ref=e225]
+    - generic [ref=e226]:
+      - article [ref=e227]:
+        - paragraph [ref=e228]: Complete
+        - strong [ref=e229]: "1"
+        - paragraph [ref=e230]: 基礎研究作業系統與輸出面已能穩定運作。
+      - article [ref=e231]:
+        - paragraph [ref=e232]: Prototype / Basic
+        - strong [ref=e233]: "5"
+        - paragraph [ref=e234]: 已有原型，但尚未達到機構級穩定度。
+      - article [ref=e235]:
+        - paragraph [ref=e236]: Missing
+        - strong [ref=e237]: "0"
+        - paragraph [ref=e238]: 風控熔斷、sizing engine、VIX macro overlay 都屬於本輪補強重點。
+  - generic [ref=e239]:
+    - generic [ref=e241]:
+      - paragraph [ref=e242]: Control Surface
+      - heading "篩選與排序" [level=2] [ref=e243]
+    - generic [ref=e244]:
+      - generic [ref=e245]:
+        - generic [ref=e246]: 排序方式
+        - combobox "排序方式" [ref=e247]:
+          - option "依處理優先度" [selected]
+          - option "依下次檢查日期"
+          - option "依風險等級"
+          - option "依 thesis 健康度"
+      - generic [ref=e248]:
+        - generic [ref=e249]: 部位狀態
+        - combobox "部位狀態" [ref=e250]:
+          - option "全部" [selected]
+          - option "只看已填部位"
+          - option "只看未填部位"
+      - generic [ref=e251]:
+        - generic [ref=e252]: 風險等級
+        - combobox "風險等級" [ref=e253]:
+          - option "全部" [selected]
+          - option "高信念"
+          - option "核心"
+          - option "衛星"
+          - option "未設定"
+  - generic [ref=e254]:
+    - generic [ref=e255]:
+      - paragraph [ref=e256]: Coverage
+      - heading "個股駕駛艙" [level=2] [ref=e257]
+    - paragraph [ref=e258]: 目前顯示 3 / 3 檔。
+  - generic [ref=e259]:
+    - article [ref=e260]:
+      - generic [ref=e261]:
+        - generic [ref=e262]:
+          - heading "MSFT" [level=3] [ref=e263]
+          - paragraph [ref=e264]: Microsoft
+        - generic [ref=e265]: 持有觀察
+      - paragraph [ref=e266]: MSFT 這輪有足以觸發重新檢查的事件，但目前主判斷沒有被推翻。 目前先維持「持有 / 觀望，等待下一次驗證點」，下一個驗證點先盯 Azure 成長。
+      - generic [ref=e267]:
+        - generic [ref=e268]:
+          - generic [ref=e269]: 部位摘要
+          - strong [ref=e270]: 5 股 @ $536.98
+        - generic [ref=e271]:
+          - generic [ref=e272]: 未實現 P/L
+          - strong [ref=e273]: $-901.05 / -33.56%
+        - generic [ref=e274]:
+          - generic [ref=e275]: 權重 / 調整後目標
+          - strong [ref=e276]: 30.66% / 30.0%
+        - generic [ref=e277]:
+          - generic [ref=e278]: Sizing 狀態
+          - strong [ref=e279]: 高於目標
+        - generic [ref=e280]:
+          - generic [ref=e281]: 風險警報
+          - strong [ref=e282]: 2 則
+        - generic [ref=e283]:
+          - generic [ref=e284]: 下次檢查
+          - strong [ref=e285]: 2026-04-03
+      - generic [ref=e286]:
+        - generic [ref=e287]: 停止加碼並優先做 capital-preservation review，等待下一個 catalyst 重新驗證。
+        - generic [ref=e288]: 最高優先
+        - generic [ref=e289]: 核心倉位
+        - generic [ref=e290]: 高於目標
+      - generic [ref=e291]:
+        - link "打開決策頁" [ref=e292] [cursor=pointer]:
+          - /url: ./tickers/MSFT.html
+        - link "研究內頁" [ref=e293] [cursor=pointer]:
+          - /url: ./research/MSFT.html
+    - article [ref=e294]:
+      - generic [ref=e295]:
+        - generic [ref=e296]:
+          - heading "PLTR" [level=3] [ref=e297]
+          - paragraph [ref=e298]: Palantir Technologies
+        - generic [ref=e299]: 偏多
+      - paragraph [ref=e300]: PLTR 這輪有足以觸發重新檢查的事件，但目前主判斷沒有被推翻。 目前先維持「持有 / 逢回加碼」，下一個驗證點先盯 美國商業業務成長。
+      - generic [ref=e301]:
+        - generic [ref=e302]:
+          - generic [ref=e303]: 部位摘要
+          - strong [ref=e304]: 6 股 @ $173.86
+        - generic [ref=e305]:
+          - generic [ref=e306]: 未實現 P/L
+          - strong [ref=e307]: $-184.80 / -17.72%
+        - generic [ref=e308]:
+          - generic [ref=e309]: 權重 / 調整後目標
+          - strong [ref=e310]: 14.75% / 22.5%
+        - generic [ref=e311]:
+          - generic [ref=e312]: Sizing 狀態
+          - strong [ref=e313]: 低於目標
+        - generic [ref=e314]:
+          - generic [ref=e315]: 風險警報
+          - strong [ref=e316]: 2 則
+        - generic [ref=e317]:
+          - generic [ref=e318]: 下次檢查
+          - strong [ref=e319]: 2026-05-08
+      - generic [ref=e320]:
+        - generic [ref=e321]: 減碼到 regime-adjusted target 附近，並重新檢查 thesis。
+        - generic [ref=e322]: 最高優先
+        - generic [ref=e323]: 高信念倉位
+        - generic [ref=e324]: 低於目標
+      - generic [ref=e325]:
+        - link "打開決策頁" [ref=e326] [cursor=pointer]:
+          - /url: ./tickers/PLTR.html
+        - link "研究內頁" [ref=e327] [cursor=pointer]:
+          - /url: ./research/PLTR.html
+    - article [ref=e328]:
+      - generic [ref=e329]:
+        - generic [ref=e330]:
+          - heading "MAR" [level=3] [ref=e331]
+          - paragraph [ref=e332]: Marriott International
+        - generic [ref=e333]: 持有觀察
+      - paragraph [ref=e334]: MAR 本輪沒有新增足以改寫 thesis 的重大事件，研究主軸先延續前一版。 目前先維持「穩健持有」，下一個驗證點先盯 RevPAR 結構。
+      - generic [ref=e335]:
+        - generic [ref=e336]:
+          - generic [ref=e337]: 部位摘要
+          - strong [ref=e338]: 10 股 @ $350.30
+        - generic [ref=e339]:
+          - generic [ref=e340]: 未實現 P/L
+          - strong [ref=e341]: $-327.60 / -9.35%
+        - generic [ref=e342]:
+          - generic [ref=e343]: 權重 / 調整後目標
+          - strong [ref=e344]: 54.58% / 22.5%
+        - generic [ref=e345]:
+          - generic [ref=e346]: Sizing 狀態
+          - strong [ref=e347]: 高於上限
+        - generic [ref=e348]:
+          - generic [ref=e349]: 風險警報
+          - strong [ref=e350]: 2 則
+        - generic [ref=e351]:
+          - generic [ref=e352]: 下次檢查
+          - strong [ref=e353]: 2026-05-07
+      - generic [ref=e354]:
+        - generic [ref=e355]: 曝險高於 regime-adjusted max，先不要新增部位。
+        - generic [ref=e356]: 優先追蹤
+        - generic [ref=e357]: 核心倉位
+        - generic [ref=e358]: 高於上限
+      - generic [ref=e359]:
+        - link "打開決策頁" [ref=e360] [cursor=pointer]:
+          - /url: ./tickers/MAR.html
+        - link "研究內頁" [ref=e361] [cursor=pointer]:
+          - /url: ./research/MAR.html

@@ -4,25 +4,45 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>投資駕駛艙</title>
+    <link rel="icon" href="data:,">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@500;600&family=IBM+Plex+Sans:wght@400;500;600;700&family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./assets/dashboard.css">
   </head>
   <body data-dashboard-page="portfolio">
     <div class="ambient ambient-left"></div>
     <div class="ambient ambient-right"></div>
+    <div class="grid-overlay"></div>
     <main class="app-shell">
       <section class="masthead">
         <div class="masthead-copy">
-          <p class="eyebrow">Private Investment Cockpit</p>
+          <p class="eyebrow">Institutional Growth Cockpit</p>
           <h1>投資駕駛艙</h1>
-          <p class="lede">先看部位與操作，再看 thesis、事件、風險與待辦。這裡不是展示頁，而是你每天真正會打開的決策面板。</p>
+          <p class="lede">先看真實部位、VIX regime 與熔斷警報，再看 thesis、事件、sizing 壓力與專案成熟度。這是本機私有 cockpit，不是展示用 landing page。</p>
         </div>
         <div class="masthead-strip" id="portfolio-summary-strip"></div>
       </section>
 
-      <section class="board two-column">
+      <section class="overview-grid">
+        <article class="panel panel-hero" id="portfolio-totals-panel"></article>
+        <article class="panel" id="macro-regime-panel"></article>
+        <article class="panel" id="risk-radar-panel"></article>
+      </section>
+
+      <section class="overview-grid overview-grid-secondary">
+        <article class="panel" id="recent-progress-panel"></article>
+        <article class="panel" id="gap-map-panel"></article>
+        <article class="panel" id="analytics-panel"></article>
+      </section>
+
+      <section class="overview-grid overview-grid-observation">
+        <article class="panel panel-emphasis" id="observation-command-panel"></article>
+        <article class="panel" id="observation-lake-panel"></article>
+        <article class="panel" id="watchlist-recommendations-panel"></article>
+      </section>
+
+      <section class="board two-column board-main">
         <article class="panel panel-emphasis">
           <div class="panel-head">
             <div>
@@ -35,8 +55,8 @@
         <article class="panel">
           <div class="panel-head">
             <div>
-              <p class="panel-kicker">Portfolio Signal</p>
-              <h2>投資組合摘要</h2>
+              <p class="panel-kicker">Coverage Signal</p>
+              <h2>研究與持倉摘要</h2>
             </div>
           </div>
           <div id="summary-cards" class="summary-grid"></div>
@@ -44,24 +64,24 @@
       </section>
 
       <section class="board two-column">
-        <article class="panel panel-emphasis" id="exception-board" style="display: none; border: 2px solid var(--accent-red);">
+        <article class="panel panel-alert" id="exception-board" style="display: none;">
           <div class="panel-head">
             <div>
-              <p class="panel-kicker" style="color: var(--accent-red);">Risk Alert</p>
-              <h2>例外管理 (Exceptions)</h2>
+              <p class="panel-kicker panel-kicker-alert">Risk Alert</p>
+              <h2>例外管理</h2>
             </div>
           </div>
           <div id="exception-queue" class="priority-list"></div>
         </article>
-        
+
         <article class="panel">
           <div class="panel-head">
             <div>
-              <p class="panel-kicker">Review Performance</p>
-              <h2>決策回測 (Post-Mortem)</h2>
+              <p class="panel-kicker">Institutional Gaps</p>
+              <h2>目前缺口總覽</h2>
             </div>
           </div>
-          <div id="analytics-summary" class="summary-grid"></div>
+          <div id="gap-summary-panel" class="summary-grid"></div>
         </article>
       </section>
 
@@ -112,6 +132,7 @@
       </section>
       <section class="portfolio-grid" id="portfolio-grid"></section>
     </main>
+    <div id="observation-modal-root"></div>
     <script src="./assets/dashboard.js"></script>
   </body>
 </html>

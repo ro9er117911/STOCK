@@ -26,6 +26,7 @@
   "last_event_status": "持續追蹤",
   "detail_path": "tickers/MAR.html",
   "internal_research_path": "research/MAR.html",
+  "recommended_next_action": "穩健持有",
   "position": {
     "ticker": "MAR",
     "has_position": false,
@@ -40,7 +41,36 @@
     "shares_label": "尚未填入",
     "avg_cost_label": "未填成本",
     "target_weight_label": "未填目標倉位",
-    "max_weight_label": "未填上限倉位"
+    "max_weight_label": "未填上限倉位",
+    "cost_basis": null,
+    "cost_basis_label": "Private only",
+    "current_price": null,
+    "current_price_label": "N/A",
+    "market_value": null,
+    "market_value_label": "Private only",
+    "unrealized_pnl": null,
+    "unrealized_pnl_label": "Private only",
+    "unrealized_pnl_pct": null,
+    "unrealized_pnl_pct_label": "Private only",
+    "portfolio_weight_pct": null,
+    "portfolio_weight_label": "Private only",
+    "adjusted_target_weight_pct": null,
+    "adjusted_target_weight_label": "Private only",
+    "adjusted_max_weight_pct": null,
+    "adjusted_max_weight_label": "Private only",
+    "distance_to_target_pct": null,
+    "distance_to_target_label": "Private only",
+    "distance_to_max_pct": null,
+    "distance_to_max_label": "Private only",
+    "sizing_status": {
+      "state": "private-only",
+      "label": "Private only",
+      "summary": "需要本機 private portfolio 才會顯示 sizing 狀態。"
+    },
+    "risk_alerts": [],
+    "risk_alert_count": 0,
+    "recommended_next_action": "需要本機 private portfolio 才會顯示風控建議。",
+    "market_data_as_of": ""
   },
   "portfolio_position": {
     "ticker": "MAR",
@@ -56,7 +86,36 @@
     "shares_label": "尚未填入",
     "avg_cost_label": "未填成本",
     "target_weight_label": "未填目標倉位",
-    "max_weight_label": "未填上限倉位"
+    "max_weight_label": "未填上限倉位",
+    "cost_basis": null,
+    "cost_basis_label": "Private only",
+    "current_price": null,
+    "current_price_label": "N/A",
+    "market_value": null,
+    "market_value_label": "Private only",
+    "unrealized_pnl": null,
+    "unrealized_pnl_label": "Private only",
+    "unrealized_pnl_pct": null,
+    "unrealized_pnl_pct_label": "Private only",
+    "portfolio_weight_pct": null,
+    "portfolio_weight_label": "Private only",
+    "adjusted_target_weight_pct": null,
+    "adjusted_target_weight_label": "Private only",
+    "adjusted_max_weight_pct": null,
+    "adjusted_max_weight_label": "Private only",
+    "distance_to_target_pct": null,
+    "distance_to_target_label": "Private only",
+    "distance_to_max_pct": null,
+    "distance_to_max_label": "Private only",
+    "sizing_status": {
+      "state": "private-only",
+      "label": "Private only",
+      "summary": "需要本機 private portfolio 才會顯示 sizing 狀態。"
+    },
+    "risk_alerts": [],
+    "risk_alert_count": 0,
+    "recommended_next_action": "需要本機 private portfolio 才會顯示風控建議。",
+    "market_data_as_of": ""
   },
   "key_events": [
     {
@@ -72,7 +131,10 @@
       "link_kind": "internal",
       "link_label": "內部研究節點",
       "href": "research/MAR.html#event-timeline",
-      "is_clickable": true
+      "is_clickable": true,
+      "metadata": {
+        "seed": true
+      }
     },
     {
       "event_id": "mar-seed-2026-guidance",
@@ -87,7 +149,10 @@
       "link_kind": "internal",
       "link_label": "內部研究節點",
       "href": "research/MAR.html#event-timeline",
-      "is_clickable": true
+      "is_clickable": true,
+      "metadata": {
+        "seed": true
+      }
     }
   ],
   "event_timeline": [
@@ -104,7 +169,10 @@
       "link_kind": "internal",
       "link_label": "內部研究節點",
       "href": "research/MAR.html#event-timeline",
-      "is_clickable": true
+      "is_clickable": true,
+      "metadata": {
+        "seed": true
+      }
     },
     {
       "event_id": "mar-seed-2026-guidance",
@@ -119,7 +187,10 @@
       "link_kind": "internal",
       "link_label": "內部研究節點",
       "href": "research/MAR.html#event-timeline",
-      "is_clickable": true
+      "is_clickable": true,
+      "metadata": {
+        "seed": true
+      }
     }
   ],
   "key_action_rules": [
@@ -195,13 +266,13 @@
       "source_type": "sec",
       "kind": "sec",
       "url": "https://data.sec.gov/submissions/CIK0001048286.json",
-      "status": "active",
+      "status": "failed",
       "priority": 10,
       "new_events": 0,
       "cursor": "",
-      "error": "",
+      "error": "https://data.sec.gov/submissions/CIK0001048286.json: HTTP Error 403: Forbidden",
       "notes": "官方 SEC 揭露來源；是否算重大事件，依各 ticker 的門檻設定判斷。",
-      "status_label": "啟用",
+      "status_label": "失敗",
       "is_clickable": true
     },
     {
@@ -209,13 +280,13 @@
       "source_type": "price",
       "kind": "price",
       "url": "https://query1.finance.yahoo.com/v8/finance/chart/MAR?range=1mo&interval=1d",
-      "status": "active",
+      "status": "polled",
       "priority": 20,
       "new_events": 0,
-      "cursor": "",
+      "cursor": "2026-03-27",
       "error": "",
       "notes": "Yahoo Finance 日線資料，用來抓跳空與異常成交量。",
-      "status_label": "啟用",
+      "status_label": "已輪詢",
       "is_clickable": true
     },
     {
@@ -223,13 +294,13 @@
       "source_type": "investor_news",
       "kind": "html",
       "url": "https://news.marriott.com/news/",
-      "status": "active",
+      "status": "polled",
       "priority": 30,
       "new_events": 0,
       "cursor": "",
       "error": "",
       "notes": "Marriott 官方新聞室頁面。",
-      "status_label": "啟用",
+      "status_label": "已輪詢",
       "is_clickable": true
     }
   ],
@@ -661,7 +732,10 @@
         "link_kind": "internal",
         "link_label": "內部研究節點",
         "href": "research/MAR.html#event-timeline",
-        "is_clickable": true
+        "is_clickable": true,
+        "metadata": {
+          "seed": true
+        }
       },
       {
         "event_id": "mar-seed-2026-guidance",
@@ -676,7 +750,10 @@
         "link_kind": "internal",
         "link_label": "內部研究節點",
         "href": "research/MAR.html#event-timeline",
-        "is_clickable": true
+        "is_clickable": true,
+        "metadata": {
+          "seed": true
+        }
       }
     ],
     "source_manifest": [

@@ -1,0 +1,61 @@
+{
+  "holding_period": "3-12 months",
+  "vix": {
+    "symbol": "^VIX",
+    "regimes": [
+      {
+        "key": "calm",
+        "label": "平穩",
+        "min": 0.0,
+        "max": 19.99,
+        "size_multiplier": 1.0,
+        "review_urgency": "normal",
+        "summary": "波動正常，維持原始 target / max 倉位。"
+      },
+      {
+        "key": "elevated",
+        "label": "偏緊",
+        "min": 20.0,
+        "max": 29.99,
+        "size_multiplier": 0.9,
+        "review_urgency": "elevated",
+        "summary": "波動抬升，target / max 倉位收緊 10%。"
+      },
+      {
+        "key": "stress",
+        "label": "壓力",
+        "min": 30.0,
+        "max": 39.99,
+        "size_multiplier": 0.75,
+        "review_urgency": "high",
+        "summary": "風險偏高，target / max 倉位收緊 25%，暫停追價加碼。"
+      },
+      {
+        "key": "panic",
+        "label": "恐慌",
+        "min": 40.0,
+        "max": 1000.0,
+        "size_multiplier": 0.6,
+        "review_urgency": "critical",
+        "summary": "市場進入恐慌區，target / max 倉位收緊 40%，優先做風險審視。"
+      }
+    ]
+  },
+  "circuit_breakers": {
+    "review_loss_pct": -10.0,
+    "de_risk_loss_pct": -15.0,
+    "capital_preservation_loss_pct": -20.0,
+    "weak_thesis_score": 0.6,
+    "stress_regimes": [
+      "stress",
+      "panic"
+    ]
+  },
+  "actions": {
+    "review": "觸發強制重新審視，在下一個 catalyst 前停止加碼。",
+    "de_risk": "減碼到 regime-adjusted target 附近，並重新檢查 thesis。",
+    "capital_preservation": "停止加碼並優先做 capital-preservation review，等待下一個 catalyst 重新驗證。",
+    "over_max": "曝險高於 regime-adjusted max，先不要新增部位。",
+    "healthy": "部位仍在可接受範圍，等待 thesis 驗證而不是追價。"
+  }
+}

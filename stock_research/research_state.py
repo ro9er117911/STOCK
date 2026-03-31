@@ -35,7 +35,10 @@ ORIGIN_ALIASES = {
     "ad_hoc": "ad_hoc_idea",
     "ad_hoc_idea": "ad_hoc_idea",
     "quant": "quant_radar",
+    "radar_scan": "quant_radar",
     "quant_radar": "quant_radar",
+    "observation": "observation_lake",
+    "observation_lake": "observation_lake",
 }
 
 
@@ -339,4 +342,3 @@ def rewrite_research_artifacts(research_root: Path, ticker: str, state: dict[str
         (artifacts_dir / "review_summary.md").write_text(review_summary_markdown, encoding="utf-8")
         if (artifacts_dir / "review_summary.zh-tw.md").exists():
             (artifacts_dir / "review_summary.zh-tw.md").write_text(review_summary_markdown, encoding="utf-8")
-

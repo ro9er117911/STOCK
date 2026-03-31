@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-03-27T11:51:05+00:00",
+  "generated_at": "2026-03-30T12:34:35+00:00",
   "portfolio_summary": {
     "tracked_ticker_count": 3,
     "positioned_ticker_count": 0,
@@ -17,7 +17,7 @@
       "ticker": "MSFT",
       "company_name": "Microsoft",
       "priority_label": "優先追蹤",
-      "priority_score": 102,
+      "priority_score": 105,
       "reason": "持有 / 觀望，等待下一次驗證點；下一步先看 Azure 成長",
       "detail_path": "tickers/MSFT.html",
       "research_path": "research/MSFT.html"
@@ -69,6 +69,7 @@
       "last_event_status": "需要重估",
       "detail_path": "tickers/PLTR.html",
       "internal_research_path": "research/PLTR.html",
+      "recommended_next_action": "持有 / 逢回加碼",
       "position": {
         "ticker": "PLTR",
         "has_position": false,
@@ -83,7 +84,36 @@
         "shares_label": "尚未填入",
         "avg_cost_label": "未填成本",
         "target_weight_label": "未填目標倉位",
-        "max_weight_label": "未填上限倉位"
+        "max_weight_label": "未填上限倉位",
+        "cost_basis": null,
+        "cost_basis_label": "Private only",
+        "current_price": null,
+        "current_price_label": "N/A",
+        "market_value": null,
+        "market_value_label": "Private only",
+        "unrealized_pnl": null,
+        "unrealized_pnl_label": "Private only",
+        "unrealized_pnl_pct": null,
+        "unrealized_pnl_pct_label": "Private only",
+        "portfolio_weight_pct": null,
+        "portfolio_weight_label": "Private only",
+        "adjusted_target_weight_pct": null,
+        "adjusted_target_weight_label": "Private only",
+        "adjusted_max_weight_pct": null,
+        "adjusted_max_weight_label": "Private only",
+        "distance_to_target_pct": null,
+        "distance_to_target_label": "Private only",
+        "distance_to_max_pct": null,
+        "distance_to_max_label": "Private only",
+        "sizing_status": {
+          "state": "private-only",
+          "label": "Private only",
+          "summary": "需要本機 private portfolio 才會顯示 sizing 狀態。"
+        },
+        "risk_alerts": [],
+        "risk_alert_count": 0,
+        "recommended_next_action": "需要本機 private portfolio 才會顯示風控建議。",
+        "market_data_as_of": ""
       },
       "portfolio_position": {
         "ticker": "PLTR",
@@ -99,7 +129,36 @@
         "shares_label": "尚未填入",
         "avg_cost_label": "未填成本",
         "target_weight_label": "未填目標倉位",
-        "max_weight_label": "未填上限倉位"
+        "max_weight_label": "未填上限倉位",
+        "cost_basis": null,
+        "cost_basis_label": "Private only",
+        "current_price": null,
+        "current_price_label": "N/A",
+        "market_value": null,
+        "market_value_label": "Private only",
+        "unrealized_pnl": null,
+        "unrealized_pnl_label": "Private only",
+        "unrealized_pnl_pct": null,
+        "unrealized_pnl_pct_label": "Private only",
+        "portfolio_weight_pct": null,
+        "portfolio_weight_label": "Private only",
+        "adjusted_target_weight_pct": null,
+        "adjusted_target_weight_label": "Private only",
+        "adjusted_max_weight_pct": null,
+        "adjusted_max_weight_label": "Private only",
+        "distance_to_target_pct": null,
+        "distance_to_target_label": "Private only",
+        "distance_to_max_pct": null,
+        "distance_to_max_label": "Private only",
+        "sizing_status": {
+          "state": "private-only",
+          "label": "Private only",
+          "summary": "需要本機 private portfolio 才會顯示 sizing 狀態。"
+        },
+        "risk_alerts": [],
+        "risk_alert_count": 0,
+        "recommended_next_action": "需要本機 private portfolio 才會顯示風控建議。",
+        "market_data_as_of": ""
       },
       "key_events": [
         {
@@ -115,7 +174,10 @@
           "link_kind": "internal",
           "link_label": "內部研究節點",
           "href": "research/PLTR.html#event-timeline",
-          "is_clickable": true
+          "is_clickable": true,
+          "metadata": {
+            "seed": true
+          }
         },
         {
           "event_id": "pltr-seed-2026-q4-results",
@@ -130,7 +192,10 @@
           "link_kind": "internal",
           "link_label": "內部研究節點",
           "href": "research/PLTR.html#event-timeline",
-          "is_clickable": true
+          "is_clickable": true,
+          "metadata": {
+            "seed": true
+          }
         }
       ],
       "event_timeline": [
@@ -147,7 +212,10 @@
           "link_kind": "internal",
           "link_label": "內部研究節點",
           "href": "research/PLTR.html#event-timeline",
-          "is_clickable": true
+          "is_clickable": true,
+          "metadata": {
+            "seed": true
+          }
         },
         {
           "event_id": "pltr-seed-2026-q4-results",
@@ -162,7 +230,10 @@
           "link_kind": "internal",
           "link_label": "內部研究節點",
           "href": "research/PLTR.html#event-timeline",
-          "is_clickable": true
+          "is_clickable": true,
+          "metadata": {
+            "seed": true
+          }
         }
       ],
       "key_action_rules": [
@@ -238,13 +309,13 @@
           "source_type": "sec",
           "kind": "sec",
           "url": "https://data.sec.gov/submissions/CIK0001321655.json",
-          "status": "active",
+          "status": "failed",
           "priority": 10,
           "new_events": 0,
           "cursor": "",
-          "error": "",
+          "error": "https://data.sec.gov/submissions/CIK0001321655.json: HTTP Error 403: Forbidden",
           "notes": "官方 SEC 揭露來源；是否算重大事件，依各 ticker 的門檻設定判斷。",
-          "status_label": "啟用",
+          "status_label": "失敗",
           "is_clickable": true
         },
         {
@@ -252,13 +323,13 @@
           "source_type": "price",
           "kind": "price",
           "url": "https://query1.finance.yahoo.com/v8/finance/chart/PLTR?range=1mo&interval=1d",
-          "status": "active",
+          "status": "polled",
           "priority": 20,
           "new_events": 0,
-          "cursor": "",
+          "cursor": "2026-03-27",
           "error": "",
           "notes": "Yahoo Finance 日線資料，用來抓跳空與異常成交量。",
-          "status_label": "啟用",
+          "status_label": "已輪詢",
           "is_clickable": true
         },
         {
@@ -266,13 +337,13 @@
           "source_type": "investor_news",
           "kind": "html",
           "url": "https://investors.palantir.com/news-events/news-releases/",
-          "status": "active",
+          "status": "polled",
           "priority": 30,
           "new_events": 0,
           "cursor": "",
           "error": "",
           "notes": "Palantir 投資人新聞稿頁面。",
-          "status_label": "啟用",
+          "status_label": "已輪詢",
           "is_clickable": true
         }
       ],
@@ -705,7 +776,10 @@
             "link_kind": "internal",
             "link_label": "內部研究節點",
             "href": "research/PLTR.html#event-timeline",
-            "is_clickable": true
+            "is_clickable": true,
+            "metadata": {
+              "seed": true
+            }
           },
           {
             "event_id": "pltr-seed-2026-q4-results",
@@ -720,7 +794,10 @@
             "link_kind": "internal",
             "link_label": "內部研究節點",
             "href": "research/PLTR.html#event-timeline",
-            "is_clickable": true
+            "is_clickable": true,
+            "metadata": {
+              "seed": true
+            }
           }
         ],
         "source_manifest": [
@@ -824,11 +901,12 @@
       "last_reviewed_at": "2026-03-27",
       "risk_level": "",
       "risk_level_label": "尚未設定",
-      "priority_score": 102,
+      "priority_score": 105,
       "priority_label": "優先追蹤",
       "last_event_status": "持續追蹤",
       "detail_path": "tickers/MSFT.html",
       "internal_research_path": "research/MSFT.html",
+      "recommended_next_action": "持有 / 觀望，等待下一次驗證點",
       "position": {
         "ticker": "MSFT",
         "has_position": false,
@@ -843,7 +921,36 @@
         "shares_label": "尚未填入",
         "avg_cost_label": "未填成本",
         "target_weight_label": "未填目標倉位",
-        "max_weight_label": "未填上限倉位"
+        "max_weight_label": "未填上限倉位",
+        "cost_basis": null,
+        "cost_basis_label": "Private only",
+        "current_price": null,
+        "current_price_label": "N/A",
+        "market_value": null,
+        "market_value_label": "Private only",
+        "unrealized_pnl": null,
+        "unrealized_pnl_label": "Private only",
+        "unrealized_pnl_pct": null,
+        "unrealized_pnl_pct_label": "Private only",
+        "portfolio_weight_pct": null,
+        "portfolio_weight_label": "Private only",
+        "adjusted_target_weight_pct": null,
+        "adjusted_target_weight_label": "Private only",
+        "adjusted_max_weight_pct": null,
+        "adjusted_max_weight_label": "Private only",
+        "distance_to_target_pct": null,
+        "distance_to_target_label": "Private only",
+        "distance_to_max_pct": null,
+        "distance_to_max_label": "Private only",
+        "sizing_status": {
+          "state": "private-only",
+          "label": "Private only",
+          "summary": "需要本機 private portfolio 才會顯示 sizing 狀態。"
+        },
+        "risk_alerts": [],
+        "risk_alert_count": 0,
+        "recommended_next_action": "需要本機 private portfolio 才會顯示風控建議。",
+        "market_data_as_of": ""
       },
       "portfolio_position": {
         "ticker": "MSFT",
@@ -859,7 +966,36 @@
         "shares_label": "尚未填入",
         "avg_cost_label": "未填成本",
         "target_weight_label": "未填目標倉位",
-        "max_weight_label": "未填上限倉位"
+        "max_weight_label": "未填上限倉位",
+        "cost_basis": null,
+        "cost_basis_label": "Private only",
+        "current_price": null,
+        "current_price_label": "N/A",
+        "market_value": null,
+        "market_value_label": "Private only",
+        "unrealized_pnl": null,
+        "unrealized_pnl_label": "Private only",
+        "unrealized_pnl_pct": null,
+        "unrealized_pnl_pct_label": "Private only",
+        "portfolio_weight_pct": null,
+        "portfolio_weight_label": "Private only",
+        "adjusted_target_weight_pct": null,
+        "adjusted_target_weight_label": "Private only",
+        "adjusted_max_weight_pct": null,
+        "adjusted_max_weight_label": "Private only",
+        "distance_to_target_pct": null,
+        "distance_to_target_label": "Private only",
+        "distance_to_max_pct": null,
+        "distance_to_max_label": "Private only",
+        "sizing_status": {
+          "state": "private-only",
+          "label": "Private only",
+          "summary": "需要本機 private portfolio 才會顯示 sizing 狀態。"
+        },
+        "risk_alerts": [],
+        "risk_alert_count": 0,
+        "recommended_next_action": "需要本機 private portfolio 才會顯示風控建議。",
+        "market_data_as_of": ""
       },
       "key_events": [
         {
@@ -875,7 +1011,10 @@
           "link_kind": "external",
           "link_label": "原始公告",
           "href": "https://www.linkedin.com/posts/satyanadella_introducing-azure-ai-foundry-labs-a-hub-activity-7298071158258614273-TIiL",
-          "is_clickable": true
+          "is_clickable": true,
+          "metadata": {
+            "feed_url": "https://news.microsoft.com/feed/"
+          }
         },
         {
           "event_id": "ed6756e435fcf1551e21491030e21b9972fb73c7",
@@ -890,7 +1029,10 @@
           "link_kind": "external",
           "link_label": "原始公告",
           "href": "https://news.microsoft.com/2025/03/03/microsoft-dragon-copilot-provides-the-healthcare-industrys-first-unified-voice-ai-assistant-that-enables-clinicians-to-streamline-clinical-documentation-surface-information-and-automate-task/",
-          "is_clickable": true
+          "is_clickable": true,
+          "metadata": {
+            "feed_url": "https://news.microsoft.com/feed/"
+          }
         },
         {
           "event_id": "e943236490c770ed14bd5814d1c9eb6204e736e3",
@@ -905,7 +1047,10 @@
           "link_kind": "external",
           "link_label": "原始公告",
           "href": "https://news.microsoft.com/2025/04/09/microsoft-announces-quarterly-earnings-release-date-63/",
-          "is_clickable": true
+          "is_clickable": true,
+          "metadata": {
+            "feed_url": "https://news.microsoft.com/feed/"
+          }
         }
       ],
       "event_timeline": [
@@ -922,7 +1067,10 @@
           "link_kind": "external",
           "link_label": "原始公告",
           "href": "https://www.linkedin.com/posts/satyanadella_introducing-azure-ai-foundry-labs-a-hub-activity-7298071158258614273-TIiL",
-          "is_clickable": true
+          "is_clickable": true,
+          "metadata": {
+            "feed_url": "https://news.microsoft.com/feed/"
+          }
         },
         {
           "event_id": "ed6756e435fcf1551e21491030e21b9972fb73c7",
@@ -937,7 +1085,10 @@
           "link_kind": "external",
           "link_label": "原始公告",
           "href": "https://news.microsoft.com/2025/03/03/microsoft-dragon-copilot-provides-the-healthcare-industrys-first-unified-voice-ai-assistant-that-enables-clinicians-to-streamline-clinical-documentation-surface-information-and-automate-task/",
-          "is_clickable": true
+          "is_clickable": true,
+          "metadata": {
+            "feed_url": "https://news.microsoft.com/feed/"
+          }
         },
         {
           "event_id": "e943236490c770ed14bd5814d1c9eb6204e736e3",
@@ -952,7 +1103,10 @@
           "link_kind": "external",
           "link_label": "原始公告",
           "href": "https://news.microsoft.com/2025/04/09/microsoft-announces-quarterly-earnings-release-date-63/",
-          "is_clickable": true
+          "is_clickable": true,
+          "metadata": {
+            "feed_url": "https://news.microsoft.com/feed/"
+          }
         },
         {
           "event_id": "7e260af1308e86512e2fb0b318aaf7affbff0a1d",
@@ -967,7 +1121,10 @@
           "link_kind": "external",
           "link_label": "原始公告",
           "href": "https://news.microsoft.com/2025/04/30/microsoft-cloud-and-ai-strength-drives-third-quarter-results/",
-          "is_clickable": true
+          "is_clickable": true,
+          "metadata": {
+            "feed_url": "https://news.microsoft.com/feed/"
+          }
         },
         {
           "event_id": "19872b27eec6a2a9ed43f77196dc4872db5212a1",
@@ -982,7 +1139,10 @@
           "link_kind": "external",
           "link_label": "原始公告",
           "href": "https://news.microsoft.com/2025/04/30/microsoft-earnings-press-release-available-on-investor-relations-website-26/",
-          "is_clickable": true
+          "is_clickable": true,
+          "metadata": {
+            "feed_url": "https://news.microsoft.com/feed/"
+          }
         },
         {
           "event_id": "msft-seed-2026-copilot-adoption",
@@ -997,7 +1157,10 @@
           "link_kind": "internal",
           "link_label": "內部研究節點",
           "href": "research/MSFT.html#event-timeline",
-          "is_clickable": true
+          "is_clickable": true,
+          "metadata": {
+            "seed": true
+          }
         },
         {
           "event_id": "msft-seed-2026-azure-capex",
@@ -1012,7 +1175,10 @@
           "link_kind": "internal",
           "link_label": "內部研究節點",
           "href": "research/MSFT.html#event-timeline",
-          "is_clickable": true
+          "is_clickable": true,
+          "metadata": {
+            "seed": true
+          }
         }
       ],
       "key_action_rules": [
@@ -1088,13 +1254,13 @@
           "source_type": "sec",
           "kind": "sec",
           "url": "https://data.sec.gov/submissions/CIK0000789019.json",
-          "status": "active",
+          "status": "failed",
           "priority": 10,
           "new_events": 0,
           "cursor": "",
-          "error": "",
+          "error": "https://data.sec.gov/submissions/CIK0000789019.json: HTTP Error 403: Forbidden",
           "notes": "官方 SEC 揭露來源；是否算重大事件，依各 ticker 的門檻設定判斷。",
-          "status_label": "啟用",
+          "status_label": "失敗",
           "is_clickable": true
         },
         {
@@ -1102,13 +1268,13 @@
           "source_type": "price",
           "kind": "price",
           "url": "https://query1.finance.yahoo.com/v8/finance/chart/MSFT?range=1mo&interval=1d",
-          "status": "active",
+          "status": "polled",
           "priority": 20,
           "new_events": 0,
-          "cursor": "",
+          "cursor": "2026-03-27",
           "error": "",
           "notes": "Yahoo Finance 日線資料，用來抓跳空與異常成交量。",
-          "status_label": "啟用",
+          "status_label": "已輪詢",
           "is_clickable": true
         },
         {
@@ -1116,13 +1282,13 @@
           "source_type": "investor_news",
           "kind": "rss",
           "url": "https://news.microsoft.com/feed/",
-          "status": "active",
+          "status": "polled",
           "priority": 30,
           "new_events": 0,
-          "cursor": "",
+          "cursor": "https://news.microsoft.com/source/2025/05/06/microsoft-and-ffa-help-students-use-smart-sensors-and-ai-to-learn-about-the-future-of-farming/",
           "error": "",
           "notes": "Microsoft 官方新聞室 RSS。",
-          "status_label": "啟用",
+          "status_label": "已輪詢",
           "is_clickable": true
         }
       ],
@@ -1689,7 +1855,10 @@
             "link_kind": "external",
             "link_label": "原始公告",
             "href": "https://www.linkedin.com/posts/satyanadella_introducing-azure-ai-foundry-labs-a-hub-activity-7298071158258614273-TIiL",
-            "is_clickable": true
+            "is_clickable": true,
+            "metadata": {
+              "feed_url": "https://news.microsoft.com/feed/"
+            }
           },
           {
             "event_id": "ed6756e435fcf1551e21491030e21b9972fb73c7",
@@ -1704,7 +1873,10 @@
             "link_kind": "external",
             "link_label": "原始公告",
             "href": "https://news.microsoft.com/2025/03/03/microsoft-dragon-copilot-provides-the-healthcare-industrys-first-unified-voice-ai-assistant-that-enables-clinicians-to-streamline-clinical-documentation-surface-information-and-automate-task/",
-            "is_clickable": true
+            "is_clickable": true,
+            "metadata": {
+              "feed_url": "https://news.microsoft.com/feed/"
+            }
           },
           {
             "event_id": "e943236490c770ed14bd5814d1c9eb6204e736e3",
@@ -1719,7 +1891,10 @@
             "link_kind": "external",
             "link_label": "原始公告",
             "href": "https://news.microsoft.com/2025/04/09/microsoft-announces-quarterly-earnings-release-date-63/",
-            "is_clickable": true
+            "is_clickable": true,
+            "metadata": {
+              "feed_url": "https://news.microsoft.com/feed/"
+            }
           },
           {
             "event_id": "7e260af1308e86512e2fb0b318aaf7affbff0a1d",
@@ -1734,7 +1909,10 @@
             "link_kind": "external",
             "link_label": "原始公告",
             "href": "https://news.microsoft.com/2025/04/30/microsoft-cloud-and-ai-strength-drives-third-quarter-results/",
-            "is_clickable": true
+            "is_clickable": true,
+            "metadata": {
+              "feed_url": "https://news.microsoft.com/feed/"
+            }
           },
           {
             "event_id": "19872b27eec6a2a9ed43f77196dc4872db5212a1",
@@ -1749,7 +1927,10 @@
             "link_kind": "external",
             "link_label": "原始公告",
             "href": "https://news.microsoft.com/2025/04/30/microsoft-earnings-press-release-available-on-investor-relations-website-26/",
-            "is_clickable": true
+            "is_clickable": true,
+            "metadata": {
+              "feed_url": "https://news.microsoft.com/feed/"
+            }
           },
           {
             "event_id": "msft-seed-2026-copilot-adoption",
@@ -1764,7 +1945,10 @@
             "link_kind": "internal",
             "link_label": "內部研究節點",
             "href": "research/MSFT.html#event-timeline",
-            "is_clickable": true
+            "is_clickable": true,
+            "metadata": {
+              "seed": true
+            }
           },
           {
             "event_id": "msft-seed-2026-azure-capex",
@@ -1779,7 +1963,10 @@
             "link_kind": "internal",
             "link_label": "內部研究節點",
             "href": "research/MSFT.html#event-timeline",
-            "is_clickable": true
+            "is_clickable": true,
+            "metadata": {
+              "seed": true
+            }
           }
         ],
         "source_manifest": [
@@ -1826,7 +2013,7 @@
         "decision_updated_at": "2026-03-27",
         "current_action": "持有 / 觀望，等待下一次驗證點",
         "status_label": "持有觀察",
-        "priority_score": 102,
+        "priority_score": 105,
         "priority_label": "優先追蹤",
         "next_review_at": "2026-04-03",
         "next_checklist": [
@@ -1896,6 +2083,7 @@
       "last_event_status": "持續追蹤",
       "detail_path": "tickers/MAR.html",
       "internal_research_path": "research/MAR.html",
+      "recommended_next_action": "穩健持有",
       "position": {
         "ticker": "MAR",
         "has_position": false,
@@ -1910,7 +2098,36 @@
         "shares_label": "尚未填入",
         "avg_cost_label": "未填成本",
         "target_weight_label": "未填目標倉位",
-        "max_weight_label": "未填上限倉位"
+        "max_weight_label": "未填上限倉位",
+        "cost_basis": null,
+        "cost_basis_label": "Private only",
+        "current_price": null,
+        "current_price_label": "N/A",
+        "market_value": null,
+        "market_value_label": "Private only",
+        "unrealized_pnl": null,
+        "unrealized_pnl_label": "Private only",
+        "unrealized_pnl_pct": null,
+        "unrealized_pnl_pct_label": "Private only",
+        "portfolio_weight_pct": null,
+        "portfolio_weight_label": "Private only",
+        "adjusted_target_weight_pct": null,
+        "adjusted_target_weight_label": "Private only",
+        "adjusted_max_weight_pct": null,
+        "adjusted_max_weight_label": "Private only",
+        "distance_to_target_pct": null,
+        "distance_to_target_label": "Private only",
+        "distance_to_max_pct": null,
+        "distance_to_max_label": "Private only",
+        "sizing_status": {
+          "state": "private-only",
+          "label": "Private only",
+          "summary": "需要本機 private portfolio 才會顯示 sizing 狀態。"
+        },
+        "risk_alerts": [],
+        "risk_alert_count": 0,
+        "recommended_next_action": "需要本機 private portfolio 才會顯示風控建議。",
+        "market_data_as_of": ""
       },
       "portfolio_position": {
         "ticker": "MAR",
@@ -1926,7 +2143,36 @@
         "shares_label": "尚未填入",
         "avg_cost_label": "未填成本",
         "target_weight_label": "未填目標倉位",
-        "max_weight_label": "未填上限倉位"
+        "max_weight_label": "未填上限倉位",
+        "cost_basis": null,
+        "cost_basis_label": "Private only",
+        "current_price": null,
+        "current_price_label": "N/A",
+        "market_value": null,
+        "market_value_label": "Private only",
+        "unrealized_pnl": null,
+        "unrealized_pnl_label": "Private only",
+        "unrealized_pnl_pct": null,
+        "unrealized_pnl_pct_label": "Private only",
+        "portfolio_weight_pct": null,
+        "portfolio_weight_label": "Private only",
+        "adjusted_target_weight_pct": null,
+        "adjusted_target_weight_label": "Private only",
+        "adjusted_max_weight_pct": null,
+        "adjusted_max_weight_label": "Private only",
+        "distance_to_target_pct": null,
+        "distance_to_target_label": "Private only",
+        "distance_to_max_pct": null,
+        "distance_to_max_label": "Private only",
+        "sizing_status": {
+          "state": "private-only",
+          "label": "Private only",
+          "summary": "需要本機 private portfolio 才會顯示 sizing 狀態。"
+        },
+        "risk_alerts": [],
+        "risk_alert_count": 0,
+        "recommended_next_action": "需要本機 private portfolio 才會顯示風控建議。",
+        "market_data_as_of": ""
       },
       "key_events": [
         {
@@ -1942,7 +2188,10 @@
           "link_kind": "internal",
           "link_label": "內部研究節點",
           "href": "research/MAR.html#event-timeline",
-          "is_clickable": true
+          "is_clickable": true,
+          "metadata": {
+            "seed": true
+          }
         },
         {
           "event_id": "mar-seed-2026-guidance",
@@ -1957,7 +2206,10 @@
           "link_kind": "internal",
           "link_label": "內部研究節點",
           "href": "research/MAR.html#event-timeline",
-          "is_clickable": true
+          "is_clickable": true,
+          "metadata": {
+            "seed": true
+          }
         }
       ],
       "event_timeline": [
@@ -1974,7 +2226,10 @@
           "link_kind": "internal",
           "link_label": "內部研究節點",
           "href": "research/MAR.html#event-timeline",
-          "is_clickable": true
+          "is_clickable": true,
+          "metadata": {
+            "seed": true
+          }
         },
         {
           "event_id": "mar-seed-2026-guidance",
@@ -1989,7 +2244,10 @@
           "link_kind": "internal",
           "link_label": "內部研究節點",
           "href": "research/MAR.html#event-timeline",
-          "is_clickable": true
+          "is_clickable": true,
+          "metadata": {
+            "seed": true
+          }
         }
       ],
       "key_action_rules": [
@@ -2065,13 +2323,13 @@
           "source_type": "sec",
           "kind": "sec",
           "url": "https://data.sec.gov/submissions/CIK0001048286.json",
-          "status": "active",
+          "status": "failed",
           "priority": 10,
           "new_events": 0,
           "cursor": "",
-          "error": "",
+          "error": "https://data.sec.gov/submissions/CIK0001048286.json: HTTP Error 403: Forbidden",
           "notes": "官方 SEC 揭露來源；是否算重大事件，依各 ticker 的門檻設定判斷。",
-          "status_label": "啟用",
+          "status_label": "失敗",
           "is_clickable": true
         },
         {
@@ -2079,13 +2337,13 @@
           "source_type": "price",
           "kind": "price",
           "url": "https://query1.finance.yahoo.com/v8/finance/chart/MAR?range=1mo&interval=1d",
-          "status": "active",
+          "status": "polled",
           "priority": 20,
           "new_events": 0,
-          "cursor": "",
+          "cursor": "2026-03-27",
           "error": "",
           "notes": "Yahoo Finance 日線資料，用來抓跳空與異常成交量。",
-          "status_label": "啟用",
+          "status_label": "已輪詢",
           "is_clickable": true
         },
         {
@@ -2093,13 +2351,13 @@
           "source_type": "investor_news",
           "kind": "html",
           "url": "https://news.marriott.com/news/",
-          "status": "active",
+          "status": "polled",
           "priority": 30,
           "new_events": 0,
           "cursor": "",
           "error": "",
           "notes": "Marriott 官方新聞室頁面。",
-          "status_label": "啟用",
+          "status_label": "已輪詢",
           "is_clickable": true
         }
       ],
@@ -2531,7 +2789,10 @@
             "link_kind": "internal",
             "link_label": "內部研究節點",
             "href": "research/MAR.html#event-timeline",
-            "is_clickable": true
+            "is_clickable": true,
+            "metadata": {
+              "seed": true
+            }
           },
           {
             "event_id": "mar-seed-2026-guidance",
@@ -2546,7 +2807,10 @@
             "link_kind": "internal",
             "link_label": "內部研究節點",
             "href": "research/MAR.html#event-timeline",
-            "is_clickable": true
+            "is_clickable": true,
+            "metadata": {
+              "seed": true
+            }
           }
         ],
         "source_manifest": [
@@ -2658,6 +2922,177 @@
         "regime_drifts": 0,
         "expectation_gaps": 0
       }
+    }
+  },
+  "market_snapshot": {
+    "generated_at": "2026-03-30T12:34:33+00:00",
+    "quotes": {
+      "PLTR": {
+        "symbol": "PLTR",
+        "price": 143.06,
+        "previous_close": 147.56,
+        "change_pct": -3.05,
+        "as_of": "2026-03-27"
+      },
+      "MSFT": {
+        "symbol": "MSFT",
+        "price": 356.77,
+        "previous_close": 365.97,
+        "change_pct": -2.51,
+        "as_of": "2026-03-27"
+      },
+      "MAR": {
+        "symbol": "MAR",
+        "price": 317.54,
+        "previous_close": 325.74,
+        "change_pct": -2.52,
+        "as_of": "2026-03-27"
+      }
+    },
+    "vix": {
+      "symbol": "^VIX",
+      "value": 30.27,
+      "previous_close": 31.05,
+      "change_pct": -2.51,
+      "as_of": "2026-03-30"
+    }
+  },
+  "macro_regime": {
+    "symbol": "^VIX",
+    "value": 30.27,
+    "value_label": "30.27",
+    "previous_close": 31.05,
+    "change_pct": -2.51,
+    "as_of": "2026-03-30",
+    "key": "stress",
+    "label": "壓力",
+    "size_multiplier": 0.75,
+    "review_urgency": "high",
+    "summary": "風險偏高，target / max 倉位收緊 25%，暫停追價加碼。"
+  },
+  "portfolio_totals": {
+    "has_private_positions": false,
+    "held_ticker_count": 0,
+    "cost_basis": null,
+    "cost_basis_label": "Private only",
+    "market_value": null,
+    "market_value_label": "Private only",
+    "unrealized_pnl": null,
+    "unrealized_pnl_label": "Private only",
+    "unrealized_pnl_pct": null,
+    "unrealized_pnl_pct_label": "Private only",
+    "active_alert_count": 0,
+    "largest_position_ticker": "",
+    "largest_position_weight_pct": null,
+    "as_of": ""
+  },
+  "project_maturity": [
+    {
+      "id": "research-os",
+      "label": "Research OS",
+      "status": "complete",
+      "status_label": "Complete",
+      "summary": "研究 dossiers、state contract、digest 與 dashboard 產線已成形。"
+    },
+    {
+      "id": "exception-monitoring",
+      "label": "Exception monitoring",
+      "status": "prototype",
+      "status_label": "Prototype",
+      "summary": "已有量價例外事件與 UI 入口，但先前資料 contract 斷裂。"
+    },
+    {
+      "id": "post-mortem",
+      "label": "Post-mortem analytics",
+      "status": "basic",
+      "status_label": "Basic",
+      "summary": "已能回顧 assumption hit rate，但尚未結合 sizing / P&L。"
+    },
+    {
+      "id": "risk-circuit-breaker",
+      "label": "Risk circuit breaker",
+      "status": "basic",
+      "status_label": "Basic",
+      "summary": "v1 成本基礎與 thesis/macro 雙重條件熔斷邏輯已上線，下一步是更細的例外分級。"
+    },
+    {
+      "id": "position-sizing",
+      "label": "Position sizing engine",
+      "status": "prototype",
+      "status_label": "Prototype",
+      "summary": "已新增 regime-adjusted target / max sizing 建議，下一步是加入更完整的集中度限制。"
+    },
+    {
+      "id": "vix-macro",
+      "label": "VIX macro regime",
+      "status": "basic",
+      "status_label": "Basic",
+      "summary": "VIX-led macro overlay 已接上，下一步是補 rates / discount-rate linkage。"
+    }
+  ],
+  "recent_progress": [
+    {
+      "label": "Tracked names",
+      "value": "3",
+      "detail": "Living dossiers currently covered by the research OS."
+    },
+    {
+      "label": "Pending events",
+      "value": "7",
+      "detail": "Recent watch / refresh items already flowing through the digest."
+    },
+    {
+      "label": "Due this week",
+      "value": "1",
+      "detail": "Names that need near-term review attention."
+    },
+    {
+      "label": "Post-mortem",
+      "value": "0.0%",
+      "detail": "Current assumption hit rate from the existing post-mortem layer."
+    },
+    {
+      "label": "Complete modules",
+      "value": "1",
+      "detail": "Institutional-capability map showing what is finished versus missing."
+    }
+  ],
+  "risk_policy": {
+    "holding_period": "3-12 months",
+    "vix": {
+      "symbol": "^VIX",
+      "regimes": [
+        {
+          "key": "calm",
+          "label": "平穩",
+          "size_multiplier": 1.0
+        },
+        {
+          "key": "elevated",
+          "label": "偏緊",
+          "size_multiplier": 0.9
+        },
+        {
+          "key": "stress",
+          "label": "壓力",
+          "size_multiplier": 0.75
+        },
+        {
+          "key": "panic",
+          "label": "恐慌",
+          "size_multiplier": 0.6
+        }
+      ]
+    },
+    "circuit_breakers": {
+      "capital_preservation_loss_pct": -20.0,
+      "stress_regimes": [
+        "stress",
+        "panic"
+      ],
+      "de_risk_loss_pct": -15.0,
+      "review_loss_pct": -10.0,
+      "weak_thesis_score": 0.6
     }
   }
 }

@@ -338,6 +338,8 @@ def compute_priority(
     risk_level: str,
     confidence_delta: float,
     event_timeline: list[dict[str, Any]],
+    risk_alert_count: int = 0,
+    macro_regime: str = "",
 ) -> dict[str, Any]:
     action_weight = 40
     lowered = current_action.lower()
@@ -361,7 +363,9 @@ def compute_priority(
     event_weight = sum(8 for item in event_timeline[:3] if item.get("decision") == "refresh")
     event_weight += sum(4 for item in event_timeline[:3] if item.get("decision") == "watch")
     confidence_weight = 8 if confidence_delta > 0.04 else (-4 if confidence_delta < -0.04 else 0)
-    score = action_weight + review_weight + risk_weight + event_weight + confidence_weight
+    alert_weight = min(risk_alert_count, 3) * 8
+    macro_weight = 12 if macro_regime in {"stress", "panic"} else (6 if macro_regime == "elevated" else 0)
+    score = action_weight + review_weight + risk_weight + event_weight + confidence_weight + alert_weight + macro_weight
     if score >= 110:
         label = "最高優先"
     elif score >= 85:

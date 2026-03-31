@@ -27,6 +27,7 @@ from .llm import generate_refresh, translate_markdown
 from .radar import scan_market
 from .markdown import render_current_report, render_review_summary
 from .models import Event
+from .observation import ensure_observation_system_files
 from .postprocess import post_process_refresh_output
 from .research_state import (
     append_state_change_entry,
@@ -562,6 +563,7 @@ def run_radar_scan(
 
 
 def sync_research_contracts(research_root: Path = RESEARCH_ROOT) -> dict[str, Any]:
+    ensure_observation_system_files(research_root)
     rewritten: list[str] = []
     for state_path in sorted(research_root.glob("*/state.json")):
         state = read_json(state_path)

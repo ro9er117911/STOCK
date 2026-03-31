@@ -1,0 +1,220 @@
+- main [ref=e2]:
+  - navigation [ref=e3]:
+    - link "返回總覽" [ref=e4] [cursor=pointer]:
+      - /url: ../index.html
+    - link "回到決策頁" [ref=e5] [cursor=pointer]:
+      - /url: ../tickers/MSFT.html
+  - generic [ref=e7]:
+    - paragraph [ref=e8]: Structured Research
+    - heading "MSFT｜Microsoft" [level=1] [ref=e9]
+    - paragraph [ref=e10]: MSFT 這輪有足以觸發重新檢查的事件，但目前主判斷沒有被推翻。 目前先維持「持有 / 觀望，等待下一次驗證點」，下一個驗證點先盯 Azure 成長。
+    - generic [ref=e11]:
+      - generic [ref=e12]:
+        - generic [ref=e13]: 目前操作
+        - strong [ref=e14]: 持有 / 觀望，等待下一次驗證點
+      - generic [ref=e15]:
+        - generic [ref=e16]: VIX regime
+        - strong [ref=e17]: 壓力
+      - generic [ref=e18]:
+        - generic [ref=e19]: thesis 健康度
+        - strong [ref=e20]: 71%
+      - generic [ref=e21]:
+        - generic [ref=e22]: 下次檢查
+        - strong [ref=e23]: 2026-04-03
+  - generic [ref=e24]:
+    - generic [ref=e25]:
+      - article [ref=e26]:
+        - generic [ref=e27]:
+          - generic [ref=e28]:
+            - paragraph [ref=e29]: Research Brief
+            - heading "先看結論，再看證據" [level=2] [ref=e30]
+          - generic [ref=e31]: 持有觀察
+        - generic [ref=e32]:
+          - article [ref=e33]:
+            - heading "目前操作" [level=3] [ref=e34]
+            - paragraph [ref=e35]: 持有 / 觀望，等待下一次驗證點
+          - article [ref=e36]:
+            - heading "下一個動作" [level=3] [ref=e37]
+            - paragraph [ref=e38]: 停止加碼並優先做 capital-preservation review，等待下一個 catalyst 重新驗證。
+          - article [ref=e39]:
+            - heading "這輪先看什麼" [level=3] [ref=e40]
+            - paragraph [ref=e41]: Azure 成長
+          - article [ref=e42]:
+            - heading "風險 / 健康度" [level=3] [ref=e43]
+            - paragraph [ref=e44]: VIX 壓力｜thesis 71%
+      - article [ref=e45]:
+        - generic [ref=e46]:
+          - generic [ref=e47]:
+            - paragraph [ref=e48]: Thesis Snapshot
+            - heading "thesis 摘要" [level=2] [ref=e49]
+          - generic [ref=e50]: 穩定監控
+        - blockquote [ref=e51]: 微軟仍是 AI 基礎設施與企業分發的核心受益者，但要讓股價脫離 CapEx 懷疑，必須用 Copilot adoption、M365 漲價與 Azure AI 需求證明其估值可以重新從成熟雲端股回到高品質 AI 平台股。
+        - generic [ref=e52]:
+          - generic [ref=e53]:
+            - generic [ref=e54]: 研究主題
+            - strong [ref=e55]: AI 變現重估，加上 model-agnostic 平台對沖。
+          - generic [ref=e56]:
+            - generic [ref=e57]: 核心催化
+            - strong [ref=e58]: Copilot adoption、M365 漲價傳導，以及 Azure AI 需求。
+          - generic [ref=e59]:
+            - generic [ref=e60]: 市場盲點
+            - strong [ref=e61]: 市場短線聚焦高 CapEx，低估 model-agnostic Copilot 與商業訂價權恢復帶來的 EPS 扭轉。
+          - generic [ref=e62]:
+            - generic [ref=e63]: 持有期間
+            - strong [ref=e64]: 數季至一年
+      - article [ref=e65]:
+        - generic [ref=e67]:
+          - paragraph [ref=e68]: Assumption Map
+          - heading "假設地圖" [level=2] [ref=e69]
+        - generic [ref=e70]:
+          - article [ref=e71]:
+            - generic [ref=e72]:
+              - heading "msft-a1" [level=3] [ref=e73]
+              - generic [ref=e74]: 已強化
+            - paragraph [ref=e75]: Azure 的 AI 需求有機會把整體 Azure 成長維持在 30% 以上。
+            - paragraph [ref=e76]:
+              - strong [ref=e77]: 驗證方式：
+              - text: 每季 Azure 成長與 AI 貢獻揭露。
+            - paragraph [ref=e78]:
+              - strong [ref=e79]: 失效條件：
+              - text: 如果 Azure 成長跌到 30% 以下，或 AI 貢獻明顯放緩，這個假設就要重估。
+          - article [ref=e80]:
+            - generic [ref=e81]:
+              - heading "msft-a2" [level=3] [ref=e82]
+              - generic [ref=e83]: 已強化
+            - paragraph [ref=e84]: Copilot adoption 若能明顯改善，就足以支撐 AI 分發溢價。
+            - paragraph [ref=e85]:
+              - strong [ref=e86]: 驗證方式：
+              - text: 企業採用評論、席次成長，以及 attach rate。
+            - paragraph [ref=e87]:
+              - strong [ref=e88]: 失效條件：
+              - text: 若 Copilot 到下一輪財報仍低於 10% 企業滲透率，就要保守看待。
+          - article [ref=e89]:
+            - generic [ref=e90]:
+              - heading "msft-a3" [level=3] [ref=e91]
+              - generic [ref=e92]: 持續觀察
+            - paragraph [ref=e93]: CapEx 成長最終要轉成可持續的營收與利潤率支撐，而不是單純的成本拖累。
+            - paragraph [ref=e94]:
+              - strong [ref=e95]: 驗證方式：
+              - text: CapEx 趨勢、毛利率趨勢與變現更新。
+            - paragraph [ref=e96]:
+              - strong [ref=e97]: 失效條件：
+              - text: 如果 CapEx 持續加速，但利潤率與變現連兩季都沒有改善，這個假設就要降級。
+      - article [ref=e98]:
+        - generic [ref=e100]:
+          - paragraph [ref=e101]: Timeline
+          - heading "事件時間線" [level=2] [ref=e102]
+        - generic [ref=e103]:
+          - article [ref=e104]:
+            - generic [ref=e105]:
+              - heading "2025-02-20｜官方新聞" [level=3] [ref=e106]
+              - generic [ref=e107]: 持續追蹤
+            - paragraph [ref=e108]: We’re taking our latest AI research breakthroughs and putting them in the hands of devs everywhere, with Azure AI Foundry Labs.
+            - generic [ref=e109]:
+              - generic [ref=e110]: 偏正向
+              - link "原始公告" [ref=e111] [cursor=pointer]:
+                - /url: https://www.linkedin.com/posts/satyanadella_introducing-azure-ai-foundry-labs-a-hub-activity-7298071158258614273-TIiL
+          - article [ref=e112]:
+            - generic [ref=e113]:
+              - heading "2025-03-03｜官方新聞" [level=3] [ref=e114]
+              - generic [ref=e115]: 持續追蹤
+            - paragraph [ref=e116]: Microsoft Dragon Copilot provides the healthcare industry’s first unified voice AI assistant that enables clinicians to streamline clinical documentation, surface information and automate tasks
+            - generic [ref=e117]:
+              - generic [ref=e118]: 偏正向
+              - link "原始公告" [ref=e119] [cursor=pointer]:
+                - /url: https://news.microsoft.com/2025/03/03/microsoft-dragon-copilot-provides-the-healthcare-industrys-first-unified-voice-ai-assistant-that-enables-clinicians-to-streamline-clinical-documentation-surface-information-and-automate-task/
+          - article [ref=e120]:
+            - generic [ref=e121]:
+              - heading "2025-04-09｜官方新聞" [level=3] [ref=e122]
+              - generic [ref=e123]: 需要重估
+            - paragraph [ref=e124]: Microsoft announces quarterly earnings release date
+            - generic [ref=e125]:
+              - generic [ref=e126]: 中性
+              - link "原始公告" [ref=e127] [cursor=pointer]:
+                - /url: https://news.microsoft.com/2025/04/09/microsoft-announces-quarterly-earnings-release-date-63/
+          - article [ref=e128]:
+            - generic [ref=e129]:
+              - heading "2025-04-30｜官方新聞" [level=3] [ref=e130]
+              - generic [ref=e131]: 需要重估
+            - paragraph [ref=e132]: Microsoft Cloud and AI strength drives third quarter results
+            - generic [ref=e133]:
+              - generic [ref=e134]: 中性
+              - link "原始公告" [ref=e135] [cursor=pointer]:
+                - /url: https://news.microsoft.com/2025/04/30/microsoft-cloud-and-ai-strength-drives-third-quarter-results/
+          - article [ref=e136]:
+            - generic [ref=e137]:
+              - heading "2025-04-30｜官方新聞" [level=3] [ref=e138]
+              - generic [ref=e139]: 需要重估
+            - paragraph [ref=e140]: Microsoft earnings press release available on Investor Relations website
+            - generic [ref=e141]:
+              - generic [ref=e142]: 中性
+              - link "原始公告" [ref=e143] [cursor=pointer]:
+                - /url: https://news.microsoft.com/2025/04/30/microsoft-earnings-press-release-available-on-investor-relations-website-26/
+        - paragraph [ref=e144]: 僅顯示最近 5 筆事件，避免研究頁過度擁擠。
+    - generic [ref=e145]:
+      - article [ref=e146]:
+        - generic [ref=e148]:
+          - paragraph [ref=e149]: Review Summary
+          - heading "本輪更新摘要" [level=2] [ref=e150]
+        - article [ref=e151]:
+          - paragraph [ref=e152]: 本輪沒有新增足以改寫 thesis 的重大事件，所以 MSFT 除了例行更新檢查時間之外，主判斷不變。信心、關鍵假設與操作規則都先維持。
+        - generic [ref=e154]: 本輪沒有額外的假設變更。
+      - article [ref=e155]:
+        - generic [ref=e157]:
+          - paragraph [ref=e158]: Delta
+          - heading "與前版差異" [level=2] [ref=e159]
+        - generic [ref=e160]:
+          - article [ref=e161]:
+            - paragraph [ref=e162]: 這輪沒有超出既有研究框架的新證據，因此不需要重新評等 thesis 或假設。
+          - article [ref=e163]:
+            - paragraph [ref=e164]: 目前維持持有 / 觀望，等下一個財報驗證點。
+          - article [ref=e165]:
+            - paragraph [ref=e166]: 這次把檢查時間更新成今天已完成複盤，並維持近期待追蹤節奏。
+      - article [ref=e167]:
+        - generic [ref=e169]:
+          - paragraph [ref=e170]: Citations
+          - heading "來源與引用" [level=2] [ref=e171]
+        - generic [ref=e172]:
+          - article [ref=e173]:
+            - generic [ref=e174]:
+              - heading "研究內頁" [level=3] [ref=e175]
+              - generic [ref=e176]: 內部節點
+            - paragraph [ref=e177]: 研究頁面｜2026-03-27
+            - link "打開引用" [ref=e179] [cursor=pointer]:
+              - /url: ../research/MSFT.html
+          - article [ref=e180]:
+            - generic [ref=e181]:
+              - heading "本輪更新摘要" [level=3] [ref=e182]
+              - generic [ref=e183]: 內部節點
+            - paragraph [ref=e184]: 更新摘要｜2026-03-27
+            - link "打開引用" [ref=e186] [cursor=pointer]:
+              - /url: ../research/MSFT.html#review-summary
+          - article [ref=e187]:
+            - generic [ref=e188]:
+              - heading "SEC 公司揭露檔案" [level=3] [ref=e189]
+              - generic [ref=e190]: 外部來源
+            - paragraph [ref=e191]: SEC｜2026-03-27
+            - link "打開引用" [ref=e193] [cursor=pointer]:
+              - /url: https://data.sec.gov/submissions/CIK0000789019.json
+          - article [ref=e194]:
+            - generic [ref=e195]:
+              - heading "Microsoft 官方新聞來源" [level=3] [ref=e196]
+              - generic [ref=e197]: 外部來源
+            - paragraph [ref=e198]: RSS｜2026-03-27
+            - link "打開引用" [ref=e200] [cursor=pointer]:
+              - /url: https://news.microsoft.com/feed/
+          - article [ref=e201]:
+            - generic [ref=e202]:
+              - heading "Yahoo Finance 圖表資料" [level=3] [ref=e203]
+              - generic [ref=e204]: 外部來源
+            - paragraph [ref=e205]: 市場資料｜2026-03-27
+            - link "打開引用" [ref=e207] [cursor=pointer]:
+              - /url: https://query1.finance.yahoo.com/v8/finance/chart/MSFT?range=1mo&interval=1d
+          - article [ref=e208]:
+            - generic [ref=e209]:
+              - heading "We’re taking our latest AI research breakthroughs and putting them in the hands of devs everywhere, with Azure AI Foundry Labs." [level=3] [ref=e210]
+              - generic [ref=e211]: 外部來源
+            - paragraph [ref=e212]: 官方新聞｜2025-02-20
+            - link "打開引用" [ref=e214] [cursor=pointer]:
+              - /url: https://www.linkedin.com/posts/satyanadella_introducing-azure-ai-foundry-labs-a-hub-activity-7298071158258614273-TIiL
+        - paragraph [ref=e215]: 僅顯示前 6 個引用，保留研究頁的閱讀節奏。

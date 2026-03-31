@@ -15,7 +15,7 @@ from stock_research.notify import send_resend_email
 from stock_research.pipeline import bootstrap_baselines, draft_refreshes, poll_events, sync_research_contracts
 from stock_research.postprocess import post_process_refresh_output
 from stock_research.sources import fetch_feed_events
-from stock_research.storage import deep_merge, read_json, read_jsonl
+from stock_research.storage import deep_merge, read_json, read_jsonl, write_jsonl
 from stock_research.config import WATCHLIST
 
 
@@ -494,12 +494,23 @@ class PipelineTests(unittest.TestCase):
                 ),
                 encoding="utf-8",
             )
-            summary = build_dashboard_bundle(
-                research_root=research_root,
-                public_site_root=public_site_root,
-                local_site_root=local_site_root,
-                portfolio_path=portfolio_path,
-            )
+            market_snapshot = {
+                "generated_at": "2026-03-30T00:00:00+00:00",
+                "quotes": {
+                    "MSFT": {"symbol": "MSFT", "price": 370.0, "previous_close": 380.0, "change_pct": -2.63, "as_of": "2026-03-30"},
+                    "PLTR": {"symbol": "PLTR", "price": 150.0, "previous_close": 151.0, "change_pct": -0.66, "as_of": "2026-03-30"},
+                    "MAR": {"symbol": "MAR", "price": 330.0, "previous_close": 331.0, "change_pct": -0.3, "as_of": "2026-03-30"},
+                },
+                "vix": {"symbol": "^VIX", "value": 31.0, "previous_close": 29.0, "change_pct": 6.9, "as_of": "2026-03-30"},
+            }
+            with mock.patch("stock_research.digest.fetch_market_snapshot", return_value=market_snapshot), \
+                mock.patch("stock_research.risk.fetch_market_snapshot", return_value=market_snapshot):
+                summary = build_dashboard_bundle(
+                    research_root=research_root,
+                    public_site_root=public_site_root,
+                    local_site_root=local_site_root,
+                    portfolio_path=portfolio_path,
+                )
             public_portfolio = read_json(public_site_root / "data" / "portfolio.json")
             local_portfolio = read_json(local_site_root / "data" / "portfolio.json")
             msft_public = next(item for item in public_portfolio["tickers"] if item["ticker"] == "MSFT")
@@ -507,7 +518,42 @@ class PipelineTests(unittest.TestCase):
             self.assertFalse(msft_public["position"]["has_position"])
             self.assertTrue(msft_local["position"]["has_position"])
             self.assertEqual(msft_local["position"]["shares"], 12)
+            self.assertIsNone(msft_public["position"]["market_value"])
+            self.assertEqual(msft_local["position"]["current_price"], 370.0)
+            self.assertLess(msft_local["position"]["unrealized_pnl"], 0)
+            self.assertTrue(local_portfolio["portfolio_totals"]["has_private_positions"])
             self.assertTrue(summary["has_private_overlay"])
+
+    def test_digest_preserves_exception_event_metadata_for_dashboard_rendering(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            research_root = Path(tmp) / "research"
+            bootstrap_baselines(research_root=research_root, force=True)
+            events_path = research_root / "MSFT" / "events.jsonl"
+            baseline_events = read_jsonl(events_path)
+            baseline_events.append(
+                {
+                    "event_id": "msft-exception-1",
+                    "ticker": "MSFT",
+                    "source_type": "price",
+                    "occurred_at": "2026-04-01",
+                    "title": "[EXCEPTION] Price move -6.2% with 2.9x volume",
+                    "source_url": "https://finance.yahoo.com/quote/MSFT",
+                    "affected_assumption_ids": [],
+                    "marginal_impact": "-",
+                    "threshold_breach": True,
+                    "requires_refresh": True,
+                    "decision": "refresh",
+                    "metadata": {
+                        "is_exception": True,
+                        "exception_type": "籌碼崩解 (High-Volume Selloff)",
+                        "severity": "critical",
+                    },
+                }
+            )
+            write_jsonl(events_path, baseline_events)
+            digest = build_ticker_digest(research_root, "MSFT")
+            self.assertTrue(digest["event_timeline"][0]["metadata"]["is_exception"])
+            self.assertEqual(digest["key_events"][0]["metadata"]["severity"], "critical")
 
     def test_public_citations_replace_local_seed_path_with_internal_research_link(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:

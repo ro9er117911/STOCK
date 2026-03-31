@@ -24,6 +24,12 @@ Do not force this framework onto:
 4. Analyze valuation regime shifts before doing point-estimate valuation.
 5. Treat research as a living document that must be recalibrated over time.
 
+6. **Mermaid Syntax Rule**: All punctuation (e.g., colons, parentheses, arrows) must be half-width (ASCII) characters.
+7. **Service Connectivity Rule**: 嚴禁 Backend (8001) 與 Frontend (8000/3000) 埠號不對稱。修改 API 調用前必須核對連線設定。
+8. **Visual Verification Rule**: 對於 UI 佈局調整，宣稱完成前需主動建議或使用 `webapp-testing` (Playwright) 檢查元素重疊 (Overlap)。
+
+
+
 ## Required Outputs
 
 - Human-readable thesis: `research/<ticker>/current.md`

@@ -7,6 +7,8 @@ from typing import Any
 
 from .config import (
     CANONICAL_DIGEST_PATH,
+    COCKPIT_API_HOST,
+    COCKPIT_API_PORT,
     DIGEST_FILENAME,
     NOTIFICATION_PAYLOAD_PATH,
     PORTFOLIO_PRIVATE_PATH,
@@ -29,8 +31,19 @@ from .copy import (
     split_checklist,
     thesis_health_snapshot,
 )
+from .observation import build_observation_workspace, observation_context_for_ticker
 from .portfolio import load_private_portfolio
 from .research_state import normalize_state_contract
+from .risk import (
+    build_macro_regime,
+    build_portfolio_totals,
+    empty_portfolio_totals,
+    evaluate_position_snapshot,
+    fetch_market_snapshot,
+    finalize_position_weights,
+    load_risk_policy,
+    project_maturity_snapshot,
+)
 from .storage import read_json, read_jsonl, write_json
 from .analytics import generate_post_mortem_report
 
@@ -127,6 +140,35 @@ def _position_placeholder(ticker: str) -> dict[str, Any]:
         "avg_cost_label": "未填成本",
         "target_weight_label": "未填目標倉位",
         "max_weight_label": "未填上限倉位",
+        "cost_basis": None,
+        "cost_basis_label": "Private only",
+        "current_price": None,
+        "current_price_label": "N/A",
+        "market_value": None,
+        "market_value_label": "Private only",
+        "unrealized_pnl": None,
+        "unrealized_pnl_label": "Private only",
+        "unrealized_pnl_pct": None,
+        "unrealized_pnl_pct_label": "Private only",
+        "portfolio_weight_pct": None,
+        "portfolio_weight_label": "Private only",
+        "adjusted_target_weight_pct": None,
+        "adjusted_target_weight_label": "Private only",
+        "adjusted_max_weight_pct": None,
+        "adjusted_max_weight_label": "Private only",
+        "distance_to_target_pct": None,
+        "distance_to_target_label": "Private only",
+        "distance_to_max_pct": None,
+        "distance_to_max_label": "Private only",
+        "sizing_status": {
+            "state": "private-only",
+            "label": "Private only",
+            "summary": "需要本機 private portfolio 才會顯示 sizing 狀態。",
+        },
+        "risk_alerts": [],
+        "risk_alert_count": 0,
+        "recommended_next_action": "需要本機 private portfolio 才會顯示風控建議。",
+        "market_data_as_of": "",
     }
 
 
@@ -153,6 +195,35 @@ def _position_snapshot(ticker: str, position: dict[str, Any] | None) -> dict[str
         "avg_cost_label": format_currency(avg_cost) if avg_cost > 0 else "未填成本",
         "target_weight_label": format_percent(target_weight_pct) if target_weight_pct > 0 else "未填目標倉位",
         "max_weight_label": format_percent(max_weight_pct) if max_weight_pct > 0 else "未填上限倉位",
+        "cost_basis": round(shares * avg_cost, 2) if shares > 0 and avg_cost > 0 else None,
+        "cost_basis_label": format_currency(shares * avg_cost) if shares > 0 and avg_cost > 0 else "Private only",
+        "current_price": None,
+        "current_price_label": "N/A",
+        "market_value": None,
+        "market_value_label": "Private only",
+        "unrealized_pnl": None,
+        "unrealized_pnl_label": "Private only",
+        "unrealized_pnl_pct": None,
+        "unrealized_pnl_pct_label": "Private only",
+        "portfolio_weight_pct": None,
+        "portfolio_weight_label": "Private only",
+        "adjusted_target_weight_pct": None,
+        "adjusted_target_weight_label": "Private only",
+        "adjusted_max_weight_pct": None,
+        "adjusted_max_weight_label": "Private only",
+        "distance_to_target_pct": None,
+        "distance_to_target_label": "Private only",
+        "distance_to_max_pct": None,
+        "distance_to_max_label": "Private only",
+        "sizing_status": {
+            "state": "private-only",
+            "label": "Private only",
+            "summary": "需要本機 private portfolio 才會顯示 sizing 狀態。",
+        },
+        "risk_alerts": [],
+        "risk_alert_count": 0,
+        "recommended_next_action": "需要本機 private portfolio 才會顯示風控建議。",
+        "market_data_as_of": "",
     }
 
 
@@ -306,9 +377,45 @@ def _build_event_timeline(events: list[dict[str, Any]], ticker: str) -> list[dic
                 "link_label": "原始公告" if is_public else "內部研究節點",
                 "href": source_url if is_public else f"{logical_paths['research_path']}#event-timeline",
                 "is_clickable": True,
+                "metadata": event.get("metadata", {}),
             }
         )
     return timeline
+
+
+def _build_recent_progress(
+    summary: dict[str, Any],
+    analytics: dict[str, Any],
+    project_maturity: list[dict[str, Any]],
+) -> list[dict[str, str]]:
+    complete_count = sum(1 for item in project_maturity if item["status"] == "complete")
+    return [
+        {
+            "label": "Tracked names",
+            "value": str(summary["tracked_ticker_count"]),
+            "detail": "Living dossiers currently covered by the research OS.",
+        },
+        {
+            "label": "Pending events",
+            "value": str(summary["pending_event_count"]),
+            "detail": "Recent watch / refresh items already flowing through the digest.",
+        },
+        {
+            "label": "Due this week",
+            "value": str(summary["review_due_count"]),
+            "detail": "Names that need near-term review attention.",
+        },
+        {
+            "label": "Post-mortem",
+            "value": f"{analytics['hit_rate_pct']}%",
+            "detail": "Current assumption hit rate from the existing post-mortem layer.",
+        },
+        {
+            "label": "Complete modules",
+            "value": str(complete_count),
+            "detail": "Institutional-capability map showing what is finished versus missing.",
+        },
+    ]
 
 
 def _build_assumptions(state: dict[str, Any]) -> list[dict[str, Any]]:
@@ -429,6 +536,7 @@ def _build_card(
         "last_event_status": event_timeline[0]["decision_label"] if event_timeline else "例行更新",
         "detail_path": paths["detail_path"],
         "internal_research_path": paths["research_path"],
+        "recommended_next_action": state["current_action"],
         "position": position_snapshot,
         "portfolio_position": position_snapshot,
         "key_events": event_timeline[:3],
@@ -507,6 +615,8 @@ def _build_card(
             "current_path": _relative_path(ticker_dir / "current.md"),
             "review_summary_path": _relative_path(ticker_dir / "artifacts" / "review_summary.md"),
         },
+        "observation_actions_enabled": False,
+        "observation_context": None,
     }
 
     if persist_artifacts:
@@ -569,13 +679,25 @@ def _build_priority_queue(cards: list[dict[str, Any]]) -> list[dict[str, Any]]:
     return queue
 
 
+def _discover_research_tickers(research_root: Path) -> list[str]:
+    discovered = sorted(
+        state_path.parent.name
+        for state_path in research_root.glob("*/state.json")
+        if state_path.parent.name != "system"
+    )
+    return discovered or list(WATCHLIST.keys())
+
+
 def build_portfolio_digest(
     research_root: Path,
     *,
     tickers: list[str] | None = None,
     source_status_map: dict[str, list[dict[str, Any]]] | None = None,
 ) -> dict[str, Any]:
-    tickers = tickers or list(WATCHLIST.keys())
+    tickers = tickers or _discover_research_tickers(research_root)
+    risk_policy = load_risk_policy(research_root / "system" / "risk_policy.json")
+    market_snapshot = fetch_market_snapshot(tickers, policy=risk_policy)
+    macro_regime = build_macro_regime(market_snapshot, risk_policy)
     cards = [
         _build_card(
             research_root,
@@ -585,12 +707,47 @@ def build_portfolio_digest(
         )
         for ticker in tickers
     ]
+    analytics = generate_post_mortem_report(research_root)
+    project_maturity = project_maturity_snapshot()
+    portfolio_summary = _build_portfolio_summary(cards)
     payload = {
         "generated_at": datetime.now(UTC).isoformat(timespec="seconds"),
-        "portfolio_summary": _build_portfolio_summary(cards),
+        "portfolio_summary": portfolio_summary,
         "priority_queue": _build_priority_queue(cards),
         "tickers": cards,
-        "post_mortem_analytics": generate_post_mortem_report(research_root),
+        "post_mortem_analytics": analytics,
+        "market_snapshot": market_snapshot,
+        "macro_regime": macro_regime,
+        "portfolio_totals": empty_portfolio_totals(),
+        "project_maturity": project_maturity,
+        "recent_progress": _build_recent_progress(portfolio_summary, analytics, project_maturity),
+        "risk_policy": {
+            "holding_period": risk_policy["holding_period"],
+            "vix": {
+                "symbol": risk_policy["vix"]["symbol"],
+                "regimes": [
+                    {
+                        "key": regime["key"],
+                        "label": regime["label"],
+                        "size_multiplier": regime["size_multiplier"],
+                    }
+                    for regime in risk_policy["vix"]["regimes"]
+                ],
+            },
+            "circuit_breakers": risk_policy["circuit_breakers"],
+        },
+        "observation_summary": {
+            "total_count": 0,
+            "open_count": 0,
+            "ready_count": 0,
+            "promoted_count": 0,
+            "dismissed_count": 0,
+            "average_score": 0.0,
+        },
+        "observation_items": [],
+        "watchlist_recommendations": [],
+        "observation_actions_enabled": False,
+        "api_base_url": None,
     }
     write_json(CANONICAL_DIGEST_PATH, payload)
     return payload
@@ -599,28 +756,89 @@ def build_portfolio_digest(
 def overlay_private_positions(
     payload: dict[str, Any],
     *,
+    research_root: Path | None = None,
     portfolio_path: Path = PORTFOLIO_PRIVATE_PATH,
+    risk_policy_path: Path | None = None,
+    market_snapshot: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
     positions = load_private_portfolio(portfolio_path)
-    if not positions:
-        return payload
+    risk_policy = load_risk_policy(risk_policy_path or portfolio_path.parent / "risk_policy.json")
     copied = json.loads(json.dumps(payload))
+    market_snapshot = market_snapshot or copied.get("market_snapshot") or fetch_market_snapshot(
+        [card["ticker"] for card in copied["tickers"]],
+        policy=risk_policy,
+    )
+    macro_regime = build_macro_regime(market_snapshot, risk_policy)
+    enriched_positions: list[dict[str, Any]] = []
     for card in copied["tickers"]:
-        card["position"] = _position_snapshot(card["ticker"], positions.get(card["ticker"]))
+        base_position = _position_snapshot(card["ticker"], positions.get(card["ticker"]))
+        evaluated_position = evaluate_position_snapshot(
+            base_position,
+            quote=market_snapshot.get("quotes", {}).get(card["ticker"], {}),
+            macro_regime=macro_regime,
+            thesis_health_score=card["thesis_health"]["score"],
+            key_events=card.get("key_events", []),
+            policy=risk_policy,
+        )
+        enriched_positions.append(evaluated_position)
+    finalized_positions = {
+        position["ticker"]: position
+        for position in finalize_position_weights(enriched_positions)
+    }
+
+    for card in copied["tickers"]:
+        card["position"] = finalized_positions.get(card["ticker"], _position_snapshot(card["ticker"], positions.get(card["ticker"])))
+        if (
+            card["position"]["sizing_status"]["state"] == "over_max"
+            and not any(alert["kind"] == "capital_preservation" for alert in card["position"]["risk_alerts"])
+        ):
+            card["position"]["risk_alerts"].append(
+                {
+                    "level": "medium",
+                    "kind": "over_max",
+                    "title": "Size above regime-adjusted max",
+                    "message": "目前曝險高於依 VIX regime 調整後的 max 倉位。",
+                    "action": risk_policy["actions"]["over_max"],
+                }
+            )
+            card["position"]["risk_alert_count"] = len(card["position"]["risk_alerts"])
+            if card["position"]["recommended_next_action"] == risk_policy["actions"]["healthy"]:
+                card["position"]["recommended_next_action"] = risk_policy["actions"]["over_max"]
         card["portfolio_position"] = card["position"]
         card["risk_level"] = card["position"]["risk_level"]
         card["risk_level_label"] = card["position"]["risk_level_label"]
+        card["recommended_next_action"] = card["position"]["recommended_next_action"]
         priority = compute_priority(
             current_action=card["current_action"],
             next_review_at=card["next_review_at"],
             risk_level=card["risk_level"],
             confidence_delta=card.get("confidence_delta", 0.0),
             event_timeline=card.get("event_timeline", []),
+            risk_alert_count=card["position"].get("risk_alert_count", 0),
+            macro_regime=macro_regime.get("key", ""),
         )
         card["priority_score"] = priority["score"]
         card["priority_label"] = priority["label"]
+    copied["market_snapshot"] = market_snapshot
+    copied["macro_regime"] = macro_regime
     copied["portfolio_summary"] = _build_portfolio_summary(copied["tickers"])
+    copied["portfolio_totals"] = build_portfolio_totals([card["position"] for card in copied["tickers"]])
     copied["priority_queue"] = _build_priority_queue(copied["tickers"])
+    observation_workspace = build_observation_workspace(
+        research_root=research_root or portfolio_path.parent.parent,
+        cards=copied["tickers"],
+    )
+    copied["observation_summary"] = observation_workspace["summary"]
+    copied["observation_items"] = observation_workspace["items"]
+    copied["watchlist_recommendations"] = observation_workspace["watchlist_recommendations"]
+    copied["observation_actions_enabled"] = True
+    copied["api_base_url"] = f"http://{COCKPIT_API_HOST}:{COCKPIT_API_PORT}"
+    for card in copied["tickers"]:
+        card["observation_actions_enabled"] = True
+        card["observation_context"] = observation_context_for_ticker(
+            card["ticker"],
+            graph=observation_workspace["graph"],
+        )
     return copied
 
 

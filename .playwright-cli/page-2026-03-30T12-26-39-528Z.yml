@@ -1,0 +1,324 @@
+- main [ref=e2]:
+  - navigation [ref=e3]:
+    - link "返回總覽" [ref=e4] [cursor=pointer]:
+      - /url: ../index.html
+    - link "打開研究內頁" [ref=e5] [cursor=pointer]:
+      - /url: ../research/MSFT.html
+  - generic [ref=e6]:
+    - generic [ref=e7]:
+      - paragraph [ref=e8]: Decision View
+      - heading "MSFT｜Microsoft" [level=1] [ref=e9]
+      - paragraph [ref=e10]: MSFT 這輪有足以觸發重新檢查的事件，但目前主判斷沒有被推翻。 目前先維持「持有 / 觀望，等待下一次驗證點」，下一個驗證點先盯 Azure 成長。
+      - generic [ref=e11]:
+        - generic [ref=e12]:
+          - generic [ref=e13]: 狀態
+          - strong [ref=e14]: 持有觀察
+        - generic [ref=e15]:
+          - generic [ref=e16]: VIX regime
+          - strong [ref=e17]: 壓力
+        - generic [ref=e18]:
+          - generic [ref=e19]: 未實現 P/L
+          - strong [ref=e20]: "-33.56%"
+        - generic [ref=e21]:
+          - generic [ref=e22]: 下次檢查
+          - strong [ref=e23]: 2026-04-03
+    - complementary [ref=e24]:
+      - generic [ref=e25]:
+        - paragraph [ref=e26]: Action Rail
+        - heading "現在該怎麼做" [level=2] [ref=e27]
+        - paragraph [ref=e28]: 停止加碼並優先做 capital-preservation review，等待下一個 catalyst 重新驗證。
+      - generic [ref=e29]:
+        - generic [ref=e30]:
+          - generic [ref=e31]: 研究操作
+          - strong [ref=e32]: 持有 / 觀望，等待下一次驗證點
+        - generic [ref=e33]:
+          - generic [ref=e34]: VIX regime
+          - strong [ref=e35]: 壓力
+        - generic [ref=e36]:
+          - generic [ref=e37]: Sizing 狀態
+          - strong [ref=e38]: 高於目標
+        - generic [ref=e39]:
+          - generic [ref=e40]: 下次檢查
+          - strong [ref=e41]: 2026-04-03
+      - generic [ref=e42]:
+        - heading "這輪先看什麼" [level=3] [ref=e43]
+        - paragraph [ref=e44]: Azure 成長
+        - link "研究內頁" [ref=e46] [cursor=pointer]:
+          - /url: ../research/MSFT.html
+  - generic [ref=e47]:
+    - generic [ref=e48]:
+      - article [ref=e49]:
+        - generic [ref=e50]:
+          - generic [ref=e51]:
+            - paragraph [ref=e52]: Position
+            - heading "部位與風控" [level=2] [ref=e53]
+          - generic [ref=e54]: 核心倉位
+        - generic [ref=e55]:
+          - generic [ref=e56]:
+            - generic [ref=e57]: 持股數
+            - strong [ref=e58]: 5 股
+          - generic [ref=e59]:
+            - generic [ref=e60]: 平均成本
+            - strong [ref=e61]: $536.98
+          - generic [ref=e62]:
+            - generic [ref=e63]: Current Price
+            - strong [ref=e64]: $356.77
+          - generic [ref=e65]:
+            - generic [ref=e66]: Market Value
+            - strong [ref=e67]: $1,783.85
+          - generic [ref=e68]:
+            - generic [ref=e69]: 未實現 P/L
+            - strong [ref=e70]: $-901.05
+          - generic [ref=e71]:
+            - generic [ref=e72]: 未實現 P/L %
+            - strong [ref=e73]: "-33.56%"
+          - generic [ref=e74]:
+            - generic [ref=e75]: 目前權重
+            - strong [ref=e76]: 30.66%
+          - generic [ref=e77]:
+            - generic [ref=e78]: 調整後目標 / 上限
+            - strong [ref=e79]: 30.0% / 37.5%
+        - paragraph [ref=e80]: Cost basic 536.98 - High valuation regime entry.
+      - article [ref=e81]:
+        - generic [ref=e82]:
+          - generic [ref=e83]:
+            - paragraph [ref=e84]: Thesis Health
+            - heading "thesis 健康度" [level=2] [ref=e85]
+          - generic [ref=e86]: 穩定監控
+        - generic [ref=e87]:
+          - generic [ref=e88]:
+            - paragraph [ref=e89]: 整體健康度
+            - strong [ref=e90]: 71%
+          - generic [ref=e93]:
+            - paragraph [ref=e94]: 假設分布
+            - strong [ref=e95]: 2 / 3
+            - paragraph [ref=e96]: 已強化 2、觀察 1、受壓 0
+        - paragraph [ref=e97]: 目前 thesis 信心 63%，本輪信心變化 +0%。
+      - article [ref=e98]:
+        - generic [ref=e99]:
+          - generic [ref=e100]:
+            - paragraph [ref=e101]: Risk Alerts
+            - heading "熔斷與警報" [level=2] [ref=e102]
+          - generic [ref=e103]: 2 則
+        - generic [ref=e104]:
+          - article [ref=e105]:
+            - generic [ref=e106]:
+              - heading "VIX 壓力 regime" [level=3] [ref=e107]
+              - generic [ref=e108]: high
+            - paragraph [ref=e109]: 風險偏高，target / max 倉位收緊 25%，暫停追價加碼。
+            - paragraph [ref=e110]: 先收緊 sizing，暫停追價加碼。
+          - article [ref=e111]:
+            - generic [ref=e112]:
+              - heading "Capital-preservation review" [level=3] [ref=e113]
+              - generic [ref=e114]: critical
+            - paragraph [ref=e115]: 未實現損益已達 -33.56%。
+            - paragraph [ref=e116]: 停止加碼並優先做 capital-preservation review，等待下一個 catalyst 重新驗證。
+      - article [ref=e117]:
+        - generic [ref=e119]:
+          - paragraph [ref=e120]: Core Assumptions
+          - heading "關鍵假設" [level=2] [ref=e121]
+        - generic [ref=e122]:
+          - article [ref=e123]:
+            - generic [ref=e124]:
+              - heading "msft-a1" [level=3] [ref=e125]
+              - generic [ref=e126]: 已強化
+            - paragraph [ref=e127]: Azure 的 AI 需求有機會把整體 Azure 成長維持在 30% 以上。
+            - paragraph [ref=e128]:
+              - strong [ref=e129]: 驗證方式：
+              - text: 每季 Azure 成長與 AI 貢獻揭露。
+            - paragraph [ref=e130]:
+              - strong [ref=e131]: 失效條件：
+              - text: 如果 Azure 成長跌到 30% 以下，或 AI 貢獻明顯放緩，這個假設就要重估。
+            - paragraph [ref=e132]:
+              - strong [ref=e133]: 信心：
+              - text: 68%
+          - article [ref=e134]:
+            - generic [ref=e135]:
+              - heading "msft-a2" [level=3] [ref=e136]
+              - generic [ref=e137]: 已強化
+            - paragraph [ref=e138]: Copilot adoption 若能明顯改善，就足以支撐 AI 分發溢價。
+            - paragraph [ref=e139]:
+              - strong [ref=e140]: 驗證方式：
+              - text: 企業採用評論、席次成長，以及 attach rate。
+            - paragraph [ref=e141]:
+              - strong [ref=e142]: 失效條件：
+              - text: 若 Copilot 到下一輪財報仍低於 10% 企業滲透率，就要保守看待。
+            - paragraph [ref=e143]:
+              - strong [ref=e144]: 信心：
+              - text: 54%
+          - article [ref=e145]:
+            - generic [ref=e146]:
+              - heading "msft-a3" [level=3] [ref=e147]
+              - generic [ref=e148]: 持續觀察
+            - paragraph [ref=e149]: CapEx 成長最終要轉成可持續的營收與利潤率支撐，而不是單純的成本拖累。
+            - paragraph [ref=e150]:
+              - strong [ref=e151]: 驗證方式：
+              - text: CapEx 趨勢、毛利率趨勢與變現更新。
+            - paragraph [ref=e152]:
+              - strong [ref=e153]: 失效條件：
+              - text: 如果 CapEx 持續加速，但利潤率與變現連兩季都沒有改善，這個假設就要降級。
+            - paragraph [ref=e154]:
+              - strong [ref=e155]: 信心：
+              - text: 56%
+      - article [ref=e156]:
+        - generic [ref=e158]:
+          - paragraph [ref=e159]: Event Timeline
+          - heading "關鍵事件時間線" [level=2] [ref=e160]
+        - generic [ref=e161]:
+          - article [ref=e162]:
+            - generic [ref=e163]:
+              - heading "2025-02-20｜官方新聞" [level=3] [ref=e164]
+              - generic [ref=e165]: 持續追蹤
+            - paragraph [ref=e166]: We’re taking our latest AI research breakthroughs and putting them in the hands of devs everywhere, with Azure AI Foundry Labs.
+            - generic [ref=e167]:
+              - generic [ref=e168]: 偏正向
+              - link "原始公告" [ref=e169] [cursor=pointer]:
+                - /url: https://www.linkedin.com/posts/satyanadella_introducing-azure-ai-foundry-labs-a-hub-activity-7298071158258614273-TIiL
+          - article [ref=e170]:
+            - generic [ref=e171]:
+              - heading "2025-03-03｜官方新聞" [level=3] [ref=e172]
+              - generic [ref=e173]: 持續追蹤
+            - paragraph [ref=e174]: Microsoft Dragon Copilot provides the healthcare industry’s first unified voice AI assistant that enables clinicians to streamline clinical documentation, surface information and automate tasks
+            - generic [ref=e175]:
+              - generic [ref=e176]: 偏正向
+              - link "原始公告" [ref=e177] [cursor=pointer]:
+                - /url: https://news.microsoft.com/2025/03/03/microsoft-dragon-copilot-provides-the-healthcare-industrys-first-unified-voice-ai-assistant-that-enables-clinicians-to-streamline-clinical-documentation-surface-information-and-automate-task/
+          - article [ref=e178]:
+            - generic [ref=e179]:
+              - heading "2025-04-09｜官方新聞" [level=3] [ref=e180]
+              - generic [ref=e181]: 需要重估
+            - paragraph [ref=e182]: Microsoft announces quarterly earnings release date
+            - generic [ref=e183]:
+              - generic [ref=e184]: 中性
+              - link "原始公告" [ref=e185] [cursor=pointer]:
+                - /url: https://news.microsoft.com/2025/04/09/microsoft-announces-quarterly-earnings-release-date-63/
+          - article [ref=e186]:
+            - generic [ref=e187]:
+              - heading "2025-04-30｜官方新聞" [level=3] [ref=e188]
+              - generic [ref=e189]: 需要重估
+            - paragraph [ref=e190]: Microsoft Cloud and AI strength drives third quarter results
+            - generic [ref=e191]:
+              - generic [ref=e192]: 中性
+              - link "原始公告" [ref=e193] [cursor=pointer]:
+                - /url: https://news.microsoft.com/2025/04/30/microsoft-cloud-and-ai-strength-drives-third-quarter-results/
+          - article [ref=e194]:
+            - generic [ref=e195]:
+              - heading "2025-04-30｜官方新聞" [level=3] [ref=e196]
+              - generic [ref=e197]: 需要重估
+            - paragraph [ref=e198]: Microsoft earnings press release available on Investor Relations website
+            - generic [ref=e199]:
+              - generic [ref=e200]: 中性
+              - link "原始公告" [ref=e201] [cursor=pointer]:
+                - /url: https://news.microsoft.com/2025/04/30/microsoft-earnings-press-release-available-on-investor-relations-website-26/
+          - article [ref=e202]:
+            - generic [ref=e203]:
+              - heading "2026-03-25｜既有研究節點" [level=3] [ref=e204]
+              - generic [ref=e205]: 需要重估
+            - paragraph [ref=e206]: Copilot enterprise penetration remained near 3%, below expectations.
+            - generic [ref=e207]:
+              - generic [ref=e208]: 偏負向
+              - link "內部研究節點" [ref=e209] [cursor=pointer]:
+                - /url: ../research/MSFT.html#event-timeline
+          - article [ref=e210]:
+            - generic [ref=e211]:
+              - heading "2026-03-25｜既有研究節點" [level=3] [ref=e212]
+              - generic [ref=e213]: 需要重估
+            - paragraph [ref=e214]: Q2 FY2026 Azure stayed strong but CapEx nearly reached $30B.
+            - generic [ref=e215]:
+              - generic [ref=e216]: 偏負向
+              - link "內部研究節點" [ref=e217] [cursor=pointer]:
+                - /url: ../research/MSFT.html#event-timeline
+    - generic [ref=e218]:
+      - article [ref=e219]:
+        - generic [ref=e221]:
+          - paragraph [ref=e222]: Next Checks
+          - heading "下一步檢查清單" [level=2] [ref=e223]
+        - generic [ref=e224]:
+          - article [ref=e225]:
+            - heading "Step 1" [level=3] [ref=e226]
+            - paragraph [ref=e227]: Azure 成長
+          - article [ref=e228]:
+            - heading "Step 2" [level=3] [ref=e229]
+            - paragraph [ref=e230]: AI 貢獻
+          - article [ref=e231]:
+            - heading "Step 3" [level=3] [ref=e232]
+            - paragraph [ref=e233]: Copilot 變現
+          - article [ref=e234]:
+            - heading "Step 4" [level=3] [ref=e235]
+            - paragraph [ref=e236]: 利潤率趨勢
+          - article [ref=e237]:
+            - heading "Step 5" [level=3] [ref=e238]
+            - paragraph [ref=e239]: CapEx 財測
+      - article [ref=e240]:
+        - generic [ref=e242]:
+          - paragraph [ref=e243]: Rulebook
+          - heading "動作規則" [level=2] [ref=e244]
+        - generic [ref=e245]:
+          - article [ref=e246]:
+            - generic [ref=e247]:
+              - heading "msft-ar-add" [level=3] [ref=e248]
+              - generic [ref=e249]: 加碼條件
+            - paragraph [ref=e250]:
+              - strong [ref=e251]: 條件：
+              - text: 當 Copilot 企業滲透率突破 10%，且 CapEx 成長放緩時，就可以考慮加碼。
+            - paragraph [ref=e252]:
+              - strong [ref=e253]: 動作：
+              - text: 等財報確認後再加碼。
+          - article [ref=e254]:
+            - generic [ref=e255]:
+              - heading "msft-ar-trim" [level=3] [ref=e256]
+              - generic [ref=e257]: 減碼條件
+            - paragraph [ref=e258]:
+              - strong [ref=e259]: 條件：
+              - text: 如果 CapEx 再往上走、而 Copilot 變現還是沒改善，就要減碼。
+            - paragraph [ref=e260]:
+              - strong [ref=e261]: 動作：
+              - text: 趁強勢減碼，並下調信心。
+          - article [ref=e262]:
+            - generic [ref=e263]:
+              - heading "msft-ar-exit" [level=3] [ref=e264]
+              - generic [ref=e265]: 退出條件
+            - paragraph [ref=e266]:
+              - strong [ref=e267]: 條件：
+              - text: 若 Azure 成長跌破 30%，或核心雲端能力出現實質受損，就要退出這個 thesis。
+            - paragraph [ref=e268]:
+              - strong [ref=e269]: 動作：
+              - text: 退出目前 thesis，轉往風險報酬更佳的標的。
+      - article [ref=e270]:
+        - generic [ref=e272]:
+          - paragraph [ref=e273]: Whitelisted Sources
+          - heading "來源與引用" [level=2] [ref=e274]
+        - generic [ref=e275]:
+          - article [ref=e276]:
+            - generic [ref=e277]:
+              - heading "sec" [level=3] [ref=e278]
+              - generic [ref=e279]: 失敗
+            - paragraph [ref=e280]: 官方 SEC 揭露來源；是否算重大事件，依各 ticker 的門檻設定判斷。
+            - link "來源網址" [ref=e282] [cursor=pointer]:
+              - /url: https://data.sec.gov/submissions/CIK0000789019.json
+          - article [ref=e283]:
+            - generic [ref=e284]:
+              - heading "price" [level=3] [ref=e285]
+              - generic [ref=e286]: 已輪詢
+            - paragraph [ref=e287]: Yahoo Finance 日線資料，用來抓跳空與異常成交量。
+            - link "來源網址" [ref=e289] [cursor=pointer]:
+              - /url: https://query1.finance.yahoo.com/v8/finance/chart/MSFT?range=1mo&interval=1d
+          - article [ref=e290]:
+            - generic [ref=e291]:
+              - heading "investor_news" [level=3] [ref=e292]
+              - generic [ref=e293]: 已輪詢
+            - paragraph [ref=e294]: Microsoft 官方新聞室 RSS。
+            - link "來源網址" [ref=e296] [cursor=pointer]:
+              - /url: https://news.microsoft.com/feed/
+      - article [ref=e297]:
+        - generic [ref=e299]:
+          - paragraph [ref=e300]: Deep Dive
+          - heading "研究內頁入口" [level=2] [ref=e301]
+        - generic [ref=e302]:
+          - paragraph [ref=e303]: 如果你要看 thesis 脈絡、與前版差異、事件時間線與內部研究節點，這裡是正式入口。
+          - generic [ref=e304]:
+            - link "打開研究內頁" [ref=e305] [cursor=pointer]:
+              - /url: ../research/MSFT.html
+            - link "留在決策頁" [ref=e306] [cursor=pointer]:
+              - /url: ../tickers/MSFT.html
+          - paragraph [ref=e307]: 目前共有 14 個可用引用，其中外部來源 11 個。

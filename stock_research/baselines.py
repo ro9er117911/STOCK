@@ -7,7 +7,9 @@ from typing import Any
 
 from .config import RESEARCH_ROOT, WATCHLIST
 from .markdown import render_current_report, render_review_summary
+from .observation import ensure_observation_system_files
 from .research_state import normalize_state_contract, sync_candidate_queue
+from .risk import DEFAULT_RISK_POLICY
 from .storage import write_json, write_jsonl
 
 
@@ -775,5 +777,9 @@ def bootstrap_baselines(research_root: Path = RESEARCH_ROOT, force: bool = False
             )
         lines.append("")
     (system_root / "source_registry.md").write_text("\n".join(lines).strip() + "\n", encoding="utf-8")
+    risk_policy_path = system_root / "risk_policy.json"
+    if force or not risk_policy_path.exists():
+        write_json(risk_policy_path, DEFAULT_RISK_POLICY)
+    ensure_observation_system_files(research_root, force=force)
     sync_candidate_queue(research_root)
     return created

@@ -60,6 +60,32 @@ launchd/com.ro9air.stock-research.catchup.plist
 
 The repo root is intentionally kept lean. Long-form planning notes, audits, walkthroughs, and imported reference material now live under `docs/`.
 
+## Python Setup
+
+Recommended local setup from a clean checkout:
+
+```bash
+python3 -m venv .venv
+source .venv/bin/activate
+python -m pip install --upgrade pip
+python -m pip install -e '.[dev]'
+```
+
+This repo now keeps Python dependency metadata in `pyproject.toml`. For environments that prefer requirements files, `requirements-dev.txt` is a thin wrapper around the same editable install.
+
+Once installed, you can use either interface:
+
+```bash
+research-ops --help
+python scripts/research_ops.py --help
+```
+
+Run the test suite with:
+
+```bash
+python -m pytest
+```
+
 ## What Is Automated
 
 The pipeline only uses high-signal inputs in v1:

@@ -22,11 +22,12 @@
   "last_reviewed_at": "2026-03-27",
   "risk_level": "",
   "risk_level_label": "尚未設定",
-  "priority_score": 102,
+  "priority_score": 105,
   "priority_label": "優先追蹤",
   "last_event_status": "持續追蹤",
   "detail_path": "tickers/MSFT.html",
   "internal_research_path": "research/MSFT.html",
+  "recommended_next_action": "持有 / 觀望，等待下一次驗證點",
   "position": {
     "ticker": "MSFT",
     "has_position": false,
@@ -41,7 +42,36 @@
     "shares_label": "尚未填入",
     "avg_cost_label": "未填成本",
     "target_weight_label": "未填目標倉位",
-    "max_weight_label": "未填上限倉位"
+    "max_weight_label": "未填上限倉位",
+    "cost_basis": null,
+    "cost_basis_label": "Private only",
+    "current_price": null,
+    "current_price_label": "N/A",
+    "market_value": null,
+    "market_value_label": "Private only",
+    "unrealized_pnl": null,
+    "unrealized_pnl_label": "Private only",
+    "unrealized_pnl_pct": null,
+    "unrealized_pnl_pct_label": "Private only",
+    "portfolio_weight_pct": null,
+    "portfolio_weight_label": "Private only",
+    "adjusted_target_weight_pct": null,
+    "adjusted_target_weight_label": "Private only",
+    "adjusted_max_weight_pct": null,
+    "adjusted_max_weight_label": "Private only",
+    "distance_to_target_pct": null,
+    "distance_to_target_label": "Private only",
+    "distance_to_max_pct": null,
+    "distance_to_max_label": "Private only",
+    "sizing_status": {
+      "state": "private-only",
+      "label": "Private only",
+      "summary": "需要本機 private portfolio 才會顯示 sizing 狀態。"
+    },
+    "risk_alerts": [],
+    "risk_alert_count": 0,
+    "recommended_next_action": "需要本機 private portfolio 才會顯示風控建議。",
+    "market_data_as_of": ""
   },
   "portfolio_position": {
     "ticker": "MSFT",
@@ -57,7 +87,36 @@
     "shares_label": "尚未填入",
     "avg_cost_label": "未填成本",
     "target_weight_label": "未填目標倉位",
-    "max_weight_label": "未填上限倉位"
+    "max_weight_label": "未填上限倉位",
+    "cost_basis": null,
+    "cost_basis_label": "Private only",
+    "current_price": null,
+    "current_price_label": "N/A",
+    "market_value": null,
+    "market_value_label": "Private only",
+    "unrealized_pnl": null,
+    "unrealized_pnl_label": "Private only",
+    "unrealized_pnl_pct": null,
+    "unrealized_pnl_pct_label": "Private only",
+    "portfolio_weight_pct": null,
+    "portfolio_weight_label": "Private only",
+    "adjusted_target_weight_pct": null,
+    "adjusted_target_weight_label": "Private only",
+    "adjusted_max_weight_pct": null,
+    "adjusted_max_weight_label": "Private only",
+    "distance_to_target_pct": null,
+    "distance_to_target_label": "Private only",
+    "distance_to_max_pct": null,
+    "distance_to_max_label": "Private only",
+    "sizing_status": {
+      "state": "private-only",
+      "label": "Private only",
+      "summary": "需要本機 private portfolio 才會顯示 sizing 狀態。"
+    },
+    "risk_alerts": [],
+    "risk_alert_count": 0,
+    "recommended_next_action": "需要本機 private portfolio 才會顯示風控建議。",
+    "market_data_as_of": ""
   },
   "key_events": [
     {
@@ -73,7 +132,10 @@
       "link_kind": "external",
       "link_label": "原始公告",
       "href": "https://www.linkedin.com/posts/satyanadella_introducing-azure-ai-foundry-labs-a-hub-activity-7298071158258614273-TIiL",
-      "is_clickable": true
+      "is_clickable": true,
+      "metadata": {
+        "feed_url": "https://news.microsoft.com/feed/"
+      }
     },
     {
       "event_id": "ed6756e435fcf1551e21491030e21b9972fb73c7",
@@ -88,7 +150,10 @@
       "link_kind": "external",
       "link_label": "原始公告",
       "href": "https://news.microsoft.com/2025/03/03/microsoft-dragon-copilot-provides-the-healthcare-industrys-first-unified-voice-ai-assistant-that-enables-clinicians-to-streamline-clinical-documentation-surface-information-and-automate-task/",
-      "is_clickable": true
+      "is_clickable": true,
+      "metadata": {
+        "feed_url": "https://news.microsoft.com/feed/"
+      }
     },
     {
       "event_id": "e943236490c770ed14bd5814d1c9eb6204e736e3",
@@ -103,7 +168,10 @@
       "link_kind": "external",
       "link_label": "原始公告",
       "href": "https://news.microsoft.com/2025/04/09/microsoft-announces-quarterly-earnings-release-date-63/",
-      "is_clickable": true
+      "is_clickable": true,
+      "metadata": {
+        "feed_url": "https://news.microsoft.com/feed/"
+      }
     }
   ],
   "event_timeline": [
@@ -120,7 +188,10 @@
       "link_kind": "external",
       "link_label": "原始公告",
       "href": "https://www.linkedin.com/posts/satyanadella_introducing-azure-ai-foundry-labs-a-hub-activity-7298071158258614273-TIiL",
-      "is_clickable": true
+      "is_clickable": true,
+      "metadata": {
+        "feed_url": "https://news.microsoft.com/feed/"
+      }
     },
     {
       "event_id": "ed6756e435fcf1551e21491030e21b9972fb73c7",
@@ -135,7 +206,10 @@
       "link_kind": "external",
       "link_label": "原始公告",
       "href": "https://news.microsoft.com/2025/03/03/microsoft-dragon-copilot-provides-the-healthcare-industrys-first-unified-voice-ai-assistant-that-enables-clinicians-to-streamline-clinical-documentation-surface-information-and-automate-task/",
-      "is_clickable": true
+      "is_clickable": true,
+      "metadata": {
+        "feed_url": "https://news.microsoft.com/feed/"
+      }
     },
     {
       "event_id": "e943236490c770ed14bd5814d1c9eb6204e736e3",
@@ -150,7 +224,10 @@
       "link_kind": "external",
       "link_label": "原始公告",
       "href": "https://news.microsoft.com/2025/04/09/microsoft-announces-quarterly-earnings-release-date-63/",
-      "is_clickable": true
+      "is_clickable": true,
+      "metadata": {
+        "feed_url": "https://news.microsoft.com/feed/"
+      }
     },
     {
       "event_id": "7e260af1308e86512e2fb0b318aaf7affbff0a1d",
@@ -165,7 +242,10 @@
       "link_kind": "external",
       "link_label": "原始公告",
       "href": "https://news.microsoft.com/2025/04/30/microsoft-cloud-and-ai-strength-drives-third-quarter-results/",
-      "is_clickable": true
+      "is_clickable": true,
+      "metadata": {
+        "feed_url": "https://news.microsoft.com/feed/"
+      }
     },
     {
       "event_id": "19872b27eec6a2a9ed43f77196dc4872db5212a1",
@@ -180,7 +260,10 @@
       "link_kind": "external",
       "link_label": "原始公告",
       "href": "https://news.microsoft.com/2025/04/30/microsoft-earnings-press-release-available-on-investor-relations-website-26/",
-      "is_clickable": true
+      "is_clickable": true,
+      "metadata": {
+        "feed_url": "https://news.microsoft.com/feed/"
+      }
     },
     {
       "event_id": "msft-seed-2026-copilot-adoption",
@@ -195,7 +278,10 @@
       "link_kind": "internal",
       "link_label": "內部研究節點",
       "href": "research/MSFT.html#event-timeline",
-      "is_clickable": true
+      "is_clickable": true,
+      "metadata": {
+        "seed": true
+      }
     },
     {
       "event_id": "msft-seed-2026-azure-capex",
@@ -210,7 +296,10 @@
       "link_kind": "internal",
       "link_label": "內部研究節點",
       "href": "research/MSFT.html#event-timeline",
-      "is_clickable": true
+      "is_clickable": true,
+      "metadata": {
+        "seed": true
+      }
     }
   ],
   "key_action_rules": [
@@ -286,13 +375,13 @@
       "source_type": "sec",
       "kind": "sec",
       "url": "https://data.sec.gov/submissions/CIK0000789019.json",
-      "status": "active",
+      "status": "failed",
       "priority": 10,
       "new_events": 0,
       "cursor": "",
-      "error": "",
+      "error": "https://data.sec.gov/submissions/CIK0000789019.json: HTTP Error 403: Forbidden",
       "notes": "官方 SEC 揭露來源；是否算重大事件，依各 ticker 的門檻設定判斷。",
-      "status_label": "啟用",
+      "status_label": "失敗",
       "is_clickable": true
     },
     {
@@ -300,13 +389,13 @@
       "source_type": "price",
       "kind": "price",
       "url": "https://query1.finance.yahoo.com/v8/finance/chart/MSFT?range=1mo&interval=1d",
-      "status": "active",
+      "status": "polled",
       "priority": 20,
       "new_events": 0,
-      "cursor": "",
+      "cursor": "2026-03-27",
       "error": "",
       "notes": "Yahoo Finance 日線資料，用來抓跳空與異常成交量。",
-      "status_label": "啟用",
+      "status_label": "已輪詢",
       "is_clickable": true
     },
     {
@@ -314,13 +403,13 @@
       "source_type": "investor_news",
       "kind": "rss",
       "url": "https://news.microsoft.com/feed/",
-      "status": "active",
+      "status": "polled",
       "priority": 30,
       "new_events": 0,
-      "cursor": "",
+      "cursor": "https://news.microsoft.com/source/2025/05/06/microsoft-and-ffa-help-students-use-smart-sensors-and-ai-to-learn-about-the-future-of-farming/",
       "error": "",
       "notes": "Microsoft 官方新聞室 RSS。",
-      "status_label": "啟用",
+      "status_label": "已輪詢",
       "is_clickable": true
     }
   ],
@@ -887,7 +976,10 @@
         "link_kind": "external",
         "link_label": "原始公告",
         "href": "https://www.linkedin.com/posts/satyanadella_introducing-azure-ai-foundry-labs-a-hub-activity-7298071158258614273-TIiL",
-        "is_clickable": true
+        "is_clickable": true,
+        "metadata": {
+          "feed_url": "https://news.microsoft.com/feed/"
+        }
       },
       {
         "event_id": "ed6756e435fcf1551e21491030e21b9972fb73c7",
@@ -902,7 +994,10 @@
         "link_kind": "external",
         "link_label": "原始公告",
         "href": "https://news.microsoft.com/2025/03/03/microsoft-dragon-copilot-provides-the-healthcare-industrys-first-unified-voice-ai-assistant-that-enables-clinicians-to-streamline-clinical-documentation-surface-information-and-automate-task/",
-        "is_clickable": true
+        "is_clickable": true,
+        "metadata": {
+          "feed_url": "https://news.microsoft.com/feed/"
+        }
       },
       {
         "event_id": "e943236490c770ed14bd5814d1c9eb6204e736e3",
@@ -917,7 +1012,10 @@
         "link_kind": "external",
         "link_label": "原始公告",
         "href": "https://news.microsoft.com/2025/04/09/microsoft-announces-quarterly-earnings-release-date-63/",
-        "is_clickable": true
+        "is_clickable": true,
+        "metadata": {
+          "feed_url": "https://news.microsoft.com/feed/"
+        }
       },
       {
         "event_id": "7e260af1308e86512e2fb0b318aaf7affbff0a1d",
@@ -932,7 +1030,10 @@
         "link_kind": "external",
         "link_label": "原始公告",
         "href": "https://news.microsoft.com/2025/04/30/microsoft-cloud-and-ai-strength-drives-third-quarter-results/",
-        "is_clickable": true
+        "is_clickable": true,
+        "metadata": {
+          "feed_url": "https://news.microsoft.com/feed/"
+        }
       },
       {
         "event_id": "19872b27eec6a2a9ed43f77196dc4872db5212a1",
@@ -947,7 +1048,10 @@
         "link_kind": "external",
         "link_label": "原始公告",
         "href": "https://news.microsoft.com/2025/04/30/microsoft-earnings-press-release-available-on-investor-relations-website-26/",
-        "is_clickable": true
+        "is_clickable": true,
+        "metadata": {
+          "feed_url": "https://news.microsoft.com/feed/"
+        }
       },
       {
         "event_id": "msft-seed-2026-copilot-adoption",
@@ -962,7 +1066,10 @@
         "link_kind": "internal",
         "link_label": "內部研究節點",
         "href": "research/MSFT.html#event-timeline",
-        "is_clickable": true
+        "is_clickable": true,
+        "metadata": {
+          "seed": true
+        }
       },
       {
         "event_id": "msft-seed-2026-azure-capex",
@@ -977,7 +1084,10 @@
         "link_kind": "internal",
         "link_label": "內部研究節點",
         "href": "research/MSFT.html#event-timeline",
-        "is_clickable": true
+        "is_clickable": true,
+        "metadata": {
+          "seed": true
+        }
       }
     ],
     "source_manifest": [
@@ -1024,7 +1134,7 @@
     "decision_updated_at": "2026-03-27",
     "current_action": "持有 / 觀望，等待下一次驗證點",
     "status_label": "持有觀察",
-    "priority_score": 102,
+    "priority_score": 105,
     "priority_label": "優先追蹤",
     "next_review_at": "2026-04-03",
     "next_checklist": [

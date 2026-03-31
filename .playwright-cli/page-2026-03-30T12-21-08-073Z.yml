@@ -1,0 +1,271 @@
+- main [ref=e2]:
+  - navigation [ref=e3]:
+    - link "返回總覽" [ref=e4] [cursor=pointer]:
+      - /url: ../index.html
+    - link "回到決策頁" [ref=e5] [cursor=pointer]:
+      - /url: ../tickers/MSFT.html
+  - generic [ref=e7]:
+    - paragraph [ref=e8]: Structured Research
+    - heading "MSFT｜Microsoft" [level=1] [ref=e9]
+    - paragraph [ref=e10]: MSFT 這輪有足以觸發重新檢查的事件，但目前主判斷沒有被推翻。 目前先維持「持有 / 觀望，等待下一次驗證點」，下一個驗證點先盯 Azure 成長。
+    - generic [ref=e11]:
+      - generic [ref=e12]:
+        - generic [ref=e13]: 目前操作
+        - strong [ref=e14]: 持有 / 觀望，等待下一次驗證點
+      - generic [ref=e15]:
+        - generic [ref=e16]: VIX regime
+        - strong [ref=e17]: 壓力
+      - generic [ref=e18]:
+        - generic [ref=e19]: thesis 健康度
+        - strong [ref=e20]: 71%
+      - generic [ref=e21]:
+        - generic [ref=e22]: 下次檢查
+        - strong [ref=e23]: 2026-04-03
+  - generic [ref=e24]:
+    - article [ref=e25]:
+      - generic [ref=e26]:
+        - generic [ref=e27]:
+          - paragraph [ref=e28]: Thesis Snapshot
+          - heading "thesis 摘要" [level=2] [ref=e29]
+        - generic [ref=e30]: 穩定監控
+      - blockquote [ref=e31]: 微軟仍是 AI 基礎設施與企業分發的核心受益者，但要讓股價脫離 CapEx 懷疑，必須用 Copilot adoption、M365 漲價與 Azure AI 需求證明其估值可以重新從成熟雲端股回到高品質 AI 平台股。
+      - generic [ref=e32]:
+        - generic [ref=e33]:
+          - generic [ref=e34]: 研究主題
+          - strong [ref=e35]: AI 變現重估，加上 model-agnostic 平台對沖。
+        - generic [ref=e36]:
+          - generic [ref=e37]: 核心催化
+          - strong [ref=e38]: Copilot adoption、M365 漲價傳導，以及 Azure AI 需求。
+        - generic [ref=e39]:
+          - generic [ref=e40]: 市場盲點
+          - strong [ref=e41]: 市場短線聚焦高 CapEx，低估 model-agnostic Copilot 與商業訂價權恢復帶來的 EPS 扭轉。
+        - generic [ref=e42]:
+          - generic [ref=e43]: 持有期間
+          - strong [ref=e44]: 數季至一年
+    - article [ref=e45]:
+      - generic [ref=e47]:
+        - paragraph [ref=e48]: Delta
+        - heading "與前版差異" [level=2] [ref=e49]
+      - generic [ref=e50]:
+        - article [ref=e51]:
+          - paragraph [ref=e52]: 這輪沒有超出既有研究框架的新證據，因此不需要重新評等 thesis 或假設。
+        - article [ref=e53]:
+          - paragraph [ref=e54]: 目前維持持有 / 觀望，等下一個財報驗證點。
+        - article [ref=e55]:
+          - paragraph [ref=e56]: 這次把檢查時間更新成今天已完成複盤，並維持近期待追蹤節奏。
+    - article [ref=e57]:
+      - generic [ref=e59]:
+        - paragraph [ref=e60]: Review Summary
+        - heading "本輪更新摘要" [level=2] [ref=e61]
+      - article [ref=e62]:
+        - paragraph [ref=e63]: 本輪沒有新增足以改寫 thesis 的重大事件，所以 MSFT 除了例行更新檢查時間之外，主判斷不變。信心、關鍵假設與操作規則都先維持。
+      - generic [ref=e65]: 本輪沒有額外的假設變更。
+    - article [ref=e66]:
+      - generic [ref=e68]:
+        - paragraph [ref=e69]: Assumption Map
+        - heading "假設地圖" [level=2] [ref=e70]
+      - generic [ref=e71]:
+        - article [ref=e72]:
+          - generic [ref=e73]:
+            - heading "msft-a1" [level=3] [ref=e74]
+            - generic [ref=e75]: 已強化
+          - paragraph [ref=e76]: Azure 的 AI 需求有機會把整體 Azure 成長維持在 30% 以上。
+          - paragraph [ref=e77]:
+            - strong [ref=e78]: 驗證方式：
+            - text: 每季 Azure 成長與 AI 貢獻揭露。
+          - paragraph [ref=e79]:
+            - strong [ref=e80]: 失效條件：
+            - text: 如果 Azure 成長跌到 30% 以下，或 AI 貢獻明顯放緩，這個假設就要重估。
+        - article [ref=e81]:
+          - generic [ref=e82]:
+            - heading "msft-a2" [level=3] [ref=e83]
+            - generic [ref=e84]: 已強化
+          - paragraph [ref=e85]: Copilot adoption 若能明顯改善，就足以支撐 AI 分發溢價。
+          - paragraph [ref=e86]:
+            - strong [ref=e87]: 驗證方式：
+            - text: 企業採用評論、席次成長，以及 attach rate。
+          - paragraph [ref=e88]:
+            - strong [ref=e89]: 失效條件：
+            - text: 若 Copilot 到下一輪財報仍低於 10% 企業滲透率，就要保守看待。
+        - article [ref=e90]:
+          - generic [ref=e91]:
+            - heading "msft-a3" [level=3] [ref=e92]
+            - generic [ref=e93]: 持續觀察
+          - paragraph [ref=e94]: CapEx 成長最終要轉成可持續的營收與利潤率支撐，而不是單純的成本拖累。
+          - paragraph [ref=e95]:
+            - strong [ref=e96]: 驗證方式：
+            - text: CapEx 趨勢、毛利率趨勢與變現更新。
+          - paragraph [ref=e97]:
+            - strong [ref=e98]: 失效條件：
+            - text: 如果 CapEx 持續加速，但利潤率與變現連兩季都沒有改善，這個假設就要降級。
+    - article [ref=e99]:
+      - generic [ref=e101]:
+        - paragraph [ref=e102]: Timeline
+        - heading "事件時間線" [level=2] [ref=e103]
+      - generic [ref=e104]:
+        - article [ref=e105]:
+          - generic [ref=e106]:
+            - heading "2025-02-20｜官方新聞" [level=3] [ref=e107]
+            - generic [ref=e108]: 持續追蹤
+          - paragraph [ref=e109]: We’re taking our latest AI research breakthroughs and putting them in the hands of devs everywhere, with Azure AI Foundry Labs.
+          - generic [ref=e110]:
+            - generic [ref=e111]: 偏正向
+            - link "原始公告" [ref=e112] [cursor=pointer]:
+              - /url: https://www.linkedin.com/posts/satyanadella_introducing-azure-ai-foundry-labs-a-hub-activity-7298071158258614273-TIiL
+        - article [ref=e113]:
+          - generic [ref=e114]:
+            - heading "2025-03-03｜官方新聞" [level=3] [ref=e115]
+            - generic [ref=e116]: 持續追蹤
+          - paragraph [ref=e117]: Microsoft Dragon Copilot provides the healthcare industry’s first unified voice AI assistant that enables clinicians to streamline clinical documentation, surface information and automate tasks
+          - generic [ref=e118]:
+            - generic [ref=e119]: 偏正向
+            - link "原始公告" [ref=e120] [cursor=pointer]:
+              - /url: https://news.microsoft.com/2025/03/03/microsoft-dragon-copilot-provides-the-healthcare-industrys-first-unified-voice-ai-assistant-that-enables-clinicians-to-streamline-clinical-documentation-surface-information-and-automate-task/
+        - article [ref=e121]:
+          - generic [ref=e122]:
+            - heading "2025-04-09｜官方新聞" [level=3] [ref=e123]
+            - generic [ref=e124]: 需要重估
+          - paragraph [ref=e125]: Microsoft announces quarterly earnings release date
+          - generic [ref=e126]:
+            - generic [ref=e127]: 中性
+            - link "原始公告" [ref=e128] [cursor=pointer]:
+              - /url: https://news.microsoft.com/2025/04/09/microsoft-announces-quarterly-earnings-release-date-63/
+        - article [ref=e129]:
+          - generic [ref=e130]:
+            - heading "2025-04-30｜官方新聞" [level=3] [ref=e131]
+            - generic [ref=e132]: 需要重估
+          - paragraph [ref=e133]: Microsoft Cloud and AI strength drives third quarter results
+          - generic [ref=e134]:
+            - generic [ref=e135]: 中性
+            - link "原始公告" [ref=e136] [cursor=pointer]:
+              - /url: https://news.microsoft.com/2025/04/30/microsoft-cloud-and-ai-strength-drives-third-quarter-results/
+        - article [ref=e137]:
+          - generic [ref=e138]:
+            - heading "2025-04-30｜官方新聞" [level=3] [ref=e139]
+            - generic [ref=e140]: 需要重估
+          - paragraph [ref=e141]: Microsoft earnings press release available on Investor Relations website
+          - generic [ref=e142]:
+            - generic [ref=e143]: 中性
+            - link "原始公告" [ref=e144] [cursor=pointer]:
+              - /url: https://news.microsoft.com/2025/04/30/microsoft-earnings-press-release-available-on-investor-relations-website-26/
+        - article [ref=e145]:
+          - generic [ref=e146]:
+            - heading "2026-03-25｜既有研究節點" [level=3] [ref=e147]
+            - generic [ref=e148]: 需要重估
+          - paragraph [ref=e149]: Copilot enterprise penetration remained near 3%, below expectations.
+          - generic [ref=e150]:
+            - generic [ref=e151]: 偏負向
+            - link "內部研究節點" [ref=e152] [cursor=pointer]:
+              - /url: ../research/MSFT.html#event-timeline
+        - article [ref=e153]:
+          - generic [ref=e154]:
+            - heading "2026-03-25｜既有研究節點" [level=3] [ref=e155]
+            - generic [ref=e156]: 需要重估
+          - paragraph [ref=e157]: Q2 FY2026 Azure stayed strong but CapEx nearly reached $30B.
+          - generic [ref=e158]:
+            - generic [ref=e159]: 偏負向
+            - link "內部研究節點" [ref=e160] [cursor=pointer]:
+              - /url: ../research/MSFT.html#event-timeline
+    - article [ref=e161]:
+      - generic [ref=e163]:
+        - paragraph [ref=e164]: Citations
+        - heading "來源與引用" [level=2] [ref=e165]
+      - generic [ref=e166]:
+        - article [ref=e167]:
+          - generic [ref=e168]:
+            - heading "研究內頁" [level=3] [ref=e169]
+            - generic [ref=e170]: 內部節點
+          - paragraph [ref=e171]: 研究頁面｜2026-03-27
+          - link "打開引用" [ref=e173] [cursor=pointer]:
+            - /url: ../research/MSFT.html
+        - article [ref=e174]:
+          - generic [ref=e175]:
+            - heading "本輪更新摘要" [level=3] [ref=e176]
+            - generic [ref=e177]: 內部節點
+          - paragraph [ref=e178]: 更新摘要｜2026-03-27
+          - link "打開引用" [ref=e180] [cursor=pointer]:
+            - /url: ../research/MSFT.html#review-summary
+        - article [ref=e181]:
+          - generic [ref=e182]:
+            - heading "SEC 公司揭露檔案" [level=3] [ref=e183]
+            - generic [ref=e184]: 外部來源
+          - paragraph [ref=e185]: SEC｜2026-03-27
+          - link "打開引用" [ref=e187] [cursor=pointer]:
+            - /url: https://data.sec.gov/submissions/CIK0000789019.json
+        - article [ref=e188]:
+          - generic [ref=e189]:
+            - heading "Microsoft 官方新聞來源" [level=3] [ref=e190]
+            - generic [ref=e191]: 外部來源
+          - paragraph [ref=e192]: RSS｜2026-03-27
+          - link "打開引用" [ref=e194] [cursor=pointer]:
+            - /url: https://news.microsoft.com/feed/
+        - article [ref=e195]:
+          - generic [ref=e196]:
+            - heading "Yahoo Finance 圖表資料" [level=3] [ref=e197]
+            - generic [ref=e198]: 外部來源
+          - paragraph [ref=e199]: 市場資料｜2026-03-27
+          - link "打開引用" [ref=e201] [cursor=pointer]:
+            - /url: https://query1.finance.yahoo.com/v8/finance/chart/MSFT?range=1mo&interval=1d
+        - article [ref=e202]:
+          - generic [ref=e203]:
+            - heading "We’re taking our latest AI research breakthroughs and putting them in the hands of devs everywhere, with Azure AI Foundry Labs." [level=3] [ref=e204]
+            - generic [ref=e205]: 外部來源
+          - paragraph [ref=e206]: 官方新聞｜2025-02-20
+          - link "打開引用" [ref=e208] [cursor=pointer]:
+            - /url: https://www.linkedin.com/posts/satyanadella_introducing-azure-ai-foundry-labs-a-hub-activity-7298071158258614273-TIiL
+        - article [ref=e209]:
+          - generic [ref=e210]:
+            - heading "Microsoft Dragon Copilot provides the healthcare industry’s first unified voice AI assistant that enables clinicians to streamline clinical documentation, surface information and automate tasks" [level=3] [ref=e211]
+            - generic [ref=e212]: 外部來源
+          - paragraph [ref=e213]: 官方新聞｜2025-03-03
+          - link "打開引用" [ref=e215] [cursor=pointer]:
+            - /url: https://news.microsoft.com/2025/03/03/microsoft-dragon-copilot-provides-the-healthcare-industrys-first-unified-voice-ai-assistant-that-enables-clinicians-to-streamline-clinical-documentation-surface-information-and-automate-task/
+        - article [ref=e216]:
+          - generic [ref=e217]:
+            - heading "Microsoft announces quarterly earnings release date" [level=3] [ref=e218]
+            - generic [ref=e219]: 外部來源
+          - paragraph [ref=e220]: 官方新聞｜2025-04-09
+          - link "打開引用" [ref=e222] [cursor=pointer]:
+            - /url: https://news.microsoft.com/2025/04/09/microsoft-announces-quarterly-earnings-release-date-63/
+        - article [ref=e223]:
+          - generic [ref=e224]:
+            - heading "Microsoft Cloud and AI strength drives third quarter results" [level=3] [ref=e225]
+            - generic [ref=e226]: 外部來源
+          - paragraph [ref=e227]: 官方新聞｜2025-04-30
+          - link "打開引用" [ref=e229] [cursor=pointer]:
+            - /url: https://news.microsoft.com/2025/04/30/microsoft-cloud-and-ai-strength-drives-third-quarter-results/
+        - article [ref=e230]:
+          - generic [ref=e231]:
+            - heading "Microsoft earnings press release available on Investor Relations website" [level=3] [ref=e232]
+            - generic [ref=e233]: 外部來源
+          - paragraph [ref=e234]: 官方新聞｜2025-04-30
+          - link "打開引用" [ref=e236] [cursor=pointer]:
+            - /url: https://news.microsoft.com/2025/04/30/microsoft-earnings-press-release-available-on-investor-relations-website-26/
+        - article [ref=e237]:
+          - generic [ref=e238]:
+            - heading "內部研究節點：market_update_mar2026.md" [level=3] [ref=e239]
+            - generic [ref=e240]: 內部節點
+          - paragraph [ref=e241]: 內部研究筆記｜2026-03-25
+          - link "打開引用" [ref=e243] [cursor=pointer]:
+            - /url: ../research/MSFT.html#event-timeline
+        - article [ref=e244]:
+          - generic [ref=e245]:
+            - heading "官方 SEC 揭露來源；是否算重大事件，依各 ticker 的門檻設定判斷。" [level=3] [ref=e246]
+            - generic [ref=e247]: 外部來源
+          - paragraph [ref=e248]: SEC｜2026-03-27
+          - link "打開引用" [ref=e250] [cursor=pointer]:
+            - /url: https://data.sec.gov/submissions/CIK0000789019.json
+        - article [ref=e251]:
+          - generic [ref=e252]:
+            - heading "Yahoo Finance 日線資料，用來抓跳空與異常成交量。" [level=3] [ref=e253]
+            - generic [ref=e254]: 外部來源
+          - paragraph [ref=e255]: price｜2026-03-27
+          - link "打開引用" [ref=e257] [cursor=pointer]:
+            - /url: https://query1.finance.yahoo.com/v8/finance/chart/MSFT?range=1mo&interval=1d
+        - article [ref=e258]:
+          - generic [ref=e259]:
+            - heading "Microsoft 官方新聞室 RSS。" [level=3] [ref=e260]
+            - generic [ref=e261]: 外部來源
+          - paragraph [ref=e262]: 官方新聞｜2026-03-27
+          - link "打開引用" [ref=e264] [cursor=pointer]:
+            - /url: https://news.microsoft.com/feed/

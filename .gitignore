@@ -5,6 +5,10 @@ __pycache__/
 .coverage
 .coverage.*
 .venv/
+*.egg-info/
+build/
+dist/
+pip-wheel-metadata/
 
 # JavaScript and build tooling
 node_modules/
