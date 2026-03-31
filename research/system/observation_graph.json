@@ -1,0 +1,83 @@
+{
+  "version": 1,
+  "generated_at": "2026-03-31",
+  "companies": {
+    "MSFT": "Microsoft",
+    "PLTR": "Palantir Technologies",
+    "MAR": "Marriott International",
+    "NVDA": "NVIDIA",
+    "AMD": "Advanced Micro Devices",
+    "AVGO": "Broadcom",
+    "GOOGL": "Alphabet",
+    "AMZN": "Amazon",
+    "ORCL": "Oracle",
+    "CRM": "Salesforce",
+    "NOW": "ServiceNow",
+    "SNOW": "Snowflake",
+    "CFLT": "Confluent",
+    "HLT": "Hilton Worldwide",
+    "BKNG": "Booking Holdings",
+    "ABNB": "Airbnb",
+    "EXPE": "Expedia",
+    "SABR": "Sabre"
+  },
+  "relations": [
+    {
+      "ticker": "MSFT",
+      "company_name": "Microsoft",
+      "theme_id": "ai-platforms",
+      "peer_tickers": ["AMZN", "GOOGL", "ORCL"],
+      "upstream_tickers": ["NVDA", "AMD", "AVGO"],
+      "downstream_tickers": ["PLTR", "CRM", "NOW"],
+      "default_horizon": "3-12 months",
+      "default_event_weights": {
+        "historical_trauma": 2.4,
+        "capital_allocation": 2.4,
+        "decision_os_lockin": 2.5,
+        "risk_transfer_pricing_power": 2.1,
+        "valuation_regime_shift": 2.3,
+        "peer_readthrough": 1.6,
+        "supply_chain_readthrough": 1.5,
+        "price_exception": 0.9
+      }
+    },
+    {
+      "ticker": "PLTR",
+      "company_name": "Palantir Technologies",
+      "theme_id": "decision-os",
+      "peer_tickers": ["SNOW", "CFLT", "NOW"],
+      "upstream_tickers": ["MSFT", "AMZN", "GOOGL"],
+      "downstream_tickers": ["CRM"],
+      "default_horizon": "3-12 months",
+      "default_event_weights": {
+        "historical_trauma": 2.3,
+        "capital_allocation": 2.1,
+        "decision_os_lockin": 2.7,
+        "risk_transfer_pricing_power": 2.4,
+        "valuation_regime_shift": 2.2,
+        "peer_readthrough": 1.7,
+        "supply_chain_readthrough": 1.4,
+        "price_exception": 0.9
+      }
+    },
+    {
+      "ticker": "MAR",
+      "company_name": "Marriott International",
+      "theme_id": "asset-light-travel",
+      "peer_tickers": ["HLT", "BKNG", "ABNB"],
+      "upstream_tickers": ["SABR", "EXPE"],
+      "downstream_tickers": [],
+      "default_horizon": "3-12 months",
+      "default_event_weights": {
+        "historical_trauma": 2.5,
+        "capital_allocation": 2.4,
+        "decision_os_lockin": 2.1,
+        "risk_transfer_pricing_power": 2.6,
+        "valuation_regime_shift": 2.1,
+        "peer_readthrough": 1.5,
+        "supply_chain_readthrough": 1.3,
+        "price_exception": 0.8
+      }
+    }
+  ]
+}
