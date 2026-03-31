@@ -364,7 +364,7 @@ function renderSummaryCards(payload) {
   if (!root) return;
   root.innerHTML = `
     <article class="stat-card">
-      <p>整體 thesis 狀態</p>
+      <p>投資邏輯狀態</p>
       <strong>${escapeHtml(summary.thesis_health_label)}</strong>
       <p>平均健康度 ${Math.round(summary.thesis_health_score * 100)}%，平均信心 ${Math.round(summary.average_confidence * 100)}%。</p>
     </article>
@@ -805,8 +805,8 @@ function relatedDraftFromTickerPayload(payload, relation) {
     relation_type: relation.relation_type,
     event_family: relation.relation_type === "supply_chain" ? "supply_chain_readthrough" : "peer_readthrough",
     occurred_at: seed?.occurred_at || payload.last_reviewed_at,
-    title: seed?.title || `${payload.ticker} thesis 需要延伸觀察 ${relation.ticker}`,
-    summary: `${payload.ticker} 的最新事件與 thesis 狀態，值得延伸觀察 ${relation.ticker}。`,
+    title: seed?.title || `${payload.ticker} 投資邏輯需要延伸觀察 ${relation.ticker}`,
+    summary: `${payload.ticker} 的最新事件與投資邏輯狀態，值得延伸觀察 ${relation.ticker}。`,
     signal_strength: seed?.metadata?.severity === "critical" ? "high" : "medium",
     source_url: seed?.href || payload.internal_research_path,
     is_primary_source: true,
@@ -1077,8 +1077,8 @@ function renderHealthPanel(payload) {
   root.innerHTML = `
     <div class="panel-head">
       <div>
-        <p class="panel-kicker">Thesis Health</p>
-        <h2>thesis 健康度</h2>
+        <p class="panel-kicker">Logic Health</p>
+        <h2>邏輯健康度</h2>
       </div>
       <span class="${badgeClass(payload.thesis_health.label)}">${escapeHtml(payload.thesis_health.label)}</span>
     </div>
@@ -1094,7 +1094,7 @@ function renderHealthPanel(payload) {
         <p>已強化 ${payload.thesis_health.reinforced_count}、觀察 ${payload.thesis_health.watch_count}、受壓 ${payload.thesis_health.pressured_count}</p>
       </div>
     </div>
-    <p class="footer-note">目前 thesis 信心 ${Math.round(payload.thesis_confidence * 100)}%，本輪信心變化 ${payload.confidence_delta >= 0 ? "+" : ""}${Math.round(payload.confidence_delta * 100)}%。</p>
+    <p class="footer-note">目前邏輯信心 ${Math.round(payload.thesis_confidence * 100)}%，本輪信心變化 ${payload.confidence_delta >= 0 ? "+" : ""}${Math.round(payload.confidence_delta * 100)}%。</p>
   `;
 }
 
@@ -1325,7 +1325,7 @@ function renderResearchBriefPanel(payload) {
       </article>
       <article class="compact-card">
         <h3>風險 / 健康度</h3>
-        <p>${escapeHtml(`VIX ${payload.macro_regime?.label || "載入中"}｜thesis ${Math.round((payload.thesis_health?.score ?? 0) * 100)}%`)}</p>
+        <p>${escapeHtml(`VIX ${payload.macro_regime?.label || "載入中"}｜邏輯 ${Math.round((payload.thesis_health?.score ?? 0) * 100)}%`)}</p>
       </article>
     </div>
   `;
@@ -1335,8 +1335,8 @@ function renderThesisPanel(payload) {
   document.getElementById("thesis-panel").innerHTML = `
     <div class="panel-head">
       <div>
-        <p class="panel-kicker">Thesis Snapshot</p>
-        <h2>thesis 摘要</h2>
+        <p class="panel-kicker">Logic Snapshot</p>
+        <h2>核心邏輯</h2>
       </div>
       <span class="${badgeClass(payload.thesis_health.label)}">${escapeHtml(payload.thesis_health.label)}</span>
     </div>
@@ -1461,7 +1461,7 @@ function renderResearch(payload) {
   document.getElementById("research-meta").innerHTML = [
     pill("目前操作", payload.current_action),
     pill("VIX regime", payload.macro_regime?.label || "載入中"),
-    pill("thesis 健康度", `${Math.round(payload.thesis_health.score * 100)}%`),
+    pill("邏輯健康度", `${Math.round(payload.thesis_health.score * 100)}%`),
     pill("下次檢查", payload.next_review_at),
   ].join("");
   renderResearchBriefPanel(payload);

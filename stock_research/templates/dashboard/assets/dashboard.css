@@ -142,7 +142,7 @@ a {
 
 .eyebrow,
 .panel-kicker {
-  margin: 0 0 12px;
+  margin: 0 0 6px;
   font: 600 11px/1 "IBM Plex Mono", monospace;
   letter-spacing: 0.22em;
   text-transform: uppercase;
@@ -310,6 +310,7 @@ a {
   align-items: start;
   justify-content: space-between;
   gap: 16px;
+  margin-bottom: 20px;
 }
 
 .panel-head h2,
@@ -346,6 +347,12 @@ a {
 .field {
   display: grid;
   gap: 8px;
+}
+
+.observation-form {
+  display: grid;
+  gap: 16px;
+  margin-top: 16px;
 }
 
 .field span {
