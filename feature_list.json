@@ -1,0 +1,230 @@
+[
+  {
+    "id": "TASK-001",
+    "category": "functional",
+    "priority": "P0",
+    "description": "Artifact 與資料層：建立 market_data.py + performance.py，產出 price_series / monthly_metrics / drawdown_analysis / cagr_scenarios / strategy_metrics / quarterly_fundamentals / glossary_refs JSON artifacts",
+    "dependencies": [],
+    "parallelizable_with": ["TASK-002", "TASK-010"],
+    "files_to_create": [
+      "stock_research/market_data.py",
+      "stock_research/performance.py"
+    ],
+    "files_to_modify": [
+      "scripts/research_ops.py"
+    ],
+    "steps": [
+      "實作 fetch_price_series、resample_monthly、build_price_series_artifact、build_monthly_metrics_artifact",
+      "實作 calc_cagr、build_cagr_scenarios、calc_drawdown_series、calc_max_drawdown、calc_rolling_mdd、extract_drawdown_periods、build_drawdown_artifact",
+      "實作 calc_annualized_return、calc_annualized_volatility、calc_sharpe、run_buy_and_hold、build_strategy_metrics_artifact",
+      "擴充 research_ops.py 新增 build-analysis CLI 命令",
+      "對 PLTR 執行 build-analysis 確認各 artifact JSON 結構正確"
+    ],
+    "acceptance": "所有 7 個 artifact JSON 可由 CLI 產出，schema 符合 analysis-page-v2.md 定義",
+    "passes": false
+  },
+  {
+    "id": "TASK-002",
+    "category": "functional",
+    "priority": "P0",
+    "description": "Ticker 頁 Tab 化：將現有 panel layout 重構為 8 tab 架構（Overview / Price / Drawdown / Monthly / Quarterly / CAGR / Sharpe / Glossary），含 hash router 與 lazy load",
+    "dependencies": [],
+    "parallelizable_with": ["TASK-001", "TASK-010"],
+    "files_to_modify": [
+      "stock_research/templates/dashboard/ticker.html",
+      "stock_research/templates/dashboard/assets/dashboard.js",
+      "stock_research/templates/dashboard/assets/dashboard.css"
+    ],
+    "steps": [
+      "重構 ticker.html 為 hero + tab-nav + tab-content 結構",
+      "在 dashboard.js 實作 tab router（hashchange 監聽）",
+      "在 dashboard.css 新增 tab 樣式",
+      "實作 lazy load：先載 digest.json，再載 analysis.json",
+      "驗證 8 個 tab 可正常切換，URL hash 對應正確"
+    ],
+    "acceptance": "8 個 tab 可切換，URL hash 正確，任一 tab 載入失敗不影響其他",
+    "passes": false
+  },
+  {
+    "id": "TASK-003",
+    "category": "functional",
+    "priority": "P0",
+    "description": "Drawdown Tab：3 個子視圖（Underwater Chart / Drawdown Periods Table / Rolling MDD）+ 6 個 KPI 卡片",
+    "dependencies": ["TASK-001", "TASK-002"],
+    "parallelizable_with": ["TASK-004"],
+    "files_to_modify": [
+      "stock_research/templates/dashboard/assets/dashboard.js"
+    ],
+    "steps": [
+      "實作 renderDrawdownTab(analysis)",
+      "繪製 Underwater Chart（SVG，負值紅色漸層，hover tooltip，區間切換）",
+      "繪製 Drawdown Periods Table（排序、色碼、未恢復處理）",
+      "繪製 Rolling MDD 曲線（252日滾動，標記當前值）",
+      "實作 6 個 KPI 卡片",
+      "Playwright 驗證元素不重疊"
+    ],
+    "acceptance": "3 個視圖正常渲染，KPI 數值與 drawdown_analysis.json 一致",
+    "passes": false
+  },
+  {
+    "id": "TASK-004",
+    "category": "functional",
+    "priority": "P0",
+    "description": "Price Tab：折線圖 + 區間切換 + 指標切換 + KPI",
+    "dependencies": ["TASK-001", "TASK-002"],
+    "parallelizable_with": ["TASK-003"],
+    "files_to_modify": [
+      "stock_research/templates/dashboard/assets/dashboard.js"
+    ],
+    "steps": [
+      "實作 renderPriceTab(analysis)",
+      "繪製折線圖（adj_close，1M/3M/6M/1Y/3Y/5Y/MAX）",
+      "實作指標切換（price / drawdown / cumulative return / volume）",
+      "實作 KPI 卡片（最新收盤 / 52W 高低 / 區間報酬 / volatility / MDD）",
+      "切換區間時圖表與 KPI 同步更新"
+    ],
+    "acceptance": "切換區間後圖表與 KPI 同步，百分比統一小數 2 位",
+    "passes": false
+  },
+  {
+    "id": "TASK-005",
+    "category": "functional",
+    "priority": "P1",
+    "description": "CAGR Tab：固定區間按鈕 + 自訂區間 + 防呆",
+    "dependencies": ["TASK-001", "TASK-002"],
+    "parallelizable_with": ["TASK-006", "TASK-007", "TASK-009"],
+    "files_to_modify": [
+      "stock_research/templates/dashboard/assets/dashboard.js"
+    ],
+    "steps": [
+      "實作 renderCagrTab(analysis)",
+      "1Y/3Y/5Y/10Y/since inception 按鈕",
+      "自訂區間 date picker",
+      "防呆：start > end 阻擋，< 1 年警告",
+      "輸出 total_return / CAGR / start+end_price / years"
+    ],
+    "acceptance": "固定區間與自訂區間一致，重跑結果一致，防呆正確",
+    "passes": false
+  },
+  {
+    "id": "TASK-006",
+    "category": "functional",
+    "priority": "P1",
+    "description": "Quarterly Tab：8 季表格 + YoY/QoQ + TTM + 迷你趨勢圖",
+    "dependencies": ["TASK-001", "TASK-002"],
+    "parallelizable_with": ["TASK-005", "TASK-007", "TASK-009"],
+    "files_to_modify": [
+      "stock_research/fundamentals.py",
+      "stock_research/templates/dashboard/assets/dashboard.js"
+    ],
+    "steps": [
+      "實作 renderQuarterlyTab(analysis)",
+      "8 季表格：revenue / gross margin / operating margin / EPS / FCF",
+      "YoY / QoQ 變化率計算與顯示",
+      "TTM 摘要列",
+      "迷你折線：revenue trend + EPS trend",
+      "缺資料欄顯示 null 不消失整行"
+    ],
+    "acceptance": "至少顯示 8 季，YoY/QoQ 正確，null 處理正確",
+    "passes": false
+  },
+  {
+    "id": "TASK-007",
+    "category": "functional",
+    "priority": "P1",
+    "description": "Monthly Tab：月報酬 heatmap + 滾動 12M 報酬曲線 + 月度 drawdown 條圖",
+    "dependencies": ["TASK-001", "TASK-002"],
+    "parallelizable_with": ["TASK-005", "TASK-006", "TASK-009"],
+    "files_to_modify": [
+      "stock_research/templates/dashboard/assets/dashboard.js"
+    ],
+    "steps": [
+      "實作 renderMonthlyTab(analysis)",
+      "月報酬 heatmap（年×月，green/red）",
+      "滾動 12 個月報酬曲線",
+      "月度 drawdown 條圖",
+      "至少 5 年，月份排序正確"
+    ],
+    "acceptance": "heatmap 排序正確，可回推 5 年",
+    "passes": false
+  },
+  {
+    "id": "TASK-008",
+    "category": "functional",
+    "priority": "P2",
+    "description": "Sharpe Tab：策略選擇器 + equity/drawdown curve + 示意回測聲明",
+    "dependencies": ["TASK-001", "TASK-002"],
+    "parallelizable_with": [],
+    "files_to_modify": [
+      "stock_research/templates/dashboard/assets/dashboard.js"
+    ],
+    "steps": [
+      "實作 renderSharpeTab(analysis)",
+      "策略選擇器：buy-and-hold（v1）",
+      "輸出面板：return / volatility / Sharpe / MDD / win rate / exposure",
+      "Equity curve + drawdown curve",
+      "強制顯示「示意回測，非交易建議」"
+    ],
+    "acceptance": "buy-and-hold 策略數據正確，頁面有免責聲明",
+    "passes": false
+  },
+  {
+    "id": "TASK-009",
+    "category": "functional",
+    "priority": "P1",
+    "description": "Glossary Tab：16 個必備詞條 + 頁內搜尋 + 側邊 drawer",
+    "dependencies": ["TASK-002"],
+    "parallelizable_with": ["TASK-005", "TASK-006", "TASK-007"],
+    "files_to_modify": [
+      "stock_research/glossary.py",
+      "stock_research/templates/dashboard/assets/dashboard.js"
+    ],
+    "steps": [
+      "實作 renderGlossaryTab(analysis)",
+      "16 個詞條：CAGR / Sharpe / Ann. Return / Volatility / MDD / Adj Close / TTM / YoY / QoQ / Gross Margin / Op Margin / FCF / Rev Growth / Beta / RFR / Underwater Chart",
+      "每條含 term / 中文 / 定義 / 公式 / 重要性 / 誤用警告 / related_terms",
+      "頁內搜尋",
+      "點名稱開側邊 drawer"
+    ],
+    "acceptance": "至少 16 個詞條，搜尋可用，drawer 正常",
+    "passes": false
+  },
+  {
+    "id": "TASK-010",
+    "category": "testing",
+    "priority": "P0",
+    "description": "測試：test_performance.py（CAGR / MDD / Sharpe / drawdown periods）+ test_market_data.py（resample）",
+    "dependencies": [],
+    "parallelizable_with": ["TASK-001", "TASK-002"],
+    "files_to_create": [
+      "tests/test_performance.py",
+      "tests/test_market_data.py"
+    ],
+    "steps": [
+      "test_cagr_5y / test_cagr_custom_range / test_cagr_start_after_end_raises",
+      "test_mdd_simple / test_mdd_rolling",
+      "test_drawdown_periods_extraction / test_recovery_days_calculation",
+      "test_sharpe_buy_and_hold / test_annualized_return / test_annualized_volatility",
+      "test_resample_monthly_sum_volume / test_resample_monthly_end_price / test_monthly_return_calculation",
+      "pytest 全部通過"
+    ],
+    "acceptance": "pytest tests/test_performance.py tests/test_market_data.py 全部 PASS",
+    "passes": false
+  },
+  {
+    "id": "TASK-WP-001",
+    "category": "functional",
+    "priority": "P0",
+    "description": "DCA Web App: 將 R 腳本轉換為 HTML/JS 網頁，含 Yahoo Finance 抓取與指標計算",
+    "dependencies": [],
+    "parallelizable_with": [],
+    "steps": [
+      "設計 HTML 介面 (Ticker, Dates, IA, CF, Freq)",
+      "實作 Yahoo Finance 抓取邏輯 (透過 CORS Proxy)",
+      "實作 JS 計算邏輯 (Cumulative Wealth, CAGR, MDD)",
+      "整合 Chart.js 視覺化"
+    ],
+    "acceptance": "網頁能抓取 SPY 資料並與 R 腳本指標一致",
+    "passes": true
+  }
+]

@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DCA Analysis Tool - 定期定額回測器</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/luxon@3.0.1/build/global/luxon.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-luxon@1.2.0/dist/chartjs-adapter-luxon.min.js"></script>
+    <style>
+        :root {
+            --primary: #2563eb;
+            --bg: #f8fafc;
+            --card: #ffffff;
+            --text: #1e293b;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .card {
+            background: var(--card);
+            border-radius: 12px;
+            padding: 24px;
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+            margin-bottom: 20px;
+        }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 16px;
+            margin-bottom: 20px;
+        }
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+        label {
+            font-size: 0.875rem;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+        input, select {
+            padding: 8px 12px;
+            border: 1px solid #cbd5e1;
+            border-radius: 6px;
+            font-size: 1rem;
+        }
+        button {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: opacity 0.2s;
+            grid-column: 1 / -1;
+        }
+        button:hover {
+            opacity: 0.9;
+        }
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 16px;
+        }
+        .stat-item {
+            padding: 16px;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            text-align: center;
+        }
+        .stat-value {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+        .stat-label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            color: #64748b;
+            margin-top: 4px;
+        }
+        #chartContainer {
+            height: 400px;
+            margin-top: 20px;
+        }
+        .proxy-tip {
+            font-size: 0.8rem;
+            color: #64748b;
+            margin-top: 10px;
+            background: #f1f5f9;
+            padding: 10px;
+            border-radius: 6px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="header">
+        <h1>📈 DCA 定期定額回測工具</h1>
+        <p>比較初始金額與定期投入的長期財富增長</p>
+    </div>
+
+    <div class="card">
+        <div class="grid">
+            <div class="form-group">
+                <label>股票/ETF 代碼</label>
+                <input type="text" id="ticker" value="SPY" placeholder="例如: SPY, VOO, NVDA">
+            </div>
+            <div class="form-group">
+                <label>開始日期</label>
+                <input type="date" id="startDate" value="2010-01-01">
+            </div>
+            <div class="form-group">
+                <label>結束日期</label>
+                <input type="date" id="endDate" value="2024-01-01">
+            </div>
+            <div class="form-group">
+                <label>初始金額 (IA)</label>
+                <input type="number" id="ia" value="10000">
+            </div>
+            <div class="form-group">
+                <label>每月投入金額 (CF)</label>
+                <input type="number" id="cf" value="1000">
+            </div>
+            <div class="form-group">
+                <label>CORS Proxy (自建 CF Worker)</label>
+                <input type="text" id="proxy" value="" placeholder="https://your-worker.workers.dev/">
+            </div>
+            <button onclick="runBacktest()">開始回測</button>
+        </div>
+        <div class="proxy-tip">
+            💡 <b>CORS 提示：</b> Yahoo Finance 不允許直接從瀏覽器抓取。請填寫自建的 Cloudflare Worker URL。格式為 `https://proxy.workers.dev/?url=`
+        </div>
+    </div>
+
+    <div id="resultSection" style="display: none;">
+        <div class="card">
+            <div class="stats-grid" id="statsGrid">
+                <!-- Stats will be injected here -->
+            </div>
+        </div>
+
+        <div class="card">
+            <div id="chartContainer">
+                <canvas id="wealthChart"></canvas>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    let myChart = null;
+
+    async function runBacktest() {
+        const ticker = document.getElementById('ticker').value.toUpperCase();
+        const start = document.getElementById('startDate').value;
+        const end = document.getElementById('endDate').value;
+        const ia = parseFloat(document.getElementById('ia').value);
+        const cf = parseFloat(document.getElementById('cf').value);
+        const proxy = document.getElementById('proxy').value;
+
+        if (!proxy) {
+            alert('請填寫 Cloudflare Worker Proxy URL 以繞過跨域限制！');
+            return;
+        }
+
+        const sTimestamp = Math.floor(new Date(start).getTime() / 1000);
+        const eTimestamp = Math.floor(new Date(end).getTime() / 1000);
+        const yahooUrl = `https://query1.finance.yahoo.com/v7/finance/download/${ticker}?period1=${sTimestamp}&period2=${eTimestamp}&interval=1d&events=history&includeAdjustedClose=true`;
+        const fetchUrl = proxy.includes('?') ? `${proxy}${encodeURIComponent(yahooUrl)}` : `${proxy}?url=${encodeURIComponent(yahooUrl)}`;
+
+        try {
+            const response = await fetch(fetchUrl);
+            const csvText = await response.text();
+            if (csvText.includes('404 Not Found') || csvText.includes('Invalid ticker symbol')) {
+                throw new Error('找不到該股票資料或 Proxy 設定錯誤');
+            }
+            const data = parseCSV(csvText);
+            const results = calculateDCA(data, ia, cf);
+            displayResults(results);
+        } catch (error) {
+            alert('錯誤: ' + error.message);
+        }
+    }
+
+    function parseCSV(text) {
+        const lines = text.trim().split('\n');
+        const header = lines[0].split(',');
+        return lines.slice(1).map(line => {
+            const values = line.split(',');
+            const obj = {};
+            header.forEach((key, i) => obj[key] = values[i]);
+            return {
+                date: obj['Date'],
+                adjClose: parseFloat(obj['Adj Close'])
+            };
+        }).filter(d => !isNaN(d.adjClose));
+    }
+
+    function calculateDCA(data, ia, cf) {
+        let wealth = ia;
+        let totalInvested = ia;
+        let currentMonth = -1;
+        const history = [];
+
+        for (let i = 0; i < data.length; i++) {
+            const day = data[i];
+            const date = new Date(day.date);
+            const month = date.getMonth();
+
+            // Apply returns from previous day
+            if (i > 0) {
+                const dailyReturn = day.adjClose / data[i - 1].adjClose;
+                wealth *= dailyReturn;
+            }
+
+            // Monthly contribution at the start of each month
+            if (month !== currentMonth) {
+                if (i > 0) { // Don't add contribution on the very first day (IA takes care of it)
+                    wealth += cf;
+                    totalInvested += cf;
+                }
+                currentMonth = month;
+            }
+
+            history.push({
+                x: date,
+                y: wealth,
+                invested: totalInvested
+            });
+        }
+
+        const firstPrice = data[0].adjClose;
+        const lastPrice = data[data.length - 1].adjClose;
+        const years = (new Date(data[data.length-1].date) - new Date(data[0].date)) / (1000 * 60 * 60 * 24 * 365.25);
+        
+        // Stats
+        const totalReturn = (wealth / totalInvested) - 1;
+        const cagr = Math.pow(wealth / totalInvested, 1 / years) - 1;
+        
+        // MDD calculation
+        let peak = 0;
+        let maxDD = 0;
+        history.forEach(d => {
+            if (d.y > peak) peak = d.y;
+            const dd = (d.y - peak) / peak;
+            if (dd < maxDD) maxDD = dd;
+        });
+
+        return {
+            history,
+            totalInvested,
+            finalWealth: wealth,
+            cagr,
+            maxDD,
+            totalReturn,
+            ticker: data[0].ticker
+        };
+    }
+
+    function displayResults(res) {
+        document.getElementById('resultSection').style.display = 'block';
+        const stats = [
+            { label: '最終資產', value: '$' + res.finalWealth.toLocaleString(undefined, {maximumFractionDigits: 0}) },
+            { label: '總投入成本', value: '$' + res.totalInvested.toLocaleString(undefined, {maximumFractionDigits: 0}) },
+            { label: '總報酬率', value: (res.totalReturn * 100).toFixed(2) + '%' },
+            { label: '年化報酬 (CAGR)', value: (res.cagr * 100).toFixed(2) + '%' },
+            { label: '最大回撤 (MDD)', value: (res.maxDD * 100).toFixed(2) + '%' }
+        ];
+
+        document.getElementById('statsGrid').innerHTML = stats.map(s => `
+            <div class="stat-item">
+                <div class="stat-value">${s.value}</div>
+                <div class="stat-label">${s.label}</div>
+            </div>
+        `).join('');
+
+        renderChart(res.history);
+    }
+
+    function renderChart(history) {
+        const ctx = document.getElementById('wealthChart').getContext('2d');
+        if (myChart) myChart.destroy();
+
+        myChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                datasets: [
+                    {
+                        label: '累積資產 (Wealth)',
+                        data: history,
+                        borderColor: '#2563eb',
+                        backgroundColor: 'rgba(37, 99, 235, 0.1)',
+                        fill: true,
+                        pointRadius: 0,
+                    },
+                    {
+                        label: '累積投入 (Invested)',
+                        data: history.map(d => ({x: d.x, y: d.invested})),
+                        borderColor: '#94a3b8',
+                        borderDash: [5, 5],
+                        pointRadius: 0,
+                        fill: false
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    x: {
+                        type: 'time',
+                        time: { unit: 'year' },
+                        title: { display: true, text: '日期' }
+                    },
+                    y: {
+                        title: { display: true, text: '金額 (USD)' },
+                        ticks: {
+                            callback: value => '$' + value.toLocaleString()
+                        }
+                    }
+                },
+                plugins: {
+                    tooltip: {
+                        mode: 'index',
+                        intersect: false,
+                    }
+                }
+            }
+        });
+    }
+</script>
+
+</body>
+</html>
