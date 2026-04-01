@@ -1,0 +1,33 @@
+{
+  "ticker": "PLTR",
+  "as_of": "2026-04-01",
+  "buy_and_hold": {
+    "start_date": "2020-09-30",
+    "end_date": "2026-03-31",
+    "start_price": 9.5,
+    "end_price": 146.28,
+    "total_return_pct": 1439.7895,
+    "annualized_return_pct": 64.7558,
+    "annualized_volatility_pct": 70.2223,
+    "sharpe_ratio": 0.8794,
+    "max_drawdown_pct": -84.6154,
+    "rfr_used": 0.03,
+    "cagr_scenarios": {
+      "1y": 0.733828,
+      "3y": 1.586318,
+      "5y": 0.444192,
+      "10y": 0.644357,
+      "since_inception": 0.644357
+    }
+  },
+  "drawdown_summary": {
+    "mdd_alltime_pct": -84.6154,
+    "mdd_1y_pct": -37.8125,
+    "mdd_3y_pct": -40.6115,
+    "mdd_5y_pct": -79.1449
+  },
+  "source": {
+    "provider": "yfinance",
+    "adj_close": true
+  }
+}

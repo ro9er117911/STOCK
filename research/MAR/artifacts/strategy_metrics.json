@@ -1,0 +1,33 @@
+{
+  "ticker": "MAR",
+  "as_of": "2026-04-01",
+  "buy_and_hold": {
+    "start_date": "2016-04-01",
+    "end_date": "2026-03-31",
+    "start_price": 61.1264,
+    "end_price": 327.07,
+    "total_return_pct": 435.0712,
+    "annualized_return_pct": 18.3162,
+    "annualized_volatility_pct": 32.7569,
+    "sharpe_ratio": 0.4676,
+    "max_drawdown_pct": -61.2637,
+    "rfr_used": 0.03,
+    "cagr_scenarios": {
+      "1y": 0.386381,
+      "3y": 0.265953,
+      "5y": 0.180694,
+      "10y": 0.18269,
+      "since_inception": 0.18269
+    }
+  },
+  "drawdown_summary": {
+    "mdd_alltime_pct": -61.2637,
+    "mdd_1y_pct": -12.9617,
+    "mdd_3y_pct": -30.5001,
+    "mdd_5y_pct": -30.5001
+  },
+  "source": {
+    "provider": "yfinance",
+    "adj_close": true
+  }
+}

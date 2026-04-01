@@ -1,0 +1,33 @@
+{
+  "ticker": "MSFT",
+  "as_of": "2026-04-01",
+  "buy_and_hold": {
+    "start_date": "2016-04-01",
+    "end_date": "2026-03-31",
+    "start_price": 48.8954,
+    "end_price": 370.17,
+    "total_return_pct": 657.0647,
+    "annualized_return_pct": 22.5062,
+    "annualized_volatility_pct": 26.8887,
+    "sharpe_ratio": 0.7254,
+    "max_drawdown_pct": -37.1485,
+    "rfr_used": 0.03,
+    "cagr_scenarios": {
+      "1y": -0.006361,
+      "3y": 0.09538,
+      "5y": 0.103504,
+      "10y": 0.224474,
+      "since_inception": 0.224474
+    }
+  },
+  "drawdown_summary": {
+    "mdd_alltime_pct": -37.1485,
+    "mdd_1y_pct": -33.9101,
+    "mdd_3y_pct": -33.9101,
+    "mdd_5y_pct": -37.1485
+  },
+  "source": {
+    "provider": "yfinance",
+    "adj_close": true
+  }
+}

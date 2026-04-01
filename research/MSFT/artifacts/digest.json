@@ -22,7 +22,7 @@
   "last_reviewed_at": "2026-03-27",
   "risk_level": "",
   "risk_level_label": "尚未設定",
-  "priority_score": 106,
+  "priority_score": 107,
   "priority_label": "優先追蹤",
   "last_event_status": "持續追蹤",
   "detail_path": "tickers/MSFT.html",
@@ -1134,7 +1134,7 @@
     "decision_updated_at": "2026-03-27",
     "current_action": "持有 / 觀望，等待下一次驗證點",
     "status_label": "持有觀察",
-    "priority_score": 106,
+    "priority_score": 107,
     "priority_label": "優先追蹤",
     "next_review_at": "2026-04-03",
     "next_checklist": [
