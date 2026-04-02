@@ -21,7 +21,7 @@
       "status": "polled",
       "priority": 20,
       "new_events": 0,
-      "cursor": "2026-03-30",
+      "cursor": "2026-04-02",
       "error": "",
       "notes": "Daily Yahoo Finance chart data for gap and abnormal volume detection."
     },
