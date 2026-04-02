@@ -47,7 +47,14 @@ jobs:
         with:
           path: site
 
+  deploy:
+    if: vars.ENABLE_DASHBOARD_PUBLISH == 'true'
+    needs: build-dashboard
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
       - name: Deploy to GitHub Pages
-        if: vars.ENABLE_DASHBOARD_PUBLISH == 'true'
         id: deployment
         uses: actions/deploy-pages@v4
