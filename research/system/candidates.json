@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-03-27",
+  "generated_at": "2026-04-02",
   "items": [
     {
       "ticker": "MAR",
@@ -35,20 +35,20 @@
       "candidate_origin": "manual_watchlist",
       "decision_status": "active",
       "decision_updated_at": "2026-03-27",
-      "current_action": "持有 / 觀望，等待下一次驗證點",
+      "current_action": "加碼 / 等待數字確認後加碼",
       "research_topic": "AI monetization reset and model-agnostic platform hedge",
       "radar_flags": [],
       "radar_summary": "No radar flags logged yet; use this field for pre-research prioritization only.",
       "radar_risk_level": "none",
       "invalidation_reason": "",
       "latest_change": {
-        "changed_at": "2026-03-27",
-        "change_type": "baseline",
+        "changed_at": "2026-04-02",
+        "change_type": "refresh_review",
         "research_stage": "active",
         "decision_status": "active",
-        "current_action": "持有 / 觀望，等待下一次驗證點",
+        "current_action": "加碼 / 等待數字確認後加碼",
         "confidence": 0.63,
-        "summary": "Established the living research state under the vNext decision workflow contract."
+        "summary": "New evidence strengthens the existing thesis without changing the core setup. Key drivers this cycle were Microsoft says paid Copilot enterprise penetration moved above 12% in FY2026 Q3 guidance and Microsoft guides to slower AI infrastructure CapEx growth while Azure AI demand remains above 30%. The main assumption shift is: Status remains reinforced, but confidence rises from 0.54 to 0.74 after Microsoft says paid Copilot enterprise penetration moved above 12% in FY2026 Q3 guidance."
       },
       "artifacts": {
         "state_path": "research/MSFT/state.json",

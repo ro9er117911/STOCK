@@ -1,4 +1,75 @@
 {
+  "holding_period": "數季至一年",
+  "assumptions": [
+    {
+      "type": "demand",
+      "confidence": 0.72,
+      "invalidation_condition": "Azure growth drops below 30% or AI contribution decelerates materially.",
+      "update_frequency": "quarterly",
+      "assumption_id": "msft-a1",
+      "status": "reinforced",
+      "verification_method": "Quarterly Azure growth and AI contribution disclosures.",
+      "keywords": [
+        "azure",
+        "cloud",
+        "ai contribution",
+        "earnings"
+      ],
+      "statement": "Azure AI demand can keep total Azure growth above 30%."
+    },
+    {
+      "type": "product",
+      "confidence": 0.74,
+      "invalidation_condition": "Copilot stays below 10% enterprise penetration through the next earnings cycle.",
+      "update_frequency": "quarterly",
+      "assumption_id": "msft-a2",
+      "status": "reinforced",
+      "verification_method": "Enterprise adoption commentary, seat growth, and attach rates.",
+      "keywords": [
+        "copilot",
+        "adoption",
+        "seat",
+        "productivity"
+      ],
+      "statement": "Copilot adoption can improve enough to justify the AI distribution premium."
+    },
+    {
+      "type": "capital_allocation",
+      "confidence": 0.66,
+      "invalidation_condition": "CapEx keeps accelerating while margin and monetization do not improve for two quarters.",
+      "update_frequency": "quarterly",
+      "assumption_id": "msft-a3",
+      "status": "reinforced",
+      "verification_method": "CapEx trend, gross margin trend, and monetization updates.",
+      "keywords": [
+        "capex",
+        "margin",
+        "profit",
+        "investment"
+      ],
+      "statement": "CapEx growth will translate into durable revenue and margin support rather than pure cost drag."
+    }
+  ],
+  "research_type": "事件驅動 / 中線",
+  "research_topic": "AI monetization reset and model-agnostic platform hedge",
+  "radar_flags": [],
+  "noise_filters": [
+    "單一功能 rollback 未連到企業端 adoption",
+    "Macro headline without Azure or Copilot impact",
+    "Short-term price weakness without revision in demand"
+  ],
+  "outcome_markers": [
+    {
+      "marked_at": "2026-04-02",
+      "kind": "material_refresh",
+      "summary": "New evidence strengthens the existing thesis without changing the core setup. Key drivers this cycle were Microsoft says paid Copilot enterprise penetration moved above 12% in FY2026 Q3 guidance and Microsoft guides to slower AI infrastructure CapEx growth while Azure AI demand remains above 30%. The main assumption shift is: Status remains reinforced, but confidence rises from 0.54 to 0.74 after Microsoft says paid Copilot enterprise penetration moved above 12% in FY2026 Q3 guidance.",
+      "affected_assumption_ids": [
+        "msft-a1",
+        "msft-a2",
+        "msft-a3"
+      ]
+    }
+  ],
   "scenarios": [
     {
       "scenario_id": "msft-s-base",
@@ -25,12 +96,48 @@
       "trigger": "Azure growth breaks below 30% or Copilot monetization clearly fails."
     }
   ],
-  "holding_period": "數季至一年",
-  "secondary_observation_variables": [
-    "Government cloud contract status",
-    "M365 pricing realization",
-    "Oil / rates driven valuation pressure"
-  ],
+  "valuation_regime": {
+    "better_yardstick": "AI platform and enterprise distribution premium",
+    "switch_trigger": "Copilot monetization shows real seat growth and CapEx intensity stabilizes.",
+    "current_yardstick": "Mature cloud P/E plus AI premium",
+    "associated_risk": "If monetization lags, the premium disappears faster than fundamentals deteriorate.",
+    "re_rating_logic": "The market pays again for AI distribution and pricing power instead of just infrastructure spend."
+  },
+  "thresholds": {
+    "positive_keywords": [
+      "raise",
+      "growth",
+      "copilot",
+      "azure",
+      "expands",
+      "pricing"
+    ],
+    "price_gap_pct": 8.0,
+    "material_sec_forms": [
+      "8-K",
+      "10-Q",
+      "10-K"
+    ],
+    "deep_refresh_days": 7,
+    "negative_keywords": [
+      "cuts",
+      "delay",
+      "lawsuit",
+      "probe",
+      "rollback",
+      "decline",
+      "miss"
+    ],
+    "earnings_keywords": [
+      "earnings",
+      "results",
+      "guidance",
+      "quarter",
+      "investor relations",
+      "price"
+    ],
+    "volume_ratio": 2.0
+  },
   "version_log": [
     {
       "version": "v0",
@@ -49,58 +156,152 @@
       "date": "2026-03-27",
       "reason": "Automated refresh triggered by manual.",
       "impact": "No new material events were provided in the refresh bundle, so the MSFT thesis state remains unchanged aside from the routine review timestamp update. Confidence, assumptions, and action rules are preserved."
+    },
+    {
+      "version": "v3",
+      "date": "2026-04-02",
+      "reason": "Automated refresh triggered by manual.",
+      "impact": "New evidence strengthens the existing thesis without changing the core setup. Key drivers this cycle were Microsoft says paid Copilot enterprise penetration moved above 12% in FY2026 Q3 guidance and Microsoft guides to slower AI infrastructure CapEx growth while Azure AI demand remains above 30%. The main assumption shift is: Status remains reinforced, but confidence rises from 0.54 to 0.74 after Microsoft says paid Copilot enterprise penetration moved above 12% in FY2026 Q3 guidance."
     }
   ],
-  "valuation_regime": {
-    "current_yardstick": "Mature cloud P/E plus AI premium",
-    "re_rating_logic": "The market pays again for AI distribution and pricing power instead of just infrastructure spend.",
-    "associated_risk": "If monetization lags, the premium disappears faster than fundamentals deteriorate.",
-    "switch_trigger": "Copilot monetization shows real seat growth and CapEx intensity stabilizes.",
-    "better_yardstick": "AI platform and enterprise distribution premium"
+  "research_debt": [
+    "Need a cleaner measure of paid Copilot seats versus trial activity.",
+    "Need a better read on government cloud exposure to model-sourcing disputes."
+  ],
+  "last_reviewed_at": "2026-04-02",
+  "primary_observation_variables": [
+    "Azure growth and AI contribution",
+    "Copilot enterprise adoption",
+    "CapEx payback versus margin pressure"
+  ],
+  "thesis_confidence": 0.72,
+  "next_review_at": "2026-04-09",
+  "source_manifest": [
+    {
+      "type": "local_markdown",
+      "url": "/Users/ro9air/STOCK/research/msft_ai_market_judgment.md",
+      "source_id": "legacy-msft-note",
+      "label": "Legacy MSFT AI market judgment"
+    },
+    {
+      "type": "local_markdown",
+      "url": "/Users/ro9air/STOCK/research/market_update_mar2026.md",
+      "source_id": "legacy-market-update",
+      "label": "Legacy March 2026 market update"
+    },
+    {
+      "type": "sec",
+      "url": "https://data.sec.gov/submissions/CIK0000789019.json",
+      "source_id": "sec",
+      "label": "SEC company submissions"
+    },
+    {
+      "type": "rss",
+      "url": "https://news.microsoft.com/feed/",
+      "source_id": "investor_news",
+      "label": "Microsoft official news feed"
+    },
+    {
+      "type": "market_data",
+      "url": "https://query1.finance.yahoo.com/v8/finance/chart/MSFT?range=1mo&interval=1d",
+      "source_id": "price",
+      "label": "Yahoo Finance chart"
+    }
+  ],
+  "decision_status": "active",
+  "secondary_observation_variables": [
+    "Government cloud contract status",
+    "M365 pricing realization",
+    "Oil / rates driven valuation pressure"
+  ],
+  "decision_updated_at": "2026-03-27",
+  "risks": [
+    {
+      "risk_id": "msft-r1",
+      "statement": "CapEx remains a black hole and the market strips out the AI premium.",
+      "response": "Reduce tactical exposure and re-rate on mature-software multiples.",
+      "tier": "thesis weakener",
+      "leading_indicator": "CapEx acceleration without monetization proof"
+    },
+    {
+      "risk_id": "msft-r2",
+      "statement": "Copilot remains productively underwhelming and adoption stalls.",
+      "response": "Exit the AI monetization thesis and keep only core cloud exposure if needed.",
+      "tier": "thesis breaker",
+      "leading_indicator": "Enterprise penetration and renewal commentary"
+    },
+    {
+      "risk_id": "msft-r3",
+      "statement": "Government or regulatory friction hurts model-neutral cloud strategy.",
+      "response": "Trim if government cloud narrative weakens the platform hedge.",
+      "tier": "thesis weakener",
+      "leading_indicator": "Contract disputes and supply-chain restrictions"
+    }
+  ],
+  "radar_summary": "No radar flags logged yet; use this field for pre-research prioritization only.",
+  "thesis_change_log": [
+    {
+      "changed_at": "2026-03-27",
+      "change_type": "baseline",
+      "research_stage": "active",
+      "decision_status": "active",
+      "current_action": "持有 / 觀望，等待下一次驗證點",
+      "confidence": 0.63,
+      "summary": "Established the living research state under the vNext decision workflow contract."
+    },
+    {
+      "changed_at": "2026-04-02",
+      "change_type": "refresh_review",
+      "research_stage": "active",
+      "decision_status": "active",
+      "current_action": "加碼 / 等待數字確認後加碼",
+      "confidence": 0.63,
+      "summary": "New evidence strengthens the existing thesis without changing the core setup. Key drivers this cycle were Microsoft says paid Copilot enterprise penetration moved above 12% in FY2026 Q3 guidance and Microsoft guides to slower AI infrastructure CapEx growth while Azure AI demand remains above 30%. The main assumption shift is: Status remains reinforced, but confidence rises from 0.54 to 0.74 after Microsoft says paid Copilot enterprise penetration moved above 12% in FY2026 Q3 guidance."
+    }
+  ],
+  "last_seen_event_cursors": {
+    "sec": "",
+    "price": "2026-03-30",
+    "investor_news": "https://news.microsoft.com/source/2025/05/06/microsoft-and-ffa-help-students-use-smart-sensors-and-ai-to-learn-about-the-future-of-farming/"
   },
+  "candidate_origin": "manual_watchlist",
+  "radar_risk_level": "none",
+  "consistency_notes": [],
+  "current_action": "加碼 / 等待數字確認後加碼",
   "thesis": {
-    "verification_date": "2026-04-29",
     "core_catalyst": "Copilot adoption、M365 pricing pass-through、Azure AI demand.",
     "market_blind_spot": "市場短線聚焦高 CapEx，低估 model-agnostic Copilot 與商業訂價權恢復帶來的 EPS 扭轉。",
+    "verification_date": "2026-04-29",
+    "expiry_condition": "Azure growth falls below 30%, Copilot adoption remains stalled, or flagship government cloud access materially weakens.",
     "statement": "微軟仍是 AI 基礎設施與企業分發的核心受益者，但要讓股價脫離 CapEx 懷疑，必須用 Copilot adoption、M365 漲價與 Azure AI 需求證明其估值可以重新從成熟雲端股回到高品質 AI 平台股。",
-    "thesis_id": "msft-thesis-core",
-    "expiry_condition": "Azure growth falls below 30%, Copilot adoption remains stalled, or flagship government cloud access materially weakens."
+    "thesis_id": "msft-thesis-core"
   },
-  "thresholds": {
-    "price_gap_pct": 8.0,
-    "earnings_keywords": [
-      "earnings",
-      "results",
-      "guidance",
-      "quarter",
-      "investor relations",
-      "price"
-    ],
-    "deep_refresh_days": 7,
-    "positive_keywords": [
-      "raise",
-      "growth",
-      "copilot",
-      "azure",
-      "expands",
-      "pricing"
-    ],
-    "negative_keywords": [
-      "cuts",
-      "delay",
-      "lawsuit",
-      "probe",
-      "rollback",
-      "decline",
-      "miss"
-    ],
-    "material_sec_forms": [
-      "8-K",
-      "10-Q",
-      "10-K"
-    ],
-    "volume_ratio": 2.0
-  },
+  "action_rules": [
+    {
+      "condition": "Copilot enterprise penetration breaks above 10% and CapEx growth moderates.",
+      "action": "Add after earnings confirmation.",
+      "kind": "add",
+      "action_rule_id": "msft-ar-add"
+    },
+    {
+      "condition": "CapEx rises again while Copilot monetization does not improve.",
+      "action": "Trim into strength and lower conviction.",
+      "kind": "trim",
+      "action_rule_id": "msft-ar-trim"
+    },
+    {
+      "condition": "Azure growth falls below 30% or flagship cloud access is materially impaired.",
+      "action": "Exit active thesis and rotate to better risk/reward.",
+      "kind": "exit",
+      "action_rule_id": "msft-ar-exit"
+    }
+  ],
+  "latest_delta": [
+    "Key new input: Microsoft says paid Copilot enterprise penetration moved above 12% in FY2026 Q3 guidance and Microsoft guides to slower AI infrastructure CapEx growth while Azure AI demand remains above 30%.",
+    "Status remains reinforced, but confidence rises from 0.54 to 0.74 after Microsoft says paid Copilot enterprise penetration moved above 12% in FY2026 Q3 guidance.",
+    "Status remains reinforced, but confidence rises from 0.68 to 0.72 after Microsoft guides to slower AI infrastructure CapEx growth while Azure AI demand remains above 30%.",
+    "Current action shifts from 持有 / 觀望，等待下一次驗證點 to 加碼 / 等待數字確認後加碼."
+  ],
   "seed_events": [
     {
       "event_id": "msft-seed-2026-azure-capex",
@@ -140,183 +341,10 @@
       }
     }
   ],
-  "latest_delta": [
-    "No new evidence beyond the existing state; no thesis or assumption re-rating required.",
-    "Maintained hold/observe stance pending the next earnings verification point.",
-    "Updated review timing to reflect a fresh check today and a near-term follow-up cadence."
-  ],
-  "confidence": 0.63,
-  "research_debt": [
-    "Need a cleaner measure of paid Copilot seats versus trial activity.",
-    "Need a better read on government cloud exposure to model-sourcing disputes."
-  ],
-  "ticker": "MSFT",
-  "next_review_at": "2026-04-03",
-  "current_action": "持有 / 觀望，等待下一次驗證點",
-  "risks": [
-    {
-      "response": "Reduce tactical exposure and re-rate on mature-software multiples.",
-      "leading_indicator": "CapEx acceleration without monetization proof",
-      "statement": "CapEx remains a black hole and the market strips out the AI premium.",
-      "tier": "thesis weakener",
-      "risk_id": "msft-r1"
-    },
-    {
-      "response": "Exit the AI monetization thesis and keep only core cloud exposure if needed.",
-      "leading_indicator": "Enterprise penetration and renewal commentary",
-      "statement": "Copilot remains productively underwhelming and adoption stalls.",
-      "tier": "thesis breaker",
-      "risk_id": "msft-r2"
-    },
-    {
-      "response": "Trim if government cloud narrative weakens the platform hedge.",
-      "leading_indicator": "Contract disputes and supply-chain restrictions",
-      "statement": "Government or regulatory friction hurts model-neutral cloud strategy.",
-      "tier": "thesis weakener",
-      "risk_id": "msft-r3"
-    }
-  ],
-  "assumptions": [
-    {
-      "update_frequency": "quarterly",
-      "invalidation_condition": "Azure growth drops below 30% or AI contribution decelerates materially.",
-      "assumption_id": "msft-a1",
-      "status": "reinforced",
-      "statement": "Azure AI demand can keep total Azure growth above 30%.",
-      "keywords": [
-        "azure",
-        "cloud",
-        "ai contribution",
-        "earnings"
-      ],
-      "type": "demand",
-      "confidence": 0.68,
-      "verification_method": "Quarterly Azure growth and AI contribution disclosures."
-    },
-    {
-      "update_frequency": "quarterly",
-      "invalidation_condition": "Copilot stays below 10% enterprise penetration through the next earnings cycle.",
-      "assumption_id": "msft-a2",
-      "status": "reinforced",
-      "statement": "Copilot adoption can improve enough to justify the AI distribution premium.",
-      "keywords": [
-        "copilot",
-        "adoption",
-        "seat",
-        "productivity"
-      ],
-      "type": "product",
-      "confidence": 0.54,
-      "verification_method": "Enterprise adoption commentary, seat growth, and attach rates."
-    },
-    {
-      "update_frequency": "quarterly",
-      "invalidation_condition": "CapEx keeps accelerating while margin and monetization do not improve for two quarters.",
-      "assumption_id": "msft-a3",
-      "status": "watch",
-      "statement": "CapEx growth will translate into durable revenue and margin support rather than pure cost drag.",
-      "keywords": [
-        "capex",
-        "margin",
-        "profit",
-        "investment"
-      ],
-      "type": "capital_allocation",
-      "confidence": 0.56,
-      "verification_method": "CapEx trend, gross margin trend, and monetization updates."
-    }
-  ],
-  "research_type": "事件驅動 / 中線",
-  "last_reviewed_at": "2026-03-27",
-  "source_manifest": [
-    {
-      "source_id": "legacy-msft-note",
-      "type": "local_markdown",
-      "url": "/Users/ro9air/STOCK/research/msft_ai_market_judgment.md",
-      "label": "Legacy MSFT AI market judgment"
-    },
-    {
-      "source_id": "legacy-market-update",
-      "type": "local_markdown",
-      "url": "/Users/ro9air/STOCK/research/market_update_mar2026.md",
-      "label": "Legacy March 2026 market update"
-    },
-    {
-      "source_id": "sec",
-      "type": "sec",
-      "url": "https://data.sec.gov/submissions/CIK0000789019.json",
-      "label": "SEC company submissions"
-    },
-    {
-      "source_id": "investor_news",
-      "type": "rss",
-      "url": "https://news.microsoft.com/feed/",
-      "label": "Microsoft official news feed"
-    },
-    {
-      "source_id": "price",
-      "type": "market_data",
-      "url": "https://query1.finance.yahoo.com/v8/finance/chart/MSFT?range=1mo&interval=1d",
-      "label": "Yahoo Finance chart"
-    }
-  ],
-  "company_name": "Microsoft",
-  "research_topic": "AI monetization reset and model-agnostic platform hedge",
-  "next_must_check_data": "FY2026 Q3 earnings: Azure growth, AI contribution, Copilot monetization, margin trend, and CapEx guidance.",
-  "primary_observation_variables": [
-    "Azure growth and AI contribution",
-    "Copilot enterprise adoption",
-    "CapEx payback versus margin pressure"
-  ],
-  "action_rules": [
-    {
-      "condition": "Copilot enterprise penetration breaks above 10% and CapEx growth moderates.",
-      "action_rule_id": "msft-ar-add",
-      "action": "Add after earnings confirmation.",
-      "kind": "add"
-    },
-    {
-      "condition": "CapEx rises again while Copilot monetization does not improve.",
-      "action_rule_id": "msft-ar-trim",
-      "action": "Trim into strength and lower conviction.",
-      "kind": "trim"
-    },
-    {
-      "condition": "Azure growth falls below 30% or flagship cloud access is materially impaired.",
-      "action_rule_id": "msft-ar-exit",
-      "action": "Exit active thesis and rotate to better risk/reward.",
-      "kind": "exit"
-    }
-  ],
-  "last_seen_event_cursors": {
-    "investor_news": "https://news.microsoft.com/source/2025/05/06/microsoft-and-ffa-help-students-use-smart-sensors-and-ai-to-learn-about-the-future-of-farming/",
-    "price": "2026-03-30",
-    "sec": ""
-  },
-  "noise_filters": [
-    "單一功能 rollback 未連到企業端 adoption",
-    "Macro headline without Azure or Copilot impact",
-    "Short-term price weakness without revision in demand"
-  ],
-  "research_stage": "active",
-  "candidate_origin": "manual_watchlist",
-  "decision_status": "active",
-  "decision_updated_at": "2026-03-27",
-  "radar_flags": [],
-  "radar_summary": "No radar flags logged yet; use this field for pre-research prioritization only.",
-  "radar_risk_level": "none",
-  "outcome_markers": [],
-  "thesis_change_log": [
-    {
-      "changed_at": "2026-03-27",
-      "change_type": "baseline",
-      "research_stage": "active",
-      "decision_status": "active",
-      "current_action": "持有 / 觀望，等待下一次驗證點",
-      "confidence": 0.63,
-      "summary": "Established the living research state under the vNext decision workflow contract."
-    }
-  ],
   "invalidation_reason": "",
-  "consistency_notes": []
+  "confidence": 0.63,
+  "company_name": "Microsoft",
+  "research_stage": "active",
+  "ticker": "MSFT",
+  "next_must_check_data": "FY2026 Q3 earnings: Azure growth, AI contribution, Copilot monetization, margin trend, and CapEx guidance."
 }
