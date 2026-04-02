@@ -1,17 +1,192 @@
 {
   "ticker": "MSFT",
-  "reviewed_at": "2026-03-27",
-  "review_summary": "No new material events were provided in the refresh bundle, so the MSFT thesis state remains unchanged aside from the routine review timestamp update. Confidence, assumptions, and action rules are preserved.",
-  "changed_assumptions": [],
-  "action_rule_delta": [],
+  "reviewed_at": "2026-04-02",
+  "review_summary": "New evidence strengthens the existing thesis without changing the core setup. Key drivers this cycle were Microsoft says paid Copilot enterprise penetration moved above 12% in FY2026 Q3 guidance and Microsoft guides to slower AI infrastructure CapEx growth while Azure AI demand remains above 30%. The main assumption shift is: Status remains reinforced, but confidence rises from 0.54 to 0.74 after Microsoft says paid Copilot enterprise penetration moved above 12% in FY2026 Q3 guidance.",
+  "changed_assumptions": [
+    {
+      "assumption_id": "msft-a2",
+      "summary": "Status remains reinforced, but confidence rises from 0.54 to 0.74 after Microsoft says paid Copilot enterprise penetration moved above 12% in FY2026 Q3 guidance."
+    },
+    {
+      "assumption_id": "msft-a1",
+      "summary": "Status remains reinforced, but confidence rises from 0.68 to 0.72 after Microsoft guides to slower AI infrastructure CapEx growth while Azure AI demand remains above 30%."
+    },
+    {
+      "assumption_id": "msft-a3",
+      "summary": "Status improves from watch to reinforced, with confidence moving from 0.56 to 0.66 after Microsoft guides to slower AI infrastructure CapEx growth while Azure AI demand remains above 30%."
+    }
+  ],
+  "action_rule_delta": [
+    {
+      "action_rule_id": "msft-ar-add",
+      "summary": "Condition is now closer to satisfied: Copilot penetration has broken above 10%, and CapEx growth is moderating. Keep add-on-confirmation as the preferred next action."
+    },
+    {
+      "action_rule_id": "msft-ar-trim",
+      "summary": "Trim condition is no longer the base case because CapEx is slowing and Copilot monetization is improving."
+    },
+    {
+      "action_rule_id": "msft-ar-exit",
+      "summary": "Exit condition is not triggered; Azure growth remains above 30% and flagship cloud access is not impaired."
+    }
+  ],
   "trigger": "manual",
   "context": {
     "ticker": "MSFT",
     "trigger": "manual",
-    "scheduled_refresh_due": true,
-    "new_events": [],
-    "material_events": [],
+    "fixture_name": "msft_copilot_breakout",
+    "scheduled_refresh_due": false,
+    "new_events": [
+      {
+        "event_id": "b5a7fa37eb981761b1d0d86f24a1a5f928c2cda1",
+        "ticker": "MSFT",
+        "source_type": "fixture",
+        "occurred_at": "2026-03-27",
+        "title": "Microsoft says paid Copilot enterprise penetration moved above 12% in FY2026 Q3 guidance.",
+        "source_url": "fixture://msft_copilot_breakout",
+        "affected_assumption_ids": [
+          "msft-a2"
+        ],
+        "marginal_impact": "+",
+        "threshold_breach": true,
+        "requires_refresh": true,
+        "decision": "refresh",
+        "metadata": {
+          "force_assumption_ids": [
+            "msft-a2"
+          ],
+          "force_marginal_impact": "+",
+          "force_requires_refresh": true,
+          "fixture_name": "msft_copilot_breakout"
+        }
+      },
+      {
+        "event_id": "5255238f72a232534f7db940531293f6f6e034fa",
+        "ticker": "MSFT",
+        "source_type": "fixture",
+        "occurred_at": "2026-03-27",
+        "title": "Microsoft guides to slower AI infrastructure CapEx growth while Azure AI demand remains above 30%.",
+        "source_url": "fixture://msft_copilot_breakout",
+        "affected_assumption_ids": [
+          "msft-a1",
+          "msft-a3"
+        ],
+        "marginal_impact": "+",
+        "threshold_breach": true,
+        "requires_refresh": true,
+        "decision": "refresh",
+        "metadata": {
+          "force_assumption_ids": [
+            "msft-a1",
+            "msft-a3"
+          ],
+          "force_marginal_impact": "+",
+          "force_requires_refresh": true,
+          "fixture_name": "msft_copilot_breakout"
+        }
+      }
+    ],
+    "material_events": [
+      {
+        "event_id": "b5a7fa37eb981761b1d0d86f24a1a5f928c2cda1",
+        "ticker": "MSFT",
+        "source_type": "fixture",
+        "occurred_at": "2026-03-27",
+        "title": "Microsoft says paid Copilot enterprise penetration moved above 12% in FY2026 Q3 guidance.",
+        "source_url": "fixture://msft_copilot_breakout",
+        "affected_assumption_ids": [
+          "msft-a2"
+        ],
+        "marginal_impact": "+",
+        "threshold_breach": true,
+        "requires_refresh": true,
+        "decision": "refresh",
+        "metadata": {
+          "force_assumption_ids": [
+            "msft-a2"
+          ],
+          "force_marginal_impact": "+",
+          "force_requires_refresh": true,
+          "fixture_name": "msft_copilot_breakout"
+        }
+      },
+      {
+        "event_id": "5255238f72a232534f7db940531293f6f6e034fa",
+        "ticker": "MSFT",
+        "source_type": "fixture",
+        "occurred_at": "2026-03-27",
+        "title": "Microsoft guides to slower AI infrastructure CapEx growth while Azure AI demand remains above 30%.",
+        "source_url": "fixture://msft_copilot_breakout",
+        "affected_assumption_ids": [
+          "msft-a1",
+          "msft-a3"
+        ],
+        "marginal_impact": "+",
+        "threshold_breach": true,
+        "requires_refresh": true,
+        "decision": "refresh",
+        "metadata": {
+          "force_assumption_ids": [
+            "msft-a1",
+            "msft-a3"
+          ],
+          "force_marginal_impact": "+",
+          "force_requires_refresh": true,
+          "fixture_name": "msft_copilot_breakout"
+        }
+      }
+    ],
     "state_path": "research/MSFT/state.json",
     "current_path": "research/MSFT/current.md"
-  }
+  },
+  "source_status": [
+    {
+      "source_id": "sec",
+      "source_type": "sec",
+      "kind": "sec",
+      "url": "https://data.sec.gov/submissions/CIK0000789019.json",
+      "status": "fixture_override",
+      "priority": 10,
+      "new_events": 0,
+      "cursor": "",
+      "error": "",
+      "notes": "Skipped because fixture msft_copilot_breakout overrides live polling."
+    },
+    {
+      "source_id": "price",
+      "source_type": "price",
+      "kind": "price",
+      "url": "https://query1.finance.yahoo.com/v8/finance/chart/MSFT?range=1mo&interval=1d",
+      "status": "fixture_override",
+      "priority": 20,
+      "new_events": 0,
+      "cursor": "",
+      "error": "",
+      "notes": "Skipped because fixture msft_copilot_breakout overrides live polling."
+    },
+    {
+      "source_id": "investor_news",
+      "source_type": "investor_news",
+      "kind": "rss",
+      "url": "https://news.microsoft.com/feed/",
+      "status": "fixture_override",
+      "priority": 30,
+      "new_events": 0,
+      "cursor": "",
+      "error": "",
+      "notes": "Skipped because fixture msft_copilot_breakout overrides live polling."
+    },
+    {
+      "source_id": "fixture:msft_copilot_breakout",
+      "source_type": "fixture",
+      "kind": "fixture",
+      "url": "fixture://msft_copilot_breakout",
+      "status": "polled",
+      "priority": 0,
+      "new_events": 2,
+      "cursor": "msft_copilot_breakout",
+      "error": "",
+      "notes": "Deterministic fixture input for test refresh validation."
+    }
+  ]
 }

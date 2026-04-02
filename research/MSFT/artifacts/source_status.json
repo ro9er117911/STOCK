@@ -6,36 +6,48 @@
       "source_type": "sec",
       "kind": "sec",
       "url": "https://data.sec.gov/submissions/CIK0000789019.json",
-      "status": "failed",
+      "status": "fixture_override",
       "priority": 10,
       "new_events": 0,
       "cursor": "",
-      "error": "https://data.sec.gov/submissions/CIK0000789019.json: HTTP Error 403: Forbidden",
-      "notes": "Official SEC filings. Material forms are filtered by each ticker state threshold."
+      "error": "",
+      "notes": "Skipped because fixture msft_copilot_breakout overrides live polling."
     },
     {
       "source_id": "price",
       "source_type": "price",
       "kind": "price",
       "url": "https://query1.finance.yahoo.com/v8/finance/chart/MSFT?range=1mo&interval=1d",
-      "status": "polled",
+      "status": "fixture_override",
       "priority": 20,
       "new_events": 0,
-      "cursor": "2026-03-30",
+      "cursor": "",
       "error": "",
-      "notes": "Daily Yahoo Finance chart data for gap and abnormal volume detection."
+      "notes": "Skipped because fixture msft_copilot_breakout overrides live polling."
     },
     {
       "source_id": "investor_news",
       "source_type": "investor_news",
       "kind": "rss",
       "url": "https://news.microsoft.com/feed/",
-      "status": "polled",
+      "status": "fixture_override",
       "priority": 30,
       "new_events": 0,
-      "cursor": "https://news.microsoft.com/source/2025/05/06/microsoft-and-ffa-help-students-use-smart-sensors-and-ai-to-learn-about-the-future-of-farming/",
+      "cursor": "",
       "error": "",
-      "notes": "Official Microsoft newsroom RSS feed."
+      "notes": "Skipped because fixture msft_copilot_breakout overrides live polling."
+    },
+    {
+      "source_id": "fixture:msft_copilot_breakout",
+      "source_type": "fixture",
+      "kind": "fixture",
+      "url": "fixture://msft_copilot_breakout",
+      "status": "polled",
+      "priority": 0,
+      "new_events": 2,
+      "cursor": "msft_copilot_breakout",
+      "error": "",
+      "notes": "Deterministic fixture input for test refresh validation."
     }
   ]
 }

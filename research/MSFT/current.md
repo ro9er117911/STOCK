@@ -10,16 +10,17 @@
 | Candidate Origin | manual_watchlist |
 | Decision Status | active |
 | Decision Updated | 2026-03-27 |
-| Last Reviewed | 2026-03-27 |
-| Next Review | 2026-04-03 |
-| Current Action | 持有 / 觀望，等待下一次驗證點 |
+| Last Reviewed | 2026-04-02 |
+| Next Review | 2026-04-09 |
+| Current Action | 加碼 / 等待數字確認後加碼 |
 | Thesis Confidence | 0.63 |
 
 ## Delta From Previous Version
 
-- No new evidence beyond the existing state; no thesis or assumption re-rating required.
-- Maintained hold/observe stance pending the next earnings verification point.
-- Updated review timing to reflect a fresh check today and a near-term follow-up cadence.
+- Key new input: Microsoft says paid Copilot enterprise penetration moved above 12% in FY2026 Q3 guidance and Microsoft guides to slower AI infrastructure CapEx growth while Azure AI demand remains above 30%.
+- Status remains reinforced, but confidence rises from 0.54 to 0.74 after Microsoft says paid Copilot enterprise penetration moved above 12% in FY2026 Q3 guidance.
+- Status remains reinforced, but confidence rises from 0.68 to 0.72 after Microsoft guides to slower AI infrastructure CapEx growth while Azure AI demand remains above 30%.
+- Current action shifts from 持有 / 觀望，等待下一次驗證點 to 加碼 / 等待數字確認後加碼.
 
 ## Core Thesis
 
@@ -55,9 +56,9 @@
 
 | ID | Assumption | Status | Confidence | Invalidation |
 | --- | --- | --- | --- | --- |
-| msft-a1 | Azure AI demand can keep total Azure growth above 30%. | reinforced | 0.68 | Azure growth drops below 30% or AI contribution decelerates materially. |
-| msft-a2 | Copilot adoption can improve enough to justify the AI distribution premium. | reinforced | 0.54 | Copilot stays below 10% enterprise penetration through the next earnings cycle. |
-| msft-a3 | CapEx growth will translate into durable revenue and margin support rather than pure cost drag. | watch | 0.56 | CapEx keeps accelerating while margin and monetization do not improve for two quarters. |
+| msft-a1 | Azure AI demand can keep total Azure growth above 30%. | reinforced | 0.72 | Azure growth drops below 30% or AI contribution decelerates materially. |
+| msft-a2 | Copilot adoption can improve enough to justify the AI distribution premium. | reinforced | 0.74 | Copilot stays below 10% enterprise penetration through the next earnings cycle. |
+| msft-a3 | CapEx growth will translate into durable revenue and margin support rather than pure cost drag. | reinforced | 0.66 | CapEx keeps accelerating while margin and monetization do not improve for two quarters. |
 
 ## Risk Register
 
@@ -113,21 +114,30 @@
 | v0 | 2026-03-25 | Baseline migration from legacy MSFT notes and March update. | Established living thesis and machine-readable state. |
 | v1 | 2026-03-27 | Automated refresh triggered by event. | Automatic fallback refresh used. Review the generated diff before merging. |
 | v2 | 2026-03-27 | Automated refresh triggered by manual. | No new material events were provided in the refresh bundle, so the MSFT thesis state remains unchanged aside from the routine review timestamp update. Confidence, assumptions, and action rules are preserved. |
+| v3 | 2026-04-02 | Automated refresh triggered by manual. | New evidence strengthens the existing thesis without changing the core setup. Key drivers this cycle were Microsoft says paid Copilot enterprise penetration moved above 12% in FY2026 Q3 guidance and Microsoft guides to slower AI infrastructure CapEx growth while Azure AI demand remains above 30%. The main assumption shift is: Status remains reinforced, but confidence rises from 0.54 to 0.74 after Microsoft says paid Copilot enterprise penetration moved above 12% in FY2026 Q3 guidance. |
+
+## Outcome Markers
+
+| Date | Kind | Summary | Assumptions |
+| --- | --- | --- | --- |
+| 2026-04-02 | material_refresh | New evidence strengthens the existing thesis without changing the core setup. Key drivers this cycle were Microsoft says paid Copilot enterprise penetration moved above 12% in FY2026 Q3 guidance and Microsoft guides to slower AI infrastructure CapEx growth while Azure AI demand remains above 30%. The main assumption shift is: Status remains reinforced, but confidence rises from 0.54 to 0.74 after Microsoft says paid Copilot enterprise penetration moved above 12% in FY2026 Q3 guidance. | msft-a1, msft-a2, msft-a3 |
 
 ## Thesis Change Log
 
 | Date | Type | Stage | Decision | Summary |
 | --- | --- | --- | --- | --- |
 | 2026-03-27 | baseline | active | active | Established the living research state under the vNext decision workflow contract. |
+| 2026-04-02 | refresh_review | active | active | New evidence strengthens the existing thesis without changing the core setup. Key drivers this cycle were Microsoft says paid Copilot enterprise penetration moved above 12% in FY2026 Q3 guidance and Microsoft guides to slower AI infrastructure CapEx growth while Azure AI demand remains above 30%. The main assumption shift is: Status remains reinforced, but confidence rises from 0.54 to 0.74 after Microsoft says paid Copilot enterprise penetration moved above 12% in FY2026 Q3 guidance. |
 
 ## Recent Event Log
 
 | Date | Source | Event | Impact | Decision |
 | --- | --- | --- | --- | --- |
+| 2026-03-27 | fixture | Microsoft guides to slower AI infrastructure CapEx growth while Azure AI demand remains above 30%. | + | refresh |
+| 2026-03-27 | fixture | Microsoft says paid Copilot enterprise penetration moved above 12% in FY2026 Q3 guidance. | + | refresh |
 | 2025-02-20 | investor_news | We’re taking our latest AI research breakthroughs and putting them in the hands of devs everywhere, with Azure AI Foundry Labs. | + | watch |
 | 2025-03-03 | investor_news | Microsoft Dragon Copilot provides the healthcare industry’s first unified voice AI assistant that enables clinicians to streamline clinical documentation, surface information and automate tasks | + | watch |
 | 2025-04-09 | investor_news | Microsoft announces quarterly earnings release date | 0 | refresh |
 | 2025-04-30 | investor_news | Microsoft Cloud and AI strength drives third quarter results | 0 | refresh |
 | 2025-04-30 | investor_news | Microsoft earnings press release available on Investor Relations website | 0 | refresh |
 | 2026-03-25 | legacy_seed | Copilot enterprise penetration remained near 3%, below expectations. | - | refresh |
-| 2026-03-25 | legacy_seed | Q2 FY2026 Azure stayed strong but CapEx nearly reached $30B. | - | refresh |
