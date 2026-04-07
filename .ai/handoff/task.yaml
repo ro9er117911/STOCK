@@ -1,0 +1,24 @@
+governance:
+  status: frozen
+  owner: PM
+  lane_hint: omx
+  change_budget: 1
+  review_gate: codex-on-convergence
+goal: |
+  📢 執行「投資工單一致性審計 (Artifact Audit)」：
+  掃描 research/ 目錄下所有 Ticker (PLTR, MSFT, MAR) 的 state.json 與 current.md。
+  確認是否包含 vNext 規範中的關鍵欄位：radar_flags, thesis_change_log, invalidation_reason。
+  產出對比矩陣與缺失警告。
+scope:
+  - 遍歷 research/*/state.json
+  - 遍歷 research/*/current.md
+  - 比對 README.md 中的 vNext Schema 定義
+acceptance:
+  - 產出包含欄位存在與否的對比 Markdown 表格
+  - 識別出任何 Schema 缺失或格式錯誤
+  - 不進行任何文件修改
+output:
+  - summary (審計結論)
+  - changed_files (此任務應為空)
+  - test_results (Schema 驗證狀態)
+  - risks (數據一致性風險)

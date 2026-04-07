@@ -1,0 +1,360 @@
+{
+  "version": "1.0.0",
+  "lastScanned": 1775157299118,
+  "projectRoot": "/Users/ro9air/STOCK",
+  "techStack": {
+    "languages": [
+      {
+        "name": "JavaScript/TypeScript",
+        "version": null,
+        "confidence": "high",
+        "markers": [
+          "package.json"
+        ]
+      },
+      {
+        "name": "Python",
+        "version": null,
+        "confidence": "high",
+        "markers": [
+          "pyproject.toml"
+        ]
+      }
+    ],
+    "frameworks": [
+      {
+        "name": "pytest",
+        "version": null,
+        "category": "testing"
+      }
+    ],
+    "packageManager": "npm",
+    "runtime": null
+  },
+  "build": {
+    "buildCommand": null,
+    "testCommand": "pytest",
+    "lintCommand": "ruff check",
+    "devCommand": null,
+    "scripts": {}
+  },
+  "conventions": {
+    "namingStyle": "snake_case",
+    "importStyle": null,
+    "testPattern": null,
+    "fileOrganization": null
+  },
+  "structure": {
+    "isMonorepo": false,
+    "workspaces": [],
+    "mainDirectories": [
+      "docs",
+      "scripts",
+      "src",
+      "tests"
+    ],
+    "gitBranches": {
+      "defaultBranch": "main",
+      "branchingStrategy": null
+    }
+  },
+  "customNotes": [],
+  "directoryMap": {
+    "automation": {
+      "path": "automation",
+      "purpose": null,
+      "fileCount": 0,
+      "lastAccessed": 1775157299025,
+      "keyFiles": []
+    },
+    "docs": {
+      "path": "docs",
+      "purpose": "Documentation",
+      "fileCount": 2,
+      "lastAccessed": 1775157299026,
+      "keyFiles": [
+        "README.md",
+        "operator-guide.md"
+      ]
+    },
+    "launchd": {
+      "path": "launchd",
+      "purpose": null,
+      "fileCount": 1,
+      "lastAccessed": 1775157299028,
+      "keyFiles": [
+        "com.ro9air.stock-research.catchup.plist"
+      ]
+    },
+    "logs": {
+      "path": "logs",
+      "purpose": null,
+      "fileCount": 1,
+      "lastAccessed": 1775157299104,
+      "keyFiles": []
+    },
+    "prep": {
+      "path": "prep",
+      "purpose": null,
+      "fileCount": 1,
+      "lastAccessed": 1775157299108,
+      "keyFiles": [
+        "orginnote.txt"
+      ]
+    },
+    "project_devOps": {
+      "path": "project_devOps",
+      "purpose": null,
+      "fileCount": 1,
+      "lastAccessed": 1775157299108,
+      "keyFiles": [
+        "README.md"
+      ]
+    },
+    "research": {
+      "path": "research",
+      "purpose": null,
+      "fileCount": 2,
+      "lastAccessed": 1775157299109,
+      "keyFiles": [
+        "market_update_mar2026.md",
+        "msft_ai_market_judgment.md"
+      ]
+    },
+    "rules": {
+      "path": "rules",
+      "purpose": null,
+      "fileCount": 5,
+      "lastAccessed": 1775157299110,
+      "keyFiles": [
+        "README.md",
+        "agent.md",
+        "orc-architecture.md",
+        "research-methodology.md",
+        "soul.md"
+      ]
+    },
+    "scripts": {
+      "path": "scripts",
+      "purpose": "Build/utility scripts",
+      "fileCount": 2,
+      "lastAccessed": 1775157299110,
+      "keyFiles": [
+        "local_catchup.sh",
+        "research_ops.py"
+      ]
+    },
+    "site": {
+      "path": "site",
+      "purpose": null,
+      "fileCount": 3,
+      "lastAccessed": 1775157299110,
+      "keyFiles": [
+        "dca_app.html",
+        "index.html"
+      ]
+    },
+    "src": {
+      "path": "src",
+      "purpose": "Source code",
+      "fileCount": 1,
+      "lastAccessed": 1775157299111,
+      "keyFiles": [
+        "index_probe.py"
+      ]
+    },
+    "stock_research": {
+      "path": "stock_research",
+      "purpose": null,
+      "fileCount": 26,
+      "lastAccessed": 1775157299111,
+      "keyFiles": [
+        "__init__.py",
+        "__main__.py",
+        "analytics.py",
+        "baselines.py",
+        "candidates.py"
+      ]
+    },
+    "stock_research_operator.egg-info": {
+      "path": "stock_research_operator.egg-info",
+      "purpose": null,
+      "fileCount": 6,
+      "lastAccessed": 1775157299112,
+      "keyFiles": [
+        "PKG-INFO",
+        "SOURCES.txt",
+        "dependency_links.txt",
+        "entry_points.txt",
+        "requires.txt"
+      ]
+    },
+    "tests": {
+      "path": "tests",
+      "purpose": "Test files",
+      "fileCount": 8,
+      "lastAccessed": 1775157299112,
+      "keyFiles": [
+        "test_analytics.py",
+        "test_market_data.py",
+        "test_observation.py",
+        "test_package_init.py",
+        "test_performance.py"
+      ]
+    },
+    "site/assets": {
+      "path": "site/assets",
+      "purpose": "Static assets",
+      "fileCount": 2,
+      "lastAccessed": 1775157299117,
+      "keyFiles": [
+        "dashboard.css",
+        "dashboard.js"
+      ]
+    },
+    "site/data": {
+      "path": "site/data",
+      "purpose": "Data files",
+      "fileCount": 1,
+      "lastAccessed": 1775157299118,
+      "keyFiles": [
+        "portfolio.json"
+      ]
+    }
+  },
+  "hotPaths": [
+    {
+      "path": "stock_research/templates/dashboard/assets/dashboard.js",
+      "accessCount": 16,
+      "lastAccessed": 1775185887339,
+      "type": "file"
+    },
+    {
+      "path": "stock_research/templates/dashboard/ticker.html",
+      "accessCount": 8,
+      "lastAccessed": 1775185196384,
+      "type": "file"
+    },
+    {
+      "path": "stock_research/cli.py",
+      "accessCount": 4,
+      "lastAccessed": 1775012740706,
+      "type": "file"
+    },
+    {
+      "path": "stock_research/templates/dashboard/assets/dashboard.css",
+      "accessCount": 4,
+      "lastAccessed": 1775013074874,
+      "type": "file"
+    },
+    {
+      "path": "tests/test_performance.py",
+      "accessCount": 3,
+      "lastAccessed": 1775012871433,
+      "type": "file"
+    },
+    {
+      "path": "stock_research/performance.py",
+      "accessCount": 3,
+      "lastAccessed": 1775013074814,
+      "type": "file"
+    },
+    {
+      "path": "stock_research/market_data.py",
+      "accessCount": 3,
+      "lastAccessed": 1775013074969,
+      "type": "file"
+    },
+    {
+      "path": "stock_research/config.py",
+      "accessCount": 3,
+      "lastAccessed": 1775157438645,
+      "type": "file"
+    },
+    {
+      "path": "",
+      "accessCount": 3,
+      "lastAccessed": 1775185189936,
+      "type": "directory"
+    },
+    {
+      "path": ".claude",
+      "accessCount": 2,
+      "lastAccessed": 1775012134316,
+      "type": "directory"
+    },
+    {
+      "path": ".harness",
+      "accessCount": 2,
+      "lastAccessed": 1775012134639,
+      "type": "directory"
+    },
+    {
+      "path": "scripts/research_ops.py",
+      "accessCount": 2,
+      "lastAccessed": 1775012658205,
+      "type": "file"
+    },
+    {
+      "path": "stock_research/dashboard.py",
+      "accessCount": 2,
+      "lastAccessed": 1775185216743,
+      "type": "file"
+    },
+    {
+      "path": ".claude/settings.local.json",
+      "accessCount": 1,
+      "lastAccessed": 1775012136255,
+      "type": "file"
+    },
+    {
+      "path": ".harness/init.sh",
+      "accessCount": 1,
+      "lastAccessed": 1775012164744,
+      "type": "file"
+    },
+    {
+      "path": "tests/test_market_data.py",
+      "accessCount": 1,
+      "lastAccessed": 1775012728565,
+      "type": "file"
+    },
+    {
+      "path": "site/index.html",
+      "accessCount": 1,
+      "lastAccessed": 1775185193198,
+      "type": "file"
+    },
+    {
+      "path": "stock_research/templates/dashboard/index.html",
+      "accessCount": 1,
+      "lastAccessed": 1775185193397,
+      "type": "file"
+    },
+    {
+      "path": "PLAN.md",
+      "accessCount": 1,
+      "lastAccessed": 1775185200861,
+      "type": "file"
+    },
+    {
+      "path": "stock_research/templates/dashboard/research.html",
+      "accessCount": 1,
+      "lastAccessed": 1775185205144,
+      "type": "file"
+    },
+    {
+      "path": "stock_research/digest.py",
+      "accessCount": 1,
+      "lastAccessed": 1775185223739,
+      "type": "file"
+    },
+    {
+      "path": "CLAUDE.md",
+      "accessCount": 1,
+      "lastAccessed": 1775186134798,
+      "type": "file"
+    }
+  ],
+  "userDirectives": []
+}

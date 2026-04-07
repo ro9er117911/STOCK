@@ -1,0 +1,14 @@
+# Antigravity x OMC Handoff Result Template
+# Executor summary mirrored into .ai/handoff/result.md.
+
+summary:
+- <Brief update>
+
+changed_files:
+- <List files>
+
+test_results:
+- <Pass/Fail/Pending>
+
+risks:
+- <Any potential issues>

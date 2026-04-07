@@ -106,6 +106,44 @@
       ]
     },
     {
+      "ticker": "2330",
+      "company_name": "TSMC",
+      "cik": "0001046179",
+      "yahoo_symbol": "2330.TW",
+      "price_gap_pct": 5.0,
+      "abnormal_volume_ratio": 1.5,
+      "deep_refresh_days": 7,
+      "sources": [
+        {
+          "source_id": "price",
+          "source_type": "price",
+          "kind": "price",
+          "url": "https://query1.finance.yahoo.com/v8/finance/chart/2330.TW?range=1mo&interval=1d",
+          "status": "active",
+          "priority": 20,
+          "notes": "Daily Yahoo Finance chart data for TSMC."
+        },
+        {
+          "source_id": "finmind_roe",
+          "source_type": "fundamental",
+          "kind": "api",
+          "url": "https://api.finmindtrade.com/api/v4/data?dataset=TaiwanStockFinancialStatements",
+          "status": "active",
+          "priority": 10,
+          "notes": "ROE data from FinMind."
+        },
+        {
+          "source_id": "finmind_flows",
+          "source_type": "institutional",
+          "kind": "api",
+          "url": "https://api.finmindtrade.com/api/v4/data?dataset=TaiwanStockInstitutionalInvestorsBuySell",
+          "status": "active",
+          "priority": 10,
+          "notes": "Institutional flows from FinMind."
+        }
+      ]
+    },
+    {
       "ticker": "MAR",
       "company_name": "Marriott International",
       "cik": "0001048286",

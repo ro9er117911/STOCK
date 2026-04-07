@@ -1,0 +1,67 @@
+{
+  "pid": 41500,
+  "parent_pid": 41498,
+  "started_at": "2026-04-01T05:14:41.791Z",
+  "cwd": "/Users/ro9air/STOCK",
+  "notify_script": "/Users/ro9air/.nvm/versions/node/v22.20.0/lib/node_modules/oh-my-codex/dist/scripts/notify-hook.js",
+  "poll_ms": 250,
+  "pid_file": "/Users/ro9air/STOCK/.omx/state/notify-fallback.pid",
+  "max_lifetime_ms": 21600000,
+  "tracked_files": 2,
+  "seen_turns": 0,
+  "dispatch_drain": {
+    "enabled": true,
+    "max_per_tick": 5,
+    "run_count": 100,
+    "leader_only": true,
+    "last_tick_at": "2026-04-01T05:15:12.638Z",
+    "last_result": {
+      "processed": 0,
+      "skipped": 0,
+      "failed": 0
+    },
+    "last_error": null
+  },
+  "leader_nudge": {
+    "enabled": true,
+    "leader_only": true,
+    "stale_threshold_ms": 180000,
+    "precomputed_leader_stale": false,
+    "last_tick_at": "2026-04-01T05:15:12.638Z",
+    "last_error": null,
+    "run_count": 100
+  },
+  "ralph_continue_steer": {
+    "enabled": true,
+    "cadence_ms": 60000,
+    "message": "Ralph loop active continue",
+    "active": false,
+    "last_state_check_at": "2026-04-01T05:15:12.675Z",
+    "last_sent_at": "",
+    "cooldown_anchor_at": "",
+    "last_reason": "blocked_by_current_session",
+    "last_error": null,
+    "state_path": "",
+    "pane_id": "",
+    "pane_current_command": "",
+    "current_phase": "",
+    "shared_timestamp_path": "/Users/ro9air/STOCK/.omx/state/ralph-last-steer-at",
+    "shared_last_sent_at": "",
+    "singleton_lock_path": "/Users/ro9air/STOCK/.omx/state/ralph-continue-steer.lock"
+  },
+  "fallback_auto_nudge": {
+    "enabled": true,
+    "stall_ms": 5000,
+    "last_tick_at": "2026-04-01T05:15:12.675Z",
+    "last_turn_at": "2026-04-01T05:14:41.757Z",
+    "last_turn_count": 0,
+    "last_message": "",
+    "last_reason": "hud_state_incomplete",
+    "last_error": null,
+    "last_nudged_signature": "",
+    "last_nudged_at": ""
+  },
+  "stop_reason": "signal",
+  "stop_signal": "SIGTERM",
+  "stopping": true
+}

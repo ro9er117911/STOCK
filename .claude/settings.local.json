@@ -1,0 +1,42 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(claude --version)",
+      "Bash(npm --version)",
+      "Bash(tmux -V)",
+      "Bash(codex --version)",
+      "Bash(brew list:*)",
+      "Bash(brew install:*)",
+      "Bash(python3:*)",
+      "Bash(bash \"/Users/ro9air/.claude/plugins/cache/omc/oh-my-claudecode/4.9.3/scripts/setup-progress.sh\" resume)",
+      "Bash(node:*)",
+      "Read(//Users/ro9air/STOCK/**)",
+      "Bash(\"$CONFIG_FILE\" echo:*)",
+      "Bash(npm install:*)",
+      "Bash(omc --version)",
+      "Bash(jq -e '.env.CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS' ~/.claude/settings.json)",
+      "Bash(claude mcp:*)",
+      "Bash(done)",
+      "Skill(update-config)",
+      "Bash(npm view:*)",
+      "Bash(rm -f ~/.claude/skills/ast-grep)",
+      "Bash(rm -rf ~/.claude/skills/omc-reference)",
+      "Bash(grep -r \"codex\\\\|gemini\\\\|gpt-5\\\\|gpt-4\" /Users/ro9air/.claude/*.json)",
+      "Bash(env)",
+      "WebSearch",
+      "Bash(python:*)",
+      "Bash(gh pr:*)",
+      "Bash(gh api:*)",
+      "Bash(git fetch:*)",
+      "Bash(git checkout:*)",
+      "Bash(git rebase:*)",
+      "Bash(git stash:*)",
+      "Bash(git add:*)",
+      "Bash(git push:*)",
+      "Bash(git pull:*)",
+      "Bash(grep:*)",
+      "Bash(gemini --help)",
+      "Bash(gemini -p '你是一個前端工程師，正在修改 stock_research/templates/dashboard/assets/dashboard.js 這個檔案。:*)"
+    ]
+  }
+}

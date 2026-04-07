@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-03-27",
+  "generated_at": "2026-04-07",
   "items": [
     {
       "ticker": "MAR",
@@ -24,8 +24,8 @@
         "summary": "Established the living research state under the vNext decision workflow contract."
       },
       "artifacts": {
-        "state_path": "research/MAR/state.json",
-        "current_path": "research/MAR/current.md"
+        "state_path": "/Users/ro9air/projects/STOCK/research/MAR/state.json",
+        "current_path": "/Users/ro9air/projects/STOCK/research/MAR/current.md"
       }
     },
     {
@@ -51,8 +51,8 @@
         "summary": "Established the living research state under the vNext decision workflow contract."
       },
       "artifacts": {
-        "state_path": "research/MSFT/state.json",
-        "current_path": "research/MSFT/current.md"
+        "state_path": "/Users/ro9air/projects/STOCK/research/MSFT/state.json",
+        "current_path": "/Users/ro9air/projects/STOCK/research/MSFT/current.md"
       }
     },
     {
@@ -78,8 +78,35 @@
         "summary": "Established the living research state under the vNext decision workflow contract."
       },
       "artifacts": {
-        "state_path": "research/PLTR/state.json",
-        "current_path": "research/PLTR/current.md"
+        "state_path": "/Users/ro9air/projects/STOCK/research/PLTR/state.json",
+        "current_path": "/Users/ro9air/projects/STOCK/research/PLTR/current.md"
+      }
+    },
+    {
+      "ticker": "2330",
+      "company_name": "TSMC",
+      "research_stage": "in_research",
+      "candidate_origin": "manual_watchlist",
+      "decision_status": "needs_more_research",
+      "decision_updated_at": "2026-04-07",
+      "current_action": "No decision yet; gather evidence and build a falsifiable thesis.",
+      "research_topic": "Taiwan Alpha",
+      "radar_flags": [],
+      "radar_summary": "No radar flags logged yet; this candidate entered manually.",
+      "radar_risk_level": "none",
+      "invalidation_reason": "",
+      "latest_change": {
+        "changed_at": "2026-04-07",
+        "change_type": "candidate_stage_update",
+        "research_stage": "in_research",
+        "decision_status": "needs_more_research",
+        "current_action": "No decision yet; gather evidence and build a falsifiable thesis.",
+        "confidence": 0.0,
+        "summary": "Candidate dossier created."
+      },
+      "artifacts": {
+        "state_path": "/Users/ro9air/projects/STOCK/research/2330/state.json",
+        "current_path": "/Users/ro9air/projects/STOCK/research/2330/current.md"
       }
     }
   ]

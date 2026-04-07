@@ -1,0 +1,123 @@
+{
+  "ticker": "2330",
+  "company_name": "TSMC",
+  "research_topic": "Taiwan Alpha",
+  "research_type": "候選研究 / 進場前",
+  "holding_period": "待定義",
+  "last_reviewed_at": "2026-04-07",
+  "next_review_at": "2026-04-21",
+  "current_action": "No decision yet; gather evidence and build a falsifiable thesis.",
+  "confidence": 0.0,
+  "latest_delta": [
+    "Candidate added to the research queue for pre-entry thesis work."
+  ],
+  "primary_observation_variables": [],
+  "secondary_observation_variables": [],
+  "noise_filters": [
+    "Single-session price moves without thesis evidence",
+    "Headline-only narrative spikes without primary-source confirmation"
+  ],
+  "thresholds": {
+    "price_gap_pct": 8.0,
+    "volume_ratio": 2.0,
+    "deep_refresh_days": 14,
+    "material_sec_forms": [
+      "8-K",
+      "10-Q",
+      "10-K"
+    ],
+    "earnings_keywords": [
+      "earnings",
+      "results",
+      "guidance",
+      "quarter",
+      "outlook"
+    ],
+    "positive_keywords": [
+      "record",
+      "raises",
+      "expands",
+      "beats",
+      "wins"
+    ],
+    "negative_keywords": [
+      "cuts",
+      "miss",
+      "delay",
+      "probe",
+      "lawsuit"
+    ]
+  },
+  "thesis": {
+    "thesis_id": "2330-thesis-core",
+    "statement": "Research in progress. The thesis is not decision-ready yet.",
+    "core_catalyst": "Define the catalyst that would close the market-expectation gap.",
+    "market_blind_spot": "State the specific change the market may be underpricing.",
+    "verification_date": "2026-05-07",
+    "expiry_condition": "Reject the candidate if the core thesis cannot be verified or falsified with primary sources."
+  },
+  "assumptions": [],
+  "risks": [],
+  "valuation_regime": {
+    "current_yardstick": "Not assessed yet.",
+    "better_yardstick": "Define during research.",
+    "switch_trigger": "Define during research.",
+    "re_rating_logic": "Define during research.",
+    "associated_risk": "Incomplete regime analysis can create false conviction."
+  },
+  "scenarios": [],
+  "action_rules": [],
+  "next_must_check_data": "Define the must-check data before promoting this candidate to ready_to_decide.",
+  "research_debt": [
+    "Write the first falsifiable thesis sentence.",
+    "Add at least three core assumptions and three risks.",
+    "Define explicit buy, defer, and reject conditions."
+  ],
+  "source_manifest": [],
+  "last_seen_event_cursors": {},
+  "version_log": [
+    {
+      "version": "v0",
+      "date": "2026-04-07",
+      "reason": "Candidate research dossier created.",
+      "impact": "Candidate added to the research queue for pre-entry thesis work."
+    }
+  ],
+  "seed_events": [],
+  "radar_flags": [],
+  "radar_summary": "No radar flags logged yet; this candidate entered manually.",
+  "radar_risk_level": "none",
+  "outcome_markers": [],
+  "thesis_change_log": [
+    {
+      "changed_at": "2026-04-07",
+      "change_type": "candidate_stage_update",
+      "research_stage": "in_research",
+      "decision_status": "needs_more_research",
+      "current_action": "No decision yet; gather evidence and build a falsifiable thesis.",
+      "confidence": 0.0,
+      "summary": "Candidate dossier created."
+    }
+  ],
+  "invalidation_reason": "",
+  "consistency_notes": [],
+  "candidate_origin": "manual_watchlist",
+  "research_stage": "in_research",
+  "decision_status": "needs_more_research",
+  "decision_updated_at": "2026-04-07",
+  "factor_snapshot": {
+    "ticker": "2330",
+    "market": "TW",
+    "scores": {
+      "quality": 33.93,
+      "value": 37.75,
+      "momentum": 73.11
+    },
+    "raw_metrics": {
+      "avg_roe_4q": 8.67,
+      "relative_strength": 0.15,
+      "forward_pe": 15.0
+    },
+    "maestro_factor_score": 46.83
+  }
+}

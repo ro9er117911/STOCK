@@ -64,3 +64,10 @@
 - VIX is a regime valve, not a standalone sell signal.
 - End-of-day data is sufficient for v1; intraday monitoring is out of scope.
 - The first deliverable is a static local private cockpit plus sanitized public parity, not a framework rewrite.
+
+## Phase 2: Hybrid Factor-Decision System (HFD)
+**Objective**: Balanced decision engine merging quantitative factors with qualitative narratives.
+- **Factor Logic**: Quality (ROE), Value (P/E), Momentum (RS).
+- **Data Source**: Integrated FinMind (Taiwan) + yfinance (Global).
+- **UI/UX Strategy**: Progressive Disclosure (L1: Cockpit, L2: Analytics, L3: Evidence).
+- **Final Score**: 60% Factor / 40% Qualitative conviction.
