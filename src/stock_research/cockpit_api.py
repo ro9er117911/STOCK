@@ -5,7 +5,11 @@ from functools import partial
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
 from typing import Any
-from urllib.parse import urlparse
+from urllib.parse import parse_qs, urlparse
+import urllib.request
+import urllib.error
+import yfinance as yf
+import pandas as pd
 
 from .config import (
     COCKPIT_API_HOST,
@@ -172,6 +176,71 @@ class CockpitAPIHandler(BaseHTTPRequestHandler):
         if path == "/api/observations":
             self._send_json(200, _workspace_payload(self.research_root))
             return
+
+        if path == "/api/history":
+            query = parse_qs(urlparse(self.path).query)
+            ticker = query.get("ticker", [""])[0]
+            start = query.get("start", [""])[0]
+            end = query.get("end", [""])[0]
+            if not ticker or not start or not end:
+                self._send_json(400, {"error": "Missing ticker, start, or end parameter"})
+                return
+            try:
+                # Use yfinance to fetch data which handles cookies/crumbs automatically
+                df = yf.download(ticker, start=start, end=end, progress=False)
+                if df.empty:
+                    self._send_json(404, {"error": f"No data found for {ticker}"})
+                    return
+                
+                # If it's a multi-index (often happens with yfinance newer versions), flatten it
+                if isinstance(df.columns, pd.MultiIndex):
+                    # Take the first level of the columns (Price, Close, High, etc.)
+                    # and ensure we are looking at the requested ticker
+                    if ticker in df.columns.levels[1]:
+                        df = df.xs(ticker, axis=1, level=1)
+                    else:
+                        df.columns = df.columns.get_level_values(0)
+
+                # Standardize columns for the legacy DCA tool
+                df.index.name = "Date"
+                # Newer yfinance might use "Close" instead of "Adj Close" depending on version/args
+                if "Close" in df.columns and "Adj Close" not in df.columns:
+                    df["Adj Close"] = df["Close"]
+                
+                # Convert DataFrame to CSV string
+                csv_body = df.to_csv().encode("utf-8")
+                self.send_response(200)
+                self.send_header("Content-Type", "text/csv; charset=utf-8")
+                self.send_header("Access-Control-Allow-Origin", "*")
+                self.end_headers()
+                self.wfile.write(csv_body)
+            except Exception as exc:
+                self._send_json(500, {"error": f"YFinance error: {str(exc)}"})
+            return
+
+        if path == "/api/proxy":
+            query = parse_qs(urlparse(self.path).query)
+            target_url = query.get("url", [""])[0]
+            if not target_url:
+                self._send_json(400, {"error": "Missing url parameter"})
+                return
+            try:
+                # Use a basic User-Agent to avoid being blocked by simple scrapers blockers
+                headers = {"User-Agent": "Mozilla/5.0"}
+                req = urllib.request.Request(target_url, headers=headers)
+                with urllib.request.urlopen(req) as response:
+                    body = response.read()
+                    self.send_response(200)
+                    self.send_header("Content-Type", response.getheader("Content-Type", "application/octet-stream"))
+                    self.send_header("Access-Control-Allow-Origin", "*")
+                    self.end_headers()
+                    self.wfile.write(body)
+            except urllib.error.URLError as exc:
+                self._send_json(500, {"error": f"Failed to proxy content: {str(exc)}"})
+            except Exception as exc:
+                self._send_json(500, {"error": f"Proxy error: {str(exc)}"})
+            return
+
         self._send_json(404, {"error": f"Unknown route: {path}"})
 
     def do_POST(self) -> None:  # noqa: N802

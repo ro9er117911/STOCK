@@ -1,0 +1,47 @@
+[
+  {
+    "citation_id": "2330-research-page",
+    "kind": "internal",
+    "label": "研究內頁",
+    "href": "research/2330.html",
+    "source_type": "研究頁面",
+    "is_clickable": true,
+    "occurred_at": "2026-04-07"
+  },
+  {
+    "citation_id": "2330-review-summary",
+    "kind": "internal",
+    "label": "本輪更新摘要",
+    "href": "research/2330.html#review-summary",
+    "source_type": "更新摘要",
+    "is_clickable": true,
+    "occurred_at": "2026-04-07"
+  },
+  {
+    "citation_id": "2330-source-price",
+    "kind": "external",
+    "label": "Daily Yahoo Finance 圖表資料 data for TSMC.",
+    "href": "https://query1.finance.yahoo.com/v8/finance/chart/2330.TW?range=1mo&interval=1d",
+    "source_type": "price",
+    "is_clickable": true,
+    "occurred_at": "2026-04-07"
+  },
+  {
+    "citation_id": "2330-source-finmind_roe",
+    "kind": "external",
+    "label": "ROE data from FinMind.",
+    "href": "https://api.finmindtrade.com/api/v4/data?dataset=TaiwanStockFinancialStatements",
+    "source_type": "fundamental",
+    "is_clickable": true,
+    "occurred_at": "2026-04-07"
+  },
+  {
+    "citation_id": "2330-source-finmind_flows",
+    "kind": "external",
+    "label": "Institutional flows from FinMind.",
+    "href": "https://api.finmindtrade.com/api/v4/data?dataset=TaiwanStockInstitutionalInvestorsBuySell",
+    "source_type": "institutional",
+    "is_clickable": true,
+    "occurred_at": "2026-04-07"
+  }
+]

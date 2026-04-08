@@ -37,6 +37,7 @@ def _write_site(site_root: Path, payload: dict[str, Any]) -> dict[str, Any]:
     portfolio_html_tpl = _load_template("index.html")
     ticker_html_tpl = _load_template("ticker.html")
     research_html_tpl = _load_template("research.html")
+    dca_app_html_tpl = _load_template("dca_app.html")
     dashboard_css = _load_template("dashboard.css")
     dashboard_js = _load_template("dashboard.js")
 
@@ -53,6 +54,7 @@ def _write_site(site_root: Path, payload: dict[str, Any]) -> dict[str, Any]:
         )
 
     (site_root / "index.html").write_text(portfolio_html_tpl, encoding="utf-8")
+    (site_root / "dca_app.html").write_text(dca_app_html_tpl, encoding="utf-8")
     (site_root / ".nojekyll").write_text("", encoding="utf-8")
     (paths["assets"] / "dashboard.css").write_text(dashboard_css, encoding="utf-8")
     (paths["assets"] / "dashboard.js").write_text(dashboard_js, encoding="utf-8")

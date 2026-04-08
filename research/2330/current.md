@@ -56,6 +56,11 @@
 | A1 | 2nm (N2) mass production started late 2025, reaching 100k+ wpm by end of 2026. | verified | 0.90 | Delayed N2P or yield drop below 60% |
 | A2 | Q1 2026 Gross Margin guided at 63-65%, indicating strong pricing power. | verified | 0.95 | Actual Q1 margin < 62% |
 | A3 | Total margin dilution from N2 ramp and overseas fabs is 4-6% in 2026. | monitored | 0.80 | Unforeseen operational delays in AZ or Kumamoto |
+| A4 | 2nm capacity fully booked through 2026 by Apple (A20), Nvidia, AMD, and Qualcomm. | verified | 0.90 | Order cancellations from Tier-1 customers |
+| A5 | 2026 full-year revenue growth projected at ~30% YoY (USD) driven by AI and N2 adoption. | monitored | 0.80 | Global semiconductor demand slowdown |
+| A6 | 2026 Capital Expenditure budgeted at $52B-$56B (70-80% for advanced nodes). | verified | 0.90 | Capex cut or shift away from N2/A16 |
+| A7 | N2P (Backside Power Delivery) mass production scheduled for H2 2026. | monitored | 0.85 | Stagnation in backside power yields |
+| A8 | Q1 2026 Operating Margin guided at 54-56%. | verified | 0.95 | Actual OM < 53% |
 
 ## Risk Register
 
@@ -97,9 +102,11 @@
 | Version | Date | Reason | Impact |
 | --- | --- | --- | --- |
 | v0 | 2026-04-07 | Candidate research dossier created. | Candidate added to the research queue for pre-entry thesis work. |
+| v1 | 2026-04-07 | Updated 2nm progress and margin guidance. | Refined 2nm production schedule and integrated Q1 2026 margin guidance. |
 
 ## Thesis Change Log
 
 | Date | Type | Stage | Decision | Summary |
 | --- | --- | --- | --- | --- |
 | 2026-04-07 | candidate_stage_update | in_research | needs_more_research | Candidate dossier created. |
+| 2026-04-07 | thesis_update | in_research | needs_more_research | Updated 2nm (N2/N2P) progress and Q1 2026 margin/operating guidance. |

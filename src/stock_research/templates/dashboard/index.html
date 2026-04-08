@@ -18,28 +18,45 @@
       <section class="masthead">
         <div class="masthead-copy">
           <p class="eyebrow">Institutional Growth Cockpit</p>
-          <h1>投資駕駛艙</h1>
-          <p class="lede">先看真實部位、VIX regime 與熔斷警報，再看核心邏輯、事件、sizing 壓力與專案成熟度。這是本機私有 cockpit，不是展示用 landing page。</p>
+          <h1>投資駕駛艙 V2</h1>
+          <p class="lede">分層架構 (L1/L2/L3) 私有駕駛艙。先看 Strategic Regime，再看 Operational Gaps 與 Execution Queue。</p>
+          <div class="masthead-actions" style="margin-top: 20px;">
+            <a href="./dca_app.html" class="action-button">📉 股價走勢與 DCA 夏普值回測</a>
+            <a href="./portfolio_app.html" class="action-button" style="margin-left: 10px;">🌐 投資組合與相關性分析</a>
+          </div>
         </div>
         <div class="masthead-strip" id="portfolio-summary-strip"></div>
       </section>
 
+      <!-- L1: Strategic Overview -->
+      <div class="level-header">
+        <span class="level-label">L1</span>
+        <h2>Strategic Regime</h2>
+      </div>
       <section class="overview-grid">
         <article class="panel panel-hero" id="portfolio-totals-panel"></article>
         <article class="panel" id="macro-regime-panel"></article>
         <article class="panel" id="risk-radar-panel"></article>
+        <article class="panel" id="factor-radar-panel">
+          <div class="panel-head">
+            <div>
+              <p class="panel-kicker">Factor Analysis</p>
+              <h2>Factor Radar</h2>
+            </div>
+          </div>
+          <div id="factor-radar-root" class="radar-container"></div>
+        </article>
       </section>
 
+      <!-- L2: Operational Insights -->
+      <div class="level-header">
+        <span class="level-label">L2</span>
+        <h2>Operational Analytics</h2>
+      </div>
       <section class="overview-grid overview-grid-secondary">
         <article class="panel" id="recent-progress-panel"></article>
         <article class="panel" id="gap-map-panel"></article>
         <article class="panel" id="analytics-panel"></article>
-      </section>
-
-      <section class="overview-grid overview-grid-observation">
-        <article class="panel panel-emphasis" id="observation-command-panel"></article>
-        <article class="panel" id="observation-lake-panel"></article>
-        <article class="panel" id="watchlist-recommendations-panel"></article>
       </section>
 
       <section class="board two-column board-main">
@@ -61,6 +78,17 @@
           </div>
           <div id="summary-cards" class="summary-grid"></div>
         </article>
+      </section>
+
+      <!-- L3: Execution & Watchlist -->
+      <div class="level-header">
+        <span class="level-label">L3</span>
+        <h2>Execution & Watchlist</h2>
+      </div>
+      <section class="overview-grid overview-grid-observation">
+        <article class="panel panel-emphasis" id="observation-command-panel"></article>
+        <article class="panel" id="observation-lake-panel"></article>
+        <article class="panel" id="watchlist-recommendations-panel"></article>
       </section>
 
       <section class="board two-column">

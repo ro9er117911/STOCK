@@ -1045,12 +1045,68 @@ function bindPortfolioControls(payload) {
   });
 }
 
+function renderFactorRadar(payload) {
+  const root = document.getElementById("factor-radar-root");
+  if (!root) return;
+
+  const factors = (payload.factor_scores && payload.factor_scores.length > 0)
+    ? payload.factor_scores.map(f => ({ label: f.factor, value: f.score / 100 }))
+    : [
+        { label: "Momentum", value: 0.85 },
+        { label: "Value", value: 0.40 },
+        { label: "Quality", value: 0.92 },
+        { label: "Growth", value: 0.88 },
+        { label: "Volatility", value: 0.65 },
+      ];
+
+  const size = 200;
+  const center = size / 2;
+  const radius = size * 0.35;
+  const angleStep = (Math.PI * 2) / factors.length;
+
+  const points = factors.map((f, i) => {
+    const angle = i * angleStep - Math.PI / 2;
+    const r = radius * f.value;
+    return {
+      x: center + r * Math.cos(angle),
+      y: center + r * Math.sin(angle),
+      labelX: center + (radius + 22) * Math.cos(angle),
+      labelY: center + (radius + 22) * Math.sin(angle),
+    };
+  });
+
+  const polygonPath = points.map((p) => `${p.x},${p.y}`).join(" ");
+  
+  const gridCircles = [0.25, 0.5, 0.75, 1].map(r => `
+    <circle cx="${center}" cy="${center}" r="${radius * r}" fill="none" stroke="rgba(255,255,255,0.05)" />
+  `).join("");
+
+  const gridLines = factors.map((_, i) => {
+    const angle = i * angleStep - Math.PI / 2;
+    return `<line x1="${center}" y1="${center}" x2="${center + radius * Math.cos(angle)}" y2="${center + radius * Math.sin(angle)}" stroke="rgba(255,255,255,0.05)" />`;
+  }).join("");
+
+  const labels = factors.map((f, i) => {
+    const p = points[i];
+    return `<text x="${p.labelX}" y="${p.labelY}" class="radar-label" text-anchor="middle" dominant-baseline="middle">${escapeHtml(f.label)}</text>`;
+  }).join("");
+
+  root.innerHTML = `
+    <svg viewBox="0 0 ${size} ${size}" class="radar-svg">
+      <g class="grid">${gridCircles}${gridLines}</g>
+      <polygon points="${polygonPath}" />
+      <g class="labels">${labels}</g>
+    </svg>
+  `;
+}
+
 function renderPortfolio(payload) {
   const workspace = dashboardRuntime.observationWorkspace || emptyObservationWorkspace();
   renderPortfolioStrip(payload);
   renderPortfolioTotals(payload);
   renderMacroRegime(payload);
   renderRiskRadar(payload);
+  renderFactorRadar(payload);
   renderRecentProgress(payload);
   renderGapMap(payload);
   renderAnalytics(payload);

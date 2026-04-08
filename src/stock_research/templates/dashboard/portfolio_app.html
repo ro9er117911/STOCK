@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio Analytics - 投資組合與相關性分析</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/luxon@3.0.1/build/global/luxon.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-luxon@1.2.0/dist/chartjs-adapter-luxon.min.js"></script>
+    <style>
+        :root {
+            --primary: #2563eb;
+            --bg: #f8fafc;
+            --card: #ffffff;
+            --text: #1e293b;
+            --border: #e2e8f0;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .card {
+            background: var(--card);
+            border-radius: 12px;
+            padding: 24px;
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+            margin-bottom: 20px;
+        }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 16px;
+            margin-bottom: 20px;
+        }
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+        label {
+            font-size: 0.875rem;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+        input, select {
+            padding: 8px 12px;
+            border: 1px solid #cbd5e1;
+            border-radius: 6px;
+            font-size: 1rem;
+        }
+        button {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: opacity 0.2s;
+            grid-column: 1 / -1;
+        }
+        button:hover {
+            opacity: 0.9;
+        }
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 16px;
+        }
+        .stat-item {
+            padding: 16px;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            text-align: center;
+        }
+        .stat-value {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+        .stat-label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            color: #64748b;
+            margin-top: 4px;
+        }
+        #chartContainer {
+            height: 400px;
+            margin-top: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+        th, td {
+            border: 1px solid var(--border);
+            padding: 10px;
+            text-align: center;
+        }
+        th {
+            background-color: #f1f5f9;
+        }
+        .proxy-tip {
+            font-size: 0.8rem;
+            color: #64748b;
+            margin-top: 10px;
+            background: #f1f5f9;
+            padding: 10px;
+            border-radius: 6px;
+        }
+        .nav-links {
+            margin-bottom: 20px;
+        }
+        .nav-links a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+        }
+        .nav-links a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="nav-links">
+        <a href="./index.html">← 返回首頁</a>
+    </div>
+    
+    <div class="header">
+        <h1>🌐 Portfolio Analytics - 投資組合與相關性分析</h1>
+        <p>多位資產走勢比對、等權重投資組合回測與資產相關性矩陣</p>
+    </div>
+
+    <div class="card">
+        <div class="grid">
+            <div class="form-group" style="grid-column: span 2;">
+                <label>股票/ETF 代碼 (請用逗號分隔)</label>
+                <input type="text" id="tickers" value="SPY, QQQ, TLT, GLD, VIXY" placeholder="例如: SPY, VOO, TLT">
+            </div>
+            <div class="form-group">
+                <label>開始日期</label>
+                <input type="date" id="startDate" value="2020-01-01">
+            </div>
+            <div class="form-group">
+                <label>結束日期</label>
+                <input type="date" id="endDate" value="2024-01-01">
+            </div>
+            <div class="form-group">
+                <label>初始資金 (USD)</label>
+                <input type="number" id="ia" value="100000">
+            </div>
+            <div class="form-group" style="grid-column: span 2;">
+                <label>CORS Proxy (若留空則自動使用 localhost:8001)</label>
+                <input type="text" id="proxy" value="" placeholder="https://your-worker.workers.dev/">
+            </div>
+            <button onclick="runAnalysis()">執行分析</button>
+        </div>
+    </div>
+
+    <div id="loading" style="display: none; text-align: center; padding: 20px;">
+        <h3>正在抓取資料並計算，請稍候...</h3>
+    </div>
+
+    <div id="resultSection" style="display: none;">
+        <div class="card">
+            <h3>📈 等權重投資組合概況 (Equal Weight Portfolio)</h3>
+            <div class="stats-grid" id="statsGrid"></div>
+        </div>
+
+        <div class="card">
+            <h3>📊 資產累積走勢 (Wealth Trajectory)</h3>
+            <div id="chartContainer">
+                <canvas id="wealthChart"></canvas>
+            </div>
+        </div>
+
+        <div class="card">
+            <h3>🔗 資產相關性矩陣 (Correlation Matrix)</h3>
+            <div id="correlationContainer"></div>
+        </div>
+    </div>
+</div>
+
+<script>
+    let myChart = null;
+
+    async function runAnalysis() {
+        const tickersObj = document.getElementById('tickers').value;
+        const tickers = [...new Set(tickersObj.split(',').map(t => t.trim().toUpperCase()).filter(t => t))];
+        if(tickers.length < 2) {
+            alert('請至少輸入兩個資產代碼才能進行相關性與投資組合分析！');
+            return;
+        }
+
+        const start = document.getElementById('startDate').value;
+        const end = document.getElementById('endDate').value;
+        const ia = parseFloat(document.getElementById('ia').value);
+        const proxyInput = document.getElementById('proxy').value;
+        const proxy = proxyInput || `http://localhost:8001/api/proxy?url=`;
+
+        const sTimestamp = Math.floor(new Date(start).getTime() / 1000);
+        const eTimestamp = Math.floor(new Date(end).getTime() / 1000);
+
+        document.getElementById('loading').style.display = 'block';
+        document.getElementById('resultSection').style.display = 'none';
+
+        try {
+            const dataMap = {};
+            for (let t of tickers) {
+                const yahooUrl = `https://query1.finance.yahoo.com/v7/finance/download/${t}?period1=${sTimestamp}&period2=${eTimestamp}&interval=1d&events=history&includeAdjustedClose=true`;
+                const fetchUrl = proxy.includes('?') ? `${proxy}${encodeURIComponent(yahooUrl)}` : `${proxy}?url=${encodeURIComponent(yahooUrl)}`;
+                
+                const response = await fetch(fetchUrl);
+                const csvText = await response.text();
+                if (csvText.includes('404 Not Found') || csvText.includes('Invalid')) {
+                    throw new Error(`找不到股票 ${t} 的資料`);
+                }
+                const parsed = parseCSV(csvText);
+                if(parsed.length === 0) {
+                     throw new Error(`股票 ${t} 的資料為空`);
+                }
+                dataMap[t] = parsed;
+            }
+
+            processData(dataMap, tickers, ia);
+        } catch (error) {
+            alert('錯誤: ' + error.message);
+        } finally {
+            document.getElementById('loading').style.display = 'none';
+        }
+    }
+
+    function parseCSV(text) {
+        const lines = text.trim().split('\n');
+        const header = lines[0].split(',');
+        return lines.slice(1).map(line => {
+            const values = line.split(',');
+            const obj = {};
+            header.forEach((key, i) => obj[key] = values[i]);
+            return {
+                date: obj['Date'],
+                adjClose: parseFloat(obj['Adj Close'])
+            };
+        }).filter(d => !isNaN(d.adjClose));
+    }
+
+    function processData(dataMap, tickers, ia) {
+        // Find common dates (Intersection approach)
+        let dateSets = tickers.map(t => new Set(dataMap[t].map(d => d.date)));
+        let commonDatesArr = [...dateSets[0]].filter(x => dateSets.every(set => set.has(x))).sort();
+
+        if (commonDatesArr.length < 10) {
+            alert('共有的交易日天數不足，請檢查輸入的日期範圍或代碼。');
+            return;
+        }
+
+        // Map by date for quick access
+        const byDateMap = {};
+        tickers.forEach(t => {
+            byDateMap[t] = {};
+            dataMap[t].forEach(d => {
+                byDateMap[t][d.date] = d.adjClose;
+            });
+        });
+
+        // Generate Time Series Array
+        let portfolioWealth = ia;
+        const weights = 1.0 / tickers.length;
+        const history = [];
+        const dailyReturnsMap = {}; // { ticker: [ret1, ret2...] }
+        const portfReturns = [];
+        
+        tickers.forEach(t => dailyReturnsMap[t] = []);
+
+        for (let i = 0; i < commonDatesArr.length; i++) {
+            const date = commonDatesArr[i];
+            
+            if (i === 0) {
+                history.push({ x: new Date(date), y: portfolioWealth });
+            } else {
+                let dailyPortfRet = 0;
+                const prevDate = commonDatesArr[i-1];
+
+                tickers.forEach(t => {
+                    const price = byDateMap[t][date];
+                    const prevPrice = byDateMap[t][prevDate];
+                    const ret = (price / prevPrice) - 1;
+                    dailyReturnsMap[t].push(ret);
+                    dailyPortfRet += ret * weights; // Daily rebalanced Equal Weight
+                });
+
+                portfolioWealth *= (1 + dailyPortfRet);
+                portfReturns.push(dailyPortfRet);
+                history.push({ x: new Date(date), y: portfolioWealth });
+            }
+        }
+
+        // --- Calculate Stats ---
+        const years = history.length / 252;
+        const cagr = Math.pow(portfolioWealth / ia, 1 / years) - 1;
+        const totalReturn = (portfolioWealth / ia) - 1;
+
+        // Portfolio Volatility & Sharpe
+        const meanRet = portfReturns.reduce((a, b) => a + b, 0) / portfReturns.length;
+        const variance = portfReturns.reduce((a, b) => a + Math.pow(b - meanRet, 2), 0) / (portfReturns.length - 1);
+        const annualizedVol = Math.sqrt(variance) * Math.sqrt(252);
+        const sharpe = (cagr - 0.02) / annualizedVol;
+
+        // MDD
+        let peak = 0;
+        let maxDD = 0;
+        history.forEach(d => {
+            if (d.y > peak) peak = d.y;
+            const dd = (d.y - peak) / peak;
+            if (dd < maxDD) maxDD = dd;
+        });
+
+        // --- Correlation Matrix ---
+        const corrMatrix = calculateCorrelationMatrix(tickers, dailyReturnsMap);
+
+        displayResults(history, ia, portfolioWealth, cagr, maxDD, sharpe, totalReturn, tickers, corrMatrix);
+    }
+
+    function calculateCorrelationMatrix(tickers, dailyReturnsMap) {
+        const matrix = [];
+        const n = dailyReturnsMap[tickers[0]].length;
+        
+        // helper to get mean
+        const getMean = arr => arr.reduce((a,b) => a+b,0)/n;
+
+        for (let r = 0; r < tickers.length; r++) {
+            const row = [];
+            const t1 = tickers[r];
+            const arr1 = dailyReturnsMap[t1];
+            const m1 = getMean(arr1);
+            
+            for (let c = 0; c < tickers.length; c++) {
+                const t2 = tickers[c];
+                const arr2 = dailyReturnsMap[t2];
+                const m2 = getMean(arr2);
+                
+                let cov = 0;
+                let var1 = 0;
+                let var2 = 0;
+                
+                for(let i=0; i<n; i++) {
+                    const d1 = arr1[i] - m1;
+                    const d2 = arr2[i] - m2;
+                    cov += d1 * d2;
+                    var1 += d1 * d1;
+                    var2 += d2 * d2;
+                }
+                
+                const corr = cov / Math.sqrt(var1 * var2);
+                row.push(corr);
+            }
+            matrix.push(row);
+        }
+        return matrix;
+    }
+
+    function displayResults(history, ia, finalWealth, cagr, maxDD, sharpe, totalReturn, tickers, corrMatrix) {
+        document.getElementById('resultSection').style.display = 'block';
+
+        const stats = [
+            { label: '最終資產', value: '$' + finalWealth.toLocaleString(undefined, {maximumFractionDigits: 0}) },
+            { label: '總報酬率', value: (totalReturn * 100).toFixed(2) + '%' },
+            { label: '年化報酬 (CAGR)', value: (cagr * 100).toFixed(2) + '%' },
+            { label: '最大回撤 (MDD)', value: (maxDD * 100).toFixed(2) + '%' },
+            { label: '夏普值 (Sharpe)', value: sharpe.toFixed(2) }
+        ];
+
+        document.getElementById('statsGrid').innerHTML = stats.map(s => `
+            <div class="stat-item">
+                <div class="stat-value">${s.value}</div>
+                <div class="stat-label">${s.label}</div>
+            </div>
+        `).join('');
+
+        renderChart(history);
+        renderCorrelation(tickers, corrMatrix);
+    }
+
+    function renderChart(history) {
+        const ctx = document.getElementById('wealthChart').getContext('2d');
+        if (myChart) myChart.destroy();
+
+        myChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                datasets: [{
+                    label: 'Equal Weight Portfolio Asset',
+                    data: history,
+                    borderColor: '#2563eb',
+                    backgroundColor: 'rgba(37, 99, 235, 0.1)',
+                    fill: true,
+                    pointRadius: 0,
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    x: {
+                        type: 'time',
+                        time: { unit: 'year' },
+                        title: { display: true, text: '日期' }
+                    },
+                    y: {
+                        title: { display: true, text: '總資產 (USD)' },
+                        ticks: {
+                            callback: value => '$' + value.toLocaleString()
+                        }
+                    }
+                },
+                plugins: {
+                    tooltip: {
+                        mode: 'index',
+                        intersect: false,
+                    }
+                }
+            }
+        });
+    }
+
+    function renderCorrelation(tickers, matrix) {
+        let html = '<table><thead><tr><th></th>';
+        tickers.forEach(t => { html += `<th>${t}</th>`; });
+        html += '</tr></thead><tbody>';
+
+        for (let i = 0; i < tickers.length; i++) {
+            html += `<tr><td><strong>${tickers[i]}</strong></td>`;
+            for (let j = 0; j < tickers.length; j++) {
+                const val = matrix[i][j];
+                let bg = 'white';
+                if (i !== j) {
+                    // Color mapping based on correlation
+                    if (val > 0.5) bg = `rgba(239, 68, 68, ${val})`; // Red for high correlation
+                    else if (val < -0.1) bg = `rgba(34, 197, 94, ${Math.abs(val)*1.5})`; // Green for negative
+                    else bg = `rgba(59, 130, 246, ${Math.abs(val)})`; // Blue for neutral
+                } else {
+                    bg = '#e2e8f0';
+                }
+                
+                html += `<td style="background-color: ${bg}; color: ${i !== j && Math.abs(val) > 0.6 ? 'white' : 'black'}">${val.toFixed(2)}</td>`;
+            }
+            html += '</tr>';
+        }
+        html += '</tbody></table>';
+
+        document.getElementById('correlationContainer').innerHTML = html;
+    }
+</script>
+
+</body>
+</html>
