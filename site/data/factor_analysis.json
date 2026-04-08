@@ -1,0 +1,119 @@
+{
+  "generated_at": "2026-04-08T05:25:06Z",
+  "summary": {
+    "total_analyzed": 4,
+    "liquidity_pass": 1,
+    "liquidity_fail": 3,
+    "pass_rate_pct": 25.0
+  },
+  "tickers": [
+    {
+      "ticker": "2330",
+      "market": "TW",
+      "current_price": 1945.0,
+      "factor_scores": {
+        "quality": 33.93,
+        "value": 37.75,
+        "momentum": 73.11
+      },
+      "maestro_score": 46.83,
+      "raw_metrics": {
+        "avg_roe_4q": 8.67,
+        "relative_strength": 0.15,
+        "forward_pe": 15.0
+      },
+      "liquidity_metrics": {
+        "avg_volume_20d": 33032437,
+        "daily_dollar_vol": 64248091521,
+        "current_price": 1945.0,
+        "status": "PASS"
+      },
+      "momentum_6m_pct": 46.11,
+      "rank": 1
+    },
+    {
+      "ticker": "MAR",
+      "market": "US",
+      "current_price": 0.0,
+      "factor_scores": {
+        "quality": 8.32,
+        "value": 37.75,
+        "momentum": 50.0
+      },
+      "maestro_score": 29.65,
+      "raw_metrics": {
+        "avg_roe_4q": 0.0,
+        "relative_strength": 0.05,
+        "forward_pe": 15.0
+      },
+      "liquidity_metrics": {
+        "avg_volume_20d": 0,
+        "daily_dollar_vol": 0,
+        "current_price": 0.0,
+        "status": "FAIL",
+        "error": "cannot convert float NaN to integer"
+      },
+      "momentum_6m_pct": NaN,
+      "rank": 2
+    },
+    {
+      "ticker": "MSFT",
+      "market": "US",
+      "current_price": 0.0,
+      "factor_scores": {
+        "quality": 8.32,
+        "value": 37.75,
+        "momentum": 50.0
+      },
+      "maestro_score": 29.65,
+      "raw_metrics": {
+        "avg_roe_4q": 0.0,
+        "relative_strength": 0.05,
+        "forward_pe": 15.0
+      },
+      "liquidity_metrics": {
+        "avg_volume_20d": 0,
+        "daily_dollar_vol": 0,
+        "current_price": 0.0,
+        "status": "FAIL",
+        "error": "cannot convert float NaN to integer"
+      },
+      "momentum_6m_pct": NaN,
+      "rank": 3
+    },
+    {
+      "ticker": "PLTR",
+      "market": "US",
+      "current_price": 0.0,
+      "factor_scores": {
+        "quality": 8.32,
+        "value": 37.75,
+        "momentum": 50.0
+      },
+      "maestro_score": 29.65,
+      "raw_metrics": {
+        "avg_roe_4q": 0.0,
+        "relative_strength": 0.05,
+        "forward_pe": 15.0
+      },
+      "liquidity_metrics": {
+        "avg_volume_20d": 0,
+        "daily_dollar_vol": 0,
+        "current_price": 0.0,
+        "status": "FAIL",
+        "error": "cannot convert float NaN to integer"
+      },
+      "momentum_6m_pct": NaN,
+      "rank": 4
+    }
+  ],
+  "filter_criteria": {
+    "min_liquidity_daily_local_currency": 10000000,
+    "market_coverage": [
+      "TW",
+      "US"
+    ],
+    "momentum_window_days": 126,
+    "volume_window_days": 20
+  }
+}

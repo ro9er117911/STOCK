@@ -1,54 +1,59 @@
 <!doctype html>
 <html lang="zh-Hant">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>MSFT｜研究內頁</title>
-    <link rel="icon" href="data:,">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../assets/dashboard.css">
-  </head>
-  <body data-dashboard-page="research" data-digest-path="../data/tickers/MSFT.json">
-    <div class="ambient ambient-left"></div>
-    <div class="ambient ambient-right"></div>
-    <div class="grid-overlay"></div>
-    <main class="app-shell app-shell-research">
-      <nav class="top-nav">
-        <a class="nav-link" href="../index.html">返回總覽</a>
-        <a class="nav-link" id="detail-page-link" href="../tickers/MSFT.html">回到決策頁</a>
-      </nav>
 
-      <section class="hero-card hero-card-research">
-        <div class="hero-main">
-          <p class="eyebrow">Structured Research</p>
-          <h1 id="research-title">MSFT</h1>
-          <p class="lede" id="research-summary"></p>
-          <div class="pill-row" id="research-meta"></div>
-        </div>
-      </section>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>MSFT｜研究內頁</title>
+  <link rel="icon" href="data:,">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&family=Noto+Sans+TC:wght@400;500;700&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="../assets/dashboard.css">
+</head>
 
-      <section class="research-layout">
-        <div class="research-main">
-          <article class="panel panel-emphasis" id="research-brief-panel">
-            <div class="panel-loading">
-              <p class="panel-kicker">Loading</p>
-              <h2>載入研究摘要</h2>
-              <p class="footer-note">正在整理 thesis、風險與本輪更新。</p>
-            </div>
-          </article>
-          <article class="panel" id="thesis-panel"></article>
-          <article class="panel" id="research-assumptions-panel"></article>
-          <article class="panel" id="research-events-panel"></article>
-        </div>
-        <div class="research-side">
-          <article class="panel" id="review-summary-panel"></article>
-          <article class="panel" id="delta-panel"></article>
-          <article class="panel" id="research-citations-panel"></article>
-        </div>
-      </section>
-    </main>
-    <script src="../assets/dashboard.js"></script>
-  </body>
+<body data-dashboard-page="research" data-digest-path="../data/tickers/MSFT.json">
+  <div class="ambient ambient-left"></div>
+  <div class="ambient ambient-right"></div>
+  <div class="grid-overlay"></div>
+  <main class="app-shell app-shell-research">
+    <nav class="top-nav">
+      <a class="nav-link" href="../index.html">返回總覽</a>
+      <a class="nav-link" id="detail-page-link" href="../tickers/MSFT.html">回到決策頁</a>
+    </nav>
+
+    <section class="hero-card hero-card-research">
+      <div class="hero-main">
+        <p class="eyebrow">Structured Research</p>
+        <h1 id="research-title">MSFT</h1>
+        <p class="lede" id="research-summary"></p>
+        <div class="pill-row" id="research-meta"></div>
+      </div>
+    </section>
+
+    <section class="research-layout">
+      <div class="research-main">
+        <article class="panel panel-emphasis" id="research-brief-panel">
+          <div class="panel-loading">
+            <p class="panel-kicker">Loading</p>
+            <h2>載入研究摘要</h2>
+            <p class="footer-note">正在整理 thesis、風險與本輪更新。</p>
+          </div>
+        </article>
+        <article class="panel" id="thesis-panel"></article>
+        <article class="panel" id="research-assumptions-panel"></article>
+        <article class="panel" id="research-events-panel"></article>
+      </div>
+      <div class="research-side">
+        <article class="panel" id="review-summary-panel"></article>
+        <article class="panel" id="delta-panel"></article>
+        <article class="panel" id="research-citations-panel"></article>
+      </div>
+    </section>
+  </main>
+  <script src="../assets/dashboard.js"></script>
+</body>
+
 </html>

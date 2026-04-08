@@ -162,9 +162,8 @@
                 <label>初始資金 (USD)</label>
                 <input type="number" id="ia" value="100000">
             </div>
-            <div class="form-group" style="grid-column: span 2;">
-                <label>CORS Proxy (若留空則自動使用 localhost:8001)</label>
-                <input type="text" id="proxy" value="" placeholder="https://your-worker.workers.dev/">
+            <div class="proxy-tip">
+                💡 <b>數據來源：</b> 直接透過本地 YFinance 引擎抓取。現在已內建本地代理，無需填寫 Proxy，直接點擊執行即可。
             </div>
             <button onclick="runAnalysis()">執行分析</button>
         </div>
@@ -205,23 +204,13 @@
             return;
         }
 
-        const start = document.getElementById('startDate').value;
-        const end = document.getElementById('endDate').value;
-        const ia = parseFloat(document.getElementById('ia').value);
-        const proxyInput = document.getElementById('proxy').value;
-        const proxy = proxyInput || `http://localhost:8001/api/proxy?url=`;
-
-        const sTimestamp = Math.floor(new Date(start).getTime() / 1000);
-        const eTimestamp = Math.floor(new Date(end).getTime() / 1000);
-
         document.getElementById('loading').style.display = 'block';
         document.getElementById('resultSection').style.display = 'none';
 
         try {
             const dataMap = {};
             for (let t of tickers) {
-                const yahooUrl = `https://query1.finance.yahoo.com/v7/finance/download/${t}?period1=${sTimestamp}&period2=${eTimestamp}&interval=1d&events=history&includeAdjustedClose=true`;
-                const fetchUrl = proxy.includes('?') ? `${proxy}${encodeURIComponent(yahooUrl)}` : `${proxy}?url=${encodeURIComponent(yahooUrl)}`;
+                const fetchUrl = `http://localhost:8001/api/history?ticker=${t}&start=${start}&end=${end}`;
                 
                 const response = await fetch(fetchUrl);
                 const csvText = await response.text();

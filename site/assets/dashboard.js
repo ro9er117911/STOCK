@@ -1627,3 +1627,392 @@ async function boot() {
 }
 
 document.addEventListener("DOMContentLoaded", boot);
+
+// ─── Tab Router ───────────────────────────────────────────────────────────────
+function initTickerTabs() {
+  if (currentPage() !== 'ticker') return;
+
+  function getActiveHash() {
+    const hash = location.hash.replace('#', '') || 'overview';
+    const valid = ['overview','price','drawdown','monthly','quarterly','cagr','sharpe','glossary'];
+    return valid.includes(hash) ? hash : 'overview';
+  }
+
+  function activateTab(tabName) {
+    // Toggle tab-pane visibility
+    document.querySelectorAll('.tab-pane').forEach(pane => {
+      pane.classList.toggle('tab-pane-hidden', pane.id !== `tab-${tabName}`);
+    });
+    // Toggle tab-link active state
+    document.querySelectorAll('.tab-link').forEach(link => {
+      const href = link.getAttribute('href') || '';
+      link.classList.toggle('tab-link-active', href === `#${tabName}`);
+    });
+    // Lazy-load analysis data for tabs that need it
+    if (['price','drawdown'].includes(tabName) && !window._analysisData) {
+      const ticker = document.body.dataset.digestPath?.match(/tickers\/(.+)\.json/)?.[1] || '';
+      if (ticker) {
+        fetch(`../data/tickers/${ticker}.analysis.json`)
+          .then(r => r.ok ? r.json() : null)
+          .then(data => {
+            window._analysisData = data;
+            if (tabName === 'price') renderPriceTab(data);
+            if (tabName === 'drawdown') renderDrawdownTab(data);
+          })
+          .catch(() => {
+            window._analysisData = null;
+            const root = document.getElementById(`${tabName}-tab-root`);
+            if (root) root.innerHTML = '<div class="panel"><p class="footer-note" style="padding:20px">分析資料尚未生成，請先執行 build-analysis</p></div>';
+          });
+      }
+    } else if (window._analysisData) {
+      if (tabName === 'price') renderPriceTab(window._analysisData);
+      if (tabName === 'drawdown') renderDrawdownTab(window._analysisData);
+    }
+    // Lazy-load strategy metrics for sharpe tab
+    if (tabName === 'sharpe' && !window._strategyData) {
+      const ticker = document.body.dataset.digestPath?.match(/tickers\/(.+)\.json/)?.[1] || '';
+      if (ticker) {
+        fetch(`../data/tickers/${ticker}.strategy.json`)
+          .then(r => r.ok ? r.json() : null)
+          .then(data => {
+            window._strategyData = data;
+            renderSharpeTab(data);
+          })
+          .catch(() => {
+            window._strategyData = null;
+            const root = document.getElementById('sharpe-tab-root');
+            if (root) root.innerHTML = '<div class="panel"><p class="footer-note" style="padding:20px">策略指標尚未生成，請先執行 build-analysis</p></div>';
+          });
+      }
+    } else if (tabName === 'sharpe' && window._strategyData) {
+      renderSharpeTab(window._strategyData);
+    }
+    if (tabName === 'glossary') renderGlossaryTab();
+  }
+
+  // Initial activation
+  activateTab(getActiveHash());
+
+  // React to hash changes
+  window.addEventListener('hashchange', () => activateTab(getActiveHash()));
+}
+
+// ─── renderPriceTab ────────────────────────────────────────────────────────────
+function renderPriceTab(analysis) {
+  const root = document.getElementById('price-tab-root');
+  if (!root) return;
+
+  const series = analysis?.price_series?.series || analysis?.series || [];
+  if (!series.length) {
+    root.innerHTML = '<div class="panel"><p class="footer-note" style="padding:20px">價格資料不可用</p></div>';
+    return;
+  }
+
+  const W = 800, H = 200, PAD = { top:10, right:20, bottom:30, left:60 };
+  const innerW = W - PAD.left - PAD.right;
+  const innerH = H - PAD.top - PAD.bottom;
+
+  const prices = series.map(d => d.adj_close);
+  const dates  = series.map(d => d.date);
+  const minP = Math.min(...prices), maxP = Math.max(...prices);
+  const xScale = i => PAD.left + (i / (prices.length - 1)) * innerW;
+  const yScale = v => PAD.top + innerH - ((v - minP) / (maxP - minP || 1)) * innerH;
+
+  const pts = prices.map((p, i) => `${xScale(i)},${yScale(p)}`).join(' ');
+  const latestPrice = prices[prices.length - 1];
+  const firstPrice  = prices[0];
+  const totalReturn = ((latestPrice - firstPrice) / firstPrice * 100).toFixed(1);
+  const returnColor = totalReturn >= 0 ? '#4CAF50' : '#f44336';
+
+  root.innerHTML = `
+    <div class="panel">
+      <div class="panel-head">
+        <div><p class="panel-kicker">Price History</p><h2>股價走勢</h2></div>
+        <span class="badge" style="color:${returnColor}; border-color:${returnColor}; background:transparent">
+          ${totalReturn >= 0 ? '+' : ''}${totalReturn}%
+        </span>
+      </div>
+      <div style="overflow-x:auto; margin:16px 0">
+        <svg viewBox="0 0 ${W} ${H}" style="width:100%; max-width:${W}px; display:block">
+          <polyline points="${pts}" fill="none" stroke="#7c6cf8" stroke-width="1.5"/>
+          <line x1="${PAD.left}" y1="${PAD.top}" x2="${PAD.left}" y2="${PAD.top+innerH}"
+                stroke="#2d2d44" stroke-width="1"/>
+          <line x1="${PAD.left}" y1="${PAD.top+innerH}" x2="${PAD.left+innerW}" y2="${PAD.top+innerH}"
+                stroke="#2d2d44" stroke-width="1"/>
+          <text x="${PAD.left-4}" y="${PAD.top+4}" text-anchor="end" font-size="10" fill="#888">${maxP.toFixed(0)}</text>
+          <text x="${PAD.left-4}" y="${PAD.top+innerH}" text-anchor="end" font-size="10" fill="#888">${minP.toFixed(0)}</text>
+          <text x="${PAD.left}" y="${H-4}" font-size="9" fill="#888">${dates[0]}</text>
+          <text x="${PAD.left+innerW}" y="${H-4}" text-anchor="end" font-size="9" fill="#888">${dates[dates.length-1]}</text>
+        </svg>
+      </div>
+      <div style="display:flex; gap:16px; flex-wrap:wrap; margin-top:8px">
+        <div class="kpi-mini"><span class="kpi-mini-label">最新收盤</span><strong>${latestPrice.toFixed(2)}</strong></div>
+        <div class="kpi-mini"><span class="kpi-mini-label">起始價</span><strong>${firstPrice.toFixed(2)}</strong></div>
+        <div class="kpi-mini"><span class="kpi-mini-label">總報酬</span><strong style="color:${returnColor}">${totalReturn >= 0 ? '+' : ''}${totalReturn}%</strong></div>
+        <div class="kpi-mini"><span class="kpi-mini-label">資料筆數</span><strong>${series.length}</strong></div>
+      </div>
+      <p class="footer-note" style="margin-top:12px">數據來源：yfinance 調整後收盤價</p>
+    </div>
+  `;
+}
+
+// ─── renderDrawdownTab ─────────────────────────────────────────────────────────
+function renderDrawdownTab(analysis) {
+  const root = document.getElementById('drawdown-tab-root');
+  if (!root) return;
+
+  const dd = analysis?.drawdown_analysis || analysis;
+  if (!dd || !dd.daily_drawdown_series) {
+    root.innerHTML = '<div class="panel"><p class="footer-note" style="padding:20px">回撤資料不可用</p></div>';
+    return;
+  }
+
+  const series = dd.daily_drawdown_series;
+  const periods = dd.drawdown_periods || [];
+  const W = 800, H = 200, PAD = { top:10, right:20, bottom:30, left:60 };
+  const innerW = W - PAD.left - PAD.right;
+  const innerH = H - PAD.top - PAD.bottom;
+
+  const vals  = series.map(d => d.drawdown_pct);
+  const dates = series.map(d => d.date);
+  const minV  = Math.min(...vals);  // most negative
+  const xScale = i => PAD.left + (i / (vals.length - 1)) * innerW;
+  const yScale = v => PAD.top + (v / minV) * innerH;  // 0 at top, minV at bottom
+
+  // Area path (fill below 0)
+  const areaPath = vals.map((v, i) => {
+    const x = xScale(i), y = yScale(v);
+    return i === 0 ? `M${x},${PAD.top}` : `L${x},${y}`;
+  }).join(' ') + ` L${xScale(vals.length-1)},${PAD.top} Z`;
+
+  const linePts = vals.map((v, i) => `${xScale(i)},${yScale(v)}`).join(' ');
+
+  // KPI rows
+  const kpis = [
+    ['全期 MDD', dd.mdd_alltime_pct != null ? `${dd.mdd_alltime_pct.toFixed(1)}%` : '—'],
+    ['近1Y MDD', dd.mdd_1y_pct  != null ? `${dd.mdd_1y_pct.toFixed(1)}%`  : '—'],
+    ['近3Y MDD', dd.mdd_3y_pct  != null ? `${dd.mdd_3y_pct.toFixed(1)}%`  : '—'],
+    ['近5Y MDD', dd.mdd_5y_pct  != null ? `${dd.mdd_5y_pct.toFixed(1)}%`  : '—'],
+  ].map(([label, val]) => `
+    <div class="kpi-mini">
+      <span class="kpi-mini-label">${label}</span>
+      <strong style="color:#f44336">${val}</strong>
+    </div>
+  `).join('');
+
+  // Periods table
+  const periodRows = periods.slice(0, 10).map(p => `
+    <tr>
+      <td>${p.rank}</td>
+      <td>${p.peak_date}</td>
+      <td>${p.trough_date}</td>
+      <td style="color:${p.depth_pct < -20 ? '#f44336' : p.depth_pct < -10 ? '#FF9800' : 'inherit'}">${p.depth_pct.toFixed(1)}%</td>
+      <td>${p.duration_days}</td>
+      <td>${p.recovery_date || '尚未恢復'}</td>
+      <td>${p.recovery_days != null ? p.recovery_days : '—'}</td>
+    </tr>
+  `).join('');
+
+  root.innerHTML = `
+    <div class="panel" style="margin-bottom:16px">
+      <div class="panel-head">
+        <div><p class="panel-kicker">Underwater Chart</p><h2>回撤水下圖</h2></div>
+      </div>
+      <div style="overflow-x:auto; margin:16px 0">
+        <svg viewBox="0 0 ${W} ${H}" style="width:100%; max-width:${W}px; display:block">
+          <path d="${areaPath}" fill="rgba(244,67,54,0.15)"/>
+          <polyline points="${linePts}" fill="none" stroke="#f44336" stroke-width="1.2"/>
+          <line x1="${PAD.left}" y1="${PAD.top}" x2="${PAD.left}" y2="${PAD.top+innerH}" stroke="#2d2d44" stroke-width="1"/>
+          <line x1="${PAD.left}" y1="${PAD.top}" x2="${PAD.left+innerW}" y2="${PAD.top}" stroke="#2d2d44" stroke-width="1" stroke-dasharray="4,4"/>
+          <text x="${PAD.left-4}" y="${PAD.top+8}" text-anchor="end" font-size="10" fill="#888">0%</text>
+          <text x="${PAD.left-4}" y="${PAD.top+innerH}" text-anchor="end" font-size="10" fill="#888">${minV.toFixed(0)}%</text>
+          <text x="${PAD.left}" y="${H-4}" font-size="9" fill="#888">${dates[0]}</text>
+          <text x="${PAD.left+innerW}" y="${H-4}" text-anchor="end" font-size="9" fill="#888">${dates[dates.length-1]}</text>
+        </svg>
+      </div>
+      <div style="display:flex; gap:16px; flex-wrap:wrap">${kpis}</div>
+    </div>
+
+    ${periods.length ? `
+    <div class="panel">
+      <div class="panel-head">
+        <div><p class="panel-kicker">Drawdown Periods</p><h2>重大回撤區間</h2></div>
+      </div>
+      <div style="overflow-x:auto">
+        <table style="width:100%; border-collapse:collapse; font-size:0.8rem">
+          <thead>
+            <tr style="border-bottom:1px solid var(--border,#2d2d44)">
+              <th style="padding:8px;text-align:left;color:#888">排名</th>
+              <th style="padding:8px;text-align:left;color:#888">峰值日</th>
+              <th style="padding:8px;text-align:left;color:#888">谷底日</th>
+              <th style="padding:8px;text-align:left;color:#888">深度</th>
+              <th style="padding:8px;text-align:left;color:#888">持續天</th>
+              <th style="padding:8px;text-align:left;color:#888">恢復日</th>
+              <th style="padding:8px;text-align:left;color:#888">恢復天</th>
+            </tr>
+          </thead>
+          <tbody>${periodRows}</tbody>
+        </table>
+      </div>
+      <p class="footer-note" style="margin-top:12px">回撤閾值 > 10%，依深度排序</p>
+    </div>
+    ` : ''}
+  `;
+}
+
+// ─── renderSharpeTab ──────────────────────────────────────────────────────────
+function renderSharpeTab(data) {
+  const root = document.getElementById('sharpe-tab-root');
+  if (!root) return;
+
+  const bah = data?.buy_and_hold || data?.strategy_metrics?.buy_and_hold;
+  if (!bah) {
+    root.innerHTML = '<div class="panel"><p class="footer-note" style="padding:20px">策略指標資料不可用</p></div>';
+    return;
+  }
+
+  function fmt(val, suffix = '', digits = 2) {
+    if (val == null || isNaN(val)) return '—';
+    const sign = val > 0 ? '+' : '';
+    return `${sign}${Number(val).toFixed(digits)}${suffix}`;
+  }
+  function fmtColor(val) {
+    if (val == null) return 'inherit';
+    return val >= 0 ? '#4CAF50' : '#f44336';
+  }
+
+  const rows = [
+    { label: 'CAGR（年化報酬）',   val: fmt(bah.annualized_return_pct, '%'),  color: fmtColor(bah.annualized_return_pct) },
+    { label: '年化波動率',         val: fmt(bah.annualized_volatility_pct, '%'), color: '#FF9800' },
+    { label: '最大回撤（MDD）',     val: fmt(bah.max_drawdown_pct, '%'),      color: '#f44336' },
+    { label: 'Sharpe Ratio',       val: fmt(bah.sharpe_ratio, '', 2),         color: fmtColor(bah.sharpe_ratio) },
+    { label: 'Sortino Ratio',      val: fmt(bah.sortino_ratio, '', 2),        color: fmtColor(bah.sortino_ratio) },
+    { label: 'Calmar Ratio',       val: fmt(bah.calmar_ratio, '', 2),         color: fmtColor(bah.calmar_ratio) },
+    { label: '月勝率',             val: fmt(bah.monthly_win_rate_pct, '%'),   color: fmtColor(bah.monthly_win_rate_pct ? bah.monthly_win_rate_pct - 50 : null) },
+    { label: '最差單月',           val: fmt(bah.worst_monthly_pct, '%'),      color: '#f44336' },
+    { label: '總報酬',             val: fmt(bah.total_return_pct, '%'),       color: fmtColor(bah.total_return_pct) },
+  ];
+
+  const kpiCards = rows.map(r => `
+    <div style="background:var(--surface-2,#16213e); border:1px solid var(--border,#2d2d44);
+                border-radius:8px; padding:16px 20px; min-width:140px; flex:1 1 140px">
+      <div style="font-size:0.75rem; color:#888; margin-bottom:6px">${r.label}</div>
+      <div style="font-size:1.4rem; font-weight:700; color:${r.color}">${r.val}</div>
+    </div>
+  `).join('');
+
+  // CAGR scenario table
+  const cagr = bah.cagr_scenarios || {};
+  const cagrRows = [
+    ['1Y', cagr['1y']], ['3Y', cagr['3y']], ['5Y', cagr['5y']],
+    ['10Y', cagr['10y']], ['since inception', cagr['since_inception']],
+  ].filter(([, v]) => v != null).map(([label, v]) => `
+    <tr>
+      <td style="padding:8px; color:#888; font-size:0.85rem">${label}</td>
+      <td style="padding:8px; font-weight:600; color:${v >= 0 ? '#4CAF50' : '#f44336'}">
+        ${v >= 0 ? '+' : ''}${(v * 100).toFixed(2)}%
+      </td>
+    </tr>
+  `).join('');
+
+  root.innerHTML = `
+    <div class="panel" style="margin-bottom:16px">
+      <div class="panel-head">
+        <div><p class="panel-kicker">Risk-Adjusted Returns</p><h2>風險調整後報酬指標</h2></div>
+        <span style="font-size:0.8rem; color:#888">${bah.start_date} → ${bah.end_date}</span>
+      </div>
+      <div style="display:flex; flex-wrap:wrap; gap:12px; margin-top:16px">
+        ${kpiCards}
+      </div>
+      <p class="footer-note" style="margin-top:12px">無風險利率假設：${((bah.rfr_used || 0.03) * 100).toFixed(1)}%（美國10年債）</p>
+    </div>
+    ${cagrRows ? `
+    <div class="panel">
+      <div class="panel-head"><div><p class="panel-kicker">CAGR Scenarios</p><h2>複合年化報酬情境</h2></div></div>
+      <table style="width:100%; border-collapse:collapse; margin-top:12px">
+        <thead>
+          <tr style="border-bottom:1px solid var(--border,#2d2d44)">
+            <th style="padding:8px; text-align:left; color:#888; font-size:0.8rem">期間</th>
+            <th style="padding:8px; text-align:left; color:#888; font-size:0.8rem">CAGR</th>
+          </tr>
+        </thead>
+        <tbody>${cagrRows}</tbody>
+      </table>
+    </div>` : ''}
+  `;
+}
+
+// ─── renderGlossaryTab ─────────────────────────────────────────────────────────
+function renderGlossaryTab() {
+  const root = document.getElementById('glossary-tab-root');
+  if (!root || root.dataset.rendered) return;
+  root.dataset.rendered = '1';
+
+  const terms = [
+    { term: 'CAGR', zh: '複合年均成長率', def: '考慮複利效果的年均成長速率。', formula: 'CAGR = (End/Start)^(1/n) - 1' },
+    { term: 'Max Drawdown (MDD)', zh: '最大回撤', def: '從歷史高點到谷底的最大虧損幅度。', formula: 'MDD = min(Price_t / max(Price_0..t) - 1)' },
+    { term: 'Sharpe Ratio', zh: '夏普比率', def: '每單位風險所獲得的超額報酬。', formula: 'Sharpe = (Return - Rfr) / Volatility' },
+    { term: 'Annualized Return', zh: '年化報酬率', def: '將持有期報酬換算為年度等效報酬。', formula: '(1+R)^(252/n) - 1' },
+    { term: 'Volatility', zh: '年化波動率', def: '日報酬標準差乘以√252。', formula: 'σ * √252' },
+    { term: 'Adjusted Close', zh: '調整後收盤價', def: '調整股息、配股、拆股後的收盤價。', formula: '— (yfinance auto_adjust)' },
+    { term: 'Underwater Chart', zh: '水下圖', def: '顯示每日回撤深度，低點 = 最大損失。', formula: 'dd_t = Price_t / max(Price_0..t) - 1' },
+    { term: 'TTM', zh: '過去12個月', def: 'Trailing Twelve Months，滾動年度指標。', formula: '—' },
+    { term: 'YoY', zh: '年增率', def: '與去年同期相比的變化率。', formula: '(本期 - 去年同期) / |去年同期|' },
+    { term: 'QoQ', zh: '季增率', def: '與上季相比的變化率。', formula: '(本季 - 上季) / |上季|' },
+    { term: 'Gross Margin', zh: '毛利率', def: '毛利除以營收。', formula: '(Revenue - COGS) / Revenue' },
+    { term: 'Operating Margin', zh: '營業利益率', def: '營業利益除以營收。', formula: 'EBIT / Revenue' },
+    { term: 'FCF', zh: '自由現金流', def: '營業現金流減去資本支出。', formula: 'CFO - CapEx' },
+    { term: 'Beta', zh: '貝他係數', def: '股票相對市場的系統性風險。', formula: 'Cov(R_stock, R_market) / Var(R_market)' },
+    { term: 'Risk-free Rate', zh: '無風險利率', def: '通常使用10年期美國國債殖利率。', formula: 'Rfr ≈ 3% (default)' },
+    { term: 'Revenue Growth', zh: '營收成長率', def: '與前期相比的營收變化率。', formula: '(本期 - 前期) / |前期|' },
+    { term: 'Sortino Ratio', zh: '索提諾比率', def: '僅以下行波動率計算風險，比 Sharpe 更準確評估下行風險。數值越高越好。', formula: 'Sortino = (Return - Rfr) / Downside_Deviation' },
+    { term: 'Calmar Ratio', zh: '卡爾瑪比率', def: '年化報酬除以最大回撤絕對值，衡量每單位尾部風險的報酬。> 1 為佳。', formula: 'Calmar = Ann_Return / |MDD|' },
+    { term: 'Monthly Win Rate', zh: '月勝率', def: '正報酬月份佔全部月份的比例，衡量策略的持續性。', formula: 'Win_Months / Total_Months' },
+    { term: 'Worst Monthly', zh: '最差單月', def: '歷史上最差的單月報酬率，衡量極端下行風險。', formula: 'min(monthly_returns)' },
+  ];
+
+  const items = terms.map(t => `
+    <div class="panel" style="margin-bottom:12px; padding:16px">
+      <div style="display:flex; align-items:baseline; gap:8px; margin-bottom:6px">
+        <strong style="font-size:1rem">${escapeHtml(t.term)}</strong>
+        <span style="color:#888; font-size:0.8rem">${escapeHtml(t.zh)}</span>
+      </div>
+      <p style="font-size:0.875rem; margin:0 0 6px">${escapeHtml(t.def)}</p>
+      <code style="font-size:0.75rem; color:#7c6cf8; background:var(--surface-2,#16213e); padding:2px 6px; border-radius:3px">${escapeHtml(t.formula)}</code>
+    </div>
+  `).join('');
+
+  root.innerHTML = `
+    <div style="max-width:720px">
+      <div class="panel-head" style="margin-bottom:16px">
+        <div><p class="panel-kicker">Reference</p><h2>名詞解釋</h2></div>
+      </div>
+      ${items}
+    </div>
+  `;
+}
+
+// ─── CSS for tabs (injected once) ────────────────────────────────────────────
+(function injectTabStyles() {
+  if (document.getElementById('tab-styles')) return;
+  const style = document.createElement('style');
+  style.id = 'tab-styles';
+  style.textContent = `
+    .tab-nav { display:flex; gap:0; border-bottom:1px solid var(--border,#2d2d44); margin:16px 0 0; overflow-x:auto; }
+    .tab-link { padding:10px 18px; text-decoration:none; color:var(--text-muted,#888); font-size:0.875rem; border-bottom:2px solid transparent; white-space:nowrap; transition:color 0.15s, border-color 0.15s; }
+    .tab-link:hover { color:inherit; }
+    .tab-link-active { color:var(--accent,#7c6cf8) !important; border-bottom-color:var(--accent,#7c6cf8) !important; }
+    .tab-pane-hidden { display:none !important; }
+    .tab-inner { padding:16px 0; }
+    .kpi-mini { display:flex; flex-direction:column; min-width:80px; }
+    .kpi-mini-label { font-size:0.7rem; color:#888; text-transform:uppercase; }
+    .kpi-mini strong { font-size:1.1rem; margin-top:2px; }
+  `;
+  document.head.appendChild(style);
+})();
+
+// ─── Auto-init on DOMContentLoaded ───────────────────────────────────────────
+document.addEventListener('DOMContentLoaded', () => {
+  initTickerTabs();
+});

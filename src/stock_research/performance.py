@@ -234,14 +234,71 @@ def calc_sharpe(return_series: pd.Series, rfr: float = 0.03) -> float:
     return (ann_return - rfr) / ann_vol
 
 
+def calc_sortino(return_series: pd.Series, rfr: float = 0.03) -> float:
+    """計算 Sortino Ratio。
+
+    Sortino = (annualized_return - rfr) / downside_deviation
+    downside_deviation = std(negative_returns) * sqrt(252)
+    """
+    if len(return_series) == 0:
+        return float("nan")
+    trading_days = len(return_series)
+    cumulative_return = (1 + return_series).prod() - 1
+    ann_return = float((1 + cumulative_return) ** (252 / trading_days) - 1)
+    negative_returns = return_series[return_series < 0]
+    if len(negative_returns) == 0:
+        return float("inf")
+    downside_dev = float(negative_returns.std() * np.sqrt(252))
+    if downside_dev == 0:
+        return float("nan")
+    return (ann_return - rfr) / downside_dev
+
+
+def calc_calmar(price_df: pd.DataFrame) -> float:
+    """計算 Calmar Ratio。
+
+    Calmar = annualized_return / abs(max_drawdown)
+    """
+    ann_return = calc_annualized_return(price_df)
+    mdd = calc_max_drawdown(price_df)
+    if mdd >= 0 or np.isnan(ann_return):
+        return float("nan")
+    return ann_return / abs(mdd)
+
+
+def calc_monthly_win_rate(monthly_df: pd.DataFrame) -> float:
+    """計算月勝率（正報酬月份佔比）。"""
+    monthly_returns = monthly_df["adj_close"].pct_change().dropna()
+    if len(monthly_returns) == 0:
+        return float("nan")
+    winning_months = (monthly_returns > 0).sum()
+    return float(winning_months / len(monthly_returns))
+
+
+def calc_worst_monthly(monthly_df: pd.DataFrame) -> float:
+    """計算最差單月報酬（百分比）。"""
+    monthly_returns = monthly_df["adj_close"].pct_change().dropna()
+    if len(monthly_returns) == 0:
+        return float("nan")
+    return float(monthly_returns.min())
+
+
 def run_buy_and_hold(price_df: pd.DataFrame, rfr: float = 0.03) -> dict[str, Any]:
     """執行買入持有策略分析。"""
     daily_returns = price_df["adj_close"].pct_change().dropna()
     ann_return = calc_annualized_return(price_df)
     ann_vol = calc_annualized_volatility(price_df)
     sharpe = calc_sharpe(daily_returns, rfr=rfr)
+    sortino = calc_sortino(daily_returns, rfr=rfr)
+    calmar = calc_calmar(price_df)
     mdd = calc_max_drawdown(price_df)
     cagr_scenarios = build_cagr_scenarios(price_df)
+
+    # 月線：只需 adj_close，直接 resample，不依賴 volume
+    monthly_price = price_df["adj_close"].resample("ME").last()
+    monthly_df_simple = monthly_price.to_frame("adj_close")
+    monthly_win_rate = calc_monthly_win_rate(monthly_df_simple)
+    worst_monthly = calc_worst_monthly(monthly_df_simple)
 
     start_price = float(price_df["adj_close"].iloc[0])
     end_price = float(price_df["adj_close"].iloc[-1])
@@ -256,6 +313,10 @@ def run_buy_and_hold(price_df: pd.DataFrame, rfr: float = 0.03) -> dict[str, Any
         "annualized_return_pct": round(ann_return * 100, 4),
         "annualized_volatility_pct": round(ann_vol * 100, 4),
         "sharpe_ratio": round(sharpe, 4),
+        "sortino_ratio": round(sortino, 4) if not np.isinf(sortino) else None,
+        "calmar_ratio": round(calmar, 4) if not np.isnan(calmar) else None,
+        "monthly_win_rate_pct": round(monthly_win_rate * 100, 2) if not np.isnan(monthly_win_rate) else None,
+        "worst_monthly_pct": round(worst_monthly * 100, 4) if not np.isnan(worst_monthly) else None,
         "max_drawdown_pct": round(mdd * 100, 4),
         "rfr_used": rfr,
         "cagr_scenarios": cagr_scenarios,

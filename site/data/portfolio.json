@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-04-08T01:58:21+00:00",
+  "generated_at": "2026-04-08T05:25:02+00:00",
   "portfolio_summary": {
     "tracked_ticker_count": 4,
     "positioned_ticker_count": 0,
@@ -740,7 +740,7 @@
           "status": "polled",
           "priority": 20,
           "new_events": 0,
-          "cursor": "2026-04-06",
+          "cursor": "2026-04-07",
           "error": "",
           "notes": "Yahoo Finance 日線資料，用來抓跳空與異常成交量。",
           "status_label": "已輪詢",
@@ -1687,7 +1687,7 @@
           "status": "polled",
           "priority": 20,
           "new_events": 0,
-          "cursor": "2026-04-06",
+          "cursor": "2026-04-07",
           "error": "",
           "notes": "Yahoo Finance 日線資料，用來抓跳空與異常成交量。",
           "status_label": "已輪詢",
@@ -2757,7 +2757,7 @@
           "status": "polled",
           "priority": 20,
           "new_events": 0,
-          "cursor": "2026-04-06",
+          "cursor": "2026-04-07",
           "error": "",
           "notes": "Yahoo Finance 日線資料，用來抓跳空與異常成交量。",
           "status_label": "已輪詢",
@@ -3351,52 +3351,52 @@
     }
   },
   "market_snapshot": {
-    "generated_at": "2026-04-08T01:58:20+00:00",
+    "generated_at": "2026-04-08T05:25:00+00:00",
     "quotes": {
       "2330": {
         "symbol": "2330.TW",
-        "price": 1935.0,
+        "price": 1945.0,
         "previous_close": 1860.0,
-        "change_pct": 4.03,
+        "change_pct": 4.57,
         "as_of": "2026-04-08"
       },
       "MAR": {
         "symbol": "MAR",
-        "price": 330.93,
-        "previous_close": 338.0,
-        "change_pct": -2.09,
-        "as_of": "2026-04-07"
+        "price": 338.0,
+        "previous_close": 331.93,
+        "change_pct": 1.83,
+        "as_of": "2026-04-06"
       },
       "MSFT": {
         "symbol": "MSFT",
-        "price": 372.29,
-        "previous_close": 372.88,
+        "price": 372.88,
+        "previous_close": 373.46,
         "change_pct": -0.16,
-        "as_of": "2026-04-07"
+        "as_of": "2026-04-06"
       },
       "PLTR": {
         "symbol": "PLTR",
-        "price": 150.07,
-        "previous_close": 147.93,
-        "change_pct": 1.45,
-        "as_of": "2026-04-07"
+        "price": 147.93,
+        "previous_close": 148.46,
+        "change_pct": -0.36,
+        "as_of": "2026-04-06"
       }
     },
     "vix": {
       "symbol": "^VIX",
-      "value": 25.78,
-      "previous_close": 24.17,
-      "change_pct": 6.66,
-      "as_of": "2026-04-07"
+      "value": 24.17,
+      "previous_close": 23.87,
+      "change_pct": 1.26,
+      "as_of": "2026-04-06"
     }
   },
   "macro_regime": {
     "symbol": "^VIX",
-    "value": 25.78,
-    "value_label": "25.78",
-    "previous_close": 24.17,
-    "change_pct": 6.66,
-    "as_of": "2026-04-07",
+    "value": 24.17,
+    "value_label": "24.17",
+    "previous_close": 23.87,
+    "change_pct": 1.26,
+    "as_of": "2026-04-06",
     "key": "elevated",
     "label": "偏緊",
     "size_multiplier": 0.9,
@@ -3518,13 +3518,13 @@
       ]
     },
     "circuit_breakers": {
+      "review_loss_pct": -10.0,
       "weak_thesis_score": 0.6,
+      "de_risk_loss_pct": -15.0,
       "stress_regimes": [
         "stress",
         "panic"
       ],
-      "de_risk_loss_pct": -15.0,
-      "review_loss_pct": -10.0,
       "capital_preservation_loss_pct": -20.0
     }
   },

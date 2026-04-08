@@ -1,0 +1,84 @@
+{
+  "title": "因子分析 + 流動性報酬 MVP 頁面",
+  "version": "1.1.0",
+  "created": "2026-04-08",
+  "stories": [
+    {
+      "id": "US-001",
+      "title": "後端因子分析 digest 模組",
+      "priority": "P0",
+      "passes": true,
+      "verifiedEvidence": [
+        "src/stock_research/factors/factor_analysis_page.py 存在，import 驗證通過",
+        "build_factor_analysis_digest() 執行成功，回傳含 summary/tickers/filter_criteria 的 dict",
+        "自動掃描 research/ 發現 2330/MAR/MSFT/PLTR 四個 ticker",
+        "每個 ticker 的 liquidity_metrics.status 均為 PASS（4/4）",
+        "tickers 依 maestro_score 降序排列（2330=46.83 > MAR/MSFT/PLTR=29.65）"
+      ]
+    },
+    {
+      "id": "US-002",
+      "title": "前端因子分析 HTML 頁面",
+      "priority": "P0",
+      "passes": true,
+      "verifiedEvidence": [
+        "src/stock_research/templates/dashboard/factor_analysis.html 存在，長度 17659 bytes",
+        "包含摘要卡片區（KPI cards）",
+        "表格欄位含 Quality/Value/Momentum 三個因子分數 + 進度條",
+        "Maestro Score 欄位存在並高亮",
+        "PASS/FAIL badge CSS class 存在",
+        "6M Momentum % 欄位正負顏色區分",
+        "fetch('../../data/factor_analysis.json') 非同步載入資料",
+        "復用 ../../assets/dashboard.css"
+      ]
+    },
+    {
+      "id": "US-003",
+      "title": "整合 dashboard 生成流程",
+      "priority": "P0",
+      "passes": true,
+      "verifiedEvidence": [
+        "dashboard.py 引入 build_factor_analysis_digest，import 驗證通過",
+        "site/data/factor_analysis.json 已生成（build 後存在）",
+        "site/factor_analysis.html 已生成（build 後存在）",
+        "site/index.html 含導航連結「📊 因子分析 + 流動性篩選 (Factor Analysis)」",
+        "dashboard build 成功（exit code 0，輸出：tickers=['2330','MAR','MSFT','PLTR']）"
+      ]
+    },
+    {
+      "id": "US-004",
+      "title": "Ticker Tab 架構（8 分頁）",
+      "priority": "P1",
+      "passes": true,
+      "verifiedEvidence": [
+        "templates/dashboard/ticker.html 重寫為 8-tab 結構（Overview/Price/Drawdown/Monthly/Quarterly/CAGR/Sharpe/Glossary）",
+        "assets/dashboard.js 新增 initTickerTabs()、renderPriceTab()、renderDrawdownTab()、renderGlossaryTab()、injectTabStyles()",
+        "dashboard build 成功，site/assets/dashboard.js 含 initTickerTabs（第 1632 行驗證）",
+        "site/research/PLTR.html 等個股頁面已更新"
+      ]
+    },
+    {
+      "id": "US-005",
+      "title": "CLI build-analysis 指令 + drawdown/price artifacts",
+      "priority": "P1",
+      "passes": true,
+      "verifiedEvidence": [
+        "cli.py 新增 build-analysis subcommand（--ticker / --research-root 參數）",
+        "research/2330/artifacts/ 含 price_series.json、monthly_metrics.json、drawdown_analysis.json、strategy_metrics.json",
+        "research/MAR/artifacts/ 同上 4 個 artifacts",
+        "research/MSFT/artifacts/ 同上 4 個 artifacts",
+        "research/PLTR/artifacts/ 同上 4 個 artifacts"
+      ]
+    },
+    {
+      "id": "US-006",
+      "title": "pytest 修復（pipeline state.json 缺失問題）",
+      "priority": "P0",
+      "passes": true,
+      "verifiedEvidence": [
+        "pipeline.py 新增 state_path.exists() 防衛性檢查，跳過無 state.json 的 ticker",
+        "pytest tests/ -q 結果：45 passed, 6 subtests passed（0 failed）"
+      ]
+    }
+  ]
+}

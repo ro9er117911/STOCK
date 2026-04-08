@@ -1,0 +1,37 @@
+{
+  "ticker": "2330.TW",
+  "as_of": "2026-04-08",
+  "buy_and_hold": {
+    "start_date": "2016-04-08",
+    "end_date": "2026-04-08",
+    "start_price": 119.1687,
+    "end_price": 1945.0,
+    "total_return_pct": 1532.1404,
+    "annualized_return_pct": 33.6039,
+    "annualized_volatility_pct": 27.1367,
+    "sharpe_ratio": 1.1278,
+    "sortino_ratio": 1.7702,
+    "calmar_ratio": 0.7501,
+    "monthly_win_rate_pct": 62.5,
+    "worst_monthly_pct": -15.9541,
+    "max_drawdown_pct": -44.799,
+    "rfr_used": 0.03,
+    "cagr_scenarios": {
+      "1y": 1.42061,
+      "3y": 0.5714,
+      "5y": 0.283267,
+      "10y": 0.322185,
+      "since_inception": 0.322185
+    }
+  },
+  "drawdown_summary": {
+    "mdd_alltime_pct": -44.799,
+    "mdd_1y_pct": -12.3701,
+    "mdd_3y_pct": -30.5147,
+    "mdd_5y_pct": -44.799
+  },
+  "source": {
+    "provider": "yfinance",
+    "adj_close": true
+  }
+}

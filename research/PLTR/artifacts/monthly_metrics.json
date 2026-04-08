@@ -1,6 +1,6 @@
 {
   "ticker": "PLTR",
-  "as_of": "2026-04-01",
+  "as_of": "2026-04-08",
   "monthly": [
     {
       "year": 2020,
@@ -403,6 +403,12 @@
       "month": 3,
       "return_pct": 6.6258,
       "adj_close": 146.28
+    },
+    {
+      "year": 2026,
+      "month": 4,
+      "return_pct": 1.128,
+      "adj_close": 147.93
     }
   ]
 }

@@ -1,6 +1,6 @@
 {
   "ticker": "PLTR",
-  "as_of": "2026-04-01",
+  "as_of": "2026-04-08",
   "series": [
     {
       "date": "2020-09-30",
@@ -8285,8 +8285,26 @@
     {
       "date": "2026-03-31",
       "adj_close": 146.28,
-      "volume": 45413300,
+      "volume": 45558600,
       "cumulative_return": 14.397895
+    },
+    {
+      "date": "2026-04-01",
+      "adj_close": 146.49,
+      "volume": 34171000,
+      "cumulative_return": 14.420001
+    },
+    {
+      "date": "2026-04-02",
+      "adj_close": 148.46,
+      "volume": 30437000,
+      "cumulative_return": 14.627369
+    },
+    {
+      "date": "2026-04-06",
+      "adj_close": 147.93,
+      "volume": 25142200,
+      "cumulative_return": 14.571578
     }
   ]
 }

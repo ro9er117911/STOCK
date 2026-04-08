@@ -7,13 +7,13 @@ from pathlib import Path
 from .candidates import upsert_candidate_dossier
 from .cockpit_api import serve_cockpit_api
 from .config import COCKPIT_API_HOST, COCKPIT_API_PORT
-from .config import DRAFT_SUMMARY_PATH
+from .config import DRAFT_SUMMARY_PATH, RESEARCH_ROOT
 from .dashboard import build_dashboard_bundle
 from .digest import build_notification_payload, build_portfolio_digest
 from .notify import send_resend_email
 from .pipeline import bootstrap_baselines, draft_refreshes, poll_events, sync_research_contracts
 from .research_state import sync_candidate_queue
-from .storage import read_json
+from .storage import read_json, write_json
 from .validator import run_all_checks
 
 
@@ -46,6 +46,15 @@ def main() -> int:
     draft_parser.add_argument("--fixture", default="", help="Optional test event fixture name.")
 
     subparsers.add_parser("build-dashboard", help="Generate the static dashboard site.")
+
+    build_analysis_parser = subparsers.add_parser("build-analysis", help="Build price/drawdown/CAGR analysis artifacts.")
+    build_analysis_parser.add_argument("--ticker", default="", help="Single ticker to build. Omit to build all.")
+    build_analysis_parser.add_argument(
+        "--research-root",
+        default="",
+        help="Path to research root directory. Defaults to configured RESEARCH_ROOT.",
+    )
+
     subparsers.add_parser("verify", help="Validate setup, connectivity, and market support.")
     subparsers.add_parser("sync-research-contracts", help="Normalize all research states and rebuild candidate queue.")
     subparsers.add_parser("sync-candidates", help="Rebuild the candidate queue from research dossiers.")
@@ -91,6 +100,41 @@ def main() -> int:
     args = parser.parse_args()
     if args.command == "bootstrap-baselines":
         payload = {"created": bootstrap_baselines(force=args.force)}
+    elif args.command == "build-analysis":
+        from .performance import build_drawdown_artifact, build_strategy_metrics_artifact
+        from .market_data import build_price_series_artifact, build_monthly_metrics_artifact
+        research_root = Path(args.research_root) if args.research_root else RESEARCH_ROOT
+        EXCLUDED = {"system"}
+        tickers_to_build = (
+            [args.ticker]
+            if args.ticker
+            else [
+                d.name
+                for d in sorted(research_root.iterdir())
+                if d.is_dir() and d.name not in EXCLUDED
+            ]
+        )
+        results: list[dict] = []
+        for t in tickers_to_build:
+            yf_ticker = f"{t}.TW" if t.isdigit() else t
+            artifacts_dir = research_root / t / "artifacts"
+            artifacts_dir.mkdir(parents=True, exist_ok=True)
+            built: list[str] = []
+            errors: list[str] = []
+            for artifact_fn, artifact_name in [
+                (build_price_series_artifact, "price_series.json"),
+                (build_monthly_metrics_artifact, "monthly_metrics.json"),
+                (build_drawdown_artifact, "drawdown_analysis.json"),
+                (build_strategy_metrics_artifact, "strategy_metrics.json"),
+            ]:
+                try:
+                    data = artifact_fn(yf_ticker)
+                    write_json(artifacts_dir / artifact_name, data)
+                    built.append(artifact_name)
+                except Exception as e:
+                    errors.append(f"{artifact_name}: {e}")
+            results.append({"ticker": t, "built": built, "errors": errors})
+        payload = {"build_analysis": results}
     elif args.command == "verify":
         return run_all_checks()
     elif args.command == "poll":

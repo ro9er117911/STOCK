@@ -20,36 +20,99 @@
         <a class="nav-link nav-link-strong" id="research-page-link" href="../research/MAR.html">打開研究內頁</a>
       </nav>
 
-      <section class="detail-layout">
-        <div class="content-stack">
-          <section class="hero-card hero-card-detail">
-            <div class="hero-main">
-              <p class="eyebrow">Decision View</p>
-              <h1 id="ticker-title">MAR</h1>
-              <p class="lede" id="ticker-summary"></p>
-              <div class="pill-row" id="ticker-meta"></div>
-            </div>
-          </section>
-          <article class="panel panel-emphasis" id="position-panel">
-            <div class="panel-loading">
-              <p class="panel-kicker">Loading</p>
-              <h2>載入部位與風控</h2>
-              <p class="footer-note">正在整理持倉、風險與決策摘要。</p>
-            </div>
-          </article>
-          <article class="panel" id="health-panel"></article>
-          <article class="panel" id="alerts-panel"></article>
-          <article class="panel" id="assumptions-panel"></article>
-          <article class="panel" id="timeline-panel"></article>
-        </div>
-        <div class="content-stack">
-          <aside class="panel panel-emphasis decision-rail" id="decision-rail"></aside>
-          <article class="panel" id="checklist-panel"></article>
-          <article class="panel" id="rules-panel"></article>
-          <article class="panel" id="sources-panel"></article>
-          <article class="panel" id="observation-related-panel"></article>
+      <!-- Hero card -->
+      <section class="hero-card hero-card-detail">
+        <div class="hero-main">
+          <p class="eyebrow">Decision View</p>
+          <h1 id="ticker-title">MAR</h1>
+          <p class="lede" id="ticker-summary"></p>
+          <div class="pill-row" id="ticker-meta"></div>
         </div>
       </section>
+
+      <!-- Tab Nav -->
+      <nav class="tab-nav" id="ticker-tab-nav">
+        <a href="#overview"  class="tab-link tab-link-active">總覽</a>
+        <a href="#price"     class="tab-link">股價</a>
+        <a href="#drawdown"  class="tab-link">最大回撤</a>
+        <a href="#monthly"   class="tab-link">月度</a>
+        <a href="#quarterly" class="tab-link">季度</a>
+        <a href="#cagr"      class="tab-link">CAGR</a>
+        <a href="#sharpe"    class="tab-link">Sharpe</a>
+        <a href="#glossary"  class="tab-link">名詞解釋</a>
+      </nav>
+
+      <!-- Tab Content -->
+      <div class="tab-content">
+        <!-- Tab 0: Overview -->
+        <section id="tab-overview" class="tab-pane">
+          <div class="detail-layout">
+            <div class="content-stack">
+              <article class="panel panel-emphasis" id="position-panel">
+                <div class="panel-loading">
+                  <p class="panel-kicker">Loading</p>
+                  <h2>載入部位與風控</h2>
+                  <p class="footer-note">正在整理持倉、風險與決策摘要。</p>
+                </div>
+              </article>
+              <article class="panel" id="health-panel"></article>
+              <article class="panel" id="alerts-panel"></article>
+              <article class="panel" id="assumptions-panel"></article>
+              <article class="panel" id="timeline-panel"></article>
+            </div>
+            <div class="content-stack">
+              <aside class="panel panel-emphasis decision-rail" id="decision-rail"></aside>
+              <article class="panel" id="checklist-panel"></article>
+              <article class="panel" id="rules-panel"></article>
+              <article class="panel" id="sources-panel"></article>
+              <article class="panel" id="observation-related-panel"></article>
+            </div>
+          </div>
+        </section>
+
+        <!-- Tab 1: Price -->
+        <section id="tab-price" class="tab-pane tab-pane-hidden">
+          <div id="price-tab-root" class="tab-inner"></div>
+        </section>
+
+        <!-- Tab 2: Drawdown -->
+        <section id="tab-drawdown" class="tab-pane tab-pane-hidden">
+          <div id="drawdown-tab-root" class="tab-inner"></div>
+        </section>
+
+        <!-- Tab 3: Monthly -->
+        <section id="tab-monthly" class="tab-pane tab-pane-hidden">
+          <div id="monthly-tab-root" class="tab-inner">
+            <div class="panel"><div class="panel-head"><div><p class="panel-kicker">Coming Soon</p><h2>月度報酬</h2></div></div><p class="footer-note">月度 heatmap 即將推出。</p></div>
+          </div>
+        </section>
+
+        <!-- Tab 4: Quarterly -->
+        <section id="tab-quarterly" class="tab-pane tab-pane-hidden">
+          <div id="quarterly-tab-root" class="tab-inner">
+            <div class="panel"><div class="panel-head"><div><p class="panel-kicker">Coming Soon</p><h2>季度基本面</h2></div></div><p class="footer-note">季度數據即將推出。</p></div>
+          </div>
+        </section>
+
+        <!-- Tab 5: CAGR -->
+        <section id="tab-cagr" class="tab-pane tab-pane-hidden">
+          <div id="cagr-tab-root" class="tab-inner">
+            <div class="panel"><div class="panel-head"><div><p class="panel-kicker">Coming Soon</p><h2>CAGR 試算</h2></div></div><p class="footer-note">CAGR 計算器即將推出。</p></div>
+          </div>
+        </section>
+
+        <!-- Tab 6: Sharpe -->
+        <section id="tab-sharpe" class="tab-pane tab-pane-hidden">
+          <div id="sharpe-tab-root" class="tab-inner">
+            <div class="panel"><div class="panel-head"><div><p class="panel-kicker">Coming Soon</p><h2>Sharpe 策略回測</h2></div></div><p class="footer-note">這是示意回測，不是交易建議。即將推出。</p></div>
+          </div>
+        </section>
+
+        <!-- Tab 7: Glossary -->
+        <section id="tab-glossary" class="tab-pane tab-pane-hidden">
+          <div id="glossary-tab-root" class="tab-inner"></div>
+        </section>
+      </div>
     </main>
     <div id="observation-modal-root"></div>
     <script src="../assets/dashboard.js"></script>

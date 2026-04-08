@@ -1,0 +1,67 @@
+# Ralph Progress — 因子分析 MVP
+
+## Session 1 — 2026-04-08
+
+### 狀態
+- PRD 建立完成：3 個 User Story
+- 開始執行 US-001（後端）
+
+### 已知架構要點
+- 專案路徑：/Users/ro9air/projects/STOCK
+- Python 模組路徑：src/stock_research/（而非 stock_research/）
+- 因子計算：src/stock_research/factors/engine.py（FactorEngine）
+- 流動性邏輯：src/stock_research/factors/mvp_screener.py
+- 靜態資產：site/assets/dashboard.css, site/assets/dashboard.js
+- Dashboard 生成：src/stock_research/dashboard.py
+
+### 關鍵依賴
+- yfinance（股價、成交量）
+- FinMind 適配器（台股基本面）
+- research/ 目錄掃描取得 ticker 清單
+
+### 流動性門檻
+- 硬編碼 10,000,000（當地幣別日均成交金額）
+
+### 完成 ✅
+- [x] US-001: src/stock_research/factors/factor_analysis_page.py
+- [x] US-002: src/stock_research/templates/dashboard/factor_analysis.html
+- [x] US-003: dashboard.py 整合（factor_analysis.html + factor_analysis.json 自動生成）
+- [x] index.html 導航連結新增「📊 因子分析 + 流動性篩選」
+
+### 驗證結果
+- build 成功，生成 site/factor_analysis.html + site/data/factor_analysis.json
+- JSON 資料：4 tickers，全部 PASS，2330 排第一（Maestro 46.83）
+- Python 3.11 import 驗證通過
+
+---
+
+## Session 2 — 2026-04-08（延伸任務）
+
+### 新增完成 ✅
+- [x] US-004: Ticker Tab 架構（8 分頁）
+  - templates/dashboard/ticker.html 重寫（57→117 行，8-tab 結構）
+  - assets/dashboard.js 新增：initTickerTabs / renderPriceTab / renderDrawdownTab / renderGlossaryTab / injectTabStyles（+281 行）
+  - 每個 tab 的 section id 對應 hash routing
+
+- [x] US-005: CLI build-analysis 指令
+  - cli.py 新增 build-analysis subcommand
+  - 為 2330/MAR/MSFT/PLTR 各生成 4 個 artifacts：
+    price_series.json / monthly_metrics.json / drawdown_analysis.json / strategy_metrics.json
+
+- [x] US-006: pytest 修復
+  - pipeline.py 新增 state_path.exists() 防衛性檢查
+  - 45 passed, 6 subtests passed（0 failed）
+
+### 最終驗證
+- pytest: 45 passed ✅
+- build-dashboard: exit code 0 ✅
+- site/factor_analysis.html: 存在 ✅
+- site/data/factor_analysis.json: 存在 ✅
+- research/*/artifacts/: 4 tickers × 4 artifacts = 16 files ✅
+- dashboard.js initTickerTabs: 第 1632 行存在 ✅
+
+### 學到的模式
+- WATCHLIST 在 source_registry.json（含 2330），但 BASELINE_PROFILES 在 baselines.py 只有 PLTR/MSFT/MAR
+  → 凡讀 state.json 的地方都要先 check exists()
+- Python binary 要用 .venv/bin/python（3.11），不能用系統 python3（3.9，缺 datetime.UTC）
+- dashboard.js 使用第二個 DOMContentLoaded listener 疊加 ticker tab 初始化，避免覆蓋原有邏輯
