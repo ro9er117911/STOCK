@@ -228,6 +228,9 @@ def poll_events(
     fixture_events = _load_fixture_events(fixture_name, fixture_root) if fixture_name else []
 
     for ticker, config in WATCHLIST.items():
+        state_path = research_root / ticker / "state.json"
+        if not state_path.exists():
+            continue
         state = _load_state(research_root, ticker)
         ledger_path = research_root / ticker / "events.jsonl"
         artifacts_dir = research_root / ticker / "artifacts"
