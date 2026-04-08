@@ -74,7 +74,9 @@
     "Define explicit buy, defer, and reject conditions."
   ],
   "source_manifest": [],
-  "last_seen_event_cursors": {},
+  "last_seen_event_cursors": {
+    "price": "2026-04-08"
+  },
   "version_log": [
     {
       "version": "v0",

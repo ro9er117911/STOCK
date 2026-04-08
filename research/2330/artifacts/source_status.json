@@ -1,0 +1,41 @@
+{
+  "ticker": "2330",
+  "sources": [
+    {
+      "source_id": "price",
+      "source_type": "price",
+      "kind": "price",
+      "url": "https://query1.finance.yahoo.com/v8/finance/chart/2330.TW?range=1mo&interval=1d",
+      "status": "polled",
+      "priority": 20,
+      "new_events": 0,
+      "cursor": "2026-04-08",
+      "error": "",
+      "notes": "Daily Yahoo Finance chart data for TSMC."
+    },
+    {
+      "source_id": "finmind_roe",
+      "source_type": "fundamental",
+      "kind": "api",
+      "url": "https://api.finmindtrade.com/api/v4/data?dataset=TaiwanStockFinancialStatements",
+      "status": "failed",
+      "priority": 10,
+      "new_events": 0,
+      "cursor": "",
+      "error": "https://api.finmindtrade.com/api/v4/data?dataset=TaiwanStockFinancialStatements: HTTP Error 400: Bad Request",
+      "notes": "ROE data from FinMind."
+    },
+    {
+      "source_id": "finmind_flows",
+      "source_type": "institutional",
+      "kind": "api",
+      "url": "https://api.finmindtrade.com/api/v4/data?dataset=TaiwanStockInstitutionalInvestorsBuySell",
+      "status": "failed",
+      "priority": 10,
+      "new_events": 0,
+      "cursor": "",
+      "error": "https://api.finmindtrade.com/api/v4/data?dataset=TaiwanStockInstitutionalInvestorsBuySell: HTTP Error 400: Bad Request",
+      "notes": "Institutional flows from FinMind."
+    }
+  ]
+}
