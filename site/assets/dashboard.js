@@ -1662,7 +1662,7 @@ function initTickerTabs() {
           .catch(() => {
             window._analysisData = null;
             const root = document.getElementById(`${tabName}-tab-root`);
-            if (root) root.innerHTML = '<div class="panel"><p class="footer-note" style="padding:20px">分析資料尚未生成，請先執行 build-analysis</p></div>';
+            if (root) root.innerHTML = '<div class="panel"><p class="footer-note" style="padding:20px">分析資料尚未生成，請先執行 build-analysis，再執行 build-dashboard</p></div>';
           });
       }
     } else if (window._analysisData) {
@@ -1682,7 +1682,7 @@ function initTickerTabs() {
           .catch(() => {
             window._strategyData = null;
             const root = document.getElementById('sharpe-tab-root');
-            if (root) root.innerHTML = '<div class="panel"><p class="footer-note" style="padding:20px">策略指標尚未生成，請先執行 build-analysis</p></div>';
+            if (root) root.innerHTML = '<div class="panel"><p class="footer-note" style="padding:20px">策略指標尚未生成，請先執行 build-analysis，再執行 build-dashboard</p></div>';
           });
       }
     } else if (tabName === 'sharpe' && window._strategyData) {

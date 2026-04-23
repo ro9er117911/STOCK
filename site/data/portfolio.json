@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-04-08T05:25:02+00:00",
+  "generated_at": "2026-04-08T05:35:06+00:00",
   "portfolio_summary": {
     "tracked_ticker_count": 4,
     "positioned_ticker_count": 0,
@@ -3351,57 +3351,57 @@
     }
   },
   "market_snapshot": {
-    "generated_at": "2026-04-08T05:25:00+00:00",
+    "generated_at": "2026-04-08T05:35:06+00:00",
     "quotes": {
       "2330": {
         "symbol": "2330.TW",
-        "price": 1945.0,
-        "previous_close": 1860.0,
-        "change_pct": 4.57,
-        "as_of": "2026-04-08"
+        "price": null,
+        "previous_close": null,
+        "change_pct": null,
+        "as_of": ""
       },
       "MAR": {
         "symbol": "MAR",
-        "price": 338.0,
-        "previous_close": 331.93,
-        "change_pct": 1.83,
-        "as_of": "2026-04-06"
+        "price": null,
+        "previous_close": null,
+        "change_pct": null,
+        "as_of": ""
       },
       "MSFT": {
         "symbol": "MSFT",
-        "price": 372.88,
-        "previous_close": 373.46,
-        "change_pct": -0.16,
-        "as_of": "2026-04-06"
+        "price": null,
+        "previous_close": null,
+        "change_pct": null,
+        "as_of": ""
       },
       "PLTR": {
         "symbol": "PLTR",
-        "price": 147.93,
-        "previous_close": 148.46,
-        "change_pct": -0.36,
-        "as_of": "2026-04-06"
+        "price": null,
+        "previous_close": null,
+        "change_pct": null,
+        "as_of": ""
       }
     },
     "vix": {
       "symbol": "^VIX",
-      "value": 24.17,
-      "previous_close": 23.87,
-      "change_pct": 1.26,
-      "as_of": "2026-04-06"
+      "value": null,
+      "previous_close": null,
+      "change_pct": null,
+      "as_of": ""
     }
   },
   "macro_regime": {
     "symbol": "^VIX",
-    "value": 24.17,
-    "value_label": "24.17",
-    "previous_close": 23.87,
-    "change_pct": 1.26,
-    "as_of": "2026-04-06",
-    "key": "elevated",
-    "label": "偏緊",
-    "size_multiplier": 0.9,
-    "review_urgency": "elevated",
-    "summary": "波動抬升，target / max 倉位收緊 10%。"
+    "value": null,
+    "value_label": "N/A",
+    "previous_close": null,
+    "change_pct": null,
+    "as_of": "",
+    "key": "calm",
+    "label": "未取得",
+    "size_multiplier": 1.0,
+    "review_urgency": "normal",
+    "summary": "VIX 資料暫時無法取得，先沿用原始 sizing。"
   },
   "portfolio_totals": {
     "has_private_positions": false,
@@ -3518,14 +3518,14 @@
       ]
     },
     "circuit_breakers": {
-      "review_loss_pct": -10.0,
+      "capital_preservation_loss_pct": -20.0,
       "weak_thesis_score": 0.6,
-      "de_risk_loss_pct": -15.0,
       "stress_regimes": [
         "stress",
         "panic"
       ],
-      "capital_preservation_loss_pct": -20.0
+      "de_risk_loss_pct": -15.0,
+      "review_loss_pct": -10.0
     }
   },
   "observation_summary": {

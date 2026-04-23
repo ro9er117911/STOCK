@@ -1,0 +1,22 @@
+{
+  "ticker": "2330",
+  "status": "WAIT",
+  "rationale": [
+    "2330 ADR premium is 16.75%, wide enough to imply local catch-up is still pending.",
+    "With RSI marked neutral, the setup favors waiting for a cleaner local entry instead of chasing the gap."
+  ],
+  "confidence": 0.62,
+  "expires_at": "2026-04-23T17:00:10.715619+00:00",
+  "signals": {
+    "adr_premium_pct": 16.75,
+    "local_px": 2050.0,
+    "rsi_state": "neutral",
+    "trigger_description": "Scheduled market-open pulse check",
+    "thesis_alignment": "neutral",
+    "adr_px": 380.07,
+    "fx_rate": 31.486,
+    "drift_direction": "lagging",
+    "fx_wind": "neutral"
+  },
+  "disclaimer": "Research automation output only; not investment advice or trade execution."
+}

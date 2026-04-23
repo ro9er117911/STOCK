@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+  <dict>
+    <key>Label</key>
+    <string>com.ro9air.stock-research.quick-pulse</string>
+    <key>ProgramArguments</key>
+    <array>
+      <string>/bin/zsh</string>
+      <string>/Users/ro9air/projects/STOCK/scripts/quick_pulse_monitor.sh</string>
+    </array>
+    <!-- Run at TWD market open: 09:00 TWD = 01:00 UTC -->
+    <key>StartCalendarInterval</key>
+    <dict>
+      <key>Hour</key>
+      <integer>1</integer>
+      <key>Minute</key>
+      <integer>0</integer>
+    </dict>
+    <key>StandardOutPath</key>
+    <string>/Users/ro9air/projects/STOCK/logs/quick-pulse.out.log</string>
+    <key>StandardErrorPath</key>
+    <string>/Users/ro9air/projects/STOCK/logs/quick-pulse.err.log</string>
+    <key>WorkingDirectory</key>
+    <string>/Users/ro9air/projects/STOCK</string>
+  </dict>
+</plist>

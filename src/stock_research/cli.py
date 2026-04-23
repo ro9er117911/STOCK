@@ -12,6 +12,7 @@ from .dashboard import build_dashboard_bundle
 from .digest import build_notification_payload, build_portfolio_digest
 from .notify import send_resend_email
 from .pipeline import bootstrap_baselines, draft_refreshes, poll_events, sync_research_contracts
+from .quick_decision import run_quick_decision
 from .research_state import sync_candidate_queue
 from .storage import read_json, write_json
 from .validator import run_all_checks
@@ -44,6 +45,22 @@ def main() -> int:
         help="Reason for the refresh pipeline.",
     )
     draft_parser.add_argument("--fixture", default="", help="Optional test event fixture name.")
+
+    quick_parser = subparsers.add_parser("quick-decision", help="Run a light-track one-liner strategy verdict.")
+    quick_parser.add_argument("--ticker", default="", help="Ticker symbol, for example 2330.")
+    quick_parser.add_argument("--adr-premium-pct", type=float, default=None, help="Manual ADR premium percentage.")
+    quick_parser.add_argument("--local-px", type=float, default=None, help="Current local share price.")
+    quick_parser.add_argument("--trigger-description", default="", help="One-line trigger or market setup.")
+    quick_parser.add_argument(
+        "--rsi-state",
+        default="neutral",
+        choices=("neutral", "overbought", "oversold"),
+        help="Manual RSI state for the light-track momentum rule.",
+    )
+    quick_parser.add_argument("--adr-px", type=float, default=None, help="Manual ADR price for premium calculation.")
+    quick_parser.add_argument("--fx-rate", type=float, default=None, help="Manual FX rate for premium calculation.")
+    quick_parser.add_argument("--adr-ratio", type=float, default=None, help="ADR ratio override.")
+    quick_parser.add_argument("--no-prompt", action="store_true", help="Fail instead of prompting for missing fields.")
 
     subparsers.add_parser("build-dashboard", help="Generate the static dashboard site.")
 
@@ -141,6 +158,18 @@ def main() -> int:
         payload = poll_events(trigger=args.trigger, fixture_name=args.fixture or None)
     elif args.command == "draft-refresh":
         payload = draft_refreshes(trigger=args.trigger, fixture_name=args.fixture or None)
+    elif args.command == "quick-decision":
+        payload = run_quick_decision(
+            ticker=args.ticker or None,
+            adr_premium_pct=args.adr_premium_pct,
+            local_px=args.local_px,
+            trigger_description=args.trigger_description or None,
+            rsi_state=args.rsi_state,
+            adr_px=args.adr_px,
+            fx_rate=args.fx_rate,
+            adr_ratio=args.adr_ratio,
+            prompt=not args.no_prompt,
+        )
     elif args.command == "build-dashboard":
         payload = build_dashboard_bundle()
     elif args.command == "serve-cockpit-api":

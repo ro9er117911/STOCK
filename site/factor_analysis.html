@@ -241,7 +241,7 @@
           <h1>Factor Analysis</h1>
           <p class="lede">因子分析 + 流動性篩選</p>
           <div class="masthead-actions" style="margin-top: 20px;">
-            <a href="../../index.html" class="action-button" style="background: var(--surface-2); border: 1px solid var(--border);">← 返回駕駛艙</a>
+            <a href="./index.html" class="action-button" style="background: var(--surface-2); border: 1px solid var(--border);">← 返回駕駛艙</a>
           </div>
         </div>
       </section>
@@ -381,7 +381,7 @@
 
       function renderTickerRow(ticker, rank) {
         const market = ticker.market || '';
-        const tickerLink = `../../tickers/${ticker.ticker}.html`;
+        const tickerLink = `./tickers/${ticker.ticker}.html`;
 
         return `
           <tr data-liquidity="${ticker.liquidity_pass ? 'pass' : 'fail'}">
@@ -482,7 +482,7 @@
 
       // ─── Data Loading ─────────────────────────────────────────────────────────
       async function loadData() {
-        const res = await fetch('../../data/factor_analysis.json');
+        const res = await fetch('./data/factor_analysis.json');
         if (!res.ok) throw new Error('Failed to load factor analysis data');
         return await res.json();
       }
@@ -494,7 +494,7 @@
               <div class="error-state">
                 <h3>資料尚未生成</h3>
                 <p>${msg}</p>
-                <p>請先執行 <code>build-dashboard</code></p>
+                <p>請先執行 <code>build-analysis</code>，再執行 <code>build-dashboard</code></p>
               </div>
             </td>
           </tr>
@@ -531,7 +531,7 @@
 
           renderTable();
         } catch (err) {
-          showError('尚未生成資料，請先執行 build-dashboard');
+          showError('尚未生成資料，請先執行 build-analysis，再執行 build-dashboard');
         }
       });
     </script>

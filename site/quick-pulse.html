@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quick Pulse — Light Track</title>
+  <style>
+    body { background: #0f0f0f; color: #e0e0e0; font-family: -apple-system, monospace; margin: 0; padding: 24px; }
+    h1 { font-size: 1.2rem; color: #888; letter-spacing: 0.1em; text-transform: uppercase; }
+    .card { background: #1a1a1a; border-radius: 12px; padding: 24px; max-width: 480px; margin: 24px auto; border: 1px solid #2a2a2a; }
+    .verdict { font-size: 2.5rem; font-weight: 700; letter-spacing: 0.05em; margin-bottom: 8px; }
+    .verdict.BUY { color: #4cff91; }
+    .verdict.WAIT { color: #ffd84c; }
+    .verdict.PASS { color: #ff5c5c; }
+    .ticker { font-size: 1rem; color: #888; margin-bottom: 16px; }
+    .rationale { font-size: 0.9rem; line-height: 1.6; color: #ccc; margin-bottom: 16px; }
+    .rationale li { margin-bottom: 6px; }
+    .meta { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 12px; }
+    .pill { background: #252525; border-radius: 20px; padding: 4px 12px; font-size: 0.75rem; color: #aaa; }
+    .thesis { font-size: 0.8rem; color: #888; margin-top: 12px; padding-top: 12px; border-top: 1px solid #2a2a2a; }
+    .consistent { color: #4cff91; }
+    .contradicts { color: #ff5c5c; }
+    .disclaimer { font-size: 0.7rem; color: #555; margin-top: 16px; font-style: italic; }
+    .expires { font-size: 0.75rem; color: #555; margin-top: 8px; }
+    .empty { text-align: center; color: #555; padding: 48px; }
+    .refresh { text-align: center; margin-top: 24px; }
+    button { background: #252525; border: 1px solid #333; color: #888; padding: 8px 20px; border-radius: 8px; cursor: pointer; font-size: 0.85rem; }
+    button:hover { background: #2a2a2a; color: #ccc; }
+  </style>
+</head>
+<body>
+  <h1>⚡ Quick Pulse</h1>
+  <div id="root"></div>
+  <div class="refresh">
+    <button onclick="loadVerdict()">重新載入</button>
+  </div>
+
+  <script>
+    const VERDICT_URL = 'data/quick-decision.json';
+
+    const alignIcon = { consistent: '✅ 一致', contradicts: '⚠️ 矛盾', neutral: '➖ 中性' };
+
+    function renderCard(v) {
+      const alignment = v.thesis_alignment || v.signals?.thesis_alignment || '';
+      const pills = Object.entries(v.signals || {})
+        .filter(([k]) => !['trigger_description', 'thesis_alignment'].includes(k))
+        .map(([k, val]) => `<span class="pill">${k}: ${val}</span>`)
+        .join('');
+
+      return `
+        <div class="card">
+          <div class="verdict ${v.status}">${v.status}</div>
+          <div class="ticker">${v.ticker}</div>
+          <ul class="rationale">${(v.rationale || []).map(r => `<li>${r}</li>`).join('')}</ul>
+          <div class="meta">
+            <span class="pill">信心 ${Math.round(v.confidence * 100)}%</span>
+            ${pills}
+          </div>
+          ${v.thesis_link ? `<div class="thesis">ThesisLink: <code>${v.thesis_link}</code> <span class="${alignment}">${alignIcon[alignment] || ''}</span></div>` : ''}
+          ${v.disclaimer ? `<div class="disclaimer">⚠️ ${v.disclaimer}</div>` : ''}
+          <div class="expires">有效至：${v.expires_at ? v.expires_at.slice(0,16).replace('T',' ') : '—'} UTC</div>
+        </div>`;
+    }
+
+    async function loadVerdict() {
+      const root = document.getElementById('root');
+      try {
+        const res = await fetch(VERDICT_URL + '?t=' + Date.now());
+        if (!res.ok) throw new Error('not found');
+        const data = await res.json();
+        root.innerHTML = renderCard(data);
+      } catch (e) {
+        root.innerHTML = '<div class="empty">尚無 Quick Pulse 資料。<br>執行 <code>quick-decision</code> 後重新載入。</div>';
+      }
+    }
+
+    loadVerdict();
+  </script>
+</body>
+</html>

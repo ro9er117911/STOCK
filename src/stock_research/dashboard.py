@@ -73,7 +73,11 @@ def _site_paths(site_root: Path) -> dict[str, Path]:
     }
 
 
-def _write_site(site_root: Path, payload: dict[str, Any]) -> dict[str, Any]:
+def _write_site(
+    site_root: Path,
+    payload: dict[str, Any],
+    research_root: Path,
+) -> dict[str, Any]:
     paths = _site_paths(site_root)
     for path in paths.values():
         path.mkdir(parents=True, exist_ok=True)
@@ -91,7 +95,7 @@ def _write_site(site_root: Path, payload: dict[str, Any]) -> dict[str, Any]:
     for card in payload["tickers"]:
         write_json(paths["data_tickers"] / f"{card['ticker']}.json", card)
         _copy_ticker_artifacts(
-            site_root.parent / "research",
+            research_root,
             paths["data_tickers"],
             card["ticker"],
         )
@@ -106,7 +110,7 @@ def _write_site(site_root: Path, payload: dict[str, Any]) -> dict[str, Any]:
 
     # Build factor analysis digest and write JSON + HTML
     try:
-        factor_digest = build_factor_analysis_digest(site_root.parent / "research")
+        factor_digest = build_factor_analysis_digest(research_root)
         write_json(paths["data"] / "factor_analysis.json", factor_digest)
     except Exception as _e:
         import logging
@@ -132,7 +136,7 @@ def build_dashboard_site(
     site_root: Path = SITE_ROOT,
 ) -> dict[str, Any]:
     payload = build_portfolio_digest(research_root)
-    return _write_site(site_root, payload)
+    return _write_site(site_root, payload, research_root)
 
 
 def build_local_dashboard_site(
@@ -147,7 +151,7 @@ def build_local_dashboard_site(
         portfolio_path=portfolio_path,
         risk_policy_path=research_root / "system" / "risk_policy.json",
     )
-    return _write_site(local_site_root, local_payload)
+    return _write_site(local_site_root, local_payload, research_root)
 
 
 def build_dashboard_bundle(
@@ -157,7 +161,7 @@ def build_dashboard_bundle(
     portfolio_path: Path = PORTFOLIO_PRIVATE_PATH,
 ) -> dict[str, Any]:
     public_payload = build_portfolio_digest(research_root)
-    public_summary = _write_site(public_site_root, public_payload)
+    public_summary = _write_site(public_site_root, public_payload, research_root)
 
     local_summary = build_local_dashboard_site(
         research_root=research_root,

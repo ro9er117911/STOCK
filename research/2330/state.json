@@ -3,11 +3,11 @@
   "company_name": "TSMC",
   "research_topic": "Taiwan Alpha",
   "research_type": "候選研究 / 進場前",
-  "holding_period": "待定義",
-  "last_reviewed_at": "2026-04-07",
-  "next_review_at": "2026-04-21",
-  "current_action": "No decision yet; gather evidence and build a falsifiable thesis.",
-  "confidence": 0.0,
+  "holding_period": "medium_term_2_3_quarters",
+  "last_reviewed_at": "2026-04-20",
+  "next_review_at": "2026-05-07",
+  "current_action": "Watch — gather Q1 earnings evidence before entry",
+  "confidence": 0.55,
   "latest_delta": [
     "Candidate added to the research queue for pre-entry thesis work."
   ],
@@ -65,8 +65,52 @@
     "re_rating_logic": "Define during research.",
     "associated_risk": "Incomplete regime analysis can create false conviction."
   },
-  "scenarios": [],
-  "action_rules": [],
+  "scenarios": [
+    {
+      "scenario_id": "2330-s-base",
+      "trigger": "Margin holds 62-65%, 2nm yield >70%, revenue +30% YoY.",
+      "logic": "The 2nm ramp thesis holds because AI demand remains strong while gross margin stays in the target range.",
+      "action": "HOLD"
+    },
+    {
+      "scenario_id": "2330-s-bull",
+      "trigger": "Margin >65%, 2nm yield >80%, AI rush orders confirmed.",
+      "logic": "AI demand exceeds consensus and the 2nm ramp shows enough pricing power to offset ramp costs.",
+      "action": "ADD"
+    },
+    {
+      "scenario_id": "2330-s-bear",
+      "trigger": "Margin <60% OR 2nm yield stagnates <60%.",
+      "logic": "Ramp costs are overwhelming pricing power, weakening the 2nm plus AI demand thesis.",
+      "action": "EXIT"
+    }
+  ],
+  "action_rules": [
+    {
+      "action_rule_id": "2330-ar-current",
+      "kind": "current_action",
+      "condition": "Current evidence is not enough for entry.",
+      "action": "Watch — gather Q1 earnings evidence before entry"
+    },
+    {
+      "action_rule_id": "2330-ar-add",
+      "kind": "add",
+      "condition": "Q1 gross margin >= 63% AND 2nm yield confirmed >70%",
+      "action": "ADD"
+    },
+    {
+      "action_rule_id": "2330-ar-trim",
+      "kind": "trim",
+      "condition": "gross margin drops below 60% for 2 consecutive quarters",
+      "action": "TRIM"
+    },
+    {
+      "action_rule_id": "2330-ar-exit",
+      "kind": "exit",
+      "condition": "gross margin < 58% OR 2nm yield stagnates below 60%",
+      "action": "EXIT"
+    }
+  ],
   "next_must_check_data": "Define the must-check data before promoting this candidate to ready_to_decide.",
   "research_debt": [
     "Write the first falsifiable thesis sentence.",

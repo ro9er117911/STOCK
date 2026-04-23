@@ -230,9 +230,27 @@
       "type": "file"
     },
     {
+      "path": "src/stock_research/quick_decision.py",
+      "accessCount": 9,
+      "lastAccessed": 1776683621975,
+      "type": "file"
+    },
+    {
       "path": "stock_research/templates/dashboard/ticker.html",
       "accessCount": 8,
       "lastAccessed": 1775185196384,
+      "type": "file"
+    },
+    {
+      "path": "research/2330/state.json",
+      "accessCount": 5,
+      "lastAccessed": 1776682232870,
+      "type": "file"
+    },
+    {
+      "path": "docs/guides/line-notify-setup.md",
+      "accessCount": 5,
+      "lastAccessed": 1776701292733,
       "type": "file"
     },
     {
@@ -278,6 +296,12 @@
       "type": "directory"
     },
     {
+      "path": "scripts/quick_pulse_monitor.sh",
+      "accessCount": 3,
+      "lastAccessed": 1776701197212,
+      "type": "file"
+    },
+    {
       "path": ".claude",
       "accessCount": 2,
       "lastAccessed": 1775012134316,
@@ -299,6 +323,12 @@
       "path": "stock_research/dashboard.py",
       "accessCount": 2,
       "lastAccessed": 1775185216743,
+      "type": "file"
+    },
+    {
+      "path": "src/stock_research/adr_premium.py",
+      "accessCount": 2,
+      "lastAccessed": 1776683516086,
       "type": "file"
     },
     {
@@ -353,6 +383,42 @@
       "path": "CLAUDE.md",
       "accessCount": 1,
       "lastAccessed": 1775186134798,
+      "type": "file"
+    },
+    {
+      "path": "launchd/com.ro9air.stock-research.catchup.plist",
+      "accessCount": 1,
+      "lastAccessed": 1776682509849,
+      "type": "file"
+    },
+    {
+      "path": "launchd/com.ro9air.stock-research.quick-pulse.plist",
+      "accessCount": 1,
+      "lastAccessed": 1776682518572,
+      "type": "file"
+    },
+    {
+      "path": "src/stock_research/notify_telegram.py",
+      "accessCount": 1,
+      "lastAccessed": 1776682541602,
+      "type": "file"
+    },
+    {
+      "path": "site/quick-pulse.html",
+      "accessCount": 1,
+      "lastAccessed": 1776682555395,
+      "type": "file"
+    },
+    {
+      "path": "research/system/source_registry.json",
+      "accessCount": 1,
+      "lastAccessed": 1776683637901,
+      "type": "file"
+    },
+    {
+      "path": "src/stock_research/notify_line.py",
+      "accessCount": 1,
+      "lastAccessed": 1776701190362,
       "type": "file"
     }
   ],
