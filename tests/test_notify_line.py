@@ -70,21 +70,21 @@ def test_send_verdict_posts_push_message_to_target(monkeypatch) -> None:
     assert req.headers["Authorization"] == "Bearer line-token"
     payload = json.loads(req.data.decode("utf-8"))
     assert payload["to"] == "U123"
-    assert payload["messages"][0]["type"] == "text"
-    assert "BUY | 2330" in payload["messages"][0]["text"]
+    assert payload["messages"][0]["type"] == "flex"
+    assert "2330" in payload["messages"][0]["altText"]
 
 
-def test_send_message_refuses_missing_target_without_broadcast(monkeypatch) -> None:
+def test_send_messages_refuses_missing_target_without_broadcast(monkeypatch) -> None:
     calls = []
     monkeypatch.setattr(notify_line.urllib.request, "urlopen", lambda *args, **kwargs: calls.append(args))
 
-    ok = notify_line.send_message("hello", "line-token")
+    ok = notify_line.send_messages([{"type": "text", "text": "hello"}], "line-token")
 
     assert ok is False
     assert calls == []
 
 
-def test_send_message_can_broadcast(monkeypatch) -> None:
+def test_send_messages_can_broadcast(monkeypatch) -> None:
     calls = []
 
     def fake_urlopen(req, timeout: int = 10):
@@ -93,7 +93,7 @@ def test_send_message_can_broadcast(monkeypatch) -> None:
 
     monkeypatch.setattr(notify_line.urllib.request, "urlopen", fake_urlopen)
 
-    ok = notify_line.send_message("hello", "line-token", broadcast=True)
+    ok = notify_line.send_messages([{"type": "text", "text": "hello"}], "line-token", broadcast=True)
 
     assert ok is True
     req = calls[0]
