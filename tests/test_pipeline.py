@@ -19,6 +19,15 @@ from stock_research.storage import deep_merge, read_json, read_jsonl, write_json
 from stock_research.config import WATCHLIST
 
 
+def _mock_refresh_from_state(state: dict) -> dict:
+    return {
+        "updated_state": json.loads(json.dumps(state)),
+        "changed_assumptions": [],
+        "action_rule_delta": [],
+        "review_summary": "Mock refresh summary for deterministic pipeline tests.",
+    }
+
+
 class PipelineTests(unittest.TestCase):
     def test_bootstrap_creates_baselines(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
@@ -198,7 +207,15 @@ class PipelineTests(unittest.TestCase):
 
             with mock.patch("stock_research.pipeline.fetch_sec_events", side_effect=sec_stub), \
                 mock.patch("stock_research.pipeline.fetch_price_events", return_value=empty), \
-                mock.patch("stock_research.pipeline.fetch_feed_events", return_value=empty):
+                mock.patch("stock_research.pipeline.fetch_feed_events", return_value=empty), \
+                mock.patch(
+                    "stock_research.pipeline.generate_refresh",
+                    side_effect=lambda state, _current_markdown, _context: _mock_refresh_from_state(state),
+                ), \
+                mock.patch(
+                    "stock_research.pipeline.translate_markdown",
+                    side_effect=lambda markdown_text, *, context_label: markdown_text,
+                ):
                 summary = poll_events(research_root=research_root, trigger="event")
                 draft_summary = draft_refreshes(research_root=research_root, trigger="event")
             self.assertIn("MSFT", summary["material_tickers"])
@@ -298,6 +315,10 @@ class PipelineTests(unittest.TestCase):
                 mock.patch("stock_research.pipeline.PR_BODY_PATH", automation_root / "pr-body.md"), \
                 mock.patch("stock_research.pipeline.PR_BODY_ZH_TW_PATH", automation_root / "pr-body.zh-tw.md"), \
                 mock.patch("stock_research.pipeline.TRANSLATION_SUMMARY_PATH", automation_root / "translation-summary.json"), \
+                mock.patch(
+                    "stock_research.pipeline.generate_refresh",
+                    side_effect=lambda state, _current_markdown, _context: _mock_refresh_from_state(state),
+                ), \
                 mock.patch(
                     "stock_research.pipeline.translate_markdown",
                     side_effect=lambda markdown_text, *, context_label: f"[zh-tw:{context_label}]\n{markdown_text}",
