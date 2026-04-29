@@ -6,24 +6,24 @@
   "decision_status": "needs_more_research",
   "decision_updated_at": "2026-04-07",
   "status_label": "研究進行中",
-  "current_action": "No decision yet; gather evidence and build a falsifiable thesis.",
-  "thesis_confidence": 0.0,
+  "current_action": "Watch — gather Q1 earnings evidence before entry",
+  "thesis_confidence": 0.55,
   "confidence_delta": 0.0,
-  "summary_blurb": "2330 本輪沒有新增足以改寫 thesis 的重大事件，研究主軸先延續前一版。 目前先維持「No decision yet; gather evidence and build a falsifiable thesis.」，下一個驗證點先盯 Define the must-check data before promoting this candidate to ready_to_decide。",
-  "next_review_at": "2026-04-21",
+  "summary_blurb": "2330 本輪沒有新增足以改寫 thesis 的重大事件，研究主軸先延續前一版。 目前先維持「Watch — gather Q1 earnings evidence before entry」，下一個驗證點先盯 Define the must-check data before promoting this candidate to ready_to_decide。",
+  "next_review_at": "2026-05-07",
   "next_must_check_data": "Define the must-check data before promoting this candidate to ready_to_decide.",
   "next_checklist": [
     "Define the must-check data before promoting this candidate to ready_to_decide"
   ],
-  "last_reviewed_at": "2026-04-07",
+  "last_reviewed_at": "2026-04-20",
   "risk_level": "",
   "risk_level_label": "尚未設定",
-  "priority_score": 65,
+  "priority_score": 70,
   "priority_label": "例行檢查",
   "last_event_status": "例行更新",
   "detail_path": "tickers/2330.html",
   "internal_research_path": "research/2330.html",
-  "recommended_next_action": "No decision yet; gather evidence and build a falsifiable thesis.",
+  "recommended_next_action": "Watch — gather Q1 earnings evidence before entry",
   "position": {
     "ticker": "2330",
     "has_position": false,
@@ -116,8 +116,59 @@
   },
   "key_events": [],
   "event_timeline": [],
-  "key_action_rules": [],
-  "action_rules": [],
+  "key_action_rules": [
+    {
+      "action_rule_id": "2330-ar-current",
+      "kind": "current_action",
+      "kind_label": "current_action",
+      "condition": "Current evidence is not enough for entry.",
+      "action": "Watch — gather Q1 財報 evidence before entry"
+    },
+    {
+      "action_rule_id": "2330-ar-add",
+      "kind": "add",
+      "kind_label": "加碼條件",
+      "condition": "Q1 gross 利潤率 >= 63% AND 2nm yield confirmed >70%",
+      "action": "ADD"
+    },
+    {
+      "action_rule_id": "2330-ar-trim",
+      "kind": "trim",
+      "kind_label": "減碼條件",
+      "condition": "gross 利潤率 drops below 60% for 2 conSECutive quarters",
+      "action": "TRIM"
+    }
+  ],
+  "action_rules": [
+    {
+      "action_rule_id": "2330-ar-current",
+      "kind": "current_action",
+      "kind_label": "current_action",
+      "condition": "Current evidence is not enough for entry.",
+      "action": "Watch — gather Q1 財報 evidence before entry"
+    },
+    {
+      "action_rule_id": "2330-ar-add",
+      "kind": "add",
+      "kind_label": "加碼條件",
+      "condition": "Q1 gross 利潤率 >= 63% AND 2nm yield confirmed >70%",
+      "action": "ADD"
+    },
+    {
+      "action_rule_id": "2330-ar-trim",
+      "kind": "trim",
+      "kind_label": "減碼條件",
+      "condition": "gross 利潤率 drops below 60% for 2 conSECutive quarters",
+      "action": "TRIM"
+    },
+    {
+      "action_rule_id": "2330-ar-exit",
+      "kind": "exit",
+      "kind_label": "退出條件",
+      "condition": "gross 利潤率 < 58% OR 2nm yield stagnates below 60%",
+      "action": "EXIT"
+    }
+  ],
   "changed_assumptions": [],
   "action_rule_delta": [],
   "radar": {
@@ -145,13 +196,13 @@
       "source_type": "price",
       "kind": "price",
       "url": "https://query1.finance.yahoo.com/v8/finance/chart/2330.TW?range=1mo&interval=1d",
-      "status": "active",
+      "status": "polled",
       "priority": 20,
       "new_events": 0,
-      "cursor": "",
+      "cursor": "2026-04-29",
       "error": "",
       "notes": "Daily Yahoo Finance 圖表資料 data for TSMC.",
-      "status_label": "啟用",
+      "status_label": "已輪詢",
       "is_clickable": true
     },
     {
@@ -159,13 +210,13 @@
       "source_type": "fundamental",
       "kind": "api",
       "url": "https://api.finmindtrade.com/api/v4/data?dataset=TaiwanStockFinancialStatements",
-      "status": "active",
+      "status": "failed",
       "priority": 10,
       "new_events": 0,
       "cursor": "",
-      "error": "",
+      "error": "https://api.finmindtrade.com/api/v4/data?dataset=TaiwanStockFinancialStatements: HTTP Error 400: Bad Request",
       "notes": "ROE data from FinMind.",
-      "status_label": "啟用",
+      "status_label": "失敗",
       "is_clickable": true
     },
     {
@@ -173,13 +224,13 @@
       "source_type": "institutional",
       "kind": "api",
       "url": "https://api.finmindtrade.com/api/v4/data?dataset=TaiwanStockInstitutionalInvestorsBuySell",
-      "status": "active",
+      "status": "failed",
       "priority": 10,
       "new_events": 0,
       "cursor": "",
-      "error": "",
+      "error": "https://api.finmindtrade.com/api/v4/data?dataset=TaiwanStockInstitutionalInvestorsBuySell: HTTP Error 400: Bad Request",
       "notes": "Institutional flows from FinMind.",
-      "status_label": "啟用",
+      "status_label": "失敗",
       "is_clickable": true
     }
   ],
@@ -191,7 +242,7 @@
       "href": "research/2330.html",
       "source_type": "研究頁面",
       "is_clickable": true,
-      "occurred_at": "2026-04-07"
+      "occurred_at": "2026-04-20"
     },
     {
       "citation_id": "2330-review-summary",
@@ -200,7 +251,7 @@
       "href": "research/2330.html#review-summary",
       "source_type": "更新摘要",
       "is_clickable": true,
-      "occurred_at": "2026-04-07"
+      "occurred_at": "2026-04-20"
     },
     {
       "citation_id": "2330-source-price",
@@ -209,7 +260,7 @@
       "href": "https://query1.finance.yahoo.com/v8/finance/chart/2330.TW?range=1mo&interval=1d",
       "source_type": "price",
       "is_clickable": true,
-      "occurred_at": "2026-04-07"
+      "occurred_at": "2026-04-20"
     },
     {
       "citation_id": "2330-source-finmind_roe",
@@ -218,7 +269,7 @@
       "href": "https://api.finmindtrade.com/api/v4/data?dataset=TaiwanStockFinancialStatements",
       "source_type": "fundamental",
       "is_clickable": true,
-      "occurred_at": "2026-04-07"
+      "occurred_at": "2026-04-20"
     },
     {
       "citation_id": "2330-source-finmind_flows",
@@ -227,7 +278,7 @@
       "href": "https://api.finmindtrade.com/api/v4/data?dataset=TaiwanStockInstitutionalInvestorsBuySell",
       "source_type": "institutional",
       "is_clickable": true,
-      "occurred_at": "2026-04-07"
+      "occurred_at": "2026-04-20"
     }
   ],
   "citation_links": {
@@ -239,7 +290,7 @@
         "href": "https://query1.finance.yahoo.com/v8/finance/chart/2330.TW?range=1mo&interval=1d",
         "source_type": "price",
         "is_clickable": true,
-        "occurred_at": "2026-04-07"
+        "occurred_at": "2026-04-20"
       },
       {
         "citation_id": "2330-source-finmind_roe",
@@ -248,7 +299,7 @@
         "href": "https://api.finmindtrade.com/api/v4/data?dataset=TaiwanStockFinancialStatements",
         "source_type": "fundamental",
         "is_clickable": true,
-        "occurred_at": "2026-04-07"
+        "occurred_at": "2026-04-20"
       },
       {
         "citation_id": "2330-source-finmind_flows",
@@ -257,7 +308,7 @@
         "href": "https://api.finmindtrade.com/api/v4/data?dataset=TaiwanStockInstitutionalInvestorsBuySell",
         "source_type": "institutional",
         "is_clickable": true,
-        "occurred_at": "2026-04-07"
+        "occurred_at": "2026-04-20"
       }
     ],
     "internal": [
@@ -268,7 +319,7 @@
         "href": "research/2330.html",
         "source_type": "研究頁面",
         "is_clickable": true,
-        "occurred_at": "2026-04-07"
+        "occurred_at": "2026-04-20"
       },
       {
         "citation_id": "2330-review-summary",
@@ -277,7 +328,7 @@
         "href": "research/2330.html#review-summary",
         "source_type": "更新摘要",
         "is_clickable": true,
-        "occurred_at": "2026-04-07"
+        "occurred_at": "2026-04-20"
       }
     ],
     "all": [
@@ -288,7 +339,7 @@
         "href": "research/2330.html",
         "source_type": "研究頁面",
         "is_clickable": true,
-        "occurred_at": "2026-04-07"
+        "occurred_at": "2026-04-20"
       },
       {
         "citation_id": "2330-review-summary",
@@ -297,7 +348,7 @@
         "href": "research/2330.html#review-summary",
         "source_type": "更新摘要",
         "is_clickable": true,
-        "occurred_at": "2026-04-07"
+        "occurred_at": "2026-04-20"
       },
       {
         "citation_id": "2330-source-price",
@@ -306,7 +357,7 @@
         "href": "https://query1.finance.yahoo.com/v8/finance/chart/2330.TW?range=1mo&interval=1d",
         "source_type": "price",
         "is_clickable": true,
-        "occurred_at": "2026-04-07"
+        "occurred_at": "2026-04-20"
       },
       {
         "citation_id": "2330-source-finmind_roe",
@@ -315,7 +366,7 @@
         "href": "https://api.finmindtrade.com/api/v4/data?dataset=TaiwanStockFinancialStatements",
         "source_type": "fundamental",
         "is_clickable": true,
-        "occurred_at": "2026-04-07"
+        "occurred_at": "2026-04-20"
       },
       {
         "citation_id": "2330-source-finmind_flows",
@@ -324,15 +375,15 @@
         "href": "https://api.finmindtrade.com/api/v4/data?dataset=TaiwanStockInstitutionalInvestorsBuySell",
         "source_type": "institutional",
         "is_clickable": true,
-        "occurred_at": "2026-04-07"
+        "occurred_at": "2026-04-20"
       }
     ]
   },
   "assumptions": [],
   "risks": [],
   "thesis_health": {
-    "score": 0.0,
-    "label": "高風險",
+    "score": 0.55,
+    "label": "需要追蹤",
     "reinforced_count": 0,
     "watch_count": 0,
     "pressured_count": 0
@@ -340,7 +391,7 @@
   "review_summary": "Candidate dossier created for pre-entry research.",
   "research_state": {
     "research_topic": "Taiwan Alpha",
-    "holding_period": "待定義",
+    "holding_period": "medium_term_2_3_quarters",
     "research_stage": "in_research",
     "candidate_origin": "manual_watchlist",
     "decision_status": "needs_more_research",
@@ -355,8 +406,8 @@
     "radar_flags": [],
     "review_summary": "Candidate dossier created for pre-entry research.",
     "thesis_health": {
-      "score": 0.0,
-      "label": "高風險",
+      "score": 0.55,
+      "label": "需要追蹤",
       "reinforced_count": 0,
       "watch_count": 0,
       "pressured_count": 0
@@ -382,15 +433,44 @@
     "research_stage": "in_research",
     "decision_status": "needs_more_research",
     "decision_updated_at": "2026-04-07",
-    "current_action": "No decision yet; gather evidence and build a falsifiable thesis.",
+    "current_action": "Watch — gather Q1 earnings evidence before entry",
     "status_label": "研究進行中",
-    "priority_score": 65,
+    "priority_score": 70,
     "priority_label": "例行檢查",
-    "next_review_at": "2026-04-21",
+    "next_review_at": "2026-05-07",
     "next_checklist": [
       "Define the must-check data before promoting this candidate to ready_to_decide"
     ],
-    "action_rules": [],
+    "action_rules": [
+      {
+        "action_rule_id": "2330-ar-current",
+        "kind": "current_action",
+        "kind_label": "current_action",
+        "condition": "Current evidence is not enough for entry.",
+        "action": "Watch — gather Q1 財報 evidence before entry"
+      },
+      {
+        "action_rule_id": "2330-ar-add",
+        "kind": "add",
+        "kind_label": "加碼條件",
+        "condition": "Q1 gross 利潤率 >= 63% AND 2nm yield confirmed >70%",
+        "action": "ADD"
+      },
+      {
+        "action_rule_id": "2330-ar-trim",
+        "kind": "trim",
+        "kind_label": "減碼條件",
+        "condition": "gross 利潤率 drops below 60% for 2 conSECutive quarters",
+        "action": "TRIM"
+      },
+      {
+        "action_rule_id": "2330-ar-exit",
+        "kind": "exit",
+        "kind_label": "退出條件",
+        "condition": "gross 利潤率 < 58% OR 2nm yield stagnates below 60%",
+        "action": "EXIT"
+      }
+    ],
     "changed_assumptions": [],
     "invalidation_reason": ""
   },
