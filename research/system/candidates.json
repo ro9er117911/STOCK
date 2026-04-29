@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-04-07",
+  "generated_at": "2026-04-29",
   "items": [
     {
       "ticker": "MAR",
@@ -24,8 +24,8 @@
         "summary": "Established the living research state under the vNext decision workflow contract."
       },
       "artifacts": {
-        "state_path": "/Users/ro9air/projects/STOCK/research/MAR/state.json",
-        "current_path": "/Users/ro9air/projects/STOCK/research/MAR/current.md"
+        "state_path": "/home/runner/work/STOCK/STOCK/research/MAR/state.json",
+        "current_path": "/home/runner/work/STOCK/STOCK/research/MAR/current.md"
       }
     },
     {
@@ -51,8 +51,8 @@
         "summary": "Established the living research state under the vNext decision workflow contract."
       },
       "artifacts": {
-        "state_path": "/Users/ro9air/projects/STOCK/research/MSFT/state.json",
-        "current_path": "/Users/ro9air/projects/STOCK/research/MSFT/current.md"
+        "state_path": "/home/runner/work/STOCK/STOCK/research/MSFT/state.json",
+        "current_path": "/home/runner/work/STOCK/STOCK/research/MSFT/current.md"
       }
     },
     {
@@ -78,8 +78,8 @@
         "summary": "Established the living research state under the vNext decision workflow contract."
       },
       "artifacts": {
-        "state_path": "/Users/ro9air/projects/STOCK/research/PLTR/state.json",
-        "current_path": "/Users/ro9air/projects/STOCK/research/PLTR/current.md"
+        "state_path": "/home/runner/work/STOCK/STOCK/research/PLTR/state.json",
+        "current_path": "/home/runner/work/STOCK/STOCK/research/PLTR/current.md"
       }
     },
     {
@@ -89,7 +89,7 @@
       "candidate_origin": "manual_watchlist",
       "decision_status": "needs_more_research",
       "decision_updated_at": "2026-04-07",
-      "current_action": "No decision yet; gather evidence and build a falsifiable thesis.",
+      "current_action": "Watch — gather Q1 earnings evidence before entry",
       "research_topic": "Taiwan Alpha",
       "radar_flags": [],
       "radar_summary": "No radar flags logged yet; this candidate entered manually.",
@@ -105,8 +105,8 @@
         "summary": "Candidate dossier created."
       },
       "artifacts": {
-        "state_path": "/Users/ro9air/projects/STOCK/research/2330/state.json",
-        "current_path": "/Users/ro9air/projects/STOCK/research/2330/current.md"
+        "state_path": "/home/runner/work/STOCK/STOCK/research/2330/state.json",
+        "current_path": "/home/runner/work/STOCK/STOCK/research/2330/current.md"
       }
     }
   ]
