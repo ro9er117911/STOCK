@@ -13,6 +13,7 @@ from .storage import read_json, write_json
 QUICK_DECISION_PATH = AUTOMATION_ROOT / "quick-decision.json"
 RsiState = Literal["neutral", "overbought", "oversold"]
 VerdictStatus = Literal["BUY", "WAIT", "PASS"]
+AUTO_FETCH_SIGNAL_KEYS = ("adr_px", "fx_rate", "adr_ratio", "drift_direction", "fx_wind", "local_px")
 
 
 @dataclass
@@ -108,37 +109,22 @@ def run_quick_decision(
 
     signals: dict[str, Any] = {}
     if adr_premium_pct is None and adr_px is not None and fx_rate is not None:
-        # Manual prices provided — calculate directly
-        ratio = adr_ratio if adr_ratio is not None else _registry_adr_ratio(ticker)
-        premium = calculate_adr_premium(local_px, adr_px, fx_rate, ratio)
-        adr_premium_pct = float(premium["premium_pct"])
-        signals.update(
-            {
-                "adr_px": float(adr_px),
-                "fx_rate": float(fx_rate),
-                "adr_ratio": float(ratio),
-                "drift_direction": premium["drift_direction"],
-                "fx_wind": premium["fx_wind"],
-            }
+        adr_premium_pct, manual_signals = _build_manual_adr_signals(
+            ticker=ticker,
+            local_px=local_px,
+            adr_px=adr_px,
+            fx_rate=fx_rate,
+            adr_ratio=adr_ratio,
         )
+        signals.update(manual_signals)
     elif adr_premium_pct is None:
-        # Auto-fetch live prices via yfinance
         try:
-            from .adr_premium import fetch_live_adr_signal
-            reg = _registry_entry(ticker)
-            live = fetch_live_adr_signal(
-                local_symbol=reg.get("yahoo_symbol", ticker),
-                adr_symbol=reg.get("adr_symbol", ""),
-                fx_symbol="TWD=X",
-                adr_ratio=float(reg.get("adr_ratio", 1.0)),
-            )
-            adr_premium_pct = float(live["premium_pct"])
-            local_px = local_px or float(live["local_px"])
-            signals.update({k: live[k] for k in ("adr_px", "fx_rate", "adr_ratio", "drift_direction", "fx_wind", "local_px") if k in live})
+            adr_premium_pct, auto_signals = _fetch_auto_adr_signals(ticker)
+            local_px = local_px or float(auto_signals["local_px"])
+            signals.update(auto_signals)
         except Exception as exc:
             if not prompt:
                 raise RuntimeError(f"Auto-fetch failed and no manual input provided: {exc}") from exc
-            # Fall through to prompt
             adr_premium_pct = None
 
     if adr_premium_pct is None:
@@ -169,6 +155,38 @@ def _registry_entry(ticker: str) -> dict:
 
 def _registry_adr_ratio(ticker: str) -> float:
     return float(_registry_entry(ticker).get("adr_ratio", 1.0))
+
+
+def _build_manual_adr_signals(
+    ticker: str,
+    local_px: float | None,
+    adr_px: float,
+    fx_rate: float,
+    adr_ratio: float | None,
+) -> tuple[float, dict[str, Any]]:
+    ratio = float(adr_ratio if adr_ratio is not None else _registry_adr_ratio(ticker))
+    premium = calculate_adr_premium(local_px, adr_px, fx_rate, ratio)
+    return float(premium["premium_pct"]), {
+        "adr_px": float(adr_px),
+        "fx_rate": float(fx_rate),
+        "adr_ratio": ratio,
+        "drift_direction": premium["drift_direction"],
+        "fx_wind": premium["fx_wind"],
+    }
+
+
+def _fetch_auto_adr_signals(ticker: str) -> tuple[float, dict[str, Any]]:
+    from .adr_premium import fetch_live_adr_signal
+
+    reg = _registry_entry(ticker)
+    live = fetch_live_adr_signal(
+        local_symbol=reg.get("yahoo_symbol", ticker),
+        adr_symbol=reg.get("adr_symbol", ""),
+        fx_symbol="TWD=X",
+        adr_ratio=float(reg.get("adr_ratio", 1.0)),
+    )
+    signals = {key: live[key] for key in AUTO_FETCH_SIGNAL_KEYS if key in live}
+    return float(live["premium_pct"]), signals
 
 
 def _check_thesis_alignment(ticker: str, status: VerdictStatus) -> str:
